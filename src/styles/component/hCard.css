@@ -1,0 +1,59 @@
+.h-card-body{
+    position: relative;
+    height: auto;
+}
+.h-card-img{
+ position: relative;
+ transition: all .4s ease-in-out; 
+}
+.h-card-img:hover{
+    transform: scale(1.1);
+}
+.h-card-info{
+    text-align: center;
+    width: 60%;
+    height: auto;
+    position: absolute;
+    font-size: 28px;
+    border-radius: 5px 0px 0px 5px;
+    background-color: rgba(255,255,255,0.60);
+    bottom: 30%;
+    opacity: 1;
+    right: 0;
+}
+
+.h-card-info > p {
+    font-size: 26px;
+    font-family: BrandonBold !important;
+    letter-spacing: -0.2px;
+    color: black;
+}
+
+@media (max-width:1200px){
+    .h-card-info > p {
+        font-size: 20px;
+    }
+    .h-card-info{
+        width: 80%;
+        bottom:15%
+    }
+}
+
+@media (max-width:800px){
+    .h-card-info > p {
+        font-size: 18px;
+    }
+    .h-card-info{
+        width: 90%;
+        bottom:10%
+    }
+}
+@media (max-width:600px){
+    .h-card-info > p {
+        font-size: 16px;
+    }
+    .h-card-info{
+        width: 100%;
+        bottom:5%
+    }
+}

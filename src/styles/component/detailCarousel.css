@@ -1,0 +1,18 @@
+.DetailCarousel-div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.DCarousel-div{
+    width: 93%;
+    height: auto;
+}
+.DCarousel-div > div {
+    gap: 10px !important;
+}
+.detail-page-small-div{
+    padding: 10px;
+}
+.detail-page-small-div > img {
+    height: 125px;
+}

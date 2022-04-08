@@ -1,0 +1,28 @@
+@media (max-width:1200px){
+    .product-cart{
+        flex-direction: column !important;
+        align-items: center;
+        display: flex !important;
+    }
+    .cart-tables{
+        width: 100% !important;
+    }
+    .product-cart-window{
+        width: 50% !important;
+        margin: 30px !important;
+    }
+}
+@media (max-width:700px){
+    .product-cart{
+        flex-direction: column !important;
+        align-items: center;
+        display: flex !important;
+    }
+    .cart-tables{
+        width: 100% !important;
+    }
+    .product-cart-window{
+        width: 100% !important;
+        margin: 30px !important;
+    }
+}

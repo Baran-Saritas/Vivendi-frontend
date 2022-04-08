@@ -1,0 +1,19 @@
+.slick-next:before, .slick-prev:before {
+    color: rgb(107, 102, 102);
+    opacity: 1;
+    
+}
+.categories-small-div{
+    padding: 25px;
+}
+
+.categoryCarousel-div{
+    width: 100%;
+    padding: 40px 30px 30px 30px;
+    display: flex;
+    justify-content: center;
+}
+.Carousel-div{
+    width: 83%;
+    height: auto;
+}

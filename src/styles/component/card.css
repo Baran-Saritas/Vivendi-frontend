@@ -1,0 +1,49 @@
+.cards{
+border-radius: 5px !important;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden !important;
+    width: 110px !important;
+    background-color: black !important;
+    color: #fff !important;
+    text-align: center !important;
+    border-radius: 6px !important;
+    padding: 5px 0 !important;
+    font-size: 12px;
+    
+    /* Position the tooltip */
+    position: absolute !important;
+    z-index: 1 !important;
+    top: -16px !important;
+    right: 125% !important;
+  }
+  .tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 100%; /* To the right of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent black;
+  }
+  .tooltip:hover .tooltiptext {
+    visibility: visible !important;
+  }
+
+
+  .card-img{
+    
+ transition: all .4s ease-in-out; 
+ overflow: hidden;
+  }
+  .card-img:hover{
+    
+    transform: scale(1.1);
+  }
