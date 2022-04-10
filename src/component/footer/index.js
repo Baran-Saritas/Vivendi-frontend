@@ -1,16 +1,5 @@
-import React from 'react';
-import { Grommet as GrommetIcon } from 'grommet-icons';
-import { Anchor, Box, Footer, Main, Text } from 'grommet';
-const FooterAnchor = ({ ...rest }) => ( <Anchor href="/" size="small" color="white" {...rest} />);
+import React from "react";
 
-export const CustomFooter = () => (
-  <Box>
-    <Footer background="light-2" justify="center" pad="small">
-     <Text textAlign="center" size="small">
-       © 2022 Copyright Vivendi
-     </Text>
-    </Footer>
-  </Box>
-);
+export const CustomFooter = () => <div>© 2022 Copyright Vivendi</div>;
 
-export default CustomFooter
+export default CustomFooter;

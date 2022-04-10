@@ -1,5 +1,4 @@
 import React from "react";
-import { Image, Box, Carousel } from "grommet";
 import CustomCard from "../component/card";
 
 import Hcard from "../component/hcard";
@@ -8,7 +7,7 @@ import CustomCarousel from "../component/carousel";
 export default function Main() {
   return (
     <div>
-            <div className="categoryCarousel-div">
+      <div className="categoryCarousel-div">
         <div className="Carousel-div">
           <CategoryCarousel />
         </div>
@@ -21,7 +20,6 @@ export default function Main() {
           <CustomCarousel />
         </div>
       </div>
-
 
       <h1 style={{ textAlign: "center", margin: "50px 0 30px" }}>
         Best Sellers

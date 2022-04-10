@@ -1,5 +1,4 @@
 import React from "react";
-import { Image, Box, Carousel } from "grommet";
 import DetailCard from "../../component/dcard/index";
 export default function Products() {
   return (
@@ -8,9 +7,12 @@ export default function Products() {
         <div
           style={{ display: "flex", justifyContent: "center", width: "100%" }}
         >
-          <div className="products-h1" style={{ textAlign: "center", width: "60%", whiteSpace: "normal" }}>
-            <h1 style={{fontWeight:500}}>SEATING GROUPS</h1>
-            <hr/>
+          <div
+            className="products-h1"
+            style={{ textAlign: "center", width: "60%", whiteSpace: "normal" }}
+          >
+            <h1 style={{ fontWeight: 500 }}>SEATING GROUPS</h1>
+            <hr />
           </div>
         </div>
         <br />
@@ -33,7 +35,6 @@ export default function Products() {
         <br />
         <br />
         <div style={{ justifyContent: "center", display: "flex" }}>
-
           <br />
           <br />
         </div>

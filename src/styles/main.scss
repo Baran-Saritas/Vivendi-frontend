@@ -1,0 +1,17 @@
+.all-best-sellers > .asd {
+    width: 10% !important;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.app > div {
+    flex: 1;
+}
+
+.app > div:last-child {
+    max-height: 50px;
+}

@@ -1,107 +1,43 @@
-import React, { useEffect, useRef,useState } from "react";
-import { Anchor, Box, Header, Menu, TextInput } from "grommet";
-import { BiSearchAlt } from "react-icons/bi";
-import { motion } from "framer-motion";
-import { useDispatch } from "react-redux";
-import { login, logout } from "../../store/user/userSlice";
-import { getFurnitures,getFurnitureById } from "../../store/furniture/furnitureSlice";
-import { getFurnitureSetInfoById,getFurnitureSetInfo } from "../../store/furnitureSetInfo/furnitureSetInfoSlice";
-import { getFurnitureGroup,getFurnitureGroupById } from "../../store/furnitureGroup/furnitureGroupSlice";
-import { Button,  IconButton , Popover,Typography,MenuItem  } from '@mui/material';
-import HeaderShoppingCart from "../shoppingCart";
+import React, { useEffect, useRef, useState } from "react";
+import SearchResult from "./SearchResult";
 
 const CustomHeader = () => {
-  
-
-  const dispatch = useDispatch()
-  const ref = useRef(null)
-  useEffect(() => {
-    if(ref.current?.style)
-    ref.current.style.zIndex = 99999
-  }, [])
+  const ref = useRef(null);
+  const [search, setSearch] = useState("");
+  const [isFocus, setIsFocus] = useState(false);
   return (
-    <Header
-      style={{ backgroundColor: "white"}}
-      background="light-4"
-      align="center"
-      justify="evenly"
-      pad="medium"
-      height="xsmall"
-    >
-     <img style={{width:"150px"}} src="icon.png" alt="" />
-      <Box direction="row" align="center" gap="small">
-        <Menu
-          label="SEATING SETS"
-          dropAlign={{ left: "left", top: "bottom" }}
-          style={{ borderRadius: 10 }}
-          icon={false}
-          className="h-title"
-          items={[
-            { label: "First Action", onClick: () => {} },
-            { label: "Second Action", onClick: () => {} },
-          ]}
-        />
-        <Menu
-          label="SEATS"
-          onClick={() => dispatch(getFurnitureGroup())}
-          dropAlign={{ left: "left", top: "bottom" }}
-          style={{ borderRadius: 10 }}
-          icon={false}
-          className="h-title"
-          items={[
-            { label: "First Action", onClick: () => {} },
-            { label: "Second Action", onClick: () => {} },
-          ]}
-        />
-        <Menu
-          label="TABLES"
-          
-          onClick={() => dispatch(getFurnitureGroupById())}
-          dropAlign={{ left: "left", top: "bottom" }}
-          style={{ borderRadius: 10 }}
-          icon={false}
-          className="h-title"
-          items={[
-            { label: "First Action", onClick: () => {} },
-            { label: "Second Action", onClick: () => {} },
-          ]}
-        />
-        <Menu
-          label="CHAIRS"
-          dropAlign={{ left: "left", top: "bottom" }}
-          style={{ borderRadius: 10 }}
-          icon={false}
-          className="h-title"
-          items={[
-            { label: "First Action", onClick: () => {} },
-            { label: "Second Action", onClick: () => {} },
-          ]}
-        />
-        <Menu
-          label="CABINETS"
-          dropAlign={{ left: "left", top: "bottom" }}
-          icon={false}
-          className="h-title"
-          items={[
-            { label: "First Action", onClick: () => {} },
-            { label: "Second Action", onClick: () => {} },
-          ]}
-        />
-      </Box>
-      
-      <Box style={{ width: 280 }}>
-        <TextInput
-          className="test"
-          suggestions={["test"]}
-          size="xsmall"
-          icon={<BiSearchAlt />}
-        />
-      </Box>
-
-     <HeaderShoppingCart/>
-
-    </Header>
+    <div className="header">
+      <div className="header-top">
+        <div className="header-logo">
+          <img src="icon.png" alt="icon" />
+        </div>
+        <div className="header-search" tabIndex="0">
+          <div className="res-con" ref={ref}>
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              onClick={() => setIsFocus(true)}
+            />
+            <button>Search</button>
+            {(search || isFocus) && (
+              <SearchResult
+                containerRef={ref}
+                setIsFocus={setIsFocus}
+                isFocus={isFocus}
+              />
+            )}
+          </div>
+        </div>
+        <div className="header-util">
+          <p>Sign In</p>
+          <p>Sepet</p>
+          <p>Lang</p>
+        </div>
+      </div>
+      <div className="header-mid"></div>
+      <div className="header-bottom"></div>
+    </div>
   );
-}
+};
 
 export default CustomHeader;
