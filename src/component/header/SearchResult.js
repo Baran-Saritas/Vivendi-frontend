@@ -54,7 +54,7 @@ function SearchResult({ containerRef, isFocus, search, setIsFocus }) {
         top: bound?.bottom + 20,
         backgroundColor: "white",
         boxShadow: "0 0 10px 2px rgba(150, 150, 150, .2)",
-        borderRadius: 10,
+        borderRadius: "10px 10px 0% 0%",
       }}
     >
       <div className="search-suggestion">
@@ -74,7 +74,17 @@ function SearchResult({ containerRef, isFocus, search, setIsFocus }) {
         </div>
         <div>Suggestion</div>
       </div>
-      <div className="search-result"></div>
+      <div className="search-result" style={{}}>
+      <div className="pin_container">
+      <div className="search-card card_large"></div>
+      <div className="search-card card_medium"></div>
+      <div className="search-card card_small"></div>
+      <div className="search-card card_small"></div>
+      <div className="search-card card_small"></div>
+
+      
+      </div>
+      </div>
     </motion.div>
   );
 }
