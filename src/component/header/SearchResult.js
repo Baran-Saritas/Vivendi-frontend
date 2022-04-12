@@ -50,52 +50,38 @@ function SearchResult({ containerRef, isFocus, search, setIsFocus }) {
       className="search-result-container"
       style={{
         width: bound?.width,
-        left: bound?.left,
+        left:
+          bound?.left -
+          document.querySelector(".app").getBoundingClientRect().left,
         top: bound?.bottom + 20,
         backgroundColor: "white",
         boxShadow: "0 0 10px 2px rgba(150, 150, 150, .2)",
       }}
     >
-      <div className="search-suggestion">
-        <div>
-          <Suggestion text="ali" />
-          <Suggestion text="mehmet" />
-          <Suggestion text="kamil" />
-          <Suggestion text="ebubekir siddik" />
-          <Suggestion text="baran" />
-          <Suggestion text="mirac" />
-          <Suggestion text="ali" />
-          <Suggestion text="mehmet" />
-          <Suggestion text="kamil" />
-          <Suggestion text="ebubekir siddik" />
-          <Suggestion text="baran" />
-          <Suggestion text="mirac" />
-        </div>
-        <div>Suggestion</div>
-      </div>
+      <h1 className="result">Results</h1>
       <div className="search-result">
         <div className="pin_container">
           <div>
-            <div className="search-card">
+            <div data-title="Baza" className="search-card">
               <img src="/image/aston-yatak-odasi.jpg" alt="" />
             </div>
-            <div className="search-card">
-              <img src="/image/aston-yatak-odasi.jpg" alt="" />
-            </div>
-          </div>
-          <div>
-            <div className="search-card">
-              <img src="/image/aston-yatak-odasi.jpg" alt="" />
-            </div>
-            <div className="search-card">
+            <div data-title="Baza" className="search-card">
               <img src="/image/aston-yatak-odasi.jpg" alt="" />
             </div>
           </div>
           <div>
-            <div className="search-card">
+            <div data-title="Baza" className="search-card">
               <img src="/image/aston-yatak-odasi.jpg" alt="" />
             </div>
-            <div className="search-card">
+            <div data-title="Baza" className="search-card">
+              <img src="/image/aston-yatak-odasi.jpg" alt="" />
+            </div>
+          </div>
+          <div>
+            <div data-title="BazaBazaBaza" className="search-card">
+              <img src="/image/aston-yatak-odasi.jpg" alt="" />
+            </div>
+            <div data-title="Baza" className="search-card">
               <img src="/image/aston-yatak-odasi.jpg" alt="" />
             </div>
           </div>
