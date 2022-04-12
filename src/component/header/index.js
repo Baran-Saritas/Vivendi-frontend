@@ -9,10 +9,8 @@ const CustomHeader = () => {
   const [search, setSearch] = useState("");
   const [isSelect, setIsSelect] = useState(0);
   const [isFocus, setIsFocus] = useState(false);
-  const { scrollYProgress } = useViewportScroll();
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 5]);
   return (
-    <motion.div style={{ scale }} className="header">
+    <motion.div className="header">
       <div className="header-top">
         <div className="header-logo">
           <img src="logo_dark.png" alt="icon" />
