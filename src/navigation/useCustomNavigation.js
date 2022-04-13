@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { Navigate } from "react-router";
+import React from "react";
 import Main from "../pages/main";
 import Products from "../pages/products/index";
 import DetailPage from "../pages/detailPage/index";
@@ -13,28 +12,24 @@ export const useCustomRoutes = () => {
       element: <Main />,
     },
     {
-      path: "/login",
-      element: <div>baran</div>,
-    },
-    {
       path: "/register",
       element: <div>mehemt</div>,
     },
     {
       path: "/products",
-      element: <Products/>,
+      element: <Products />,
     },
     {
       path: "/products/detail",
-      element: <DetailPage/>,
+      element: <DetailPage />,
     },
     {
       path: "/productCart",
-      element: <ProductCart/>,
+      element: <ProductCart />,
     },
     {
       path: "/test",
-      element: <CustomCard />
-    }
+      element: <CustomCard />,
+    },
   ];
 };

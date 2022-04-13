@@ -3,14 +3,17 @@ import React, { useEffect, useRef, useState } from "react";
 import CustomCarousel from "../carousel";
 import { motion } from "framer-motion";
 import SearchResult from "./SearchResult";
+import Login from "../../pages/user/login";
 
 const CustomHeader = () => {
   const ref = useRef(null);
   const [search, setSearch] = useState("");
   const [isSelect, setIsSelect] = useState(0);
   const [isFocus, setIsFocus] = useState(false);
+  const [open, setOpen] = useState(false);
   return (
     <motion.div className="header">
+      <Login open={open} setOpen={setOpen} />
       <div className="header-top">
         <div className="header-logo">
           <img src="logo_dark.png" alt="icon" />
@@ -35,7 +38,7 @@ const CustomHeader = () => {
           </div>
         </div>
         <div className="header-util">
-          <p>Sign In</p>
+          <p onClick={() => setOpen(true)}>Sign In</p>
           <p>Sepet</p>
           <p>Lang</p>
         </div>
