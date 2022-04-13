@@ -1,12 +1,105 @@
 import React from "react";
 import CustomCard from "../component/card";
-
 import Hcard from "../component/hcard";
 import CategoryCarousel from "../component/mainCarousel";
 import CustomCarousel from "../component/carousel";
+import { getCircularProgressUtilityClass } from "@mui/material";
+
 export default function Main() {
+  let arr = ["item-span-3", "item-span-4", "item-span-5", "item-span-6"].sort(
+    () => Math.random() - 0.5
+  );
+  function setSpan(index) {
+    if (index % 4 === 0) {
+      arr = ["item-span-3", "item-span-4", "item-span-5", "item-span-6"];
+      arr = arr.sort(() => Math.random() - 0.5);
+    }
+    let res = arr[arr.length - 1];
+    arr.pop();
+    return res;
+  }
   return (
-    <div>
+    <div className="main">
+      <div className="img-con">
+        {items.map((item, i) => (
+          <div className={setSpan(i)}>
+            <img src={item.item} alt="okyo" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+let items = [
+  {
+    item: "/image/okyo.jpg",
+  },
+  {
+    item: "/image/okyo.jpg",
+  },
+  {
+    item: "/image/okyo.jpg",
+  },
+  {
+    item: "/image/okyo.jpg",
+  },
+  {
+    item: "/image/okyo.jpg",
+  },
+  {
+    item: "/image/okyo.jpg",
+  },
+  {
+    item: "/image/okyo.jpg",
+  },
+  {
+    item: "/image/okyo.jpg",
+  },
+  {
+    item: "/image/okyo.jpg",
+  },
+  {
+    item: "/image/okyo.jpg",
+  },
+  {
+    item: "/image/okyo.jpg",
+  },
+  {
+    item: "/image/okyo.jpg",
+  },
+  {
+    item: "/image/okyo.jpg",
+  },
+  {
+    item: "/image/okyo.jpg",
+  },
+  {
+    item: "/image/okyo.jpg",
+  },
+  {
+    item: "/image/okyo.jpg",
+  },
+  {
+    item: "/image/okyo.jpg",
+  },
+  {
+    item: "/image/okyo.jpg",
+  },
+  {
+    item: "/image/okyo.jpg",
+  },
+  {
+    item: "/image/okyo.jpg",
+  },
+  {
+    item: "/image/okyo.jpg",
+  },
+];
+
+function Main2() {
+  return (
+    <div className="main">
+      {/*
       <div className="categoryCarousel-div">
         <div className="Carousel-div">
           <CategoryCarousel />
@@ -112,6 +205,7 @@ export default function Main() {
           </div>
         </div>
       </div>
+        */}
     </div>
   );
 }
