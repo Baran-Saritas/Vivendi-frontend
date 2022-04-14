@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import CustomCarousel from "../carousel";
 import { motion } from "framer-motion";
 import SearchResult from "./SearchResult";
-import Login from "../../pages/user/login";
+import Sign from "../../pages/user/index";
 
 const CustomHeader = () => {
   const ref = useRef(null);
@@ -13,7 +13,7 @@ const CustomHeader = () => {
   const [open, setOpen] = useState(false);
   return (
     <motion.div className="header">
-      <Login open={open} setOpen={setOpen} />
+      <Sign open={open} setOpen={setOpen} />
       <div className="header-top">
         <div className="header-logo">
           <img src="logo_dark.png" alt="icon" />
