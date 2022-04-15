@@ -4,6 +4,7 @@ import Products from "../pages/products/index";
 import DetailPage from "../pages/detailPage/index";
 import ProductCart from "../pages/productCart";
 import CustomCard from "../component/card";
+import Category from "../pages/category";
 export const useCustomRoutes = () => {
   let isLogin = localStorage.getItem("currentUser");
   return [
@@ -28,8 +29,12 @@ export const useCustomRoutes = () => {
       element: <ProductCart />,
     },
     {
-      path: "/test",
-      element: <CustomCard />,
+      path: "/category-edit",
+      element: <Category />,
+    },
+    {
+      path: "*",
+      element: <div>Page Not Found</div>,
     },
   ];
 };
