@@ -1,11 +1,25 @@
 import React from "react";
+import { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Tooltip } from "@mui/material";
 import CategoryItem from "../../component/category/CategoryItem";
+import AddAndEditDialog from "../../component/category/AddAndEditDialog";
 export default function Category() {
+  
+  const [edit, setEdit] = React.useState("init");
+  const [type,setType] = useState("");
+  const [data, setData] = useState({ imageSource: "", name: "" });
   return (
     <div className="category-edit">
-      <div className="category-container">
+            <AddAndEditDialog
+        open={edit}
+        setOpen={setEdit}
+        data={data}
+        setData={setData}
+        textType={type}
+      />
+      <div className="category-container"  >
+
         <CategoryItem />
         <CategoryItem />
         <CategoryItem />
@@ -20,7 +34,7 @@ export default function Category() {
           placement="bottom"
           disableInteractive
         >
-          <div className="category-item-2">
+          <div className="category-item-2" onClick={() => { setEdit(""); setType("Add")}}>
             <AiOutlinePlus size={60} />
           </div>
         </Tooltip>

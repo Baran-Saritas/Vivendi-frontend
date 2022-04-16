@@ -49,7 +49,7 @@ const furnitureCategorySlice = createSlice({
         .then((data) => console.log(data));
     },
     getFurnitureCategory: (state) => {
-      fetch("http://localhost:5051/furniture-category/", {
+      fetch("http://213.142.148.105:5054/furniture-category", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -61,7 +61,7 @@ const furnitureCategorySlice = createSlice({
     getFurnitureCategoryById: (state, id) => {
       // id eklenir hale getir object sorunu verdi
       fetch(
-        "http://localhost:5051/furniture-group/e4b80a57-ee33-4fcb-a5e3-cdaaaaaaaabb",
+        "http://213.142.148.105:5054/furniture-category/9846e8db-1116-4715-9322-0f944185e051",
         {
           method: "GET",
           headers: {

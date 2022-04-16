@@ -6,7 +6,9 @@ import AddAndEditDialog from "./AddAndEditDialog";
 export default function CategoryItem() {
   const [confirm, setConfirm] = React.useState("init");
   const [edit, setEdit] = React.useState("init");
+  const [type,setType] = useState("");
   const [data, setData] = useState({ imageSource: "", name: "" });
+  
   return (
     <div className="category-item">
       <ConfirmDialog open={confirm} setOpen={setConfirm} />
@@ -15,6 +17,7 @@ export default function CategoryItem() {
         setOpen={setEdit}
         data={data}
         setData={setData}
+        textType={type}
       />
       <div className="item-edit-cart">
         <Tooltip
@@ -24,7 +27,7 @@ export default function CategoryItem() {
           disableInteractive
         >
           <div className="tooltip">
-            <AiOutlineEdit onClick={() => setEdit("")} fill="blue" size={30} />
+            <AiOutlineEdit onClick={() => { setEdit(""); setType("Edit")}} fill="blue" size={30} />
           </div>
         </Tooltip>
         <Divider orientation="vertical" flexItem />
