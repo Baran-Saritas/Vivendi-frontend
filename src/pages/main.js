@@ -19,7 +19,13 @@ export default function Main() {
     return res;
   }
   return (
+
     <div className="main">
+      <div className="categoryCarousel-div">
+        <div className="Carousel-div">
+          <CategoryCarousel />
+        </div>
+      </div>
       <div className="img-con">
         {items.map((item, i) => (
           <div className={setSpan(i)}>

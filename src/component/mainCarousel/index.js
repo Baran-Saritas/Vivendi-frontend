@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Slider from "react-slick";
 import { Typography } from "@mui/material";
+import Story from "../story";
 const CategoryCarousel = () => {
   const [test, setTest] = useState(false);
   const settings = {
@@ -8,7 +9,7 @@ const CategoryCarousel = () => {
     className: "center",
     infinite: true,
     centerPadding: "30px",
-    slidesToShow: 5,
+    slidesToShow: 3,
     swipeToSlide: true,
     autoplay: true,
     speed: 2000,
@@ -80,7 +81,7 @@ const CategoryCarousel = () => {
             SEATING GROUPS 2
           </Typography>
         </div>
-        <div className="categories-small-div" style={{ padding: "10px" }}>
+        <div className="categories-small-div"  style={{ padding: "10px" }}>
           <img
             style={{ width: "100%", margin: "0px 5px 0px 0px" }}
             src="image/sehpa.jpg"
@@ -98,7 +99,7 @@ const CategoryCarousel = () => {
             SEATING GROUPS
           </Typography>
         </div>
-        <div className="categories-small-div" style={{ padding: "10px" }}>
+        <div className="categories-small-div"  style={{ padding: "10px" }}>
           <img
             style={{ width: "100%", margin: "0px 5px 0px 0px" }}
             src="image/sehpa.jpg"
@@ -116,96 +117,7 @@ const CategoryCarousel = () => {
             SEATING GROUPS
           </Typography>
         </div>
-        <div className="categories-small-div" style={{ padding: "10px" }}>
-          <img
-            style={{ width: "100%", margin: "0px 5px 0px 0px" }}
-            src="image/sehpa.jpg"
-            alt=""
-          />
-          <Typography
-            component="div"
-            sx={{
-              textAlign: "center",
-              letterSpacing: "0.02em",
-              fontWeight: "100",
-              color: "#444",
-            }}
-          >
-            SEATING GROUPS
-          </Typography>
-        </div>
-        <div className="categories-small-div" style={{ padding: "10px" }}>
-          <img
-            style={{ width: "100%", margin: "0px 5px 0px 0px" }}
-            src="image/sehpa.jpg"
-            alt=""
-          />
-          <Typography
-            component="div"
-            sx={{
-              textAlign: "center",
-              letterSpacing: "0.02em",
-              fontWeight: "100",
-              color: "#444",
-            }}
-          >
-            SEATING GROUPS
-          </Typography>
-        </div>
-        <div className="categories-small-div" style={{ padding: "10px" }}>
-          <img
-            style={{ width: "100%", margin: "0px 5px 0px 0px" }}
-            src="image/sehpa.jpg"
-            alt=""
-          />
-          <Typography
-            component="div"
-            sx={{
-              textAlign: "center",
-              letterSpacing: "0.02em",
-              fontWeight: "100",
-              color: "#444",
-            }}
-          >
-            SEATING GROUPS
-          </Typography>
-        </div>
-        <div className="categories-small-div" style={{ padding: "10px" }}>
-          <img
-            style={{ width: "100%", margin: "0px 5px 0px 0px" }}
-            src="image/sehpa.jpg"
-            alt=""
-          />
-          <Typography
-            component="div"
-            sx={{
-              textAlign: "center",
-              letterSpacing: "0.02em",
-              fontWeight: "100",
-              color: "#444",
-            }}
-          >
-            SEATING GROUPS
-          </Typography>
-        </div>
-        <div className="categories-small-div" style={{ padding: "10px" }}>
-          <img
-            style={{ width: "100%", margin: "0px 5px 0px 0px" }}
-            src="image/sehpa.jpg"
-            alt=""
-          />
-          <Typography
-            component="div"
-            sx={{
-              textAlign: "center",
-              letterSpacing: "0.02em",
-              fontWeight: "100",
-              color: "#444",
-            }}
-          >
-            SEATING GROUPS
-          </Typography>
-        </div>
+
       </Slider>
     </div>
   );

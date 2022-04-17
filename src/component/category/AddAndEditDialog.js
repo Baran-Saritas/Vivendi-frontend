@@ -7,6 +7,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useDispatch } from "react-redux";
+import Story from "../story";
 
 export default function AddAndEditDialog({
   open,
@@ -55,14 +56,18 @@ export default function AddAndEditDialog({
   }, [data]);
   return (
     <div>
+      
       <Dialog
         fullWidth
         maxWidth="sm"
+        
+        style={{backgroundColor:"transparent"}}
         open={open === "edit" || open === "add"}
         onClose={handleClose}
       >
         <DialogTitle>{`${open} ${variant}`.toUpperCase()}</DialogTitle>
-        <DialogContent>
+        <DialogContent >
+          
           <TextField
             value={innerData.name}
             onChange={(e) =>
