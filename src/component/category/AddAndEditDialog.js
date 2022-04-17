@@ -6,22 +6,22 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { useDispatch } from "react-redux";
-import Story from "../story";
+import { useDispatch, useSelector } from "react-redux";
+import { compareDiff } from "../../utilrs/commons";
+import { setFullFilled } from "../../store/furnitureCategory/furnitureCategorySlice";
 
 export default function AddAndEditDialog({
   open,
   setOpen,
   data,
-  updateFnc,
-  addFnc,
+  updateFunc,
+  addFunc,
+  keys,
   variant,
 }) {
   const dispatch = useDispatch();
-  const [innerData, setInnerData] = React.useState({
-    file: undefined,
-    name: undefined,
-  });
+  const { fullfilled } = useSelector((state) => state.category);
+  const [innerData, setInnerData] = React.useState({});
   function getBase64(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -32,14 +32,14 @@ export default function AddAndEditDialog({
   }
   const onFileChange = async (e) => {
     let imageSource = await getBase64(e.target.files[0]);
-    setInnerData({ ...innerData, file: imageSource });
+    setInnerData({ ...innerData, [keys.imageSource]: imageSource });
   };
   const handleOk = async (e) => {
-    setOpen("OK");
     if (open === "edit") {
-      //dispatch(updateFnc(innerData));
+      let res = compareDiff(innerData, data);
+      dispatch(updateFunc({ id: data.id, data: res }));
     } else {
-      //dispatch(addFunc(data));
+      dispatch(addFunc(innerData));
     }
   };
   const handleClose = (_, r) => {
@@ -54,24 +54,28 @@ export default function AddAndEditDialog({
       setInnerData({});
     }
   }, [data]);
+  useEffect(() => {
+    if (fullfilled) {
+      setOpen("OK");
+      setInnerData({});
+      dispatch(setFullFilled({ value: false }));
+    }
+  }, [fullfilled, setOpen]);
   return (
     <div>
-      
       <Dialog
         fullWidth
         maxWidth="sm"
-        
-        style={{backgroundColor:"transparent"}}
+        style={{ backgroundColor: "transparent" }}
         open={open === "edit" || open === "add"}
         onClose={handleClose}
       >
         <DialogTitle>{`${open} ${variant}`.toUpperCase()}</DialogTitle>
-        <DialogContent >
-          
+        <DialogContent>
           <TextField
-            value={innerData.name}
+            value={innerData[keys.name]}
             onChange={(e) =>
-              setInnerData({ ...innerData, name: e.target.value })
+              setInnerData({ ...innerData, [keys.name]: e.target.value })
             }
             autoFocus
             margin="dense"
@@ -81,11 +85,11 @@ export default function AddAndEditDialog({
             fullWidth
             variant="standard"
           />
-          {(data?.imageSource || innerData.file) && (
+          {innerData[keys.imageSource] && (
             <img
               style={{ width: "200px", height: "100px" }}
-              src={innerData.file || data?.imageSource || ""}
-              alt={innerData.name}
+              src={innerData[keys.imageSource] || ""}
+              alt={innerData[keys.name]}
             />
           )}
           <input

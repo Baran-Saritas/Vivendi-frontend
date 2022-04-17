@@ -1,63 +1,74 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import env from "../../env.json";
-const url = env.fCategoryUrl;
+import { category_api, image_api } from "../../utilrs/axiosInterceptors";
+
+const getFurnitureCategory = createAsyncThunk(
+  "category/getAll",
+  async (_, { rejectWithValue }) => {
+    const res = await category_api.get("/");
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      rejectWithValue(res.data);
+    }
+  }
+);
+
+const updateFurnitureCategory = createAsyncThunk(
+  "category/update",
+  async (data, { rejectWithValue, dispatch }) => {
+    if (data.data?.imageSource) {
+    }
+    let category_res = await category_api.put("/" + data.id, data.data);
+    if (category_res.status === 200) {
+      dispatch(furnitureCategorySlice.actions.setFullFilled({ value: true }));
+      return category_res.data;
+    } else {
+      rejectWithValue(category_res.data);
+    }
+  }
+);
+
+const postFurnitureCategory = createAsyncThunk(
+  "category/add",
+  async (data, { rejectWithValue, dispatch }) => {
+    let image_res = await image_api.post("/", { imageSource: data.file });
+    if (image_res.status === 200) {
+      let category_res = await category_api.post("/", {
+        imageUrl: image_res.data,
+        categoryName: data.name,
+      });
+      if (category_res.status === 200) {
+        dispatch(furnitureCategorySlice.actions.setFullFilled({ value: true }));
+        return category_res.data;
+      } else {
+        rejectWithValue(category_res.data);
+      }
+    } else {
+      rejectWithValue(image_res.data);
+    }
+  }
+);
 
 const initialState = {
   isLoading: false,
+  fullfilled: false,
+  categories: [],
   error: null,
-  isLogin: false,
-  updatePassword: {
-    isLoading: false,
-    error: null,
-  },
 };
 
 const furnitureCategorySlice = createSlice({
   name: "furnitureCategory",
   initialState,
   reducers: {
-    /**
-     * Assign the project to an employee.
-     * @param {string} furnitureCategory.categoryName
-     * @param {string} furnitureCategory.imageUrl
-     */
-    updateFurnitureCategory: (state, { id, furnitureCategory }) => {
-      fetch(url + id, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(furnitureCategory),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+    setFullFilled: (state, { payload: { value } }) => {
+      state.fullfilled = value;
     },
     /**
      * Assign the project to an employee.
      * @param {string} furnitureCategory.categoryName
      * @param {string} furnitureCategory.imageUrl
      */
-    postFurnitureCategory: (state, furnitureCategory) => {
-      fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(furnitureCategory),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
-    },
-    getFurnitureCategory: (state) => {
-      fetch("http://213.142.148.105:5054/furniture-category", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
-    },
     getFurnitureCategoryById: (state, { payload: { id } }) => {
       // id eklenir hale getir object sorunu verdi
       fetch(
@@ -73,12 +84,25 @@ const furnitureCategorySlice = createSlice({
         .then((data) => console.log(data));
     },
   },
+  extraReducers: {
+    [getFurnitureCategory.fulfilled]: (state, action) => {
+      state.categories = action.payload;
+    },
+    [getFurnitureCategory.rejected]: (state, action) => {
+      console.log("Category err : ", action.payload);
+    },
+    [postFurnitureCategory.fulfilled]: (state, action) => {},
+    [postFurnitureCategory.rejected]: (state, action) => {
+      console.log("Category err : ", action.payload);
+    },
+    [updateFurnitureCategory.fulfilled]: (state, action) => {},
+    [updateFurnitureCategory.rejected]: (state, action) => {
+      console.log("Category err : ", action.payload);
+    },
+  },
 });
 
-export const {
-  getFurnitureCategory,
-  getFurnitureCategoryById,
-  postFurnitureCategory,
-  updateFurnitureCategory,
-} = furnitureCategorySlice.actions;
+export const { getFurnitureCategoryById, setFullFilled } =
+  furnitureCategorySlice.actions;
+export { getFurnitureCategory, postFurnitureCategory, updateFurnitureCategory };
 export default furnitureCategorySlice.reducer;
