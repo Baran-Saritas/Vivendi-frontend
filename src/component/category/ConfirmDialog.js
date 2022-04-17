@@ -5,15 +5,19 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 
-export default function ConfirmDialog({ open, setOpen }) {
+export default function ConfirmDialog({ open, setOpen, data, fnc }) {
   const handleClose = (_, r) => {
     if (r !== "backdropClick") setOpen("init");
+  };
+
+  const handleClick = () => {
+    // dispatch(fnc(data.id))
   };
 
   return (
     <div>
       <Dialog
-        open={open === ""}
+        open={open === "delete"}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
@@ -24,8 +28,8 @@ export default function ConfirmDialog({ open, setOpen }) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpen("OK")}>OK</Button>
-          <Button onClick={() => setOpen("CANCEL")} autoFocus>
+          <Button onClick={handleClick}>OK</Button>
+          <Button onClick={() => setOpen("init")} autoFocus>
             CANCEL
           </Button>
         </DialogActions>

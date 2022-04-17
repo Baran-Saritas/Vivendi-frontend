@@ -58,7 +58,7 @@ const furnitureCategorySlice = createSlice({
         .then((response) => response.json())
         .then((data) => console.log(data));
     },
-    getFurnitureCategoryById: (state, id) => {
+    getFurnitureCategoryById: (state, { payload: { id } }) => {
       // id eklenir hale getir object sorunu verdi
       fetch(
         "http://213.142.148.105:5054/furniture-category/9846e8db-1116-4715-9322-0f944185e051",
