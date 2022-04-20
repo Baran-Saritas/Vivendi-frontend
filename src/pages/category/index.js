@@ -6,6 +6,7 @@ import Item from "../../component/category/Item";
 import AddAndEditDialog from "../../component/category/AddAndEditDialog";
 import ConfirmDialog from "../../component/category/ConfirmDialog";
 import {
+  deleteFurnitureCategory,
   getFurnitureCategory,
   postFurnitureCategory,
   updateFurnitureCategory,
@@ -35,7 +36,7 @@ export default function Category() {
         open={open}
         setOpen={setOpen}
         data={data}
-        // fnc={deleteCategory}
+        deleteFunc={deleteFurnitureCategory}
       />
       <div className="category-container">
         {categories?.map((itemData, index) => (

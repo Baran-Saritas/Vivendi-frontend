@@ -8,7 +8,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useDispatch, useSelector } from "react-redux";
 import { compareDiff } from "../../utilrs/commons";
-import { setFullFilled } from "../../store/furnitureCategory/furnitureCategorySlice";
+import { setFullFilled } from "../../store/global/globalSlice";
 
 export default function AddAndEditDialog({
   open,
@@ -20,7 +20,7 @@ export default function AddAndEditDialog({
   variant,
 }) {
   const dispatch = useDispatch();
-  const { fullfilled } = useSelector((state) => state.category);
+  const { fullfilled } = useSelector((state) => state.global);
   const [innerData, setInnerData] = React.useState({});
   function getBase64(file) {
     return new Promise((resolve, reject) => {
@@ -37,6 +37,10 @@ export default function AddAndEditDialog({
   const handleOk = async (e) => {
     if (open === "edit") {
       let res = compareDiff(innerData, data);
+      if (!Object.keys(res).length) {
+        setOpen("CLOSE");
+        return;
+      }
       dispatch(updateFunc({ id: data.id, data: res }));
     } else {
       dispatch(addFunc(innerData));
