@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import Slider from "react-slick";
 import { Typography } from "@mui/material";
 import Story from "../story";
+import StoryDialog from "../storyDialog";
 const CategoryCarousel = () => {
   const [test, setTest] = useState(false);
+  const [open,setOpen] = useState('false');
+
   const settings = {
     dots: true,
     className: "center",
@@ -44,8 +47,12 @@ const CategoryCarousel = () => {
   };
   return (
     <div className="test">
+      <StoryDialog
+        open = {open}
+        setOpen = {setOpen}
+      />
       <Slider {...settings}>
-        <div className="categories-small-div" style={{ padding: "10px" }}>
+        <div className="categories-small-div" onClick={()=>setOpen('open')} style={{ padding: "10px" }}>
           <img
             style={{ width: "100%", margin: "0px 5px 0px 0px" }}
             src="image/sehpa.jpg"
@@ -63,7 +70,7 @@ const CategoryCarousel = () => {
             SEATING GROUPS 1
           </Typography>
         </div>
-        <div className="categories-small-div" style={{ padding: "10px" }}>
+        <div className="categories-small-div" onClick={()=>setOpen('open')} style={{ padding: "10px" }}>
           <img
             style={{ width: "100%", margin: "0px 5px 0px 0px" }}
             src="image/sehpa.jpg"
@@ -81,7 +88,7 @@ const CategoryCarousel = () => {
             SEATING GROUPS 2
           </Typography>
         </div>
-        <div className="categories-small-div"  style={{ padding: "10px" }}>
+        <div className="categories-small-div" onClick={()=>setOpen('open')} style={{ padding: "10px" }}>
           <img
             style={{ width: "100%", margin: "0px 5px 0px 0px" }}
             src="image/sehpa.jpg"
@@ -99,7 +106,7 @@ const CategoryCarousel = () => {
             SEATING GROUPS
           </Typography>
         </div>
-        <div className="categories-small-div"  style={{ padding: "10px" }}>
+        <div className="categories-small-div" onClick={()=>setOpen('open')} style={{ padding: "10px" }}>
           <img
             style={{ width: "100%", margin: "0px 5px 0px 0px" }}
             src="image/sehpa.jpg"

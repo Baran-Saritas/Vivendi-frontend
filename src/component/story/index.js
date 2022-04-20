@@ -12,7 +12,7 @@ const Story = () => {
 		<Stories
 			stories={stories}
 			defaultInterval={1500}
-			width={432}
+			width={1200}
 			height={768}
 		/>
         
