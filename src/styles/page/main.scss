@@ -34,3 +34,77 @@
     grid-column-end: span 6;
   }
 }
+
+.dialog-edit {
+  height: 100%;
+  .dialog-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding-top: 50px;
+    gap: 50px;
+    .dialog-item-2 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      justify-self: center;
+      align-self: center;
+      border-radius: 50%;
+      box-shadow: 0 0 14px 2px rgba(155,155,155, .25);
+      width: 130px;
+      height: 130px;
+      border: 1px solid rgba(212, 212, 212, .65);
+      transition: all .3s ease;
+      cursor: pointer;
+      &:hover {
+        transform: rotate(90deg);
+      }
+    }
+    .dialog-item {
+      justify-self: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 14px 2px rgba(155,155,155, .25);
+      width: 230px;
+      height: 230px;
+      border-radius: 10px;
+      border: 1px solid rgba(212, 212, 212, .65);
+      transition: all .3s ease;
+      cursor: pointer;
+      &:hover {
+        transform: scale(1.02);
+        box-shadow: 0 0 20px 8px rgba(155,155,155, .30);
+        border: 1px solid rgba(212, 212, 212, .95);
+      }
+      &:hover  {
+        .item-edit-cart {
+          top: 10px
+        }
+      }
+      .item-edit-cart {
+        transition: all .5s ease;
+        padding: 2px 8px;
+        position: absolute;
+        top: -100%;
+        display: flex;
+        column-gap: 20px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: white;
+        box-shadow: 0 0 1px 1px rgb(0 0 0 / 10%);
+        margin: 10px;
+        .tooltip {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 40px;
+          width: 40px;
+        }
+      }
+    }
+  }
+}

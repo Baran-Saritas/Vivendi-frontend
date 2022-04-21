@@ -5,23 +5,30 @@ import { Tooltip } from "@mui/material";
 import Item from "../../component/category/Item";
 import AddAndEditDialog from "../../component/category/AddAndEditDialog";
 import ConfirmDialog from "../../component/category/ConfirmDialog";
-import {
-  deleteFurnitureCategory,
-  getFurnitureCategory,
-  postFurnitureCategory,
-  updateFurnitureCategory,
-} from "../../store/furnitureCategory/furnitureCategorySlice";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteFurnitureGroup,
+  getFurnitureGroupOfCategory,
+  postFurnitureGroup,
+  updateFurnitureGroup,
+} from "../../store/furnitureGroup/furnitureGroupSlice";
+import { useParams } from "react-router-dom";
+import { getFurnitureCategory } from "../../store/furnitureCategory/furnitureCategorySlice";
 import { useNavigate } from "react-router-dom";
-export default function Category() {
+export default function Group() {
   const [open, setOpen] = React.useState("init");
   const [data, setData] = useState(null);
+  const { groups } = useSelector((state) => state.group);
   const { categories } = useSelector((state) => state.category);
-  const keys = { imageSource: "imageUrl", name: "categoryName" };
-  const dispatch = useDispatch();
+  const keys = { imageSource: "imageUrl", name: "groupName", id: "categoryId" };
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { category_id } = useParams();
   useEffect(() => {
-    dispatch(getFurnitureCategory());
+    dispatch(getFurnitureGroupOfCategory(category_id));
+    if (open === "edit") {
+      dispatch(getFurnitureCategory());
+    }
   }, [open]);
   return (
     <div className="dialog-edit">
@@ -29,21 +36,22 @@ export default function Category() {
         open={open}
         setOpen={setOpen}
         data={open === "edit" ? data : undefined}
-        addFunc={postFurnitureCategory}
-        updateFunc={updateFurnitureCategory}
+        addFunc={postFurnitureGroup}
+        updateFunc={updateFurnitureGroup}
         keys={keys}
-        variant="category"
+        variant="group"
+        foreignKeys={categories}
       />
       <ConfirmDialog
         open={open}
         setOpen={setOpen}
         data={data}
-        deleteFunc={deleteFurnitureCategory}
+        deleteFunc={deleteFurnitureGroup}
       />
       <div className="dialog-container">
-        {categories?.map((itemData, index) => (
+        {groups?.map((itemData, index) => (
           <Item
-            onClick={() => navigate(`${itemData.id}/group-edit`)}
+            onClick={() => navigate(`${itemData.id}/set-info-edit`)}
             key={index}
             itemData={itemData}
             keys={keys}

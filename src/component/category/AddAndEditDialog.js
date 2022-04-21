@@ -9,6 +9,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useDispatch, useSelector } from "react-redux";
 import { compareDiff } from "../../utilrs/commons";
 import { setFullFilled } from "../../store/global/globalSlice";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { useParams } from "react-router-dom";
 
 export default function AddAndEditDialog({
   open,
@@ -18,10 +20,12 @@ export default function AddAndEditDialog({
   addFunc,
   keys,
   variant,
+  foreignKeys,
 }) {
   const dispatch = useDispatch();
   const { fullfilled } = useSelector((state) => state.global);
   const [innerData, setInnerData] = React.useState({});
+  const { category_id, group_id } = useParams();
   function getBase64(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -43,7 +47,13 @@ export default function AddAndEditDialog({
       }
       dispatch(updateFunc({ id: data.id, data: res }));
     } else {
-      dispatch(addFunc(innerData));
+      if (variant === "group") {
+        dispatch(addFunc({ data: innerData, id: category_id }));
+      } else if (variant === "set-info") {
+        dispatch(addFunc({ data: innerData, id: group_id }));
+      } else {
+        dispatch(addFunc({ data: innerData }));
+      }
     }
   };
   const handleClose = (_, r) => {
@@ -59,6 +69,7 @@ export default function AddAndEditDialog({
     }
   }, [data]);
   useEffect(() => {
+    console.log("e : ", foreignKeys);
     if (fullfilled) {
       setOpen("OK");
       setInnerData({});
@@ -75,7 +86,7 @@ export default function AddAndEditDialog({
         onClose={handleClose}
       >
         <DialogTitle>{`${open} ${variant}`.toUpperCase()}</DialogTitle>
-        <DialogContent>
+        <DialogContent sx={{ display: "flex", flexDirection: "column" }}>
           <TextField
             value={innerData[keys.name]}
             onChange={(e) =>
@@ -84,11 +95,48 @@ export default function AddAndEditDialog({
             autoFocus
             margin="dense"
             id="name"
-            label="Category Name"
+            label={`${variant} name`}
             type="text"
             fullWidth
             variant="standard"
           />
+          {variant === "set-info" && (
+            <TextField
+              value={innerData[keys.price]}
+              onChange={(e) =>
+                setInnerData({ ...innerData, [keys.price]: e.target.value })
+              }
+              autoFocus
+              margin="dense"
+              id="price"
+              label={`${variant} name`}
+              type="text"
+              fullWidth
+              variant="standard"
+            />
+          )}
+          {foreignKeys !== undefined && open === "edit" && (
+            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+              <InputLabel id="simple-select-label">
+                {keys.id.toUpperCase()}
+              </InputLabel>
+              <Select
+                labelId="simple-select-label"
+                id="simple-select-standard"
+                value={innerData[keys.id]}
+                onChange={(e) =>
+                  setInnerData({ ...innerData, [keys.id]: e.target.value })
+                }
+                label={keys.id.toUpperCase()}
+              >
+                {foreignKeys.map((i) => (
+                  <MenuItem value={i.id} key={i.id}>
+                    {i[variant === "set-info" ? "groupName" : "categoryName"]}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
           {innerData[keys.imageSource] && (
             <img
               style={{ width: "200px", height: "100px" }}

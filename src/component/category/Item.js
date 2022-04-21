@@ -2,13 +2,13 @@ import React from "react";
 import { Divider, Tooltip } from "@mui/material";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 
-export default function Item({ itemData, setData, setOpen, keys }) {
+export default function Item({ itemData, setData, setOpen, keys, onClick }) {
   const handleClick = (panel) => {
     setOpen(panel);
     setData(itemData);
   };
   return (
-    <div className="category-item">
+    <div onClick={onClick} className="dialog-item">
       <div className="item-edit-cart">
         <Tooltip
           title={<span style={{ fontSize: 14, padding: 2 }}>Edit</span>}
@@ -18,7 +18,10 @@ export default function Item({ itemData, setData, setOpen, keys }) {
         >
           <div className="tooltip">
             <AiOutlineEdit
-              onClick={() => handleClick("edit")}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleClick("edit");
+              }}
               fill="blue"
               size={30}
             />
@@ -33,7 +36,10 @@ export default function Item({ itemData, setData, setOpen, keys }) {
         >
           <div className="tooltip">
             <AiOutlineDelete
-              onClick={() => handleClick("delete")}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleClick("delete");
+              }}
               fill="red"
               size={30}
             />
