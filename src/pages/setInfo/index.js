@@ -32,10 +32,10 @@ export default function SetInfo() {
   const { group_id } = useParams();
   useEffect(() => {
     dispatch(getFurnitureSetInfoOfGroup(group_id));
-    if (open === "edit") {
-      dispatch(getFurnitureCategory());
-    }
   }, [open]);
+  useEffect(() => {
+    if (!groups.length) navigate("/category-edit");
+  }, []);
   return (
     <div className="dialog-edit">
       <AddAndEditDialog

@@ -13,6 +13,7 @@ import {
 } from "../../store/furnitureCategory/furnitureCategorySlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "../../component/loading";
 export default function Category() {
   const [open, setOpen] = React.useState("init");
   const [data, setData] = useState(null);
@@ -23,7 +24,9 @@ export default function Category() {
   useEffect(() => {
     dispatch(getFurnitureCategory());
   }, [open]);
-  return (
+  return !categories.length ? (
+    <LoadingSpinner />
+  ) : (
     <div className="dialog-edit">
       <AddAndEditDialog
         open={open}

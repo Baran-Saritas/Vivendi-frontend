@@ -15,6 +15,7 @@ import {
 import { useParams } from "react-router-dom";
 import { getFurnitureCategory } from "../../store/furnitureCategory/furnitureCategorySlice";
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "../../component/loading";
 export default function Group() {
   const [open, setOpen] = React.useState("init");
   const [data, setData] = useState(null);
@@ -26,11 +27,13 @@ export default function Group() {
   const { category_id } = useParams();
   useEffect(() => {
     dispatch(getFurnitureGroupOfCategory(category_id));
-    if (open === "edit") {
-      dispatch(getFurnitureCategory());
-    }
   }, [open]);
-  return (
+  useEffect(() => {
+    if (!categories.length) navigate("/category-edit");
+  }, []);
+  return !groups.length ? (
+    <LoadingSpinner />
+  ) : (
     <div className="dialog-edit">
       <AddAndEditDialog
         open={open}
