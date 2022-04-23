@@ -1,43 +1,45 @@
-import * as React from "react";
-import Dialog from "@mui/material/Dialog";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
-import Story from "../story";
+import * as React from 'react';
+import Dialog from '@mui/material/Dialog';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+import Story from '../story';
+import { useSelector } from 'react-redux';
 
 const StoryDialog = ({ open, setOpen }) => {
-  const [openD, setOpenD] = React.useState(false);
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
-  const handleClickOpen = () => {
-    setOpenD(true);
-  };
+    const theme = useTheme();
+    const [storyExit, setStoryExit] = React.useState();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+    const { storyEndDialog } = useSelector((state) => state.global)
 
-  const handleClose = () => {
-    setOpenD(false);
-  };
+    React.useEffect(() => {
+        if (storyEndDialog == true) {
+            setOpen("close")
+        }
+    }, [storyEndDialog])
 
-  return (
-    <div>
-      <Dialog
-        maxWidth="xl"
-        fullWidth
-        PaperProps={{
-          style: {
-            backgroundColor: "transparent",
-            boxShadow: "none",
-            margin: "0 auto",
-          },
-        }}
-        fullScreen={fullScreen}
-        open={open === "open"}
-        onClose={() => setOpen("close")}
-        aria-labelledby="responsive-dialog-title"
-      >
-        <Story />
-      </Dialog>
-    </div>
-  );
-};
 
-export default StoryDialog;
+    return (
+        <div>
+            <Dialog
+                PaperProps={{
+                    style: {
+                        backgroundColor: 'transparent',
+                        boxShadow: 'none',
+                        width: "1200px"
+                    },
+                }}
+                fullScreen={fullScreen}
+                open={open === 'open'}
+                onClose={() => setOpen(storyExit)}
+                maxWidth="xl"
+                fullWidth
+                aria-labelledby="responsive-dialog-title"
+            >
+                <Story />
+            </Dialog>
+        </div>
+    );
+}
+
+export default StoryDialog

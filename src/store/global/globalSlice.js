@@ -7,6 +7,7 @@ const globalSlice = createSlice({
     role: undefined,
     pd_active: undefined,
     fullfilled: false,
+    storyEndDialog: false,
   },
   reducers: {
     setFullFilled: (state, { payload: { value } }) => {
@@ -19,8 +20,11 @@ const globalSlice = createSlice({
       state.isLogin = payload.isLogin;
       state.role = payload.role;
     },
+    setStory: (state, { payload: { value } }) => {
+      state.storyEndDialog = value;
+    }
   },
 });
 
-export const { setGlob, setFullFilled } = globalSlice.actions;
+export const { setGlob, setFullFilled, setStory } = globalSlice.actions;
 export default globalSlice.reducer;

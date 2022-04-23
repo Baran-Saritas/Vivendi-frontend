@@ -54,7 +54,7 @@ const CategoryCarousel = () => {
       <Slider {...settings}>
         <div className="categories-small-div" onClick={()=>setOpen('open')} style={{ padding: "10px" }}>
           <img
-            style={{ width: "100%", margin: "0px 5px 0px 0px" }}
+            style={{ width: "100%", margin: "0px 5px 0px 0px" }}  
             src="image/sehpa.jpg"
             alt=""
           />
