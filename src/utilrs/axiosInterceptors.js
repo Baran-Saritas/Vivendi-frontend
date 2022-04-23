@@ -25,6 +25,22 @@ const category_api = axios.create({
   baseURL: env.FCATEGORY_API,
 });
 
+const group_api = axios.create({
+  headers: {
+    "Content-Type": "application/json",
+  },
+  timeout: 5000,
+  baseURL: env.FGROUP_API,
+});
+
+const set_info_api = axios.create({
+  headers: {
+    "Content-Type": "application/json",
+  },
+  timeout: 5000,
+  baseURL: env.FSET_INFO_API,
+});
+
 export const handleError = ({ message, data, status }) => {
   return Promise.reject({ message, data, status });
 };
@@ -37,6 +53,12 @@ image_api.interceptors.response.use(response);
 //
 category_api.interceptors.request.use(config, error);
 category_api.interceptors.response.use(response);
+//
+group_api.interceptors.request.use(config, error);
+group_api.interceptors.response.use(response);
+//
+set_info_api.interceptors.request.use(config, error);
+set_info_api.interceptors.response.use(response);
 
 async function config(config) {
   /*
@@ -67,4 +89,4 @@ async function responseResult({ message, response: { data, status } }) {
   return handleError({ message, data, status });
 }
 
-export { user_api, image_api, category_api };
+export { user_api, image_api, category_api, group_api, set_info_api };
