@@ -12,7 +12,7 @@ const CategoryCarousel = () => {
     className: "center",
     infinite: true,
     centerPadding: "30px",
-    slidesToShow: 3,
+    slidesToShow: 4,  // lenght -1 e kadar bozulma yok 
     swipeToSlide: true,
     autoplay: true,
     speed: 2000,
@@ -54,8 +54,8 @@ const CategoryCarousel = () => {
       <Slider {...settings}>
         <div className="categories-small-div" onClick={()=>setOpen('open')} style={{ padding: "10px" }}>
           <img
-            style={{ width: "100%", margin: "0px 5px 0px 0px" }}  
-            src="image/sehpa.jpg"
+            style={{ width: "100%",height:"150px", margin: "0px 5px 0px 0px" }}  
+            src="https://www.normann-copenhagen.com/-/media/Product-Pictures-Podio/Normann-Copenhagen/Scala/Scala-Table-H75-cm/Scala-Table-H75-150-cm-Marble/604184/Scala-Table-H75-150-cm1.png?w=279&rev=d4aeb33d2e7b48d085b8a6b9b0eb6d2c"
             alt=""
           />
           <Typography
@@ -67,13 +67,13 @@ const CategoryCarousel = () => {
               color: "#000",
             }}
           >
-            SEATING GROUPS 1
+            Tables
           </Typography>
         </div>
         <div className="categories-small-div" onClick={()=>setOpen('open')} style={{ padding: "10px" }}>
           <img
-            style={{ width: "100%", margin: "0px 5px 0px 0px" }}
-            src="image/sehpa.jpg"
+            style={{ width: "100%",height:"150px", margin: "0px 5px 0px 0px" }}
+            src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1580742487-resize.jpg?crop=1xw:1xh;center,top&resize=480:*"
             alt=""
           />
           <Typography
@@ -85,13 +85,13 @@ const CategoryCarousel = () => {
               color: "#444",
             }}
           >
-            SEATING GROUPS 2
+            Chair
           </Typography>
         </div>
         <div className="categories-small-div" onClick={()=>setOpen('open')} style={{ padding: "10px" }}>
           <img
-            style={{ width: "100%", margin: "0px 5px 0px 0px" }}
-            src="image/sehpa.jpg"
+            style={{ width: "100%",height:"150px", margin: "0px 5px 0px 0px" }}
+            src="https://www.ikea.com/us/en/images/products/malm-bed-frame-high-black-brown-luroey__0638608_pe699032_s5.jpg"
             alt=""
           />
           <Typography
@@ -103,13 +103,13 @@ const CategoryCarousel = () => {
               color: "#444",
             }}
           >
-            SEATING GROUPS
+            Bed
           </Typography>
         </div>
         <div className="categories-small-div" onClick={()=>setOpen('open')} style={{ padding: "10px" }}>
           <img
-            style={{ width: "100%", margin: "0px 5px 0px 0px" }}
-            src="image/sehpa.jpg"
+            style={{ width: "100%",height:"150px",  margin: "0px 5px 0px 0px" }}
+            src="https://platincdn.com/516/pictures/thumb/460X-270X-LYHFQQRSEF910202103830_adel-berjer.jpg"
             alt=""
           />
           <Typography
@@ -121,9 +121,29 @@ const CategoryCarousel = () => {
               color: "#444",
             }}
           >
-            SEATING GROUPS
+            Berjer
           </Typography>
         </div>
+        <div className="categories-small-div" onClick={()=>setOpen('open')} style={{ padding: "10px" }}>
+          <img
+            style={{ width: "100%",height:"150px", margin: "0px 5px 0px 0px" }}
+            src="https://res.cloudinary.com/castlery/image/private/b_rgb:FFFFFF,c_fit,f_auto,q_auto,w_1000/v1624969246/crusader/variants/50440636-PL4001/Hanford-Armchair-Light-Grey-Front.jpg"
+            alt=""
+          />
+          <Typography
+            component="div"
+            sx={{
+              textAlign: "center",
+              letterSpacing: "0.02em",
+              fontWeight: "100",
+              color: "#444",
+            }}
+          >
+            Armchair
+          </Typography>
+        </div>
+
+ 
 
       </Slider>
     </div>

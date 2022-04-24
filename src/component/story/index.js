@@ -17,7 +17,6 @@ const Story = () => {
           <div style={{ position: "absolute", bottom: "0px", width: "100%", height: "200px", display: "flex", justifyContent: "center" }}>
             <div style={{ width: "80%", display: "flex", height: "120px", zIndex: 999, position: "absolute" }}>
 
-
               <button className="button">
                 <h2> REWIEW </h2>
                 <div className="button__horizontal"></div>
@@ -58,7 +57,7 @@ const Story = () => {
       <Stories
         storyContainerStyles={{ margin: "0 auto" }}
         stories={stories}
-        defaultInterval={2500}
+        defaultInterval={3500}
         keyboardNavigation={true}
         onAllStoriesEnd={() =>
           dispatch(setStory({ value: true }))}
