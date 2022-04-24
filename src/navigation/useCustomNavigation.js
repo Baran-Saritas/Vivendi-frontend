@@ -3,9 +3,10 @@ import Main from "../pages/main";
 import Products from "../pages/products/index";
 import DetailPage from "../pages/detailPage/index";
 import ProductCart from "../pages/productCart";
-import CustomCard from "../component/card";
+import Category from "../pages/category";
+import Group from "../pages/group";
+import SetInfo from "../pages/setInfo";
 export const useCustomRoutes = () => {
-  let isLogin = localStorage.getItem("currentUser");
   return [
     {
       path: "/",
@@ -28,8 +29,20 @@ export const useCustomRoutes = () => {
       element: <ProductCart />,
     },
     {
-      path: "/test",
-      element: <CustomCard />,
+      path: "/category-edit",
+      element: <Category />,
+    },
+    {
+      path: "/category-edit/:category_id/group-edit",
+      element: <Group />,
+    },
+    {
+      path: "/category-edit/:category_id/group-edit/:group_id/set-info-edit",
+      element: <SetInfo />,
+    },
+    {
+      path: "*",
+      element: <div>Page Not Found</div>,
     },
   ];
 };

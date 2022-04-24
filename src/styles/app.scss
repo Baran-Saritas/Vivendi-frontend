@@ -5,11 +5,9 @@
     flex-direction: column;
     height: 100vh;
 }
-
-.app > div {
+.app > div:nth-child(2) {
     flex: 1;
 }
-
 .app > div:last-child {
     max-height: 50px;
 }

@@ -1,6 +1,8 @@
 @import "./app.scss";
-@import "./page//main.scss";
+@import "./page/main.scss";
+@import "./page/category.scss";
 @import "./component/card.scss";
+@import "./component/spinner.scss";
 @import "./component/sign.scss";
 @import "./component/category_carousel.scss";
 @import "./component/detail_carousel.scss";
@@ -11,3 +13,4 @@
 @import "./component/product_cart.scss";
 @import "./component/product_detail.scss";
 @import "./component/products.scss";
+@import "./component/story.scss";

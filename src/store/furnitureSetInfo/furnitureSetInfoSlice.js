@@ -1,77 +1,115 @@
-import { createSlice } from "@reduxjs/toolkit";
-import env from "../../env.json"
-const url = env.fSetInfoUrl;
-const initialState = {
-    isLoading: false,
-    error: null,
-    isLogin: false,
-    updatePassword: {
-      isLoading: false,
-      error: null,
-    },
-  };
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { set_info_api } from "../../utilrs/axiosInterceptors";
+import { setFullFilled } from "../global/globalSlice";
 
-export const FurnitureSetInfoSlice = createSlice({
-    name: "furnitureSetInfo",
-    initialState,
-    reducers:  {
-        /**
-       * Assign the project to an employee.
-       * @param {string} furnitureSetInfo.name
-       * @param {string} furnitureSetInfo.price
-       * @param {string} furnitureSetInfo.furnitureGroupId
-       */
-         updateFurnitureSetInfo: (state, {id, furnitureSetInfo}) => {
-          fetch(url+id,{
-            method:"PUT",
-            headers:{   
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(furnitureSetInfo)
-        })
-            .then(response => response.json())
-            .then(data => console.log(data));
-        },
-        /**
-       * Assign the project to an employee.
-       * @param {string} furnitureSetInfo.name
-       * @param {string} furnitureSetInfo.price
-       * @param {string} furnitureSetInfo.furnitureGroupId
-       */
-          postFurnitureSetInfo: (state, furnitureSetInfo) => {
-            fetch(url,{
-              method:"POST",
-              headers:{   
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(furnitureSetInfo)
-          })
-              .then(response => response.json())
-              .then(data => console.log(data));
-          }
-        ,
-        getFurnitureSetInfo: (state) => {
-            fetch('http://localhost:5053/furniture-set-info/',{
-                method:"GET",
-                headers:{   
-                  "Content-Type": "application/json",
-                }
-            })
-                .then(response => response.json())
-                .then(data => console.log(data));
-        },
-        getFurnitureSetInfoById:(state,id) =>{  // id eklenir hale getir object sorunu verdi 
-            fetch('http://localhost:5053/furniture-set-info/e4b80a57-ee23-4fcb-a5e3-cd9081899de1',{
-                method:"GET",
-                headers:{   
-                  "Content-Type": "application/json",
-                }
-            })
-                .then(response => response.json())
-                .then(data => console.log(data));
-        }
+const getFurnitureSetInfo = createAsyncThunk(
+  "setInfo/getAll",
+  async (_, { rejectWithValue }) => {
+    const res = await set_info_api.get("/");
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      rejectWithValue(res.data);
     }
-})
+  }
+);
 
-export const { getFurnitureSetInfo,getFurnitureSetInfoById,updateFurnitureSetInfo,postFurnitureSetInfo } = FurnitureSetInfoSlice.actions;
-export default FurnitureSetInfoSlice.reducer;
+const getFurnitureSetInfoOfGroup = createAsyncThunk(
+  "setInfo/getAllOfCategory",
+  async (id, { rejectWithValue }) => {
+    const res = await set_info_api.get("/group/" + id);
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      rejectWithValue(res.data);
+    }
+  }
+);
+
+const deleteFurnitureSetInfo = createAsyncThunk(
+  "setInfo/delete",
+  async (id, { rejectWithValue, dispatch }) => {
+    let set_info_res = await set_info_api.delete("/" + id);
+    if (set_info_res.status === 200) {
+      dispatch(setFullFilled({ value: true }));
+      return set_info_res.data;
+    } else {
+      rejectWithValue(set_info_res.data);
+    }
+  }
+);
+
+const updateFurnitureSetInfo = createAsyncThunk(
+  "setInfo/update",
+  async (data, { rejectWithValue, dispatch }) => {
+    let set_info_res = await set_info_api.put("/" + data.id, data.data);
+    if (set_info_res.status === 200) {
+      dispatch(setFullFilled({ value: true }));
+      return set_info_res.data;
+    } else {
+      rejectWithValue(set_info_res.data);
+    }
+  }
+);
+
+const postFurnitureSetInfo = createAsyncThunk(
+  "setInfo/add",
+  async ({ data, id }, { rejectWithValue, dispatch }) => {
+    let set_info_res = await set_info_api.post("/", {
+      ...data,
+      groupId: id,
+    });
+    if (set_info_res.status === 200) {
+      dispatch(setFullFilled({ value: true }));
+      return set_info_res.data;
+    } else {
+      rejectWithValue(set_info_res.data);
+    }
+  }
+);
+
+const initialState = {
+  isLoading: false,
+  setInfos: [],
+  error: null,
+};
+
+const furnitureGroupSlice = createSlice({
+  name: "furnitureSetInfo",
+  initialState,
+  reducers: {},
+  extraReducers: {
+    [getFurnitureSetInfo.fulfilled]: (state, action) => {},
+    [getFurnitureSetInfo.rejected]: (state, action) => {
+      console.log("Group err : ", action.payload);
+    },
+    [postFurnitureSetInfo.fulfilled]: (state, action) => {},
+    [postFurnitureSetInfo.rejected]: (state, action) => {
+      console.log("Group err : ", action.payload);
+    },
+    [updateFurnitureSetInfo.fulfilled]: (state, action) => {},
+    [updateFurnitureSetInfo.rejected]: (state, action) => {
+      console.log("Group err : ", action.payload);
+    },
+    [deleteFurnitureSetInfo.fulfilled]: (state, action) => {},
+    [deleteFurnitureSetInfo.rejected]: (state, action) => {
+      console.log("Group err : ", action.payload);
+    },
+    [getFurnitureSetInfoOfGroup.fulfilled]: (state, action) => {
+      state.setInfos = action.payload;
+    },
+    [getFurnitureSetInfoOfGroup.rejected]: (state, action) => {
+      console.log("Group err : ", action.payload);
+    },
+  },
+});
+
+export const { getFurnitureSetInfoById } = furnitureGroupSlice.actions;
+export {
+  getFurnitureSetInfo,
+  postFurnitureSetInfo,
+  updateFurnitureSetInfo,
+  deleteFurnitureSetInfo,
+  getFurnitureSetInfoOfGroup,
+};
+export default furnitureGroupSlice.reducer;
