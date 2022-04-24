@@ -84,9 +84,14 @@ export default function AddAndEditDialog({
         style={{ backgroundColor: "transparent" }}
         open={open === "edit" || open === "add"}
         onClose={handleClose}
+        className="ae-dialog"
       >
-        <DialogTitle>{`${open} ${variant}`.toUpperCase()}</DialogTitle>
-        <DialogContent sx={{ display: "flex", flexDirection: "column" }}>
+        <DialogTitle className="ae-dialog-title">
+          {`${open} ${variant}`
+            .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())
+            .replace("-", " ")}
+        </DialogTitle>
+        <DialogContent className="ae-dialog-content">
           <TextField
             value={innerData[keys.name]}
             onChange={(e) =>
@@ -95,7 +100,9 @@ export default function AddAndEditDialog({
             autoFocus
             margin="dense"
             id="name"
-            label={`${variant} name`}
+            label={`${variant} name`
+              .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())
+              .replace("-", " ")}
             type="text"
             fullWidth
             variant="standard"
@@ -109,14 +116,14 @@ export default function AddAndEditDialog({
               autoFocus
               margin="dense"
               id="price"
-              label={`${variant} name`}
+              label={`${variant} price`.replace("-", " ")}
               type="text"
               fullWidth
               variant="standard"
             />
           )}
           {foreignKeys !== undefined && open === "edit" && (
-            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+            <FormControl variant="standard" sx={{ minWidth: 120 }}>
               <InputLabel id="simple-select-label">
                 {keys.id.toUpperCase()}
               </InputLabel>
@@ -139,7 +146,6 @@ export default function AddAndEditDialog({
           )}
           {innerData[keys.imageSource] && (
             <img
-              style={{ width: "200px", height: "100px" }}
               src={innerData[keys.imageSource] || ""}
               alt={innerData[keys.name]}
             />

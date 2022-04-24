@@ -46,8 +46,10 @@ export default function Item({ itemData, setData, setOpen, keys, onClick }) {
           </div>
         </Tooltip>
       </div>
-      <img src={itemData[keys.imageSource]} alt={itemData[keys.name]} />
-      <p>{itemData[keys.name]}</p>
+      <div className="dialog-item-content">
+        <img src={itemData[keys.imageSource]} alt={itemData[keys.name]} />
+        <p>{itemData[keys.name]}</p>
+      </div>
     </div>
   );
 }

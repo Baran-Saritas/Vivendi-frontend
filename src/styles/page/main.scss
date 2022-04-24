@@ -82,6 +82,23 @@
           top: 10px
         }
       }
+      .dialog-item-content {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+        p {
+          position: absolute;
+          bottom: 20px;
+          margin: 0;
+          text-align: center;
+          width: 100%;
+          font-size: 20px;
+        }
+      }
       .item-edit-cart {
         transition: all .5s ease;
         padding: 2px 8px;
@@ -92,6 +109,7 @@
         align-items: center;
         justify-content: center;
         border-radius: 10%;
+        z-index: 2;
         left: 50%;
         transform: translateX(-50%);
         background-color: white;
@@ -107,4 +125,39 @@
       }
     }
   }
+
 }
+.ae-dialog {
+  .ae-dialog-title {
+    text-align: center;
+  }
+  .ae-dialog-content {
+    display: flex;
+    overflow: visible;
+    flex-direction: column;
+    row-gap: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #605568 #ffffff;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #605568;
+    border-radius: 10px;
+    border: 3px solid #ffffff;
+  }

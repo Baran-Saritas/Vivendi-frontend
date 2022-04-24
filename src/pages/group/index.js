@@ -31,7 +31,7 @@ export default function Group() {
   useEffect(() => {
     if (!categories.length) navigate("/category-edit");
   }, []);
-  return !groups.length ? (
+  return !categories.length ? (
     <LoadingSpinner />
   ) : (
     <div className="dialog-edit">
