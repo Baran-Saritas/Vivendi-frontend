@@ -40,7 +40,7 @@ const CustomCard = () => {
           onMouseLeave={() => setIsHover(false)}
           animate={isHover ? { scale: 1.05 } : ""}
           style={{ height: "100%", width: "100%", zIndex: 3, borderRadius:"5px" }}
-          src="https://s3.us-west-1.amazonaws.com/vivendi-image/f5bcad34-306c-4b7b-b32e-6f850041387b.png"
+          src="https://orix.com.tr/wp-content/uploads/2019/07/urun-still-yemek-odasi-takimi-01.jpg"
           alt="sehpa"
         />
       </div>

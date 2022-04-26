@@ -97,7 +97,7 @@ const DetailPage = () => {
     </div>
 
 
-    <Box sx={{display:"flex",padding:"30px",alignItems:"center",flexDirection: 'column',border:1}}>
+    <Box sx={{display:"flex",padding:"30px",alignItems:"center",flexDirection: 'column',border:1,borderColor:'grey.500'}}>
      <Typography component="div" variant="h4" sx={{
            fontWeight: "600",
            color: "#242433",
