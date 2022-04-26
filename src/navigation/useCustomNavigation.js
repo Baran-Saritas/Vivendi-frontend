@@ -1,11 +1,11 @@
 import React from "react";
 import Main from "../pages/main";
+import Products from "../pages/products/index";
 import DetailPage from "../pages/detailPage/index";
 import ProductCart from "../pages/productCart";
 import Category from "../pages/category";
 import Group from "../pages/group";
 import SetInfo from "../pages/setInfo";
-import Product from "../pages/product";
 export const useCustomRoutes = () => {
   return [
     {
@@ -18,7 +18,7 @@ export const useCustomRoutes = () => {
     },
     {
       path: "/products",
-      element: <Product />,
+      element: <Products />,
     },
     {
       path: "/products/detail",
