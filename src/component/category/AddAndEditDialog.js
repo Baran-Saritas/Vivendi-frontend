@@ -5,12 +5,14 @@ import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
+import { AiOutlinePlus } from "react-icons/ai";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useDispatch, useSelector } from "react-redux";
 import { compareDiff } from "../../utilrs/commons";
 import { setFullFilled } from "../../store/global/globalSlice";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select, Tooltip } from "@mui/material";
 import { useParams } from "react-router-dom";
+import SetDrawer from "../setDrawer";
 
 export default function AddAndEditDialog({
   open,
@@ -25,6 +27,7 @@ export default function AddAndEditDialog({
   const dispatch = useDispatch();
   const { fullfilled } = useSelector((state) => state.global);
   const [innerData, setInnerData] = React.useState({});
+  const [openDrawer, setOpenDrawer] = React.useState("init");
   const { category_id, group_id } = useParams();
   function getBase64(file) {
     return new Promise((resolve, reject) => {
@@ -108,19 +111,28 @@ export default function AddAndEditDialog({
             variant="standard"
           />
           {variant === "set-info" && (
-            <TextField
-              value={innerData[keys.price]}
-              onChange={(e) =>
-                setInnerData({ ...innerData, [keys.price]: e.target.value })
-              }
-              autoFocus
-              margin="dense"
-              id="price"
-              label={`${variant} price`.replace("-", " ")}
-              type="text"
-              fullWidth
-              variant="standard"
-            />
+            <div>
+              <TextField
+                value={innerData[keys.price]}
+                onChange={(e) =>
+                  setInnerData({ ...innerData, [keys.price]: e.target.value })
+                }
+                autoFocus
+                margin="dense"
+                id="price"
+                label={`${variant} price`.replace("-", " ")}
+                type="text"
+                fullWidth
+                variant="standard"
+              />
+              <div style={{zIndex:1399}}>
+                <SetDrawer />
+              </div>
+
+            </div>
+
+
+
           )}
           {foreignKeys !== undefined && open === "edit" && (
             <FormControl variant="standard" sx={{ minWidth: 120 }}>

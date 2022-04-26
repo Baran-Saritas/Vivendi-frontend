@@ -1,13 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const globalSlice = createSlice({
-  name: "globa",
+  name: "global",
   initialState: {
     isLogin: false,
     role: undefined,
     pd_active: undefined,
     fullfilled: false,
     storyEndDialog: false,
+    addedSetFurnitures:[],
+    closeDrawer:true,
   },
   reducers: {
     setFullFilled: (state, { payload: { value } }) => {
@@ -22,7 +24,7 @@ const globalSlice = createSlice({
     },
     setStory: (state, { payload: { value } }) => {
       state.storyEndDialog = value;
-    }
+    },
   },
 });
 

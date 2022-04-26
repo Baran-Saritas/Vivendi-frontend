@@ -127,7 +127,11 @@
   }
 
 }
+.furnitureDrawer{
+  z-index: 1300 !important;
+}
 .ae-dialog {
+  z-index: 1100 !important;
   .ae-dialog-title {
     text-align: center;
   }
