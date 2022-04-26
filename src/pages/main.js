@@ -26,10 +26,18 @@ export default function Main() {
           <CategoryCarousel />
         </div>
       </div>
+      <div
+        className="b-carousel-div"
+        style={{ width: "100%", display: "flex", justifyContent: "center" }}
+      >
+        <div className="b-carousel-side-div" style={{ width: "90%",borderRadius:"10px" }}>
+          <CustomCarousel />
+        </div>
+      </div>
       <div className="img-con">
         {items.map((item, i) => (
           <div className={setSpan(i)}>
-            <img src={item.item} alt="okyo" />
+            <CustomCard/>
           </div>
         ))}
       </div>
@@ -38,22 +46,22 @@ export default function Main() {
 }
 let items = [
   {
-    item: "/image/okyo.jpg",
+    item: "https://s3.us-west-1.amazonaws.com/vivendi-image/f5bcad34-306c-4b7b-b32e-6f850041387b.png",
   },
   {
-    item: "/image/okyo.jpg",
+    item: "https://s3.us-west-1.amazonaws.com/vivendi-image/f5bcad34-306c-4b7b-b32e-6f850041387b.png",
   },
   {
-    item: "/image/okyo.jpg",
+    item: "https://s3.us-west-1.amazonaws.com/vivendi-image/f5bcad34-306c-4b7b-b32e-6f850041387b.png",
   },
   {
-    item: "/image/okyo.jpg",
+    item: "https://s3.us-west-1.amazonaws.com/vivendi-image/f5bcad34-306c-4b7b-b32e-6f850041387b.png",
   },
   {
-    item: "/image/okyo.jpg",
+    item: "https://s3.us-west-1.amazonaws.com/vivendi-image/f5bcad34-306c-4b7b-b32e-6f850041387b.png",
   },
   {
-    item: "/image/okyo.jpg",
+    item: "https://s3.us-west-1.amazonaws.com/vivendi-image/f5bcad34-306c-4b7b-b32e-6f850041387b.png",
   },
   {
     item: "/image/okyo.jpg",

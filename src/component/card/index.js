@@ -29,18 +29,18 @@ const CustomCard = () => {
         flexDirection: "column",
         margin: "0 auto",
         position: "relative",
-        height: "auto",
+        height: "100%",
         width: "100%",
         overflow:"hidden"
       }}
     >
-      <div className="card-img" style={{ height: "auto", width: "100%" }}>
+      <div className="card-img" style={{ height: "100%", width: "100%" }}>
         <img
           onMouseEnter={() => setIsHover(true)}
           onMouseLeave={() => setIsHover(false)}
           animate={isHover ? { scale: 1.05 } : ""}
           style={{ height: "100%", width: "100%", zIndex: 3, borderRadius:"5px" }}
-          src="https://www.nills.com/upload/img//2021/09/09/6878-thumb.jpg"
+          src="https://s3.us-west-1.amazonaws.com/vivendi-image/f5bcad34-306c-4b7b-b32e-6f850041387b.png"
           alt="sehpa"
         />
       </div>
@@ -76,7 +76,7 @@ const IconComponent = () => {
     <motion.div
       variants={item}
       style={{
-        padding: "5px 6px",
+        padding: "5px 6px 1px 6px",
         position: "absolute",
         display: "flex",
         flexDirection: "column",
@@ -89,11 +89,11 @@ const IconComponent = () => {
       }}
     >
       <div className="tooltip">
-        <CgShoppingBag size={20} style={{ margin: "2px 2px 5px 2px" }} />
+        <CgShoppingBag size={30} style={{ margin: "2px 2px 1px 2px" }} />
         <p className="tooltiptext">Add To Cart</p>
       </div>
       <div className="tooltip">
-        <AiOutlineHeart size={21} style={{ margin: "0px 2px -2px 2px" }} />
+        <AiOutlineHeart size={31} style={{ margin: "0px 0px -2px 2px" }} />
         <p className="tooltiptext">Add To Favorites</p>
       </div>
     </motion.div>

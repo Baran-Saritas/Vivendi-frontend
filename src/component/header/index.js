@@ -74,9 +74,7 @@ const CustomHeader = () => {
               <div data-pane-item-title="test" className="nav-pane-item">
                 <img src="/image/okyo.jpg" alt="okyo" />
               </div>
-              <div data-pane-item-title="test" className="nav-pane-item">
-                <img src="/image/okyo.jpg" alt="okyo" />
-              </div>
+
             </div>
             <div className="nav-pane-right">
               <div>
