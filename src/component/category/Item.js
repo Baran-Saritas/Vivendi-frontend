@@ -47,7 +47,7 @@ export default function Item({ itemData, setData, setOpen, keys, onClick }) {
         </Tooltip>
       </div>
       <div className="dialog-item-content">
-        <img src={itemData[keys.imageSource]} alt={itemData[keys.name]} />
+        <img style={{objectFit:"cover"}} src={itemData[keys.imageSource]} alt={itemData[keys.name]} />
         <p>{itemData[keys.name]}</p>
       </div>
     </div>

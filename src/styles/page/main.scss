@@ -10,11 +10,12 @@
     grid-auto-flow: dense;
     div {
       border-radius: 20px;
-      overflow: hidden;
+      margin-bottom: 10px;
       img {
         transition: all 1.2s ease;
         width: 100%;
         height: 100%;
+        object-fit: cover;
       }
       &:hover img {
         transform: scale(1.2);
@@ -127,7 +128,11 @@
   }
 
 }
+.furnitureDrawer{
+  z-index: 1300 !important;
+}
 .ae-dialog {
+  z-index: 1100 !important;
   .ae-dialog-title {
     text-align: center;
   }

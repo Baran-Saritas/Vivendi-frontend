@@ -5,7 +5,7 @@ const user_api = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  timeout: 5000,
+  timeout: 15000,
   baseURL: env.USER_API,
 });
 
@@ -13,7 +13,7 @@ const image_api = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  timeout: 5000,
+  timeout: 15000,
   baseURL: env.IMAGE_API,
 });
 
@@ -21,7 +21,7 @@ const category_api = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  timeout: 5000,
+  timeout: 15000,
   baseURL: env.FCATEGORY_API,
 });
 
@@ -29,7 +29,7 @@ const group_api = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  timeout: 5000,
+  timeout: 15000,
   baseURL: env.FGROUP_API,
 });
 

@@ -41,22 +41,22 @@ const CustomCarousel = ({ speed, autoplaySpeed }) => {
       <Slider {...settings}>
         <div className="categories-main-carousel">
           <img
-            style={{ width: "100%", margin: "0px 5px 0px 0px" }}
-            src="image/aston-yatak-odasi.jpg"
+            style={{ width: "100%", margin: "0px 5px 0px 0px", objectFit: "cover" }}
+            src="https://orixhome.com/wp-content/uploads/2021/06/capella4177-kopya.jpg"
             alt="test"
           />
         </div>
         <div className="categories-main-carousel">
           <img
-            style={{ width: "100%", margin: "0px 5px 0px 0px" }}
-            src="https://www.berkemobilya.com.tr/media/catalog/product/cache/1/image/2000x1120/8cda07290adf5b61edee0d4066c5caef/w/h/whatsapp-image-2021-02-23-at-18.03_2.jpg"
+            style={{ width: "100%", margin: "0px 5px 0px 0px", objectFit: "cover" }}
+            src="https://orix.com.tr/wp-content/uploads/2019/07/urun-still-yemek-odasi-takimi-01.jpg"
             alt=""
           />
         </div>
         <div className="categories-main-carousel">
           <img
-            style={{ width: "100%", margin: "0px 5px 0px 0px" }}
-            src="https://assets.hyatt.com/content/dam/hyatt/hyattdam/images/2018/01/12/1137/Hyatt-Centric-Gran-Via-Madrid-P026-Fenix-Suite.jpg/Hyatt-Centric-Gran-Via-Madrid-P026-Fenix-Suite.16x9.jpg?imwidth=1280"
+            style={{ width: "100%", margin: "0px 5px 0px 0px", objectFit: "cover" }}
+            src="https://orixhome.com/wp-content/uploads/2020/06/urun-zen-2-koltuk-takimi-01.jpg"
             alt=""
           />
         </div>

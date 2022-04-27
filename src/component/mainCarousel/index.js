@@ -143,7 +143,7 @@ const CategoryCarousel = () => {
           </Typography>
         </div>
 
- 
+
 
       </Slider>
     </div>

@@ -4,6 +4,7 @@ import CustomCarousel from "../carousel";
 import { motion } from "framer-motion";
 import SearchResult from "./SearchResult";
 import Sign from "../../pages/user/index";
+import HeaderShoppingCart from "../shoppingCart";
 
 const CustomHeader = () => {
   const ref = useRef(null);
@@ -39,7 +40,7 @@ const CustomHeader = () => {
         </div>
         <div className="header-util">
           <p onClick={() => setOpen(true)}>Sign In</p>
-          <p>Sepet</p>
+          <p> <HeaderShoppingCart/></p>
           <p>Lang</p>
         </div>
       </div>
@@ -74,9 +75,7 @@ const CustomHeader = () => {
               <div data-pane-item-title="test" className="nav-pane-item">
                 <img src="/image/okyo.jpg" alt="okyo" />
               </div>
-              <div data-pane-item-title="test" className="nav-pane-item">
-                <img src="/image/okyo.jpg" alt="okyo" />
-              </div>
+
             </div>
             <div className="nav-pane-right">
               <div>
