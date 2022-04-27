@@ -15,7 +15,7 @@ const DetailCarousel = () => {
     swipeToSlide: true,
     autoplay: true,
     speed: 4000,
-    autoplaySpeed: 8000,
+    autoplaySpeed: 3000,
     responsive: [
       {
         breakpoint: 1424,

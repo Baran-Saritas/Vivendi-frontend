@@ -3,15 +3,16 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Checkbox from '@mui/material/Checkbox';
-import Avatar from '@mui/material/Avatar';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 import { Button, Divider, fabClasses, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAddedSetFurnitures } from '../../store/global/globalSlice';
 
-export default function SetFurnitureList({setState, setAddedFurnitures, addedFurnitures}) {
-  
+export default function SetFurnitureList({ setState, setAddedFurnitures, addedFurnitures }) {
+
+
+
     const { categories } = useSelector((state) => state.category);
     const handleToggle = (value) => () => {
         const currentIndex = addedFurnitures.findIndex(i => i.id === value.id);
@@ -24,6 +25,8 @@ export default function SetFurnitureList({setState, setAddedFurnitures, addedFur
         setAddedFurnitures(newChecked);
     };
 
+
+
     return (
         <div>
             <div style={{ textAlign: "center" }}>
@@ -32,9 +35,16 @@ export default function SetFurnitureList({setState, setAddedFurnitures, addedFur
             <Divider />
             <div style={{ marginTop: "15px", justifyContent: "center", display: "flex" }}>
                 <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                    <Autocomplete
+                        id="free-solo-demo"
+                        freeSolo
+                        options={categories?.map((option) => option.categoryName)}
+                        renderInput={(params) => <TextField {...params} label="freeSolo" />}
+                    />
                     {categories.map((value) => {
                         const labelId = `checkbox-list-secondary-label-${value}`;
                         return (
+
                             <ListItem
                                 key={value.id}
                                 sx={{ marginBottom: "10px" }}

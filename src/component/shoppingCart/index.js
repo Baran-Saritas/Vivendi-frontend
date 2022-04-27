@@ -31,7 +31,7 @@ const useStyles = makeStyles({
   return (
     <div>
       <Badge badgeContent={shoppingCartProduct.totalCount} color="primary">
-      <CgShoppingBag size={30} onClick={e => setAnchorEl(e.currentTarget)} />
+      <CgShoppingBag size={28} onClick={e => setAnchorEl(e.currentTarget)} />
       </Badge>
      <Menu
         id="basic-menu"
