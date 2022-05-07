@@ -1,30 +1,19 @@
 import React from "react";
 import DetailCard from "../../component/dcard/index";
+import KindFilter from "../../component/product/KindFilter";
+import OrderFilter from "../../component/product/OrderFilter";
+
 export default function Products() {
   return (
     <div className="products-page">
       <div className="products-page-side">
-        <div
-          style={{ display: "flex", justifyContent: "center", width: "100%" }}
-        >
-          <div
-            className="products-h1"
-            style={{ textAlign: "center", width: "60%", whiteSpace: "normal" }}
-          >
-            <h1 style={{ fontWeight: 500 }}>SEATING GROUPS</h1>
-            <hr />
-          </div>
+        <h1>SEATING GROUPS</h1>
+        <hr />
+        <div className="products-filter">
+          <OrderFilter />
+          <KindFilter />
         </div>
-        <br />
-        <br />
-        <div
-          className="all-products"
-          style={{
-            display: "flex",
-            justifyContent: "space-evenly",
-            flexWrap: "wrap",
-          }}
-        >
+        <div className="all-products">
           <DetailCard />
           <DetailCard />
           <DetailCard />
