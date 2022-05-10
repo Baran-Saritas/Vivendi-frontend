@@ -17,7 +17,7 @@ const CustomHeader = () => {
       <Sign open={open} setOpen={setOpen} />
       <div className="header-top">
         <div className="header-logo">
-          <img src="logo_dark.png" alt="icon" />
+          <img src="/logo_dark.png" alt="icon" />
         </div>
         <div className="header-search" tabIndex="0">
           <div className="res-con" ref={ref}>

@@ -6,6 +6,7 @@ import ProductCart from "../pages/productCart";
 import Category from "../pages/category";
 import Group from "../pages/group";
 import SetInfo from "../pages/setInfo";
+import Product from "../component/product";
 export const useCustomRoutes = () => {
   return [
     {
@@ -39,6 +40,10 @@ export const useCustomRoutes = () => {
     {
       path: "/category-edit/:category_id/group-edit/:group_id/set-info-edit",
       element: <SetInfo />,
+    },
+    {
+      path: "/panel/product",
+      element: <Product />,
     },
     {
       path: "*",
