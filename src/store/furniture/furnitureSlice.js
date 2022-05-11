@@ -1,92 +1,113 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import env from "../../env.json";
-const url = env.furnitureUrl;
+import { furniture_api } from "../../utilrs/axiosInterceptors";
+
+
+
+const getFurniture = createAsyncThunk(
+  "furniture/",
+  async (_, { rejectWithValue }) => {
+    const res = await furniture_api.get("/");
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      rejectWithValue(res.data);
+    }
+  }
+);
+
+const getFurnitureById = createAsyncThunk(
+  "furniture",
+  async (id, { rejectWithValue, dispatch }) => {
+    let furniture_res = await furniture_api.get("/" + id);
+    if (furniture_res.status === 200) {
+      return furniture_res.data;
+    } else {
+      rejectWithValue(furniture_res.data);
+    }
+  }
+  );
+const deleteFurniture = createAsyncThunk(
+  "furniture/delete",
+  async (id, { rejectWithValue, dispatch }) => {
+    let furniture_res = await furniture_api.delete("/" + id);
+    if (furniture_res.status === 200) {
+      return furniture_res.data;
+    } else {
+      rejectWithValue(furniture_res.data);
+    }
+  }
+);
+
+const updateFurnitures= createAsyncThunk(
+  "furniture/update",
+  async (data, { rejectWithValue, dispatch }) => {
+    let furniture_res = await furniture_api.put("/" + data.id, data.data);
+    if (furniture_res.status === 200) {
+      return furniture_res.data;
+    } else {
+      rejectWithValue(furniture_res.data);
+    }
+  }
+);
+
+const postFurnitures = createAsyncThunk(
+  "furniture/add",
+  async ({ data }, { rejectWithValue, dispatch }) => {
+    let furniture_res = await furniture_api.post("/", data);
+    if (furniture_res.status === 200) {
+      return furniture_res.data;
+    } else {
+      rejectWithValue(furniture_res.data);
+    }
+  }
+);
+
+
+
 const initialState = {
   isLoading: false,
+  furnitures: [],
   error: null,
-  isLogin: false,
-  updatePassword: {
-    isLoading: false,
-    error: null,
-  },
 };
+
 
 export const FurnitureSlice = createSlice({
   name: "furniture",
   initialState,
-  reducers: {
-    /**
-     * Assign the project to an employee.
-     * @param {string} furniture.height
-     * @param {string} furniture.width
-     * @param {string} furniture.depth
-     * @param {string} furniture.color
-     * @param {string} furniture.name
-     * @param {string} furniture.imageUrl
-     * @param {Number} furniture.price
-     * @param {string} furniture.description
-     */
-    updateFurniture: (state, { id, furniture }) => {
-      fetch(url + id, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(furniture),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+  reducers: {},
+  extraReducers: {
+    [getFurnitureById.fulfilled]: (state, action) => {},
+    [getFurnitureById.rejected]: (state, action) => {
+      console.log("Furniture err : ", action.payload);
     },
-    /**
-     * Assign the project to an employee.
-     * @param {string} furniture.height
-     * @param {string} furniture.width
-     * @param {string} furniture.depth
-     * @param {string} furniture.color
-     * @param {string} furniture.name
-     * @param {string} furniture.imageUrl
-     * @param {Number} furniture.price
-     * @param {string} furniture.description
-     */
-    postFurniture: (state, furniture) => {
-      fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(furniture),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+    [getFurniture.fulfilled]: (state, action) => {},
+    [getFurniture.rejected]: (state, action) => {
+      console.log("Furniture err : ", action.payload);
     },
-    getFurnitures: (state) => {
-      fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+    [postFurnitures.fulfilled]: (state, action) => {},
+    [postFurnitures.rejected]: (state, action) => {
+      console.log("Furniture err : ", action.payload);
     },
-    getFurnitureById: (state, id) => {
-      // id eklenir hale getir object sorunu verdi
-      fetch(url + id, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+    [updateFurnitures.fulfilled]: (state, action) => {},
+    [updateFurnitures.rejected]: (state, action) => {
+      console.log("Furniture err : ", action.payload);
     },
+    [deleteFurniture.fulfilled]: (state, action) => {},
+    [deleteFurniture.rejected]: (state, action) => {
+      console.log("Furniture err : ", action.payload);
+    },
+
   },
 });
 
-export const {
-  getFurnitures,
+
+export {
+  getFurniture,
+  postFurnitures,
+  updateFurnitures,
+  deleteFurniture,
   getFurnitureById,
-  postFurniture,
-  updateFurniture,
-} = FurnitureSlice.actions;
+};
+
 export default FurnitureSlice.reducer;
