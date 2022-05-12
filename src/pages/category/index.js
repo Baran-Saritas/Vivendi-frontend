@@ -24,9 +24,7 @@ export default function Category() {
   useEffect(() => {
     dispatch(getFurnitureCategory());
   }, [open]);
-  return !categories.length ? (
-    <LoadingSpinner />
-  ) : (
+  return (
     <div className="dialog-edit">
       <AddAndEditDialog
         open={open}
