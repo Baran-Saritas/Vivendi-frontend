@@ -46,7 +46,7 @@
         input {
           padding: 19px 18px;
           border-radius: 0;
-          height: 50px;
+          height: 40px;
           font-size: 1rem;
           line-height: 1.5;
           border: 2px solid rgba(200, 200, 200, .4);
@@ -100,6 +100,15 @@
           margin: 5px;
           justify-content: space-between;
           span:first-child {
+            display: flex;
+            column-gap: 10px;
+            .p-select-color {
+              display: block;
+              height: 20px ;
+              width: 20px;
+              border-radius: 50%;
+              box-shadow: 0 0 2px 1px rgba(0,0,0,.35);
+            }
           }
           span:last-child {
             cursor: pointer;

@@ -2,10 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import env from "../../env.json";
 import { furniture_api } from "../../utilrs/axiosInterceptors";
 
-
-
 const getFurniture = createAsyncThunk(
-  "furniture/",
+  "furniture/getAll",
   async (_, { rejectWithValue }) => {
     const res = await furniture_api.get("/");
     if (res.status === 200) {
@@ -17,7 +15,7 @@ const getFurniture = createAsyncThunk(
 );
 
 const getFurnitureById = createAsyncThunk(
-  "furniture",
+  "furniture/getById",
   async (id, { rejectWithValue, dispatch }) => {
     let furniture_res = await furniture_api.get("/" + id);
     if (furniture_res.status === 200) {
@@ -26,7 +24,7 @@ const getFurnitureById = createAsyncThunk(
       rejectWithValue(furniture_res.data);
     }
   }
-  );
+);
 const deleteFurniture = createAsyncThunk(
   "furniture/delete",
   async (id, { rejectWithValue, dispatch }) => {
@@ -39,7 +37,7 @@ const deleteFurniture = createAsyncThunk(
   }
 );
 
-const updateFurnitures= createAsyncThunk(
+const updateFurnitures = createAsyncThunk(
   "furniture/update",
   async (data, { rejectWithValue, dispatch }) => {
     let furniture_res = await furniture_api.put("/" + data.id, data.data);
@@ -51,9 +49,9 @@ const updateFurnitures= createAsyncThunk(
   }
 );
 
-const postFurnitures = createAsyncThunk(
+const postFurniture = createAsyncThunk(
   "furniture/add",
-  async ({ data }, { rejectWithValue, dispatch }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     let furniture_res = await furniture_api.post("/", data);
     if (furniture_res.status === 200) {
       return furniture_res.data;
@@ -63,14 +61,11 @@ const postFurnitures = createAsyncThunk(
   }
 );
 
-
-
 const initialState = {
   isLoading: false,
   furnitures: [],
   error: null,
 };
-
 
 export const FurnitureSlice = createSlice({
   name: "furniture",
@@ -85,8 +80,8 @@ export const FurnitureSlice = createSlice({
     [getFurniture.rejected]: (state, action) => {
       console.log("Furniture err : ", action.payload);
     },
-    [postFurnitures.fulfilled]: (state, action) => {},
-    [postFurnitures.rejected]: (state, action) => {
+    [postFurniture.fulfilled]: (state, action) => {},
+    [postFurniture.rejected]: (state, action) => {
       console.log("Furniture err : ", action.payload);
     },
     [updateFurnitures.fulfilled]: (state, action) => {},
@@ -97,14 +92,12 @@ export const FurnitureSlice = createSlice({
     [deleteFurniture.rejected]: (state, action) => {
       console.log("Furniture err : ", action.payload);
     },
-
   },
 });
 
-
 export {
   getFurniture,
-  postFurnitures,
+  postFurniture,
   updateFurnitures,
   deleteFurniture,
   getFurnitureById,

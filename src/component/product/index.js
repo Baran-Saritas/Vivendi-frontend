@@ -1,42 +1,90 @@
-import { Snackbar } from "@mui/material";
-import React, { useState } from "react";
-import { TiDeleteOutline } from "react-icons/ti";
+import { MenuItem, Select, Snackbar } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getFurnitureCategory } from "../../store/furnitureCategory/furnitureCategorySlice";
+import { postFurniture } from "../../store/furniture/furnitureSlice";
+import SelectImage from "../SelectImage/SelectImage";
 
 export default function Product() {
+  const dispatch = useDispatch();
+  const { categories } = useSelector((state) => state.category);
   const [values, setValues] = useState({
     name: undefined,
-    color: undefined,
     height: undefined,
     width: undefined,
     depth: undefined,
     price: undefined,
     description: undefined,
+    categoryId: undefined,
   });
   const [images, setImages] = useState([]);
   const [openMessage, setOpenMessage] = useState(false);
+  const [messageText, setMessageText] = useState("");
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
-  const onImageChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      if (e.target.files[0].size > 300000) {
-        setOpenMessage(true);
-        return;
-      }
-      let img = e.target.files[0];
-      setImages((p) => [...p, { image: img, id: img.name }]);
+
+  const handleClick = () => {
+    if (!values.name) {
+      setMessageText("Please fill name field!");
+      setOpenMessage(true);
+      return;
     }
+    if (!values.height || !Number(values.height)) {
+      setMessageText("Please fill height field!");
+      setOpenMessage(true);
+    }
+    if (!values.width || !Number(values.width)) {
+      setMessageText("Please fill width field!");
+      setOpenMessage(true);
+      return;
+    }
+    if (!values.depth || !Number(values.depth)) {
+      setMessageText("Please fill depth field!");
+      setOpenMessage(true);
+      return;
+    }
+    if (!values.price || !Number(values.price)) {
+      setMessageText("Please fill price field!");
+      setOpenMessage(true);
+      return;
+    }
+    if (!values.categoryId) {
+      setMessageText("Please select a category!");
+      setOpenMessage(true);
+      return;
+    }
+    if (!values.description) {
+      setMessageText("Please fill description field!");
+      setOpenMessage(true);
+      return;
+    }
+    if (images.length < 1) {
+      setMessageText("Please select one image!");
+      setOpenMessage(true);
+      return;
+    }
+    let newData = [];
+    images.forEach((i) => newData.push(JSON.parse(JSON.stringify(i))));
+    newData.forEach((i) => {
+      if (!i?.color) {
+        i.color = "#ffffff";
+      }
+      delete i.id;
+    });
+    let data = { ...values, images: newData, price: parseFloat(values.price) };
+    dispatch(postFurniture(data));
   };
-  const removeImage = (id) => {
-    setImages((p) => p.filter((i) => i.id !== id));
-  };
+  useEffect(() => {
+    dispatch(getFurnitureCategory());
+  }, []);
   return (
     <>
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         open={openMessage}
         onClose={() => setOpenMessage(false)}
-        message="Max image size must be 300KB"
+        message={messageText}
       />
       <div className="add-product-page">
         <div className="add-product-con">
@@ -97,6 +145,26 @@ export default function Product() {
               />
             </div>
             <div className="product-field">
+              <label htmlFor="p-categoryId">Category</label>
+              <Select
+                labelId="simple-select-label"
+                id="p-categoryId"
+                value={
+                  categories.filter((i) => i.id === values.categoryId)
+                    ?.categoryName
+                }
+                onChange={(e) =>
+                  setValues({ ...values, categoryId: e.target.value })
+                }
+              >
+                {categories.map((i) => (
+                  <MenuItem value={i.id} key={i.id}>
+                    {i.categoryName}
+                  </MenuItem>
+                ))}
+              </Select>
+            </div>
+            <div className="product-field">
               <label htmlFor="p-desc">Description</label>
               <textarea
                 rows="3"
@@ -109,27 +177,10 @@ export default function Product() {
             </div>
           </div>
           <div className="add-product-right">
-            <div className="up-img">
-              <img src="/image/okyo.jpg" alt="okyo" />
-            </div>
-            <div>
-              <input
-                onChange={onImageChange}
-                type="file"
-                className="custom-file-input"
-              />
-            </div>
-            <div className="img-list">
-              {images.map((i) => (
-                <p key={i.id}>
-                  <span>{i.image.name}</span>
-                  <span onClick={() => removeImage(i.id)}>
-                    <TiDeleteOutline fontSize={20} />
-                  </span>
-                </p>
-              ))}
-            </div>
-            <button type="submit">Create</button>
+            <SelectImage images={images} setImages={setImages} />
+            <button type="submit" onClick={handleClick}>
+              Create
+            </button>
           </div>
         </div>
       </div>

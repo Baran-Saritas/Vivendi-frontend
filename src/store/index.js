@@ -2,7 +2,6 @@ import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./user/userSlice";
 import furnitureReducer from "./furniture/furnitureSlice";
 import furnitureSetInfoSlice from "./furnitureSetInfo/furnitureSetInfoSlice";
-import furnitureGroupSlice from "./furnitureGroup/furnitureGroupSlice";
 import furnitureCategorySlice from "./furnitureCategory/furnitureCategorySlice";
 import imageSlice from "./image/imageSlice";
 import productCartSlice from "./productCart/productCartSlice";
@@ -13,7 +12,6 @@ const store = configureStore({
     user: userReducer,
     furniture: furnitureReducer,
     setInfo: furnitureSetInfoSlice,
-    group: furnitureGroupSlice,
     productCart: productCartSlice,
     category: furnitureCategorySlice,
     image: imageSlice,
