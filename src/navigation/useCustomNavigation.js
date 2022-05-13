@@ -6,6 +6,7 @@ import ProductCart from "../pages/productCart";
 import Category from "../pages/category";
 import SetInfo from "../pages/setInfo";
 import Product from "../component/product";
+import ProductsCampaign from "../pages/campaign";
 export const useCustomRoutes = () => {
   return [
     {
@@ -41,8 +42,13 @@ export const useCustomRoutes = () => {
       element: <Product />,
     },
     {
+      path: "/panel/campaign",
+      element: <ProductsCampaign/>,
+    },
+    {
       path: "*",
       element: <div>Page Not Found</div>,
     },
   ];
 };
+// /Campaign

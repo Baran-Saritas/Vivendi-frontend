@@ -5,13 +5,24 @@ import { motion } from "framer-motion";
 import SearchResult from "./SearchResult";
 import Sign from "../../pages/user/index";
 import HeaderShoppingCart from "../shoppingCart";
+import { useDispatch, useSelector } from "react-redux";
+import { getFurnitureCategory } from "../../store/furnitureCategory/furnitureCategorySlice";
+import { getFurniture } from "../../store/furniture/furnitureSlice";
 
 const CustomHeader = () => {
+  const dispatch = useDispatch();
+  const { categories } = useSelector((state) => state.category);
+  const { furnitures } = useSelector((state) => state.furniture);
   const ref = useRef(null);
   const [search, setSearch] = useState("");
   const [isSelect, setIsSelect] = useState(0);
   const [isFocus, setIsFocus] = useState(false);
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    dispatch(getFurniture());
+    dispatch(getFurnitureCategory());
+  },[])
   return (
     <motion.div className="header">
       <Sign open={open} setOpen={setOpen} />

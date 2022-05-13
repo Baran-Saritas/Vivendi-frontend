@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   const [cartNull,setCartNull] = useState(false);
   const {productList,shoppingCartProduct,totalPrice} = useSelector(state => state.productCart);
   return (
-    <div>
+    <>
       <Badge badgeContent={shoppingCartProduct.totalCount} color="primary">
       <CgShoppingBag size={28} onClick={e => setAnchorEl(e.currentTarget)} />
       </Badge>
@@ -69,7 +69,7 @@ const useStyles = makeStyles({
        {
          !productList.length == 0 ?(
           productList.map((item, i) => (
-          <MenuItem>
+          <MenuItem key={i}>
             <ShoppingCartProduct item={item} key={i}/>
           </MenuItem>
           
@@ -113,7 +113,7 @@ const useStyles = makeStyles({
         </Box>)}
       </Menu>
 
-    </div>
+    </>
   )
 }
 export default HeaderShoppingCart;

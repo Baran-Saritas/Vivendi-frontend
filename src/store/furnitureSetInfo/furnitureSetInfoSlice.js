@@ -74,7 +74,7 @@ const initialState = {
   error: null,
 };
 
-const furnitureGroupSlice = createSlice({
+const furnitureSetInfoSlice = createSlice({
   name: "furnitureSetInfo",
   initialState,
   reducers: {},
@@ -104,7 +104,7 @@ const furnitureGroupSlice = createSlice({
   },
 });
 
-export const { getFurnitureSetInfoById } = furnitureGroupSlice.actions;
+export const { getFurnitureSetInfoById } = furnitureSetInfoSlice.actions;
 export {
   getFurnitureSetInfo,
   postFurnitureSetInfo,
@@ -112,4 +112,4 @@ export {
   deleteFurnitureSetInfo,
   getFurnitureSetInfoOfGroup,
 };
-export default furnitureGroupSlice.reducer;
+export default furnitureSetInfoSlice.reducer;

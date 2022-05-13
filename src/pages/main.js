@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CustomCard from "../component/card";
 import Hcard from "../component/hcard";
 import CategoryCarousel from "../component/mainCarousel";
 import CustomCarousel from "../component/carousel";
 import { getCircularProgressUtilityClass } from "@mui/material";
+import { useDispatch } from "react-redux";
+
 
 export default function Main() {
+
   let arr = ["item-span-3", "item-span-4", "item-span-5", "item-span-6"].sort(
     () => Math.random() - 0.5
   );
@@ -18,6 +21,7 @@ export default function Main() {
     arr.pop();
     return res;
   }
+
   return (
 
     <div className="main">
@@ -34,6 +38,7 @@ export default function Main() {
           <CustomCarousel />
         </div>
       </div>
+
       <div className="img-con">
         {items.map((item, i) => (
           <div className={setSpan(i)}>

@@ -1,13 +1,6 @@
 import axios from "axios";
 import env from "../env.json";
 
-const user_api = axios.create({
-  headers: {
-    "Content-Type": "application/json",
-  },
-  timeout: 15000,
-  baseURL: env.USER_API,
-});
 
 const furniture_api = axios.create({
   headers:{
@@ -16,7 +9,16 @@ const furniture_api = axios.create({
   timeout: 15000,
   baseURL: env.FURNITURE_API,
 
-})
+});
+
+const user_api = axios.create({
+  headers: {
+    "Content-Type": "application/json",
+  },
+  timeout: 15000,
+  baseURL: env.USER_API,
+});
+
 
 const image_api = axios.create({
   headers: {
@@ -67,7 +69,7 @@ export const handleError = ({ message, data, status }) => {
   return Promise.reject({ message, data, status });
 };
 
-// /furniture_api
+//
 furniture_api.interceptors.request.use(config, error);
 furniture_api.interceptors.response.use(response);
 //
@@ -120,4 +122,4 @@ async function responseResult({ message, response: { data, status } }) {
   return handleError({ message, data, status });
 }
 
-export { user_api, image_api, category_api, group_api, set_info_api,campaign_api,furniture_api };
+export {furniture_api,user_api, image_api, category_api, group_api, set_info_api,campaign_api };
