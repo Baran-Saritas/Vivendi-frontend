@@ -56,12 +56,7 @@ export default function ProductsCampaign() {
       setOpenMessage(true);
       return;
     }
-
-
-
     values.endDate = selectedDate.toString();
-//    setValues({ ...values,endDate: selectedDate })
-
     let newData = [];
     images.forEach((i) => newData.push(JSON.parse(JSON.stringify(i))));
     newData.forEach((i) => {
@@ -76,7 +71,6 @@ export default function ProductsCampaign() {
      console.log(data);
      data.endDate = selectedDate.toISOString().split(".")[0];
      dispatch(postCampaign(data));
-
   };
 
   return (

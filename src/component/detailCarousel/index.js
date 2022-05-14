@@ -10,7 +10,6 @@ const DetailCarousel = () => {
     dots: true,
     className: "center",
     infinite: true,
-    centerPadding: "30px",
     slidesToShow: 4,
     swipeToSlide: true,
     autoplay: true,

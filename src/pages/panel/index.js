@@ -62,7 +62,6 @@ export default function Base() {
           <Tab label="Furniture" {...a11yProps(1)} />
           <Tab label="Campaign" {...a11yProps(2)} />
           <Tab label="Furniture Set" {...a11yProps(3)} />
-
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>

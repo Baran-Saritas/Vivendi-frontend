@@ -11,8 +11,8 @@ const CategoryCarousel = () => {
     dots: true,
     className: "center",
     infinite: true,
-    centerPadding: "30px",
-    slidesToShow: 4,  // lenght -1 e kadar bozulma yok 
+    centerPadding: "10px",
+    slidesToShow: 5,  // lenght -1 e kadar bozulma yok 
     swipeToSlide: true,
     autoplay: true,
     speed: 2000,

@@ -20,9 +20,8 @@ const CustomHeader = () => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    dispatch(getFurniture());
     dispatch(getFurnitureCategory());
-  },[])
+  }, []);
   return (
     <motion.div className="header">
       <Sign open={open} setOpen={setOpen} />
@@ -51,25 +50,17 @@ const CustomHeader = () => {
         </div>
         <div className="header-util">
           <p onClick={() => setOpen(true)}>Sign In</p>
-          <p> <HeaderShoppingCart/></p>
-          <p>Lang</p>
+          <p>
+            {" "}
+            <HeaderShoppingCart />
+          </p>
         </div>
       </div>
       <div className="header-mid" onMouseLeave={() => setIsSelect(0)}>
         <nav>
-          <div onMouseEnter={() => setIsSelect(1)}>New In</div>
-          <div onMouseEnter={() => setIsSelect(2)}>Sofas</div>
-          <div onMouseEnter={() => setIsSelect(3)}>Chairs</div>
-          <div onMouseEnter={() => setIsSelect(4)}>Tables</div>
-          <div onMouseEnter={() => setIsSelect(5)}>Storage Beds</div>
-          <div onMouseEnter={() => setIsSelect(6)}>Lighting</div>
-          <div onMouseEnter={() => setIsSelect(7)}>Textiles</div>
-          <div onMouseEnter={() => setIsSelect(8)}>Decor</div>
-          <div onMouseEnter={() => setIsSelect(9)}>Garden</div>
-          <div onMouseEnter={() => setIsSelect(10)}>Kitchen</div>
-          <div onMouseEnter={() => setIsSelect(11)}>Lifestyle</div>
-          <div onMouseEnter={() => setIsSelect(12)}>Shop by Room</div>
-          <div onMouseEnter={() => setIsSelect(13)}>Clearance</div>
+          {categories.map((value) => (
+              <div onClick={() => setIsSelect(value.id)}>{value.categoryName}</div>
+          ))}
         </nav>
         {!!isSelect && (
           <div className="nav-pane">
@@ -86,7 +77,6 @@ const CustomHeader = () => {
               <div data-pane-item-title="test" className="nav-pane-item">
                 <img src="/image/okyo.jpg" alt="okyo" />
               </div>
-
             </div>
             <div className="nav-pane-right">
               <div>

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Slider from "react-slick";
 import { Typography } from "@mui/material";
-
+import SetDetailCard from "../setdetailcard";
+import NewProductCard from "../newProductCard/index";
 const NewProductCarousel = ({ speed, autoplaySpeed }) => {
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -29,7 +30,7 @@ const NewProductCarousel = ({ speed, autoplaySpeed }) => {
     centerPadding: "30px",
     slidesToShow: 1,
     swipeToSlide: true,
-    autoplay: true,
+  // autoplay: true,
     speed: speed || 5000,
     autoplaySpeed: autoplaySpeed || 4000,
     nextArrow: <SampleNextArrow />,
@@ -39,25 +40,13 @@ const NewProductCarousel = ({ speed, autoplaySpeed }) => {
     <div>
       <Slider {...settings}>
         <div className="newProduct-main-carousel">
-          <img
-            style={{ width: "100%", margin: "0px 5px 0px 0px", objectFit: "cover" }}
-            src="https://orixhome.com/wp-content/uploads/2021/06/capella4177-kopya.jpg"
-            alt="test"
-          />
+          <NewProductCard />
         </div>
         <div className="newProduct-main-carousel">
-          <img
-            style={{ width: "100%", margin: "0px 5px 0px 0px", objectFit: "cover" }}
-            src="https://orix.com.tr/wp-content/uploads/2019/07/urun-still-yemek-odasi-takimi-01.jpg"
-            alt=""
-          />
+          <NewProductCard />
         </div>
         <div className="newProduct-main-carousel">
-          <img
-            style={{ width: "100%", margin: "0px 5px 0px 0px", objectFit: "cover" }}
-            src="https://orixhome.com/wp-content/uploads/2020/06/urun-zen-2-koltuk-takimi-01.jpg"
-            alt=""
-          />
+          <NewProductCard />
         </div>
       </Slider>
     </div>
