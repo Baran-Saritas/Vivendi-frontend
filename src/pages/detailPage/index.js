@@ -84,7 +84,9 @@ const DetailPage = () => {
               display: "flex",
               border: 1,
               borderColor: "grey",
-              width: "175px",
+              width: "165px",
+              height:"63px",
+              alignItems:"center",
               borderRadius: 10
               , justifyContent: "space-between"
 
@@ -96,21 +98,22 @@ const DetailPage = () => {
             <Box sx={{
               marginLeft: "15%"
             }}>
-              {
+              {/*
                 addFavorites == true ? (
                   <AiFillHeart size={50} style={{ color: "red" }} onClick={() => setaddFavorites(!addFavorites)} />) : (
                   <AiOutlineHeart size={50} onClick={() => setaddFavorites(!addFavorites)} />)
+                  */
               }
             </Box>
           </Box>
 
-          <Typography component="div" variant="h5" sx={{
+        { /*<Typography component="div" variant="h5" sx={{
             fontWeight: "100",
             color: "#444",
             margin: "20px 0px 0px 10px"
           }}>
             Stock Count: 0
-          </Typography>
+          </Typography>  */}
 
         </Box>
       </div>

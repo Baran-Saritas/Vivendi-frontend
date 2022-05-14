@@ -13,9 +13,11 @@ const SetDetailCard = () => {
   const theme = useTheme();
   return (
     <Card sx={{ display: 'flex',padding:"20px",justifyContent:"space-between",marginBottom:"10px" }}>
-      <img style={{width:"50%"}} src="https://media.gq-magazine.co.uk/photos/5fa3edfea6440a8c1c83079c/master/w_1920%2Cc_limit/FURNITURE511_1.jpg"/>
+      <div style={{width:"55%"}}>
+      <img style={{width:"90%"}} src="https://media.gq-magazine.co.uk/photos/5fa3edfea6440a8c1c83079c/master/w_1920%2Cc_limit/FURNITURE511_1.jpg"/>
+      </div>
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', width:"40%"}}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', width:"45%"}}>
       <Typography component="div" variant="h4" sx={{
            fontWeight: "500",
            color: "#444",
@@ -31,15 +33,9 @@ const SetDetailCard = () => {
          }} >
            Product Code: 1000496646
          </Typography>
-         <Typography component="div" variant="h6" sx={{
-           fontWeight: "500",
-           color: "#444",
-           margin:"15px 0px 0px 10px"
-         }}>
-           Count:  1
-         </Typography>
 
-         <Box sx={{flexDirection:"row",display:"flex",alignItems:"center", margin:"40px 0px 0px 10px"}}>
+
+         <Box sx={{flexDirection:"row",display:"flex",alignItems:"center", margin:"70px 0px 0px 10px"}}>
           <Box sx={{flexDirection:"row",display:"flex",alignItems:"center",marginLeft:"0px"}}>
           <Typography component="div" variant="h5" sx={{
                 fontWeight: "500",
@@ -49,7 +45,7 @@ const SetDetailCard = () => {
             </Typography>   <Typography component="div" variant="h6" sx={{
               fontWeight: "500",
               color: "#444",
-              margin:"0px 0px 0px 8px"
+              margin:"0px 0px 0px 4px"
             }}>
               350mm
             </Typography> 
@@ -64,7 +60,7 @@ const SetDetailCard = () => {
             <Typography component="div" variant="h6" sx={{
               fontWeight: "500",
               color: "#444",
-              margin:"0px 0px 0px 8px"
+              margin:"0px 0px 0px 4px"
             }}>
               600mm
             </Typography> 
@@ -79,7 +75,7 @@ const SetDetailCard = () => {
           <Typography component="div" variant="h6" sx={{
               fontWeight: "500",
               color: "#444",
-              margin:"0px 0px 0px 8px"
+              margin:"0px 0px 0px 4px"
             }}>
               400mm
             </Typography> 

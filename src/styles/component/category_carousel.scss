@@ -5,11 +5,13 @@
 }
 .categories-small-div{
     padding: 25px;
+    border: 1px solid rgba(5, 5, 5, 0.3);
 }
 
 .categoryCarousel-div{
     width: 100%;
-    padding: 40px 30px 30px 30px;
+    padding: 0px 30px 30px 30px;
+
     display: flex;
     justify-content: center;
 }
