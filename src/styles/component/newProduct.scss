@@ -1,0 +1,17 @@
+.newProduct-main-carousel > img{
+    height:400px;           
+}
+@media (max-width:1400px){
+    .newProduct-main-carousel > img{
+        height:330px;     
+
+    }
+}
+
+@media (max-width:1200px){
+    .newProduct-main-carousel > img{
+        height:300px;           
+    }
+
+}
+

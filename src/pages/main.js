@@ -3,8 +3,10 @@ import CustomCard from "../component/card";
 import Hcard from "../component/hcard";
 import CategoryCarousel from "../component/mainCarousel";
 import CustomCarousel from "../component/carousel";
-import { getCircularProgressUtilityClass } from "@mui/material";
+import { Divider, getCircularProgressUtilityClass, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
+import SetDetailCard from "../component/setdetailcard";
+import NewProductCarousel from "../component/newProduct";
 
 export default function Main() {
   let arr = ["item-span-3", "item-span-4", "item-span-5", "item-span-6"].sort(
@@ -121,6 +123,42 @@ export default function Main() {
           </div>
         </div>
       </div>
+
+<div>
+
+<div style={{ display: "flex", padding: "30px", alignItems: "center", flexDirection: 'column' }}>
+        <Typography component="div" variant="h4" sx={{
+          fontFamily:"MADE Coachella,ui-serif,Georgia,Cambria,Times New Roman,Times,serif",
+          fontWeight: "500",
+          color: "#242433",
+          margin: "15px 0px 10px 10px"
+        }}>
+          New Product
+        </Typography>
+
+        <Typography component="div" variant="h6" sx={{
+          fontFamily:"Mont,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji",
+          fontWeight: "100",
+          color: "#242433",
+          margin: "15px 0px 40px 10px"
+        }}>Have you checked out our new product?
+        </Typography>
+        <Divider sx={{ color: "black" }} style={{ width: '90%', marginBottom: '20px' }} variant="inset" />
+        <div style={{
+          width: "70%",
+        }}>
+          <NewProductCarousel />
+
+        </div>
+      </div>
+
+
+</div>
+
+
+
+
+
 
       {/* 
       <div className="img-con">

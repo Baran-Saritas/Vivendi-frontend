@@ -143,8 +143,24 @@ const CategoryCarousel = () => {
             Armchair
           </Typography>
         </div>
-
-
+        <div className="categories-small-div" onClick={()=>setOpen('open')} style={{ padding: "10px" }}>
+          <img
+            style={{ width: "100%",height:"120px", margin: "0px 5px 0px 0px" }}
+            src="https://enza.akinoncdn.com/cms/2022/05/06/e58513ba-43ac-47db-b169-bc75bc6a94f5.jpg"
+            alt=""
+          />
+          <Typography
+            component="div"
+            sx={{
+              textAlign: "center",
+              letterSpacing: "0.02em",
+              fontWeight: "100",
+              color: "#444",
+            }}
+          >
+            Lighting
+          </Typography>
+        </div>
 
       </Slider>
     </div>
