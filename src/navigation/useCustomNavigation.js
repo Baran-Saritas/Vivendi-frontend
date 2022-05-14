@@ -19,7 +19,7 @@ export const useCustomRoutes = () => {
       element: <div>mehemt</div>,
     },
     {
-      path: "/products",
+      path: "/products/:category_id",
       element: <Products />,
     },
     {

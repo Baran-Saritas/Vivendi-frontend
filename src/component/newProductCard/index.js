@@ -222,15 +222,15 @@ const NewProductCard = () => {
         </Box>
         <Box
           sx={{
-           // flexDirection: "row",
-           // display: "flex",
-            //alignItems: "center",
+            flexDirection: "row",
+            display: "flex",
+            alignItems: "center",
             margin: "40px 0px 0px 10px",
           }}
         >
           <Typography
             component="div"
-            variant="h4"
+            variant="h4 "
             sx={{
               fontFamily:
                 "New Roman,Times,serif",

@@ -8,9 +8,11 @@ import HeaderShoppingCart from "../shoppingCart";
 import { useDispatch, useSelector } from "react-redux";
 import { getFurnitureCategory } from "../../store/furnitureCategory/furnitureCategorySlice";
 import { getFurniture } from "../../store/furniture/furnitureSlice";
+import { useNavigate } from "react-router-dom";
 
 const CustomHeader = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { categories } = useSelector((state) => state.category);
   const { furnitures } = useSelector((state) => state.furniture);
   const ref = useRef(null);
@@ -59,7 +61,7 @@ const CustomHeader = () => {
       <div className="header-mid" onMouseLeave={() => setIsSelect(0)}>
         <nav>
           {categories.map((value) => (
-              <div onClick={() => setIsSelect(value.id)}>{value.categoryName}</div>
+              <div onClick={() => {navigate(`/products/${value.id}`)}}  onMouseEnter={() =>{setIsSelect(value.id)}}>{value.categoryName}</div>
           ))}
         </nav>
         {!!isSelect && (

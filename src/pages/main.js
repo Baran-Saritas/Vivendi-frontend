@@ -11,8 +11,11 @@ import {
 import { useDispatch } from "react-redux";
 import SetDetailCard from "../component/setdetailcard";
 import NewProductCarousel from "../component/newProduct";
+import { useNavigate } from "react-router-dom";
 
 export default function Main() {
+  
+  const navigate = useNavigate();
   let arr = ["item-span-3", "item-span-4", "item-span-5", "item-span-6"].sort(
     () => Math.random() - 0.5
   );
@@ -74,7 +77,7 @@ export default function Main() {
           }}
         >
           <div style={{ overflow: "hidden", width: "500px" }}>
-            <a href="">
+            <a onClick={() => navigate("/products/c76f7cef-f05f-4142-8a80-da88be374b66")} href="">
               <div className="h-card-body">
                 <div className="h-card-img">
                   <img
