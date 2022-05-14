@@ -7,6 +7,7 @@ import Category from "../pages/category";
 import SetInfo from "../pages/setInfo";
 import Product from "../component/product";
 import ProductsCampaign from "../pages/campaign";
+import Base from "../pages/panel";
 export const useCustomRoutes = () => {
   return [
     {
@@ -44,6 +45,10 @@ export const useCustomRoutes = () => {
     {
       path: "/panel/campaign",
       element: <ProductsCampaign/>,
+    },
+    {
+      path: "/panel/base",
+      element: <Base/>,
     },
     {
       path: "*",

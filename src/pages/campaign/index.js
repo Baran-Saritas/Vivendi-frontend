@@ -30,6 +30,11 @@ export default function ProductsCampaign() {
   };
   const handleClick = () => {
     //discount percentage eklenicek
+    if (!values.campaignName) {
+      setMessageText("Please fill Campaign Name field!");
+      setOpenMessage(true);
+      return;
+    }
     if (!values.title) {
       setMessageText("Please fill Title Name field!");
       setOpenMessage(true);
@@ -40,16 +45,20 @@ export default function ProductsCampaign() {
       setOpenMessage(true);
       return;
     }
-    if (!values.campaignName) {
-      setMessageText("Please fill Campaign Name field!");
-      setOpenMessage(true);
-      return;
-    }
+
     if (images.length < 1) {
       setMessageText("Please select one image!");
       setOpenMessage(true);
       return;
     }
+    if (cTarget.length < 1) {
+      setMessageText("Please select one Furniture!");
+      setOpenMessage(true);
+      return;
+    }
+
+
+
     values.endDate = selectedDate.toString();
 //    setValues({ ...values,endDate: selectedDate })
 
@@ -66,7 +75,8 @@ export default function ProductsCampaign() {
      let data = { ...values, images: newData , cTargets:cTarget };
      console.log(data);
      data.endDate = selectedDate.toISOString().split(".")[0];
-    dispatch(postCampaign(data));
+     dispatch(postCampaign(data));
+
   };
 
   return (
