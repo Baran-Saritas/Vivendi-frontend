@@ -23,7 +23,7 @@ export const useCustomRoutes = () => {
       element: <Products />,
     },
     {
-      path: "/products/detail",
+      path: "/products/detail/:product_id",
       element: <DetailPage />,
     },
     {

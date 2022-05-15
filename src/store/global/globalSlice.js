@@ -10,6 +10,7 @@ const globalSlice = createSlice({
     storyEndDialog: false,
     addedSetFurnitures:[],
     closeDrawer:true,
+    setIdValue:0,
   },
   reducers: {
     setFullFilled: (state, { payload: { value } }) => {
@@ -25,8 +26,11 @@ const globalSlice = createSlice({
     setStory: (state, { payload: { value } }) => {
       state.storyEndDialog = value;
     },
+    setId: (state, { payload: { value } }) => {
+      state.setIdValue = value;
+    },
   },
 });
 
-export const { setGlob, setFullFilled, setStory } = globalSlice.actions;
+export const { setGlob, setFullFilled, setStory,setId } = globalSlice.actions;
 export default globalSlice.reducer;

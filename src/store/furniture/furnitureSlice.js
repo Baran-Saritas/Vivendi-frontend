@@ -12,11 +12,33 @@ const getFurniture = createAsyncThunk(
     }
   }
 );
+const getFurnitureTop5 = createAsyncThunk(
+  "furniture/getCategory-top5",
+  async (id, { rejectWithValue }) => {
+    const res = await furniture_api.get("/category-top5/" + id);
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      rejectWithValue(res.data);
+    }
+  }
+);
 
 const getFurnitureByCategoryId = createAsyncThunk(
   "furniture/getAll",
   async (id, { rejectWithValue }) => {
-    const res = await furniture_api.get("/category/"+id);
+    const res = await furniture_api.get("/category/" + id);
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      rejectWithValue(res.data);
+    }
+  }
+);
+const getFurnitureBySetId = createAsyncThunk(
+  "furniture/getBySetId",
+  async (id, { rejectWithValue }) => {
+    const res = await furniture_api.get("/furniture-set-info/" + id);
     if (res.status === 200) {
       return res.data;
     } else {
@@ -27,7 +49,7 @@ const getFurnitureByCategoryId = createAsyncThunk(
 const getFurnitureByCategoryIdOnHover = createAsyncThunk(
   "furniture/getAllByCategoryId",
   async (id, { rejectWithValue }) => {
-    const res = await furniture_api.get("/category/"+id);
+    const res = await furniture_api.get("/category/" + id);
     if (res.status === 200) {
       return res.data;
     } else {
@@ -90,14 +112,23 @@ const initialState = {
   error: null,
 };
 
-
-//getFurnitureByCategoryId
 export const FurnitureSlice = createSlice({
   name: "furniture",
   initialState,
   reducers: {},
   extraReducers: {
-
+    [getFurnitureBySetId.fulfilled]: (state, action) => {
+      state.furnitures = action.payload;
+    },
+    [getFurnitureBySetId.rejected]: (state, action) => {
+      console.log("Furniture err : ", action.payload);
+    },
+    [getFurnitureTop5.fulfilled]: (state, action) => {
+      state.furnitureOnHover = action.payload;
+    },
+    [getFurnitureTop5.rejected]: (state, action) => {
+      console.log("Furniture err : ", action.payload);
+    },
     [getFurnitureByCategoryIdOnHover.fulfilled]: (state, action) => {
       state.furnitureOnHover = action.payload;
     },
@@ -141,6 +172,7 @@ export {
   getFurniture,
   postFurniture,
   updateFurnitures,
+  getFurnitureTop5,
   deleteFurniture,
   getFurnitureById,
   getFurnitureByCategoryId,

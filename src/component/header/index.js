@@ -10,14 +10,22 @@ import { getFurnitureCategory } from "../../store/furnitureCategory/furnitureCat
 import {
   getFurniture,
   getFurnitureByCategoryId,
+  getFurnitureTop5,
   getFurnitureByCategoryIdOnHover,
 } from "../../store/furniture/furnitureSlice";
+import { setId } from "../../store/global/globalSlice";
 import { useNavigate } from "react-router-dom";
-import { getFurnitureSetByCategoryId, getFurnitureSetByCategoryIdOnHover } from "../../store/furnitureSetInfo/furnitureSetInfoSlice";
+import {
+  getFurnitureSetByCategoryId,
+  getFurnitureSetByCategoryIdOnHover,
+  getFurnitureSetTop5,
+} from "../../store/furnitureSetInfo/furnitureSetInfoSlice";
+import HeaderSetCarousel from "../headerCarousel";
 
 const CustomHeader = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { setIdValue } = useSelector((state) => state.global);
   const { categories } = useSelector((state) => state.category);
   const { furnitureOnHover } = useSelector((state) => state.furniture);
   const { setInfosOnHover } = useSelector((state) => state.setInfo);
@@ -29,15 +37,21 @@ const CustomHeader = () => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    console.log(isSelect);
     if (isSelect != 0) {
-      dispatch(getFurnitureByCategoryIdOnHover(isSelect));
-      dispatch(getFurnitureSetByCategoryIdOnHover(isSelect));
-      console.log(furnitureOnHover);
+      dispatch(getFurnitureTop5(isSelect));
+      dispatch(getFurnitureSetTop5(isSelect));
+      dispatch(setId({ value: isSelect }));
     }
   }, [isSelect]);
 
-  
+  useEffect(() => {
+    console.log(setInfosOnHover);
+  }, [setInfosOnHover]);
+
+  useEffect(() => {
+    console.log(" adsf", setIdValue);
+  }, [setIdValue]);
+
   useEffect(() => {
     dispatch(getFurnitureCategory());
   }, []);
@@ -96,17 +110,24 @@ const CustomHeader = () => {
         {!!isSelect && (
           <div className="nav-pane">
             <div className="nav-pane-left">
-              {
-                furnitureOnHover?.map((furniture) => (
-                  <div data-pane-item-title="test" className="nav-pane-item">
-                    <img src="/image/okyo.jpg" alt="okyo" />
-                  </div>
-                ))
-              }
+              {furnitureOnHover?.map((furniture) => (
+                <div
+                  onClick={() => {
+                    navigate(`/products/detail/${furniture.id}`);
+                  }}
+                  data-pane-item-title={furniture.name}
+                  className="nav-pane-item"
+                >
+                  <img src={furniture.images[0].imageSource} alt="okyo" />
+                </div>
+              ))}
             </div>
             <div className="nav-pane-right">
               <div>
-                <CustomCarousel speed={2500} autoplaySpeed={6000} />
+                <HeaderSetCarousel
+                  speed={2500}
+                  autoplaySpeed={6000}
+                />
               </div>
             </div>
           </div>
