@@ -8,6 +8,7 @@ import SetInfo from "../pages/setInfo";
 import Product from "../component/product";
 import ProductsCampaign from "../pages/campaign";
 import Base from "../pages/panel";
+import SetDetailPage from "../pages/setDetailPage";
 export const useCustomRoutes = () => {
   return [
     {
@@ -25,6 +26,10 @@ export const useCustomRoutes = () => {
     {
       path: "/products/detail/:product_id",
       element: <DetailPage />,
+    },
+    {
+      path: "/products/setDetail/:set_id",
+      element: <SetDetailPage />,
     },
     {
       path: "/productCart",

@@ -16,23 +16,31 @@ import SetDetailCard from "../../component/setdetailcard";
 import ZoomProduct from "../../component/hoverZoomProductsMenu";
 import { padding } from "@mui/system";
 import { useParams } from "react-router-dom";
-import { getFurnitureById } from "../../store/furniture/furnitureSlice";
-import FurnitureDetailCard from "../../component/furnitureDetailCard";
+import { getFurnitureById,getFurnitureBySetId } from "../../store/furniture/furnitureSlice";
 
-const DetailPage = () => {
-  const { product_id } = useParams();
+const SetDetailPage = () => {
+  const { set_id } = useParams();
+  const { setInfosOnHover } = useSelector((state) => state.setInfo);
   const { furnitures } = useSelector((state) => state.furniture);
   const [addFavorites, setaddFavorites] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(furnitures);
-  }, [furnitures]);
-  useEffect(() => {
-    if (product_id) {
-      dispatch(getFurnitureById(product_id));
+    if(setInfosOnHover){
+      dispatch(getFurnitureBySetId(setInfosOnHover.id))
     }
-  }, [product_id]);
+  }, [setInfosOnHover]);
+
+  useEffect(() => {
+    console.log("egfaseg",furnitures);
+  }, [furnitures]);
+
+  useEffect(() => {
+    if (set_id) { 
+      console.log(set_id);
+      dispatch(getFurnitureById(set_id));
+    }
+  }, [set_id]);
   return (
     <div style={{ backgroundColor: "#f2f2f2 !important" }}>
       <div style={{ display: "flex", padding: "30px 10px 10px 0px" }}>
@@ -64,7 +72,7 @@ const DetailPage = () => {
               margin: "5px 0px 0px 10px",
             }}
           >
-            {furnitures.name}
+            {setInfosOnHover.setInfoName}
           </Typography>
 
           <Typography
@@ -76,7 +84,7 @@ const DetailPage = () => {
               margin: "10px 0px 0px 10px",
             }}
           >
-            Product Code: {furnitures.id}
+            Product Code: {setInfosOnHover.categoryId}
           </Typography>
 
           <Typography
@@ -91,7 +99,7 @@ const DetailPage = () => {
               fontWeight: "100",
             }}
           >
-             $ {furnitures.price}
+             $ {setInfosOnHover.price}
           </Typography>
 
           <div
@@ -103,7 +111,7 @@ const DetailPage = () => {
               marginTop: "20px",
             }}
           >
-            {furnitures?.images?.map((values) => {
+            {/* {furnitures?.images?.map((values) => {
               return (
                 <div
                   style={{
@@ -115,7 +123,7 @@ const DetailPage = () => {
                   }}
                 />
               );
-            })}
+            })} */}
           </div>
 
           <Box
@@ -153,21 +161,9 @@ const DetailPage = () => {
                 marginLeft: "15%",
               }}
             >
-              {/*
-                addFavorites == true ? (
-                  <AiFillHeart size={50} style={{ color: "red" }} onClick={() => setaddFavorites(!addFavorites)} />) : (
-                  <AiOutlineHeart size={50} onClick={() => setaddFavorites(!addFavorites)} />)
-                  */}
             </Box>
           </Box>
 
-          {/*<Typography component="div" variant="h5" sx={{
-            fontWeight: "100",
-            color: "#444",
-            margin: "20px 0px 0px 10px"
-          }}>
-            Stock Count: 0
-          </Typography>  */}
         </Box>
       </div>
 
@@ -188,18 +184,7 @@ const DetailPage = () => {
             margin: "15px 0px 20px 10px",
           }}
         >
-          {furnitures.name}
-        </Typography>
-        <Typography
-          component="div"
-          variant="h4"
-          sx={{
-            fontWeight: "100",
-            color: "#242433",
-            margin: "15px 0px 40px 10px",
-          }}
-        >
-          {furnitures.description}
+          {setInfosOnHover.setInfoName}
         </Typography>
         <Divider
           sx={{ color: "black" }}
@@ -211,11 +196,12 @@ const DetailPage = () => {
             width: "70%",
           }}
         >
-          <FurnitureDetailCard />
-
+          <SetDetailCard />
+          <SetDetailCard />
+          <SetDetailCard />
         </Box>
       </Box>
     </div>
   );
 };
-export default DetailPage;
+export default SetDetailPage;

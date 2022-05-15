@@ -14,6 +14,19 @@ const getFurnitureSetInfo = createAsyncThunk(
   }
 );
 
+const getFurnitureSetById = createAsyncThunk(
+  "setInfo/getById",
+  async (id, { rejectWithValue }) => {
+    console.log("store",id);
+    const res = await set_info_api.get("/" + id);
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      rejectWithValue(res.data);
+    }
+  }
+);
+
 
 
 const getFurnitureSetTop5 = createAsyncThunk(
@@ -119,6 +132,12 @@ const furnitureSetInfoSlice = createSlice({
   reducers: {},
   extraReducers: {
 
+    [getFurnitureSetById.fulfilled]: (state, action) => {
+      state.setInfosOnHover = action.payload;
+    },
+    [getFurnitureSetById.rejected]: (state, action) => {
+      console.log("Furniture err : ", action.payload);
+    },
     [getFurnitureSetTop5.fulfilled]: (state, action) => {
       state.setInfosOnHover = action.payload;
     },
@@ -172,5 +191,6 @@ export {
   getFurnitureSetByCategoryId,
   getFurnitureSetByCategoryIdOnHover,
   getFurnitureSetTop5,
+  getFurnitureSetById,
 };
 export default furnitureSetInfoSlice.reducer;

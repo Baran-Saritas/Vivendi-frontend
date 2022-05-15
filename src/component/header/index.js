@@ -13,11 +13,9 @@ import {
   getFurnitureTop5,
   getFurnitureByCategoryIdOnHover,
 } from "../../store/furniture/furnitureSlice";
-import { setId } from "../../store/global/globalSlice";
+import { getHeaderData, setId } from "../../store/global/globalSlice";
 import { useNavigate } from "react-router-dom";
 import {
-  getFurnitureSetByCategoryId,
-  getFurnitureSetByCategoryIdOnHover,
   getFurnitureSetTop5,
 } from "../../store/furnitureSetInfo/furnitureSetInfoSlice";
 import HeaderSetCarousel from "../headerCarousel";
@@ -25,36 +23,23 @@ import HeaderSetCarousel from "../headerCarousel";
 const CustomHeader = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { setIdValue } = useSelector((state) => state.global);
-  const { categories } = useSelector((state) => state.category);
-  const { furnitureOnHover } = useSelector((state) => state.furniture);
-  const { setInfosOnHover } = useSelector((state) => state.setInfo);
+  const { headerData } = useSelector((state) => state.global);
   const ref = useRef(null);
+  const [open , setOpen] = useState(false)
   const [search, setSearch] = useState("");
   const [isSelect, setIsSelect] = useState(0);
-  const [flag, setFlag] = useState(0);
   const [isFocus, setIsFocus] = useState(false);
-  const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    console.log(isSelect);
     if (isSelect != 0) {
-      dispatch(getFurnitureTop5(isSelect));
-      dispatch(getFurnitureSetTop5(isSelect));
-      dispatch(setId({ value: isSelect }));
+
     }
   }, [isSelect]);
 
   useEffect(() => {
-    console.log(setInfosOnHover);
-  }, [setInfosOnHover]);
-
-  useEffect(() => {
-    console.log(" adsf", setIdValue);
-  }, [setIdValue]);
-
-  useEffect(() => {
-    dispatch(getFurnitureCategory());
-  }, []);
+    dispatch(getHeaderData())
+  }, [])
 
   return (
     <motion.div className="header">
@@ -92,25 +77,20 @@ const CustomHeader = () => {
       </div>
       <div className="header-mid" onMouseLeave={() => setIsSelect(0)}>
         <nav>
-          {categories.map((value) => (
-            <div
-              onClick={() => {
-                navigate(`/products/${value.id}`);
-              }}
-              onMouseEnter={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setIsSelect(value.id);
-              }}
-            >
-              {value.categoryName}
-            </div>
-          ))}
+          <div onMouseEnter={() => setIsSelect(1)}>New In</div>
+          <div onMouseEnter={() => setIsSelect(2)}>Sofas</div>
+          <div onMouseEnter={() => setIsSelect(3)}>Chairs</div>
+          <div onMouseEnter={() => setIsSelect(4)}>Tables</div>
+          <div onMouseEnter={() => setIsSelect(5)}>Storage Beds</div>
+          <div onMouseEnter={() => setIsSelect(6)}>Lighting</div>
+          <div onMouseEnter={() => setIsSelect(7)}>Textiles</div>
+          <div onMouseEnter={() => setIsSelect(8)}>Decor</div>
+          <div onMouseEnter={() => setIsSelect(9)}>Garden</div>
         </nav>
         {!!isSelect && (
           <div className="nav-pane">
             <div className="nav-pane-left">
-              {furnitureOnHover?.map((furniture) => (
+              {headerData?.[isSelect]?.map((furniture) => (
                 <div
                   onClick={() => {
                     navigate(`/products/detail/${furniture.id}`);
@@ -122,6 +102,7 @@ const CustomHeader = () => {
                 </div>
               ))}
             </div>
+            {/*
             <div className="nav-pane-right">
               <div>
                 <HeaderSetCarousel
@@ -130,6 +111,7 @@ const CustomHeader = () => {
                 />
               </div>
             </div>
+            */}
           </div>
         )}
       </div>

@@ -177,6 +177,7 @@ export {
   getFurnitureById,
   getFurnitureByCategoryId,
   getFurnitureByCategoryIdOnHover,
+  getFurnitureBySetId,
 };
 
 export default FurnitureSlice.reducer;

@@ -4,9 +4,11 @@ import { Typography } from "@mui/material";
 import Hcard from "../hcard";
 import { useDispatch, useSelector } from "react-redux";
 import { getFurnitureSetTop5 } from "../../store/furnitureSetInfo/furnitureSetInfoSlice";
+import { useNavigate } from "react-router-dom";
 
 const HeaderSetCarousel = ({ speed, autoplaySpeed }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { setIdValue } = useSelector((state) => state.global);
   const { setInfosOnHover } = useSelector((state) => state.setInfo);
   const [test, setTest] = useState(false);
@@ -44,11 +46,18 @@ const HeaderSetCarousel = ({ speed, autoplaySpeed }) => {
   };
 
   useEffect(() => {
-    console.log(setInfosOnHover);
+    console.log("adsfaf",setInfosOnHover);
   }, [setInfosOnHover]);
-  useEffect(() => {
-    dispatch(getFurnitureSetTop5(setIdValue));
-  }, []);
+
+useEffect(() => {
+
+  dispatch(getFurnitureSetTop5(setIdValue));
+},[setIdValue])
+
+useEffect(() => {
+  console.log("adsfaf",setIdValue);
+}, []);
+
 
   return (
     <div>
