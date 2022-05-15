@@ -2,11 +2,12 @@ import React from "react";
 import { Divider, Tooltip } from "@mui/material";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 
-export default function Item({ itemData, setData, setOpen, keys, onClick }) {
-  const handleClick = (panel) => {
-    setOpen(panel);
-    setData(itemData);
-  };
+export default function Item({
+  itemData,
+  setDeleteOpen,
+  setEditOpen,
+  onClick,
+}) {
   return (
     <div onClick={onClick} className="dialog-item">
       <div className="item-edit-cart">
@@ -20,7 +21,7 @@ export default function Item({ itemData, setData, setOpen, keys, onClick }) {
             <AiOutlineEdit
               onClick={(e) => {
                 e.stopPropagation();
-                handleClick("edit");
+                setEditOpen(itemData);
               }}
               fill="blue"
               size={30}
@@ -38,7 +39,7 @@ export default function Item({ itemData, setData, setOpen, keys, onClick }) {
             <AiOutlineDelete
               onClick={(e) => {
                 e.stopPropagation();
-                handleClick("delete");
+                setDeleteOpen(itemData.id);
               }}
               fill="red"
               size={30}
@@ -47,8 +48,12 @@ export default function Item({ itemData, setData, setOpen, keys, onClick }) {
         </Tooltip>
       </div>
       <div className="dialog-item-content">
-        <img style={{objectFit:"cover"}} src={itemData[keys.imageSource]} alt={itemData[keys.name]} />
-        <p>{itemData[keys.name]}</p>
+        <img
+          style={{ objectFit: "cover" }}
+          src={itemData?.images[0].imageSource}
+          alt="category"
+        />
+        <p>{itemData.categoryName}</p>
       </div>
     </div>
   );

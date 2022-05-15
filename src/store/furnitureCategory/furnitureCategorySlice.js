@@ -42,9 +42,7 @@ const updateFurnitureCategory = createAsyncThunk(
 
 const postFurnitureCategory = createAsyncThunk(
   "category/add",
-  async ({ data }, { rejectWithValue, dispatch }) => {
-    console.log("DATA : ", data);
-    return;
+  async (data, { rejectWithValue, dispatch }) => {
     let category_res = await category_api.post("/", data);
     if (category_res.status === 200) {
       dispatch(setFullFilled({ value: true }));

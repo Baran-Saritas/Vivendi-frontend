@@ -79,7 +79,9 @@ const furnitureGroupSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [getFurnitureSetInfo.fulfilled]: (state, action) => {},
+    [getFurnitureSetInfo.fulfilled]: (state, action) => {
+      state.setInfos = action.payload;
+    },
     [getFurnitureSetInfo.rejected]: (state, action) => {
       console.log("Group err : ", action.payload);
     },

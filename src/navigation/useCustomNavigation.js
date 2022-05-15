@@ -33,7 +33,7 @@ export const useCustomRoutes = () => {
       element: <Category />,
     },
     {
-      path: "/category-edit/:category_id/group-edit/:group_id/set-info-edit",
+      path: "/set-info-edit",
       element: <SetInfo />,
     },
     {
