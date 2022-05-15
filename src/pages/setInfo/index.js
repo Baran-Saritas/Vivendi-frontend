@@ -1,68 +1,57 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-import { Tooltip } from "@mui/material";
+import { Snackbar, Tooltip } from "@mui/material";
 import Item from "../../component/category/Item";
-import AddAndEditDialog from "../../component/category/AddAndEditDialog";
-import ConfirmDialog from "../../component/category/ConfirmDialog";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { getFurnitureCategory } from "../../store/furnitureCategory/furnitureCategorySlice";
-import { useNavigate } from "react-router-dom";
 import {
-  deleteFurnitureSetInfo,
+  getFurnitureSetInfo,
   getFurnitureSetInfoOfGroup,
-  postFurnitureSetInfo,
-  updateFurnitureSetInfo,
 } from "../../store/furnitureSetInfo/furnitureSetInfoSlice";
+import AddSet from "./AddSet";
+import EditSet from "./EditSet";
+import DeleteSet from "./DeleteSet";
 
 export default function SetInfo() {
-  const [open, setOpen] = React.useState("init");
-  const [data, setData] = useState(null);
+  const [addOpen, setAddOpen] = React.useState(false);
+  const [editOpen, setEditOpen] = React.useState(false);
+  const [deleteOpen, setDeleteOpen] = React.useState("");
+  const [openMessage, setOpenMessage] = useState("");
+  const { categories } = useSelector((state) => state.category);
   const { setInfos } = useSelector((state) => state.setInfo);
-  const { groups } = useSelector((state) => state.group);
-  const keys = {
-    imageSource: "imageUrl",
-    name: "setInfoName",
-    id: "groupId",
-    price: "price",
-  };
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { group_id } = useParams();
   useEffect(() => {
-    dispatch(getFurnitureSetInfoOfGroup(group_id));
-  }, [open]);
+    dispatch(getFurnitureSetInfo());
+  }, []);
   useEffect(() => {
-    if (!groups.length) navigate("/category-edit");
+    //if (!groups.length) navigate("/category-edit");
   }, []);
   return (
     <div className="dialog-edit">
-      <AddAndEditDialog
-        open={open}
-        setOpen={setOpen}
-        data={open === "edit" ? data : undefined}
-        addFunc={postFurnitureSetInfo}
-        updateFunc={updateFurnitureSetInfo}
-        keys={keys}
-        variant="set-info"
-        foreignKeys={groups}
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        open={Boolean(openMessage)}
+        onClose={() => setOpenMessage("")}
+        message={openMessage}
       />
-      <ConfirmDialog
-        open={open}
-        setOpen={setOpen}
-        data={data}
-        deleteFunc={deleteFurnitureSetInfo}
+      <AddSet
+        setOpenMessage={setOpenMessage}
+        open={addOpen}
+        setOpen={setAddOpen}
       />
+      <EditSet
+        setOpenMessage={setOpenMessage}
+        open={editOpen}
+        setOpen={setEditOpen}
+      />
+      <DeleteSet open={deleteOpen} setOpen={setDeleteOpen} />
       <div className="dialog-container">
         {setInfos?.map((itemData, index) => (
           <Item
-            onClick={() => navigate(`${itemData.id}/set-info-edit`)}
             key={index}
             itemData={itemData}
-            keys={keys}
-            setData={setData}
-            setOpen={setOpen}
+            setDeleteOpen={setDeleteOpen}
+            setEditOpen={setEditOpen}
           />
         ))}
         <Tooltip
@@ -71,7 +60,7 @@ export default function SetInfo() {
           placement="bottom"
           disableInteractive
         >
-          <div className="dialog-item-2" onClick={() => setOpen("add")}>
+          <div className="dialog-item-2" onClick={() => setAddOpen(true)}>
             <AiOutlinePlus size={60} />
           </div>
         </Tooltip>

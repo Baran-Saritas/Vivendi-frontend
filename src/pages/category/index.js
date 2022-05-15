@@ -1,54 +1,49 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-import { Tooltip } from "@mui/material";
+import { Snackbar, Tooltip } from "@mui/material";
 import Item from "../../component/category/Item";
-import AddAndEditDialog from "../../component/category/AddAndEditDialog";
-import ConfirmDialog from "../../component/category/ConfirmDialog";
-import {
-  deleteFurnitureCategory,
-  getFurnitureCategory,
-  postFurnitureCategory,
-  updateFurnitureCategory,
-} from "../../store/furnitureCategory/furnitureCategorySlice";
+import { getFurnitureCategory } from "../../store/furnitureCategory/furnitureCategorySlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import AddCategory from "./AddCategory";
+import ConfirmDialog from "./DeleteCategory";
+import EditCategory from "./EditCategory";
+
 export default function Category() {
-  const [open, setOpen] = React.useState("init");
-  const [data, setData] = useState(null);
+  const [addOpen, setAddOpen] = React.useState(false);
+  const [editOpen, setEditOpen] = React.useState(false);
+  const [deleteOpen, setDeleteOpen] = React.useState("");
+  const [openMessage, setOpenMessage] = useState("");
   const { categories } = useSelector((state) => state.category);
-  const keys = { imageSource: "imageUrl", name: "categoryName" };
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getFurnitureCategory());
-  }, [open]);
+  }, []);
   return (
     <div className="dialog-edit">
-      <AddAndEditDialog
-        open={open}
-        setOpen={setOpen}
-        data={open === "edit" ? data : undefined}
-        addFunc={postFurnitureCategory}
-        updateFunc={updateFurnitureCategory}
-        keys={keys}
-        variant="category"
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        open={Boolean(openMessage)}
+        onClose={() => setOpenMessage("")}
+        message={openMessage}
       />
-      <ConfirmDialog
-        open={open}
-        setOpen={setOpen}
-        data={data}
-        deleteFunc={deleteFurnitureCategory}
+      <AddCategory
+        setOpenMessage={setOpenMessage}
+        open={addOpen}
+        setOpen={setAddOpen}
       />
+      <EditCategory
+        setOpenMessage={setOpenMessage}
+        open={editOpen}
+        setOpen={setEditOpen}
+      />
+      <ConfirmDialog open={deleteOpen} setOpen={setDeleteOpen} />
       <div className="dialog-container">
         {categories?.map((itemData, index) => (
           <Item
-            onClick={() => navigate(`${itemData.id}/group-edit`)}
             key={index}
             itemData={itemData}
-            keys={keys}
-            setData={setData}
-            setOpen={setOpen}
+            setDeleteOpen={setDeleteOpen}
+            setEditOpen={setEditOpen}
           />
         ))}
         <Tooltip
@@ -57,7 +52,7 @@ export default function Category() {
           placement="bottom"
           disableInteractive
         >
-          <div className="dialog-item-2" onClick={() => setOpen("add")}>
+          <div className="dialog-item-2" onClick={() => setAddOpen(true)}>
             <AiOutlinePlus size={60} />
           </div>
         </Tooltip>

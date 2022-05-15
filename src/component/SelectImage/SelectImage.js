@@ -1,22 +1,43 @@
 import { Snackbar } from "@mui/material";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { deleteImage } from "../../store/image/imageSlice";
 import ImageListItem from "./ImageListItem";
 
 function SelectImage({ images, setImages }) {
   const [openMessage, setOpenMessage] = useState(false);
+  const [previewImage, setPreviewImage] = useState(images?.[0]?.imageSource);
+  const dispatch = useDispatch();
   // eger disardan resim kaldirmak istiyorsak bu fonksiyonu oraya yerlestirip sonra da buraya prop olarak gecirmek lazim
-  const removeImage = (id) => {
-    setImages((p) => p.filter((i) => i.id !== id));
+  const removeImage = (imageName) => {
+    if (images.length <= 1) {
+      setOpenMessage("You have to select one image!");
+      return;
+    }
+    setImages((p) => {
+      let filteredImage = p.filter((i) => {
+        if (i.imageName === imageName && i.id) {
+          dispatch(deleteImage(i.id));
+        }
+        return i.imageName !== imageName;
+      });
+      setPreviewImage(filteredImage[0].getImageSource);
+      return filteredImage;
+    });
   };
   const onImageChange = async (e) => {
     if (e.target.files && e.target.files[0]) {
       if (e.target.files[0].size > 300000) {
-        setOpenMessage(true);
+        setOpenMessage("Max image size must be 300KB");
         return;
       }
       let file = e.target.files[0];
+      if (images.filter((i) => i.imageName === file.name).length) {
+        return;
+      }
       let img = await getBase64(file);
-      setImages((p) => [...p, { imageSource: img, id: file.name }]);
+      setImages((p) => [...p, { imageSource: img, imageName: file.name }]);
+      setPreviewImage(undefined);
     }
   };
 
@@ -31,16 +52,17 @@ function SelectImage({ images, setImages }) {
     <>
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        open={openMessage}
+        open={Boolean(openMessage)}
         onClose={() => setOpenMessage(false)}
-        message={"Max image size must be 300KB"}
+        message={openMessage}
       />
       <div className="up-img">
         <img
           src={
-            images.length > 0
+            previewImage ||
+            (images.length > 0
               ? images[images.length - 1].imageSource
-              : "/image/okyo.jpg"
+              : "/image/okyo.jpg")
           }
           alt="okyo"
         />
@@ -55,9 +77,10 @@ function SelectImage({ images, setImages }) {
       <div className="img-list">
         {images.map((i) => (
           <ImageListItem
+            setPreviewImage={setPreviewImage}
             removeImage={removeImage}
             setImages={setImages}
-            key={i.id}
+            key={i.imageName}
             item={i}
           />
         ))}
