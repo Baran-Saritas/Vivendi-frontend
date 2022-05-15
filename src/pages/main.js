@@ -216,7 +216,7 @@ export default function Main() {
                 <div className="h-card-img">
                   <img
                     style={{ width: "100%", objectFit: "cover" }}
-                    src="https://img.made.com/image/upload/c_pad,d_madeplusgrey.svg,dpr_2,f_auto,q_auto:good,w_350/v1/mws-critical/d8179eb5-65ed-4bfd-9a6a-1e8bc0c9e0e9_Homepage_wK11_Morland_1280x1536.jpg"
+                    src="/image/table.jpg"
                     alt=""
                   />
                 </div>
@@ -237,7 +237,7 @@ export default function Main() {
                 <div className="h-card-img">
                   <img
                     style={{ width: "100%", objectFit: "cover" }}
-                    src="./image/bedroom_img.jpg"
+                    src="./image/bergere.jpg"
                     alt=""
                   />
                 </div>
@@ -245,7 +245,7 @@ export default function Main() {
                   {" "}
                   <p>
                     {" "}
-                    <strong> Armchair </strong>
+                    <strong>  Bergere </strong>
                   </p>
                 </div>
               </div>
@@ -257,7 +257,7 @@ export default function Main() {
                 <div className="h-card-img">
                   <img
                     style={{ width: "100%", objectFit: "cover" }}
-                    src="./image/Diningroom.jpg"
+                    src="./image/Lampshade.jpg"
                     alt=""
                   />
                 </div>
@@ -352,7 +352,7 @@ export default function Main() {
                 <div className="h-card-img">
                   <img
                     style={{ width: "100%", objectFit: "cover" }}
-                    src="https://img.made.com/image/upload/c_pad,d_madeplusgrey.svg,dpr_2,f_auto,q_auto:good,w_350/v1/mws-critical/d8179eb5-65ed-4bfd-9a6a-1e8bc0c9e0e9_Homepage_wK11_Morland_1280x1536.jpg"
+                    src="/image/mirror.jpg"
                     alt=""
                   />
                 </div>
@@ -373,7 +373,7 @@ export default function Main() {
                 <div className="h-card-img">
                   <img
                     style={{ width: "100%", objectFit: "cover" }}
-                    src="./image/bedroom_img.jpg"
+                    src="./image/unite.jpg"
                     alt=""
                   />
                 </div>
@@ -393,7 +393,7 @@ export default function Main() {
                 <div className="h-card-img">
                   <img
                     style={{ width: "100%", objectFit: "cover" }}
-                    src="./image/Diningroom.jpg"
+                    src="./image/Console-Table.jpg"
                     alt=""
                   />
                 </div>

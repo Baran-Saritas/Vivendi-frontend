@@ -18,8 +18,6 @@ const item = {
   },
 };
 const CustomCard = ({value}) => {
-
-  console.log("asd",value); 
   const [isHover, setIsHover] = useState(false);
   const [image,setImage] = useState(null);
   return (
@@ -37,7 +35,7 @@ const CustomCard = ({value}) => {
         overflow:"hidden"
       }}
     >
-      <div className="card-img" style={{ height: "300px", width: "100%",overflow:"hidden" }}>
+      <div className="card-img" style={{ height: "350px", width: "100%",overflow:"hidden" }}>
         <img
           animate={isHover ? { scale: 1.05 } : ""}
           style={{ height: "100%", width: "100%", zIndex: 3, borderRadius:"5px", objectFit: "cover"  }}

@@ -6,15 +6,11 @@ import DetailCard from "../../component/dcard/index";
 import KindFilter from "../../component/product/KindFilter";
 import OrderFilter from "../../component/product/OrderFilter";
 import { getFurnitureByCategoryId } from "../../store/furniture/furnitureSlice";
-
+  
 export default function Products() {
   const { category_id } = useParams();
-
   const { furnitures } = useSelector((state) => state.furniture);
   const dispatch = useDispatch();
-
-
-
 
 useEffect(() =>{
   if(category_id){

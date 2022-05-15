@@ -24,6 +24,17 @@ const getFurnitureByCategoryId = createAsyncThunk(
     }
   }
 );
+const getFurnitureByCategoryIdOnHover = createAsyncThunk(
+  "furniture/getAllByCategoryId",
+  async (id, { rejectWithValue }) => {
+    const res = await furniture_api.get("/category/"+id);
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      rejectWithValue(res.data);
+    }
+  }
+);
 
 const getFurnitureById = createAsyncThunk(
   "furniture/getById",
@@ -75,6 +86,7 @@ const postFurniture = createAsyncThunk(
 const initialState = {
   isLoading: false,
   furnitures: [],
+  furnitureOnHover: [],
   error: null,
 };
 
@@ -85,6 +97,13 @@ export const FurnitureSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
+
+    [getFurnitureByCategoryIdOnHover.fulfilled]: (state, action) => {
+      state.furnitureOnHover = action.payload;
+    },
+    [getFurnitureByCategoryId.rejected]: (state, action) => {
+      console.log("Furniture err : ", action.payload);
+    },
     [getFurnitureByCategoryId.fulfilled]: (state, action) => {
       state.furnitures = action.payload;
     },
@@ -125,6 +144,7 @@ export {
   deleteFurniture,
   getFurnitureById,
   getFurnitureByCategoryId,
+  getFurnitureByCategoryIdOnHover,
 };
 
 export default FurnitureSlice.reducer;
