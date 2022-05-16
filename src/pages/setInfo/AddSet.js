@@ -8,10 +8,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useDispatch, useSelector } from "react-redux";
 import { setFullFilled } from "../../store/global/globalSlice";
-import {
-  getFurnitureCategory,
-  postFurnitureCategory,
-} from "../../store/furnitureCategory/furnitureCategorySlice";
+import { getFurnitureCategory } from "../../store/furnitureCategory/furnitureCategorySlice";
 import SelectImage from "../../component/SelectImage/SelectImage";
 import {
   Checkbox,
@@ -19,10 +16,13 @@ import {
   FormControl,
   FormControlLabel,
   FormGroup,
+  FormLabel,
   InputLabel,
   MenuItem,
   Select,
 } from "@mui/material";
+import { getFurniture } from "../../store/furniture/furnitureSlice";
+import { postFurnitureSetInfo } from "../../store/furnitureSetInfo/furnitureSetInfoSlice";
 
 export default function AddSet({ setOpenMessage, open, setOpen }) {
   const dispatch = useDispatch();
@@ -33,6 +33,8 @@ export default function AddSet({ setOpenMessage, open, setOpen }) {
   const [openDrawer, setOpenDrawer] = React.useState(false);
   const [categoryId, setCategoryId] = React.useState("");
   const { categories } = useSelector((state) => state.category);
+  const { furnitures } = useSelector((state) => state.furniture);
+  const [selectedFurniture, setSelectedFurniture] = React.useState({});
   const handleOk = async (e) => {
     if (!setInfoName) {
       setOpenMessage("Please fill set name!");
@@ -54,8 +56,20 @@ export default function AddSet({ setOpenMessage, open, setOpen }) {
       setOpenMessage("Please select image color!");
       return;
     }
-    console.log({ setInfoName, categoryId, price, images });
-    //dispatch(postFurnitureCategory({ setInfoName, categoryId, price, images }));
+    let furs = Object.entries(selectedFurniture)
+      .filter((i) => i[1])
+      .map((i) => i[0]);
+    if (furs.length <= 1) {
+      setOpenMessage("Please choose al lease 2 furnitures!");
+      return;
+    }
+    //console.log({ setInfoName, categoryId, price, images });
+    dispatch(
+      postFurnitureSetInfo({
+        data: { setInfoName, categoryId, price, images },
+        furnitureIds: { furs },
+      })
+    );
   };
   const handleClose = (_, r) => {
     if (r !== "backdropClick") {
@@ -64,23 +78,53 @@ export default function AddSet({ setOpenMessage, open, setOpen }) {
   };
   useEffect(() => {
     dispatch(getFurnitureCategory());
+    dispatch(getFurniture());
   }, []);
   useEffect(() => {
     if (fullfilled) {
+      setImages([]);
+      setSetInfoName("");
+      setPrice("");
+      setOpenDrawer(false);
+      setCategoryId("");
       setOpen(false);
+      setSelectedFurniture({});
       dispatch(setFullFilled({ value: false }));
     }
   }, [fullfilled, setOpen]);
   return (
     <div>
       <Drawer
-        anchor="right"
+        anchor="left"
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
+        PaperProps={{
+          sx: { minWidth: 300, padding: "30px 0 0 30px !important" },
+        }}
       >
-        <FormGroup>
-          <FormControlLabel control={<Checkbox />} label="Label" />
-        </FormGroup>
+        <FormControl component="fieldset">
+          <FormLabel component="legend">Select Furniture</FormLabel>
+          <FormGroup>
+            {furnitures.map((i) => (
+              <FormControlLabel
+                key={i.id}
+                control={
+                  <Checkbox
+                    checked={!!selectedFurniture[i.id]}
+                    name={i.id}
+                    onChange={(e) => {
+                      setSelectedFurniture({
+                        ...selectedFurniture,
+                        [e.target.name]: e.target.checked,
+                      });
+                    }}
+                  />
+                }
+                label={i.name}
+              />
+            ))}
+          </FormGroup>
+        </FormControl>
       </Drawer>
       <Dialog
         fullWidth

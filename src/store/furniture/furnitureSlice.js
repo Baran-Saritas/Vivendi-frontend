@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import env from "../../env.json";
 import { furniture_api } from "../../utilrs/axiosInterceptors";
 
 const getFurniture = createAsyncThunk(
@@ -76,7 +75,9 @@ export const FurnitureSlice = createSlice({
     [getFurnitureById.rejected]: (state, action) => {
       console.log("Furniture err : ", action.payload);
     },
-    [getFurniture.fulfilled]: (state, action) => {},
+    [getFurniture.fulfilled]: (state, action) => {
+      state.furnitures = action.payload;
+    },
     [getFurniture.rejected]: (state, action) => {
       console.log("Furniture err : ", action.payload);
     },
