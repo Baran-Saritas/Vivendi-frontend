@@ -73,6 +73,11 @@ export default function ProductsCampaign() {
      dispatch(postCampaign(data));
   };
 
+  useEffect(() => {
+    if(categories.length === 0){
+      dispatch(getFurnitureCategory());
+    }
+  },[])
   return (
     <div>
       <Snackbar

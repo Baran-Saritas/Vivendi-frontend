@@ -9,6 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useDispatch, useSelector } from "react-redux";
 import { setFullFilled } from "../../store/global/globalSlice";
 import SelectImage from "../../component/SelectImage/SelectImage";
+import { updateFurnitureCategory } from "../../store/furnitureCategory/furnitureCategorySlice";
 
 export default function EditCategory({ setOpenMessage, open, setOpen }) {
   const dispatch = useDispatch();
@@ -32,8 +33,7 @@ export default function EditCategory({ setOpenMessage, open, setOpen }) {
     if (editImages.length) {
       data.images = editImages;
     }
-    console.log(data);
-    //dispatch(updateFurnitureCategory({ categoryName, images }));
+    dispatch(updateFurnitureCategory({id: open.id, data }));
   };
   const handleClose = (_, r) => {
     if (r !== "backdropClick") {

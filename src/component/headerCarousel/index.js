@@ -45,28 +45,12 @@ const HeaderSetCarousel = ({ speed, autoplaySpeed }) => {
     prevArrow: <SamplePrevArrow />,
   };
 
-  useEffect(() => {
-    console.log("adsfaf",setInfosOnHover);
-  }, [setInfosOnHover]);
-
-useEffect(() => {
-
-  dispatch(getFurnitureSetTop5(setIdValue));
-},[setIdValue])
-
-useEffect(() => {
-  console.log("adsfaf",setIdValue);
-}, []);
-
-
   return (
     <div>
       <Slider {...settings}>
-        {setInfosOnHover?.map((value) => (
-          <div className="header-main-carousel">
-            <Hcard  value = {value}/>
-          </div>
-        ))}
+        <div className="header-main-carousel">
+          <Hcard />
+        </div>
       </Slider>
     </div>
   );

@@ -1,21 +1,21 @@
 .header-main-carousel > div > img{
-    height:300px;           
+    height:300px !important;           
 }
 
-@media (max-width:1400px){
-    .header-main-carousel > img{
-        height:530px;     
+// @media (max-width:1400px){
+//     .header-main-carousel > img{
+//         height:300px;     
 
-    }
-}
-@media (max-width:1200px){
-    .header-main-carousel > img{
-        height:450px;           
-    }
-}
+//     }
+// }
+// @media (max-width:1200px){
+//     .header-main-carousel > img{
+//         height:450px;           
+//     }
+// }
 
-@media (max-width:800px){
-    .header-main-carousel > img{
-        height:400px;           
-    }
-}
+// @media (max-width:800px){
+//     .header-main-carousel > img{
+//         height:400px;           
+//     }
+// }

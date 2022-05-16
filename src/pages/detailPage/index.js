@@ -8,7 +8,6 @@ import {
   AiFillHeart,
   AiOutlineHeart,
 } from "react-icons/ai";
-import CustomCarousel from "../../component/carousel";
 import { Button, IconButton, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import Divider from "@mui/material/Divider";
@@ -37,17 +36,18 @@ const DetailPage = () => {
     <div style={{ backgroundColor: "#f2f2f2 !important" }}>
       <div style={{ display: "flex", padding: "30px 10px 10px 0px" }}>
         <div
+          className="detail-img"
           style={{
             width: "68%",
             height: "auto",
             padding: "0",
           }}
         >
-          <ZoomProduct />
+          <ZoomProduct  furnitures ={furnitures}/>
         </div>
 
-        <Box
-          sx={{
+        <div
+          style={{
             width: "30%",
             padding: "40px 0px 0px 20px",
             backgroundColor: "white",
@@ -168,7 +168,7 @@ const DetailPage = () => {
           }}>
             Stock Count: 0
           </Typography>  */}
-        </Box>
+        </div>
       </div>
 
       <Box
@@ -179,13 +179,10 @@ const DetailPage = () => {
           flexDirection: "column",
         }}
       >
-        <Typography
-          component="div"
-          variant="h4"
-          sx={{
-            fontWeight: "600",
-            color: "#242433",
-            margin: "15px 0px 20px 10px",
+      <Typography component="div" variant="h4" sx={{
+           fontWeight: "500",
+           color: "#444",
+           margin:"15px 0px 0px 10px"
           }}
         >
           {furnitures.name}
@@ -211,7 +208,7 @@ const DetailPage = () => {
             width: "70%",
           }}
         >
-          <FurnitureDetailCard />
+          <FurnitureDetailCard furnitures = {furnitures} />
 
         </Box>
       </Box>

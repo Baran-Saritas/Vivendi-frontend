@@ -77,7 +77,7 @@ export default function Main() {
           }}
         >
           <div style={{ overflow: "hidden", width: "500px" }}>
-            <a onClick={() => navigate("/products/c76f7cef-f05f-4142-8a80-da88be374b66")} href="">
+            <a onClick={() => navigate("/products/ca333a93-4630-4cd9-8176-2969887072c2")} href="">
               <div className="h-card-body">
                 <div className="h-card-img">
                   <img
@@ -98,7 +98,7 @@ export default function Main() {
           </div>
 
           <div style={{ overflow: "hidden", width: "500px" }}>
-            <a href="">
+            <a onClick={() => navigate("/products/ea6b1aaf-65c0-4023-9248-cfa2ac8e3cbc")} href="">
               <div className="h-card-body">
                 <div className="h-card-img">
                   <img
@@ -118,7 +118,7 @@ export default function Main() {
             </a>
           </div>
           <div style={{ overflow: "hidden", width: "500px" }}>
-            <a href="">
+            <a onClick={() => navigate("/products/a76ec128-c8be-4234-be0c-158518585153")} href="">
               <div className="h-card-body">
                 <div className="h-card-img">
                   <img
@@ -211,7 +211,7 @@ export default function Main() {
           }}
         >
           <div style={{ overflow: "hidden", width: "500px" }}>
-            <a href="">
+            <a  onClick={() => navigate("/products/635e94eb-75ac-4933-a75c-07a21db3a319")} href="">
               <div className="h-card-body">
                 <div className="h-card-img">
                   <img
@@ -232,7 +232,7 @@ export default function Main() {
           </div>
 
           <div style={{ overflow: "hidden", width: "500px" }}>
-            <a href="">
+            <a  onClick={() => navigate("/products/775f98ce-a2f2-4c9b-bd70-fcb99481af9a")} href="">
               <div className="h-card-body">
                 <div className="h-card-img">
                   <img
@@ -252,7 +252,7 @@ export default function Main() {
             </a>
           </div>
           <div style={{ overflow: "hidden", width: "500px" }}>
-            <a href="">
+            <a  onClick={() => navigate("/products/888cce34-8ce8-4207-9628-be245d6930c0")} href="">
               <div className="h-card-body">
                 <div className="h-card-img">
                   <img
@@ -347,7 +347,7 @@ export default function Main() {
           }}
         >
           <div style={{ overflow: "hidden", width: "500px" }}>
-            <a href="">
+            <a onClick={() => navigate("/products/1161f244-93cb-4415-9940-d2ceb6ea3a7c")} href="">
               <div className="h-card-body">
                 <div className="h-card-img">
                   <img
@@ -368,7 +368,7 @@ export default function Main() {
           </div>
 
           <div style={{ overflow: "hidden", width: "500px" }}>
-            <a href="">
+            <a onClick={() => navigate("/products/e557af58-0800-4ac6-8783-8ecc9f7cf337")} href="">
               <div className="h-card-body">
                 <div className="h-card-img">
                   <img
@@ -388,7 +388,7 @@ export default function Main() {
             </a>
           </div>
           <div style={{ overflow: "hidden", width: "500px" }}>
-            <a href="">
+            <a onClick={() => navigate("/products/f48538c8-e405-4e5b-bea7-28d948aba48a")} href="">
               <div className="h-card-body">
                 <div className="h-card-img">
                   <img

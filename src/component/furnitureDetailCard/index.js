@@ -8,84 +8,207 @@ import Typography from '@mui/material/Typography';
 import { useDispatch, useSelector } from "react-redux";
 import {AiOutlineColumnWidth,AiOutlineColumnHeight} from 'react-icons/ai'
 import { toIncreaseProductCount, toReduceProductCount } from "../../store/productCart/productCartSlice";
+import { setGlob } from "../../store/global/globalSlice";
 
-const FurnitureDetailCard = () => {
+const FurnitureDetailCard = ({furnitures}) => {
+  const dispatch = useDispatch();
+  const { pd_active } = useSelector((state) => state.global);
   const theme = useTheme();
+  useEffect(() => {
+ 
+    if(furnitures?.images !== undefined){
+    dispatch(setGlob(["pd_active",furnitures?.images[0]?.imageSource]));
+    }
+  }, [furnitures]);
   return (
-    <Card sx={{ display: 'flex',padding:"20px",justifyContent:"space-between",marginBottom:"10px" }}>
-      <div style={{width:"55%"}}>
-      <img style={{width:"90%"}} src="https://media.gq-magazine.co.uk/photos/5fa3edfea6440a8c1c83079c/master/w_1920%2Cc_limit/FURNITURE511_1.jpg"/>
+    <Card
+    sx={{
+      display: "flex",
+      padding: "20px",
+      justifyContent: "space-between",
+      marginBottom: "10px",
+    }}
+  >
+    <div style={{ width: "55%",height:"300px" }}>
+    <img
+            style={{width: "100%"}}
+            src={
+               pd_active
+            }
+            alt=""
+          />
+    </div>
+
+
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        width: "45%",
+        padding: "10px",
+      }}
+    >
+      <Typography
+        component="div"
+        variant="h4"
+        sx={{
+          fontWeight: "500",
+          color: "#444",
+          margin: "15px 0px 0px 10px",
+        }}
+      >
+        {furnitures.name}
+      </Typography>
+
+      <div
+        style={{
+          width: "100%",
+          padding: "0px 10px",
+          display: "flex",
+          columnGap: "10px",
+          marginTop: "20px",
+        }}
+      >
+            {furnitures?.images?.map((values) => {
+              return (
+                <div
+                  style={{
+                    width: "32px",
+                    height: "32px",
+                    overflow: "hidden",
+                    borderRadius: "50%",
+                    backgroundColor: values.color,
+                  }}
+                />
+              );
+            })}
+
+
       </div>
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', width:"45%"}}>
-      <Typography component="div" variant="h4" sx={{
-           fontWeight: "500",
-           color: "#444",
-           margin:"15px 0px 0px 10px"
-         }}>
-           Furniture Name
-         </Typography>
-
-         <Typography component="div" variant="h7"sx={{
-           fontWeight: "500",
-           color: "#838383",
-           margin:"10px 0px 0px 10px"
-         }} >
-           Product Code: 1000496646
-         </Typography>
-
-
-         <Box sx={{flexDirection:"row",display:"flex",alignItems:"center", margin:"70px 0px 0px 10px"}}>
-          <Box sx={{flexDirection:"row",display:"flex",alignItems:"center",marginLeft:"0px"}}>
-          <Typography component="div" variant="h5" sx={{
-                fontWeight: "500",
-                color: "#242433"
-              }}> 
-                W
-            </Typography>   <Typography component="div" variant="h6" sx={{
+      <Box
+        sx={{
+          flexDirection: "row",
+          display: "flex",
+          alignItems: "center",
+          margin: "50px 0px 0px 10px",
+        }}
+      >
+        <Box
+          sx={{
+            flexDirection: "row",
+            display: "flex",
+            alignItems: "center",
+            marginLeft: "0px",
+          }}
+        >
+          <Typography
+            component="div"
+            variant="h5"
+            sx={{
+              fontWeight: "500",
+              color: "#242433",
+            }}
+          >
+            W
+          </Typography>{" "}
+          <Typography
+            component="div"
+            variant="h6"
+            sx={{
               fontWeight: "500",
               color: "#444",
-              margin:"0px 0px 0px 4px"
-            }}>
-              350mm
-            </Typography> 
-          </Box>
-          <Box  sx={{flexDirection:"row",display:"flex",alignItems:"center",marginLeft:"20px"}}>
-          <Typography component="div" variant="h5" sx={{
-                fontWeight: "500",
-                color: "#242433"
-              }}>
-                H
-            </Typography> 
-            <Typography component="div" variant="h6" sx={{
+              margin: "0px 0px 0px 4px",
+            }}
+          >
+            {furnitures.width}mm
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            flexDirection: "row",
+            display: "flex",
+            alignItems: "center",
+            marginLeft: "25px",
+          }}
+        >
+          <Typography
+            component="div"
+            variant="h5"
+            sx={{
+              fontWeight: "500",
+              color: "#242433",
+            }}
+          >
+            H
+          </Typography>
+          <Typography
+            component="div"
+            variant="h6"
+            sx={{
               fontWeight: "500",
               color: "#444",
-              margin:"0px 0px 0px 4px"
-            }}>
-              600mm
-            </Typography> 
-          </Box>
-          <Box  sx={{flexDirection:"row",display:"flex",alignItems:"center",marginLeft:"20px"}}>    
-              <Typography component="div" variant="h5" sx={{
-                fontWeight: "500",
-                color: "#242433"
-              }}>
-                D 
-            </Typography>
-          <Typography component="div" variant="h6" sx={{
+              margin: "0px 0px 0px 4px",
+            }}
+          >
+            {furnitures.height}mm
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            flexDirection: "row",
+            display: "flex",
+            alignItems: "center",
+            marginLeft: "25px",
+          }}
+        >
+          <Typography
+            component="div"
+            variant="h5"
+            sx={{
+              fontWeight: "500",
+              color: "#242433",
+            }}
+          >
+            D
+          </Typography>
+          <Typography
+            component="div"
+            variant="h6"
+            sx={{
               fontWeight: "500",
               color: "#444",
-              margin:"0px 0px 0px 4px"
-            }}>
-              400mm
-            </Typography> 
-          </Box>
-          </Box>
-          <Box sx={{flexDirection:"row",display:"flex",alignItems:"center", margin:"40px 0px 0px 10px"}}>
-             <Link style={{textDecoration:"none"}} href="#">Buy single?</Link>
-          </Box>
+              margin: "0px 0px 0px 4px",
+            }}
+          >
+            {furnitures.depth}mm
+          </Typography>
+        </Box>
       </Box>
-    </Card>
+      <Box
+        sx={{
+          flexDirection: "row",
+          display: "flex",
+          alignItems: "center",
+          margin: "40px 0px 0px 10px",
+        }}
+      >
+        <Typography
+          component="div"
+          variant="h4 "
+          sx={{
+            fontFamily:
+              "New Roman,Times,serif",
+            fontWeight: "500",
+            color: "#242433",
+            margin: "0px 0px 10px 0px",
+          }}
+        >
+          £ {furnitures.price}
+        </Typography>
+      </Box>
+    </Box>
+  </Card>
   );
 }
 export default FurnitureDetailCard

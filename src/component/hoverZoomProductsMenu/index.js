@@ -2,27 +2,48 @@ import React, { useEffect, useRef, useState } from "react";
 import CategoryCarousel from "../mainCarousel";
 import CustomCarousel from "../carousel";
 import DetailCarousel from "../detailCarousel";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setGlob } from "../../store/global/globalSlice";
 
-const ZoomProduct = () => {
-  const { pd_active }  = useSelector(state => state.global)
-  useEffect(() => {});
+const ZoomProduct = ({ furnitures }) => {
+  const dispatch = useDispatch();
+  const [images,setImages] = useState([]);
+  const { pd_active } = useSelector((state) => state.global);
+
+  useEffect(() => {
+ 
+    if(furnitures?.images !== undefined){
+      setImages(furnitures.images);
+    dispatch(setGlob(["pd_active",furnitures?.images[0]?.imageSource]));
+    }
+  }, [furnitures]);
+
   return (
     <div>
       <div
         className="xyz"
         style={{ width: "100%", display: "flex", justifyContent: "center" }}
       >
-        <div className="asd" style={{ width: "93%", height:"500px",overflow:"hidden" }}>
-          <img style={{maxWidth:"100%"}} src={pd_active} alt="" />
+        <div
+          className="asd"
+          style={{ width: "93%", height: "500px", overflow: "hidden" }}
+        >
+          <img
+            style={{ maxWidth: "100%" }}
+            src={
+               pd_active
+            }
+            alt=""
+          />
         </div>
       </div>
 
-    <div className="DetailCarousel-div">
-        <div className="DCarousel-div">  
-          <DetailCarousel />
+      <div className="DetailCarousel-div">
+        <div className="DCarousel-div">
+          {images.length > 0 ?<DetailCarousel images={images} />:null}
+          
         </div>
-      </div> 
+      </div>
     </div>
   );
 };

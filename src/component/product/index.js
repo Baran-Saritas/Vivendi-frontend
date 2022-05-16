@@ -75,7 +75,11 @@ export default function Product() {
     let data = { ...values, images: newData, price: parseFloat(values.price) };
     dispatch(postFurniture(data));
   };
-
+  useEffect(() => {
+    if(categories.length === 0){
+      dispatch(getFurnitureCategory());
+    }
+  },[])
   return (
     <>
       <Snackbar

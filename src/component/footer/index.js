@@ -5,7 +5,7 @@ export const CustomFooter = () => (
     style={{
       height: "50px",
       display: "flex",
-      justifyContent: "right",
+      justifyContent: "center",
       width: "100%",
     }}
   >
