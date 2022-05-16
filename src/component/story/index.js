@@ -62,8 +62,8 @@ const Story = () => {
         onAllStoriesEnd={() =>
           dispatch(setStory({ value: true }))}
         onStoryStart={() => dispatch(setStory({ value: false }))}
-        width={1200}
-        height={768}
+        width={1100}
+        height={648}
         isPaused={true}
       />
     </div>

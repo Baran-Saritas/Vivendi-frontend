@@ -27,7 +27,7 @@ function SelectImage({ images, setImages }) {
   };
   const onImageChange = async (e) => {
     if (e.target.files && e.target.files[0]) {
-      if (e.target.files[0].size > 300000) {
+      if (e.target.files[0].size > 3000000) {
         setOpenMessage("Max image size must be 300KB");
         return;
       }
