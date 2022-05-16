@@ -5,8 +5,6 @@ import CardContent from "@mui/material/CardContent";
 import {
   AiOutlinePlus,
   AiOutlineMinus,
-  AiFillHeart,
-  AiOutlineHeart,
 } from "react-icons/ai";
 import CustomCarousel from "../../component/carousel";
 import { Button, IconButton, Typography } from "@mui/material";
@@ -16,7 +14,9 @@ import SetDetailCard from "../../component/setdetailcard";
 import ZoomProduct from "../../component/hoverZoomProductsMenu";
 import { padding } from "@mui/system";
 import { useParams } from "react-router-dom";
-import { getFurnitureById,getFurnitureBySetId } from "../../store/furniture/furnitureSlice";
+import { getFurnitureById } from "../../store/furniture/furnitureSlice";
+import SetImageTable from "../../component/setImages";
+import { getFurnitureSetById } from "../../store/furnitureSetInfo/furnitureSetInfoSlice";
 
 const SetDetailPage = () => {
   const { set_id } = useParams();
@@ -26,19 +26,12 @@ const SetDetailPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if(setInfosOnHover){
-      dispatch(getFurnitureBySetId(setInfosOnHover.id))
-    }
+    console.log("sets :",setInfosOnHover);
   }, [setInfosOnHover]);
 
   useEffect(() => {
-    console.log("egfaseg",furnitures);
-  }, [furnitures]);
-
-  useEffect(() => {
     if (set_id) { 
-      console.log(set_id);
-      dispatch(getFurnitureById(set_id));
+      dispatch(getFurnitureSetById(set_id));
     }
   }, [set_id]);
   return (
@@ -51,7 +44,7 @@ const SetDetailPage = () => {
             padding: "0",
           }}
         >
-          <ZoomProduct />
+           <SetImageTable set ={setInfosOnHover.images} />
         </div>
 
         <Box
@@ -111,7 +104,7 @@ const SetDetailPage = () => {
               marginTop: "20px",
             }}
           >
-            {/* {furnitures?.images?.map((values) => {
+            {setInfosOnHover?.images?.map((values) => {
               return (
                 <div
                   style={{
@@ -123,7 +116,7 @@ const SetDetailPage = () => {
                   }}
                 />
               );
-            })} */}
+            })}
           </div>
 
           <Box

@@ -30,7 +30,7 @@ const NewProductCarousel = ({ speed, autoplaySpeed }) => {
     centerPadding: "30px",
     slidesToShow: 1,
     swipeToSlide: true,
-  // autoplay: true,
+    autoplay: true,
     speed: speed || 5000,
     autoplaySpeed: autoplaySpeed || 4000,
     nextArrow: <SampleNextArrow />,

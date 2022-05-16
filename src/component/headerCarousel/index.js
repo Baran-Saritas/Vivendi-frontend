@@ -6,12 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getFurnitureSetTop5 } from "../../store/furnitureSetInfo/furnitureSetInfoSlice";
 import { useNavigate } from "react-router-dom";
 
-const HeaderSetCarousel = ({ speed, autoplaySpeed }) => {
+const HeaderSetCarousel = ({ set, speed, autoplaySpeed }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { setIdValue } = useSelector((state) => state.global);
-  const { setInfosOnHover } = useSelector((state) => state.setInfo);
-  const [test, setTest] = useState(false);
+
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (
@@ -45,11 +43,14 @@ const HeaderSetCarousel = ({ speed, autoplaySpeed }) => {
     prevArrow: <SamplePrevArrow />,
   };
 
+  useEffect(() => {
+    console.log("set :",set);
+  },[])
   return (
     <div>
       <Slider {...settings}>
         <div className="header-main-carousel">
-          <Hcard />
+          <Hcard set={set} />
         </div>
       </Slider>
     </div>

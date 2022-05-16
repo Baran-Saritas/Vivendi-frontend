@@ -16,14 +16,14 @@ const NewProductCard = () => {
   const theme = useTheme();
   return (
     <Card
+      className="newFurnitureCard"
       sx={{
         display: "flex",
         padding: "20px",
         justifyContent: "space-between",
-        marginBottom: "10px",
       }}
     >
-      <div style={{ width: "55%" }}>
+      <div className="newFurnitureCardLeft" style={{ width: "55%" }}>
         <img
           style={{ width: "90%" }}
           src="https://media.gq-magazine.co.uk/photos/5fa3edfea6440a8c1c83079c/master/w_1920%2Cc_limit/FURNITURE511_1.jpg"
@@ -31,6 +31,7 @@ const NewProductCard = () => {
       </div>
 
       <Box
+        className="newFurnitureCardRight"
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -53,7 +54,7 @@ const NewProductCard = () => {
         <div
           style={{
             width: "100%",
-            padding: "10px",
+            padding: "0px 0px 0px 10px",
             display: "flex",
             columnGap: "10px",
             marginTop: "20px",
@@ -126,7 +127,7 @@ const NewProductCard = () => {
             flexDirection: "row",
             display: "flex",
             alignItems: "center",
-            margin: "50px 0px 0px 10px",
+            margin: "30px 0px 0px 10px",
           }}
         >
           <Box

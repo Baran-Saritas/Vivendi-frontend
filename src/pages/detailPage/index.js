@@ -179,10 +179,13 @@ const DetailPage = () => {
           flexDirection: "column",
         }}
       >
-      <Typography component="div" variant="h4" sx={{
-           fontWeight: "500",
-           color: "#444",
-           margin:"15px 0px 0px 10px"
+        <Typography
+          component="div"
+          variant="h4"
+          sx={{
+            fontWeight: "600",
+            color: "#242433",
+            margin: "15px 0px 20px 10px",
           }}
         >
           {furnitures.name}
