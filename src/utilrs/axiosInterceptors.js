@@ -3,12 +3,11 @@ import env from "../env.json";
 
 
 const furniture_api = axios.create({
-  headers:{
-    "Content-Type":"application/json",
+  headers: {
+    "Content-Type": "application/json",
   },
   timeout: 15000,
   baseURL: env.FURNITURE_API,
-
 });
 
 const user_api = axios.create({
@@ -18,7 +17,6 @@ const user_api = axios.create({
   timeout: 15000,
   baseURL: env.USER_API,
 });
-
 
 const image_api = axios.create({
   headers: {
@@ -64,6 +62,13 @@ const set_info_api = axios.create({
   timeout: 5000,
   baseURL: env.FSET_INFO_API,
 });
+const set_info_f_api = axios.create({
+  headers: {
+    "Content-Type": "application/json",
+  },
+  timeout: 5000,
+  baseURL: env.FSET_INFO_F_API,
+});
 
 export const handleError = ({ message, data, status }) => {
   return Promise.reject({ message, data, status });
@@ -87,6 +92,9 @@ group_api.interceptors.response.use(response);
 //
 set_info_api.interceptors.request.use(config, error);
 set_info_api.interceptors.response.use(response);
+//
+set_info_f_api.interceptors.request.use(config, error);
+set_info_f_api.interceptors.response.use(response);
 //
 campaign_api.interceptors.request.use(config, error);
 campaign_api.interceptors.response.use(response);
@@ -122,4 +130,14 @@ async function responseResult({ message, response: { data, status } }) {
   return handleError({ message, data, status });
 }
 
-export {furniture_api,user_api, image_api, category_api, group_api, set_info_api,campaign_api };
+export {
+  user_api,
+  image_api,
+  category_api,
+  group_api,
+  set_info_api,
+  campaign_api,
+  furniture_api,
+  set_info_f_api,
+};
+

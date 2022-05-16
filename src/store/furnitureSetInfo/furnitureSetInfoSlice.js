@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { set_info_api } from "../../utilrs/axiosInterceptors";
+import { set_info_api, set_info_f_api } from "../../utilrs/axiosInterceptors";
 import { setFullFilled } from "../global/globalSlice";
 
 const getFurnitureSetInfo = createAsyncThunk(
@@ -105,17 +105,42 @@ const updateFurnitureSetInfo = createAsyncThunk(
 
 const postFurnitureSetInfo = createAsyncThunk(
   "setInfo/add",
-  async ({ data, id }, { rejectWithValue, dispatch }) => {
-    let set_info_res = await set_info_api.post("/", {
-      ...data,
-      groupId: id,
-    });
+  async ({ data, furnitureIds }, { rejectWithValue, dispatch }) => {
+    set_info_api
+      .post("/", data)
+      .then((res) => {
+        set_info_f_api
+          .post("/furniture-set/", {
+            furnitureIds: furnitureIds.furs,
+            furnitureSetInfoId: res.data.id,
+          })
+          .then((res2) => {
+            dispatch(setFullFilled({ value: true }));
+          })
+          .catch((err) => {
+            rejectWithValue(err);
+          });
+      })
+      .then((err) => {
+        rejectWithValue(err);
+      });
+    /*
+    let set_info_res = await set_info_api.post("/", data);
     if (set_info_res.status === 200) {
-      dispatch(setFullFilled({ value: true }));
+      let res = await set_info_f_api.post("/furniture-set", {
+        furnitureIds: furnitureIds.furs,
+        furnitureSetInfoId: set_info_res.data.id,
+      });
+      if (res.status === 200) {
+        dispatch(setFullFilled({ value: true }));
+      } else {
+        rejectWithValue(res.data);
+      }
       return set_info_res.data;
     } else {
       rejectWithValue(set_info_res.data);
     }
+    */
   }
 );
 
