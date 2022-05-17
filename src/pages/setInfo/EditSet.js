@@ -11,12 +11,18 @@ import { setFullFilled } from "../../store/global/globalSlice";
 import SelectImage from "../../component/SelectImage/SelectImage";
 import Icon from "@mui/material/Icon";
 import {
+  Checkbox,
+  Drawer,
   FormControl,
+  FormControlLabel,
+  FormGroup,
+  FormLabel,
   IconButton,
   InputLabel,
   MenuItem,
   Select,
 } from "@mui/material";
+import { set_info_f_api } from "../../utilrs/axiosInterceptors";
 
 export default function EditSet({ setOpenMessage, open, setOpen }) {
   const dispatch = useDispatch();
@@ -24,15 +30,18 @@ export default function EditSet({ setOpenMessage, open, setOpen }) {
   const [images, setImages] = React.useState([]);
   const [setInfoName, setSetInfoName] = React.useState("");
   const [price, setPrice] = React.useState("");
+  const [openDrawer, setOpenDrawer] = React.useState(false);
   const [categoryId, setCategoryId] = React.useState("");
   const { categories } = useSelector((state) => state.category);
+  const { furnitures } = useSelector((state) => state.furniture);
+  const [selectedFurniture, setSelectedFurniture] = React.useState({});
   const handleOk = async (e) => {
     let data = {};
     if (open.setInfoName !== setInfoName) {
       data.setInfoName = setInfoName;
     }
-    if (open.price !== price) {
-      data.price = price;
+    if (open.price !== Number(price)) {
+      data.price = Number(price);
     }
     if (open.categoryId !== categoryId) {
       data.categoryId = categoryId;
@@ -45,7 +54,26 @@ export default function EditSet({ setOpenMessage, open, setOpen }) {
       setOpenMessage("Price have to be number!");
       return;
     }
-    console.log("RES : ", Number(price));
+    let furs = Object.entries(selectedFurniture)
+      .filter((i) => i[1])
+      .map((i) => i[0])
+      .sort();
+    if (furs.length <= 1) {
+      setOpenMessage("Please choose al lease 2 furnitures!");
+      return;
+    }
+    let _furs = [...open.furnitures.map((i) => i.id)].sort();
+
+    if (furs.toString() !== _furs.toString()) {
+      let removed = [];
+      let added = [];
+      _furs.forEach((i) => {
+        if (!furs.includes(i)) removed.push(i);
+      });
+      furs.forEach((i) => {
+        if (!_furs.includes(i)) added.push(i);
+      });
+    }
     let editImages = [];
     images.forEach((i) => {
       let res = open.images.find((j) => j.id === i.id);
@@ -68,6 +96,9 @@ export default function EditSet({ setOpenMessage, open, setOpen }) {
       setSetInfoName(open.setInfoName);
       setPrice(open.price);
       setCategoryId(open.categoryId);
+      let val = {};
+      open.furnitures.map((i) => (val[i.id] = true));
+      setSelectedFurniture(val);
     }
   }, [open]);
   useEffect(() => {
@@ -78,6 +109,38 @@ export default function EditSet({ setOpenMessage, open, setOpen }) {
   }, [fullfilled, setOpen]);
   return (
     <div>
+      <Drawer
+        anchor="left"
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+        PaperProps={{
+          sx: { minWidth: 300, padding: "30px 0 0 30px !important" },
+        }}
+      >
+        <FormControl component="fieldset">
+          <FormLabel component="legend">Select Furniture</FormLabel>
+          <FormGroup>
+            {furnitures.map((i) => (
+              <FormControlLabel
+                key={i.id}
+                control={
+                  <Checkbox
+                    checked={!!selectedFurniture[i.id]}
+                    name={i.id}
+                    onChange={(e) => {
+                      setSelectedFurniture({
+                        ...selectedFurniture,
+                        [e.target.name]: e.target.checked,
+                      });
+                    }}
+                  />
+                }
+                label={i.name}
+              />
+            ))}
+          </FormGroup>
+        </FormControl>
+      </Drawer>
       <Dialog
         fullWidth
         maxWidth="sm"
@@ -129,6 +192,13 @@ export default function EditSet({ setOpenMessage, open, setOpen }) {
           <div className="f-add-edit-images">
             <SelectImage images={images} setImages={setImages} />
           </div>
+          <Button
+            onClick={() => setOpenDrawer(true)}
+            variant="contained"
+            disableElevation
+          >
+            Add Furniture
+          </Button>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleOk}>OK</Button>

@@ -17,7 +17,6 @@ export default function SetInfo() {
   const [editOpen, setEditOpen] = React.useState(false);
   const [deleteOpen, setDeleteOpen] = React.useState("");
   const [openMessage, setOpenMessage] = useState("");
-  const { categories } = useSelector((state) => state.category);
   const { setInfos } = useSelector((state) => state.setInfo);
   const dispatch = useDispatch();
   useEffect(() => {
