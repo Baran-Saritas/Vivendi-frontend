@@ -69,3 +69,22 @@
    font-size: xx-large;
  }
 }
+
+
+@media (max-width:800px){
+  .all-products {
+}
+.products-page-side{
+  width: 90% !important;
+}
+.all-products > div{
+    width: 100% !important;
+    margin:20px 0px 10px 0px  !important;
+}
+.products-h1{
+  white-space: normal !important;
+  width: 100%;
+  height: auto;
+
+}
+}

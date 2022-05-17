@@ -22,6 +22,7 @@ const FurnitureDetailCard = ({furnitures}) => {
   }, [furnitures]);
   return (
     <Card
+    className="FurnitureDetailCard"
     sx={{
       display: "flex",
       padding: "20px",
@@ -29,7 +30,7 @@ const FurnitureDetailCard = ({furnitures}) => {
       marginBottom: "10px",
     }}
   >
-    <div style={{ width: "55%",height:"300px" }}>
+    <div className="FurnitureDetailCardLeft" style={{ width: "55%",height:"300px" }}>
     <img
             style={{width: "100%"}}
             src={
@@ -41,6 +42,7 @@ const FurnitureDetailCard = ({furnitures}) => {
 
 
     <Box
+    className="FurnitureDetailCardRight"
       sx={{
         display: "flex",
         flexDirection: "column",

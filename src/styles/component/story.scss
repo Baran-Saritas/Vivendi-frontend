@@ -1,6 +1,6 @@
 
 .button {
-	
+
 	--offset: 10px;
 	--border-size: 2px;
 	
@@ -76,3 +76,57 @@
 	}
 	
 }
+
+
+.large-Story{
+
+}
+
+
+.medium-Story{
+	display: none;
+}
+
+.small-Story{
+	display: none;
+}
+
+.xsmall-Story{
+	display: none;
+}
+
+
+@media (max-width:1100px) {
+
+	.large-Story{
+		display: none !important;
+	}
+	
+	
+	.medium-Story{
+		display: block !important;
+	}
+}	
+
+@media (max-width:1000px) {
+
+	.medium-Story{
+		display: none !important;
+	}
+	
+	.small-Story{
+		display: block !important;
+	}
+
+}
+
+@media (max-width:700px) {
+	.small-Story{
+		display: none !important;
+	}
+	
+	.xsmall-Story{
+		display: block !important;
+	}
+}
+

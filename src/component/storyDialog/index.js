@@ -26,7 +26,7 @@ const StoryDialog = ({ open, setOpen }) => {
                     style: {
                         backgroundColor: 'transparent',
                         boxShadow: 'none',
-                        width: "1200px"
+                        width: "100%"
                     },
                 }}
                 fullScreen={fullScreen}

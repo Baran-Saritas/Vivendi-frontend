@@ -50,7 +50,7 @@ const DetailCarousel = ({ images }) => {
   return (
     <div className="test">
       <Slider {...settings}>
-        {images.map((value) => (
+        {images?.map((value) => (
           <div
             onClick={() =>
               dispatch(

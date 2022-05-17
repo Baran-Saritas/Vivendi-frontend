@@ -9,6 +9,7 @@ import Product from "../component/product";
 import ProductsCampaign from "../pages/campaign";
 import Base from "../pages/panel";
 import SetDetailPage from "../pages/setDetailPage";
+import ZoomDeneme from "../pages/zoomdeneme";
 export const useCustomRoutes = () => {
   return [
     {
@@ -30,6 +31,10 @@ export const useCustomRoutes = () => {
     {
       path: "/products/setDetail/:set_id",
       element: <SetDetailPage />,
+    },
+    {
+      path: "/zoom",
+      element: <ZoomDeneme />,
     },
     {
       path: "/productCart",
