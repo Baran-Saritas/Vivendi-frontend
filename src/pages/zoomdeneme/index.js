@@ -7,6 +7,18 @@ import { AiOutlineEdit, AiOutlinePlus } from "react-icons/ai";
 import { Drawer } from "@mui/material";
 import { Box } from "@mui/system";
 import {IoIosMenu,IoMdClose} from "react-icons/io"
+
+
+
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useTheme } from "@material-ui/core/styles";
+
 export default function ZoomDeneme() {
   const [state, setState] = React.useState(false);
   const toggleDrawer = (open) => {
@@ -19,43 +31,37 @@ export default function ZoomDeneme() {
     zoomWidth: 400,
     img: "http://malaman.github.io/react-image-zoom/example/1.jpg",
   };
+  const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <div>
-      {/* <div style={{width:"300px",height:"200px"}}>
-        
-      <ReactImageZoom {...props} />
-      </div> */}
-
-      <div>
-        <div className="dialog-item-2" onClick={() => toggleDrawer(true)}>
-          {state ===true ?(<IoMdClose size={30}/>): (<IoIosMenu size={30}/>)}
-        
-        </div>
-        <div className="furnitureDrawer"></div>
-        <Drawer
-          PaperProps={{
-            paper: {
-              width: 250,
-            },
-            sx: { width: "450px" },
-          }}
-          anchor={"left"}
-          open={state}
-          onClose={() => toggleDrawer(false)}
-        >
-          <Box
-            PaperProps={{
-              sx: { width: "100%" },
-            }}
-            sx={{ width: 400 }}
-            role="presentation"
-          >
-            <HamburgerList setState={setState} />
-          </Box>
-        </Drawer>
-      </div>
+      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+        Open dialog
+      </Button>
+      <Dialog fullScreen={fullScreen} open={open} onClose={handleClose}>
+        <DialogTitle>Dialog</DialogTitle>
+        <DialogContent>
+          <DialogContentText>lorem ipsum</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            ok
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
 
 // /https://s3.us-west-1.amazonaws.com/vivendi-image/9483fa5e-5f77-4b9f-ab6c-716902b7b547.png
+
