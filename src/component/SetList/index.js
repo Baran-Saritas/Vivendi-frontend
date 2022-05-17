@@ -71,7 +71,7 @@ export default function SetFurnitureList({
 
           {
           label === "Furniture"?(  
-          furnitures.map((value) => {
+          furnitures?.map((value) => {
             const labelId = `checkbox-list-secondary-label-${value}`;
             return (
               <ListItem

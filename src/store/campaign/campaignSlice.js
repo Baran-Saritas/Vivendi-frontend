@@ -54,6 +54,7 @@ const postCampaign = createAsyncThunk(
         let campaign_res = await campaign_api.post("/", data);
         if (campaign_res.status === 200) {
             dispatch(setFullFilled({ value: true }));
+
             return campaign_res.data;
         } else {
             rejectWithValue(campaign_res.data);
@@ -97,7 +98,9 @@ const campaign= createSlice({
         [getCampaigns.rejected]: (state, action) => {
             console.log("Campaigns err : ", action.payload);
         },
-        [postCampaign.fulfilled]: (state, action) => { },
+        [postCampaign.fulfilled]: (state, action) => { 
+            window.location.reload();
+        },
         [postCampaign.rejected]: (state, action) => {
             console.log("Campaigns err : ", action.payload);
         },
