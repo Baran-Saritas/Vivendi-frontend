@@ -87,6 +87,9 @@
   }
   .header-mid {
     padding: 10px 0px;
+    .hamburger-menu{
+      display: none;
+    }
     nav {
       display: flex;
       margin-left: 20px;
@@ -199,8 +202,13 @@
     height: 200 !important;
   }
 }
-@media (max-width:800px) {
-
+@media (max-width:1000px) {
+.hamburger-menu{
+  display: block !important;
+}
+.large-menu{
+  display: none !important;
+}
 
 
 }

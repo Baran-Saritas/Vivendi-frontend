@@ -6,8 +6,10 @@ import HeaderShoppingCart from "../shoppingCart";
 import { useDispatch, useSelector } from "react-redux";
 import { getHeaderData, setId } from "../../store/global/globalSlice";
 import { useNavigate } from "react-router-dom";
-
+import {IoIosMenu,IoMdClose} from "react-icons/io"
 import HeaderSetCarousel from "../headerCarousel";
+import { Box, Drawer } from "@mui/material";
+import HamburgerList from "../hamburgerMenu/hamburgerList";
 
 const CustomHeader = () => {
   const dispatch = useDispatch();
@@ -19,7 +21,10 @@ const CustomHeader = () => {
   const [search, setSearch] = useState("");
   const [isSelect, setIsSelect] = useState(0);
   const [isFocus, setIsFocus] = useState(false);
-
+  const [state, setState] = React.useState(false);
+  const toggleDrawer = (open) => {
+    setState(open);
+  };
   useEffect(() => {
     dispatch(getHeaderData());
   }, []);
@@ -65,7 +70,39 @@ const CustomHeader = () => {
         </div>
       </div>
       <div className="header-mid" onMouseLeave={() => setIsSelect(0)}>
-        <nav>
+
+      <div className="hamburger-menu">
+        <div  style={{marginLeft:"10px"}} className="dialog-item-2" onClick={() => toggleDrawer(true)}>
+          {state ===true ?(<IoMdClose size={50}/>): (<IoIosMenu size={50}/>)}
+        
+        </div>
+        <div className="furnitureDrawer"></div>
+        <Drawer
+          PaperProps={{
+            paper: {
+              width: 250,
+            },
+            sx: { width: "450px" },
+          }}
+          anchor={"left"}
+          open={state}
+          onClose={() => toggleDrawer(false)}
+        >
+          <Box
+            PaperProps={{
+              sx: { width: "100%" },
+            }}
+            sx={{ width: 400 }}
+            role="presentation"
+          >
+            {/* setIsSelect={setIsSelect} */}
+            <HamburgerList  setState={setState} />
+          </Box>
+        </Drawer>
+      </div>
+
+
+        <nav className="large-menu">
           <div
             onClick={() => {
               navigate(`/products/c76f7cef-f05f-4142-8a80-da88be374b66`);
