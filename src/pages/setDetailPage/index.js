@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import {
-  AiOutlinePlus,
-  AiOutlineMinus,
-} from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import CustomCarousel from "../../component/carousel";
 import { Button, IconButton, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,11 +23,7 @@ const SetDetailPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("sets :",setInfosOnHover);
-  }, [setInfosOnHover]);
-
-  useEffect(() => {
-    if (set_id) { 
+    if (set_id) {
       dispatch(getFurnitureSetById(set_id));
     }
   }, [set_id]);
@@ -44,7 +37,7 @@ const SetDetailPage = () => {
             padding: "0",
           }}
         >
-           <SetImageTable set ={setInfosOnHover.images} />
+          <SetImageTable set={setInfosOnHover} />
         </div>
 
         <Box
@@ -92,7 +85,7 @@ const SetDetailPage = () => {
               fontWeight: "100",
             }}
           >
-             $ {setInfosOnHover.price}
+            $ {setInfosOnHover.price}
           </Typography>
 
           <div
@@ -153,10 +146,8 @@ const SetDetailPage = () => {
               sx={{
                 marginLeft: "15%",
               }}
-            >
-            </Box>
+            ></Box>
           </Box>
-
         </Box>
       </div>
 
@@ -189,9 +180,9 @@ const SetDetailPage = () => {
             width: "70%",
           }}
         >
-          <SetDetailCard />
-          <SetDetailCard />
-          <SetDetailCard />
+          {setInfosOnHover?.furnitures?.map((i) => (
+            <SetDetailCard key={i?.id} value={i} />
+          ))}
         </Box>
       </Box>
     </div>

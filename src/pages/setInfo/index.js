@@ -23,8 +23,8 @@ export default function SetInfo() {
     dispatch(getFurnitureSetInfo());
   }, []);
   useEffect(() => {
-    //if (!groups.length) navigate("/category-edit");
-  }, []);
+    console.log("RES : ", setInfos);
+  }, [setInfos]);
   return (
     <div className="dialog-edit">
       <Snackbar

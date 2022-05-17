@@ -17,6 +17,7 @@ import { padding } from "@mui/system";
 import { useParams } from "react-router-dom";
 import { getFurnitureById } from "../../store/furniture/furnitureSlice";
 import FurnitureDetailCard from "../../component/furnitureDetailCard";
+import { setGlob } from "../../store/global/globalSlice";
 
 const DetailPage = () => {
   const { product_id } = useParams();
@@ -114,6 +115,9 @@ const DetailPage = () => {
                       borderRadius: "50%",
                       backgroundColor: values.color,
                     }}
+                    onMouseEnter={() =>
+                      dispatch(setGlob(["pd_active", values.imageSource]))
+                    }
                   />
                 );
               })}
@@ -179,7 +183,7 @@ const DetailPage = () => {
       </div>
 
       <Box
-      className=""
+        className=""
         sx={{
           display: "flex",
           padding: "30px",
@@ -215,7 +219,7 @@ const DetailPage = () => {
           variant="inset"
         />
         <Box
-        className="detail-card-main"
+          className="detail-card-main"
           sx={{
             width: "70%",
           }}

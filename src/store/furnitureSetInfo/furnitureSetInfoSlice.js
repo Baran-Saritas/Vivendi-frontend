@@ -17,7 +17,6 @@ const getFurnitureSetInfo = createAsyncThunk(
 const getFurnitureSetById = createAsyncThunk(
   "setInfo/getById",
   async (id, { rejectWithValue }) => {
-
     const res = await set_info_api.get("/" + id);
     if (res.status === 200) {
       return res.data;
@@ -26,8 +25,6 @@ const getFurnitureSetById = createAsyncThunk(
     }
   }
 );
-
-
 
 const getFurnitureSetTop5 = createAsyncThunk(
   "setInfo/getCategory-top5",
@@ -40,7 +37,6 @@ const getFurnitureSetTop5 = createAsyncThunk(
     }
   }
 );
-
 
 const getFurnitureSetByCategoryId = createAsyncThunk(
   "setInfo/getSetsByCategoryId",
@@ -149,14 +145,18 @@ const initialState = {
   setInfos: [],
   setInfosOnHover: [],
   error: null,
+  activeSet: [],
 };
 
 const furnitureSetInfoSlice = createSlice({
   name: "furnitureSetInfo",
   initialState,
-  reducers: {},
+  reducers: {
+    setActiveSet: (state, { payload }) => {
+      state.activeSet = payload;
+    },
+  },
   extraReducers: {
-
     [getFurnitureSetById.fulfilled]: (state, action) => {
       state.setInfosOnHover = action.payload;
     },
@@ -181,7 +181,9 @@ const furnitureSetInfoSlice = createSlice({
     [getFurnitureSetByCategoryId.rejected]: (state, action) => {
       console.log("Furniture err : ", action.payload);
     },
-    [getFurnitureSetInfo.fulfilled]: (state, action) => {},
+    [getFurnitureSetInfo.fulfilled]: (state, action) => {
+      state.setInfos = action.payload;
+    },
     [getFurnitureSetInfo.rejected]: (state, action) => {
       console.log("Group err : ", action.payload);
     },
@@ -206,7 +208,8 @@ const furnitureSetInfoSlice = createSlice({
   },
 });
 
-export const { getFurnitureSetInfoById } = furnitureSetInfoSlice.actions;
+export const { getFurnitureSetInfoById, setActiveSet } =
+  furnitureSetInfoSlice.actions;
 export {
   getFurnitureSetInfo,
   postFurnitureSetInfo,
