@@ -13,6 +13,7 @@ import {
 } from "../../store/productCart/productCartSlice";
 
 const NewProductCard = () => {
+  const [activeImage, setActiveImage] = useState(srcs[0].imageSource);
   const theme = useTheme();
   return (
     <Card
@@ -24,10 +25,7 @@ const NewProductCard = () => {
       }}
     >
       <div className="newFurnitureCardLeft" style={{ width: "55%" }}>
-        <img
-          style={{ width: "90%" }}
-          src="https://media.gq-magazine.co.uk/photos/5fa3edfea6440a8c1c83079c/master/w_1920%2Cc_limit/FURNITURE511_1.jpg"
-        />
+        <img style={{ width: "90%" }} src={activeImage} />
       </div>
 
       <Box
@@ -69,10 +67,11 @@ const NewProductCard = () => {
               overflow: "hidden",
               borderRadius: "9999px",
             }}
+            onMouseEnter={() => setActiveImage(srcs[0].imageSource)}
           >
             <img
               style={{ width: "100%", height: "100%" }}
-              src="https://enza.akinoncdn.com/cms/2022/03/22/b86cdc48-b95c-4857-920c-1ba5b495d981_size142x80_cropCenter.png"
+              src={srcs[0].color}
             />
           </div>
           <div
@@ -84,10 +83,11 @@ const NewProductCard = () => {
               overflow: "hidden",
               borderRadius: "9999px",
             }}
+            onMouseEnter={() => setActiveImage(srcs[1].imageSource)}
           >
             <img
               style={{ width: "100%", height: "100%" }}
-              src="https://enza.akinoncdn.com/cms/2022/03/22/c6304027-55db-4b09-801a-2a0b670bfa0d_size142x80_cropCenter.png"
+              src={srcs[1].color}
             />
           </div>
           <div
@@ -99,10 +99,11 @@ const NewProductCard = () => {
               overflow: "hidden",
               borderRadius: "9999px",
             }}
+            onMouseEnter={() => setActiveImage(srcs[2].imageSource)}
           >
             <img
               style={{ width: "100%", height: "100%" }}
-              src="https://enza.akinoncdn.com/products/2021/09/08/11647/62391539-1b07-4e42-919e-a509b08b9eec_size142x80_cropCenter.jpg"
+              src={srcs[2].color}
             />
           </div>
           <div
@@ -114,10 +115,11 @@ const NewProductCard = () => {
               overflow: "hidden",
               borderRadius: "9999px",
             }}
+            onMouseEnter={() => setActiveImage(srcs[3].imageSource)}
           >
             <img
               style={{ width: "100%", height: "100%" }}
-              src="https://enza.akinoncdn.com/products/2021/09/08/12498/4d525213-97d6-4a9a-bd8c-ede89c10a29f_size142x80_cropCenter.jpg"
+              src={srcs[3].color}
             />
           </div>
         </div>
@@ -233,8 +235,7 @@ const NewProductCard = () => {
             component="div"
             variant="h4 "
             sx={{
-              fontFamily:
-                "New Roman,Times,serif",
+              fontFamily: "New Roman,Times,serif",
               fontWeight: "500",
               color: "#242433",
               margin: "0px 0px 10px 0px",
@@ -248,3 +249,30 @@ const NewProductCard = () => {
   );
 };
 export default NewProductCard;
+
+let srcs = [
+  {
+    color:
+      "https://enza.akinoncdn.com/products/2021/09/08/12498/4d525213-97d6-4a9a-bd8c-ede89c10a29f_size142x80_cropCenter.jpg",
+    imageSource:
+      "https://enza.akinoncdn.com/products/2021/11/17/22405/5e71b980-fa01-4f99-bd3a-abee4f88534d_size1684x950.jpg",
+  },
+  {
+    color:
+      "https://enza.akinoncdn.com/products/2021/09/08/12202/8598c41f-f0ba-49bd-88de-75497b2b1028_size142x80_cropCenter.jpg",
+    imageSource:
+      "https://enza.akinoncdn.com/products/2021/11/17/22315/27df44dc-1952-4132-b004-67919c796536_size1684x950.jpg",
+  },
+  {
+    color:
+      "https://enza.akinoncdn.com/products/2021/09/08/10973/c59b6e8d-2d12-4b66-95a8-57fd2bee849a_size142x80_cropCenter.jpg",
+    imageSource:
+      "https://enza.akinoncdn.com/products/2021/11/17/22311/caf9d9af-10eb-46a3-bc69-182e8c8448b8_size1684x950.jpg",
+  },
+  {
+    color:
+      "https://enza.akinoncdn.com/products/2021/09/08/10802/815faf2a-24e9-497e-9080-4fde116488bd_size142x80_cropCenter.jpg",
+    imageSource:
+      "https://enza.akinoncdn.com/products/2021/11/17/22310/10a68c03-b60d-4f5e-8aea-d1dd3af9b075_size1684x950.jpg",
+  },
+];

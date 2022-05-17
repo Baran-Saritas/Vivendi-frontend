@@ -16,6 +16,7 @@ import { makeStyles } from "@mui/styles";
 import ShoppingCartProduct from "../shoppingCartProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductCount } from "../../store/productCart/productCartSlice";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -33,6 +34,7 @@ const useStyles = makeStyles({
 const HeaderShoppingCart = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const [cartNull, setCartNull] = useState(false);
   const { productList, shoppingCartProduct, totalPrice } = useSelector(
@@ -134,8 +136,7 @@ const HeaderShoppingCart = () => {
             >
               <Typography
                 sx={{
-                  fontFamily:
-                    "MADE Coachella,Cambria",
+                  fontFamily: "MADE Coachella,Cambria",
                   fontWeight: "100",
                   color: "#242433",
                   margin: "15px 0px 10px 10px",
@@ -148,7 +149,10 @@ const HeaderShoppingCart = () => {
             </Box>
             <Button
               variant="outlined"
-              href="http://localhost:3000/productCart"
+              onClick={() => {
+                navigate("/productCart");
+                setAnchorEl(null);
+              }}
               size="medium"
               sx={{
                 width: "70%",

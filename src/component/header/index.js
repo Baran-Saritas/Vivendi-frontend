@@ -6,7 +6,7 @@ import HeaderShoppingCart from "../shoppingCart";
 import { useDispatch, useSelector } from "react-redux";
 import { getHeaderData, setId } from "../../store/global/globalSlice";
 import { useNavigate } from "react-router-dom";
-import {IoIosMenu,IoMdClose} from "react-icons/io"
+import { IoIosMenu, IoMdClose } from "react-icons/io";
 import HeaderSetCarousel from "../headerCarousel";
 import { Box, Drawer } from "@mui/material";
 import HamburgerList from "../hamburgerMenu/hamburgerList";
@@ -70,37 +70,38 @@ const CustomHeader = () => {
         </div>
       </div>
       <div className="header-mid" onMouseLeave={() => setIsSelect(0)}>
-
-      <div className="hamburger-menu">
-        <div  style={{marginLeft:"10px"}} className="dialog-item-2" onClick={() => toggleDrawer(true)}>
-          {state ===true ?(<IoMdClose size={50}/>): (<IoIosMenu size={50}/>)}
-        
-        </div>
-        <div className="furnitureDrawer"></div>
-        <Drawer
-          PaperProps={{
-            paper: {
-              width: 250,
-            },
-            sx: { width: "450px" },
-          }}
-          anchor={"left"}
-          open={state}
-          onClose={() => toggleDrawer(false)}
-        >
-          <Box
-            PaperProps={{
-              sx: { width: "100%" },
-            }}
-            sx={{ width: 400 }}
-            role="presentation"
+        <div className="hamburger-menu">
+          <div
+            style={{ marginLeft: "10px" }}
+            className="dialog-item-2"
+            onClick={() => toggleDrawer(true)}
           >
-            {/* setIsSelect={setIsSelect} */}
-            <HamburgerList  setState={setState} />
-          </Box>
-        </Drawer>
-      </div>
-
+            {state === true ? <IoMdClose size={50} /> : <IoIosMenu size={50} />}
+          </div>
+          <div className="furnitureDrawer"></div>
+          <Drawer
+            PaperProps={{
+              paper: {
+                width: 250,
+              },
+              sx: { width: "450px" },
+            }}
+            anchor={"left"}
+            open={state}
+            onClose={() => toggleDrawer(false)}
+          >
+            <Box
+              PaperProps={{
+                sx: { width: "100%" },
+              }}
+              sx={{ width: 400 }}
+              role="presentation"
+            >
+              {/* setIsSelect={setIsSelect} */}
+              <HamburgerList setState={setState} />
+            </Box>
+          </Drawer>
+        </div>
 
         <nav className="large-menu">
           <div
@@ -203,7 +204,11 @@ const CustomHeader = () => {
             <div className="nav-pane-right">
               <div>
                 {headerSetData?.[isSelect]?.map((set) => (
-                  <HeaderSetCarousel set={set} speed={2500} autoplaySpeed={6000} />
+                  <HeaderSetCarousel
+                    set={set}
+                    speed={2500}
+                    autoplaySpeed={6000}
+                  />
                 ))}
               </div>
             </div>

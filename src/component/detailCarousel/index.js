@@ -10,35 +10,20 @@ const DetailCarousel = ({ images }) => {
     dots: true,
     className: "center",
     infinite: true,
-    slidesToShow: images.length,
+    slidesToShow: images.length > 5 ? 5 : 3,
     swipeToSlide: true,
     autoplay: true,
     speed: 4000,
+
     autoplaySpeed: 3000,
     responsive: [
       {
-        breakpoint: 1424,
+        breakpoint: 1024,
         settings: {
-          slidesToShow: 1,
-        },
-      },
-      {
-        breakpoint: 960,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-      {
-        breakpoint: 760,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
         },
       },
     ],
@@ -52,18 +37,15 @@ const DetailCarousel = ({ images }) => {
       <Slider {...settings}>
         {images?.map((value) => (
           <div
-            onClick={() =>
-              dispatch(
-                setGlob([
-                  "pd_active",
-                  value.imageSource,
-                ])
-              )
-            }
+            onClick={() => dispatch(setGlob(["pd_active", value.imageSource]))}
             className="detail-page-small-div"
           >
             <img
-              style={{ width: "100%", margin: "0px 0px 0px 0px",objectFit:"cover"  }}
+              style={{
+                width: "100%",
+                margin: "0px 0px 0px 0px",
+                objectFit: "cover",
+              }}
               src={value.imageSource}
               alt=""
             />

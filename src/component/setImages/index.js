@@ -7,14 +7,13 @@ import { setGlob } from "../../store/global/globalSlice";
 
 const SetImageTable = ({ set }) => {
   const dispatch = useDispatch();
-  const [images,setImages] = useState([]);
+  const [images, setImages] = useState([]);
   const { pd_active } = useSelector((state) => state.global);
 
   useEffect(() => {
- 
-    if(set?.images !== undefined){
+    if (set?.images !== undefined) {
       setImages(set.images);
-    dispatch(setGlob(["pd_active",set?.images[0]?.imageSource]));
+      dispatch(setGlob(["pd_active", set?.images[0]?.imageSource]));
     }
   }, [set]);
 
@@ -28,20 +27,13 @@ const SetImageTable = ({ set }) => {
           className="asd"
           style={{ width: "93%", height: "500px", overflow: "hidden" }}
         >
-          <img
-            style={{ maxWidth: "100%" }}
-            src={
-               pd_active
-            }
-            alt=""
-          />
+          <img style={{ maxWidth: "100%" }} src={pd_active} alt="" />
         </div>
       </div>
 
       <div className="DetailCarousel-div">
         <div className="DCarousel-div">
-          {images.length > 0 ?<DetailCarousel images={images} />:null}
-          
+          {images.length > 0 ? <DetailCarousel images={images} /> : null}
         </div>
       </div>
     </div>

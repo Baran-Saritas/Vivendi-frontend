@@ -23,6 +23,7 @@ import {
   Select,
 } from "@mui/material";
 import { set_info_f_api } from "../../utilrs/axiosInterceptors";
+import { updateFurnitureCategory } from "../../store/furnitureCategory/furnitureCategorySlice";
 
 export default function EditSet({ setOpenMessage, open, setOpen }) {
   const dispatch = useDispatch();
@@ -73,6 +74,8 @@ export default function EditSet({ setOpenMessage, open, setOpen }) {
       furs.forEach((i) => {
         if (!_furs.includes(i)) added.push(i);
       });
+      data.removedFurnitures = removed;
+      data.addedFurnitures = added;
     }
     let editImages = [];
     images.forEach((i) => {
@@ -82,8 +85,7 @@ export default function EditSet({ setOpenMessage, open, setOpen }) {
     if (editImages.length) {
       data.images = editImages;
     }
-    console.log(data);
-    //dispatch(updateFurnitureCategory({ categoryName, images }));
+    dispatch(updateFurnitureCategory());
   };
   const handleClose = (_, r) => {
     if (r !== "backdropClick") {

@@ -7,19 +7,18 @@ import { setGlob } from "../../store/global/globalSlice";
 
 const ZoomProduct = ({ furnitures }) => {
   const dispatch = useDispatch();
-  const [images,setImages] = useState([]);
+  const [images, setImages] = useState([]);
   const { pd_active } = useSelector((state) => state.global);
 
   useEffect(() => {
- 
-    if(furnitures?.images !== undefined){
+    if (furnitures?.images !== undefined) {
       setImages(furnitures.images);
-      dispatch(setGlob(["pd_active",furnitures?.images[0]?.imageSource]));
+      dispatch(setGlob(["pd_active", furnitures?.images[0]?.imageSource]));
     }
   }, [furnitures]);
 
   return (
-    <div >
+    <div>
       <div
         className="img-detail-side"
         style={{ width: "100%", display: "flex", justifyContent: "center" }}
@@ -28,21 +27,13 @@ const ZoomProduct = ({ furnitures }) => {
           className="img-div-detail"
           style={{ width: "93%", height: "450px", overflow: "hidden" }}
         >
-          
-          <img
-            style={{ maxWidth: "100%" }}
-            src={
-               pd_active
-            }
-            alt=""
-          />
+          <img style={{ maxWidth: "100%" }} src={pd_active} alt="" />
         </div>
       </div>
 
       <div className="DetailCarousel-div">
         <div className="DCarousel-div">
-          {images.length > 0 ?<DetailCarousel images={images} />:null}
-          
+          {images.length > 0 ? <DetailCarousel images={images} /> : null}
         </div>
       </div>
     </div>
