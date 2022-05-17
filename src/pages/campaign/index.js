@@ -76,7 +76,7 @@ export default function ProductsCampaign() {
      console.log(data);
      data.endDate = selectedDate.toISOString().split(".")[0];
      dispatch(postCampaign(data));
-     reload();
+   //  reload();
   };
 
   useEffect(() => {
