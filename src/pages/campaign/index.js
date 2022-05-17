@@ -28,8 +28,12 @@ export default function ProductsCampaign() {
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
+  const reload = () => {
+    setTimeout(function() {
+    window.location.reload();
+  }, 3000);
+  }
   const handleClick = () => {
-    //discount percentage eklenicek
     if (!values.campaignName) {
       setMessageText("Please fill Campaign Name field!");
       setOpenMessage(true);
@@ -71,6 +75,7 @@ export default function ProductsCampaign() {
      console.log(data);
      data.endDate = selectedDate.toISOString().split(".")[0];
      dispatch(postCampaign(data));
+     reload();
   };
 
   useEffect(() => {

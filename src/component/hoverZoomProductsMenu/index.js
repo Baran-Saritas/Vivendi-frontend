@@ -14,20 +14,21 @@ const ZoomProduct = ({ furnitures }) => {
  
     if(furnitures?.images !== undefined){
       setImages(furnitures.images);
-    dispatch(setGlob(["pd_active",furnitures?.images[0]?.imageSource]));
+      dispatch(setGlob(["pd_active",furnitures?.images[0]?.imageSource]));
     }
   }, [furnitures]);
 
   return (
-    <div>
+    <div >
       <div
-        className="xyz"
+        className="img-detail-side"
         style={{ width: "100%", display: "flex", justifyContent: "center" }}
       >
         <div
-          className="asd"
-          style={{ width: "93%", height: "500px", overflow: "hidden" }}
+          className="img-div-detail"
+          style={{ width: "93%", height: "450px", overflow: "hidden" }}
         >
+          
           <img
             style={{ maxWidth: "100%" }}
             src={

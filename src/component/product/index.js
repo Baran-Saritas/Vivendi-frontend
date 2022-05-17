@@ -4,10 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { getFurnitureCategory } from "../../store/furnitureCategory/furnitureCategorySlice";
 import { postFurniture } from "../../store/furniture/furnitureSlice";
 import SelectImage from "../SelectImage/SelectImage";
-
+import { useNavigate } from "react-router-dom";
 export default function Product() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { categories } = useSelector((state) => state.category);
+
   const [values, setValues] = useState({
     name: undefined,
     height: undefined,
@@ -24,6 +26,11 @@ export default function Product() {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
+  const reload = () => {
+    setTimeout(function() {
+    window.location.reload();
+  }, 3000);
+  }
   const handleClick = () => {
     if (!values.name) {
       setMessageText("Please fill name field!");
@@ -74,7 +81,10 @@ export default function Product() {
     });
     let data = { ...values, images: newData, price: parseFloat(values.price) };
     dispatch(postFurniture(data));
+    reload();
   };
+
+
   useEffect(() => {
     if(categories.length === 0){
       dispatch(getFurnitureCategory());
@@ -180,7 +190,7 @@ export default function Product() {
           </div>
           <div className="add-product-right">
             <SelectImage images={images} setImages={setImages} />
-            <button type="submit" onClick={handleClick}>
+            <button  type="submit" onClick={handleClick}>
               Create
             </button>
           </div>

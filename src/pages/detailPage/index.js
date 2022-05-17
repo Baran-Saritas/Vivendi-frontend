@@ -35,143 +35,151 @@ const DetailPage = () => {
   return (
     <div style={{ backgroundColor: "#f2f2f2 !important" }}>
       <div style={{ display: "flex", padding: "30px 10px 10px 0px" }}>
-        <div
-          className="detail-img"
-          style={{
-            width: "68%",
-            height: "auto",
-            padding: "0",
-          }}
-        >
-          <ZoomProduct  furnitures ={furnitures}/>
-        </div>
-
-        <div
-          style={{
-            width: "30%",
-            padding: "40px 0px 0px 20px",
-            backgroundColor: "white",
-          }}
-        >
-          <Typography
-            component="div"
-            variant="h4"
-            sx={{
-              fontSize: "2.25rem",
-              lineHeight: "2.5rem",
-              fontWeight: "100",
-              color: "#444",
-              margin: "5px 0px 0px 10px",
-            }}
-          >
-            {furnitures.name}
-          </Typography>
-
-          <Typography
-            component="div"
-            variant="h7"
-            sx={{
-              fontWeight: "500",
-              color: "#838383",
-              margin: "10px 0px 0px 10px",
-            }}
-          >
-            Product Code: {furnitures.id}
-          </Typography>
-
-          <Typography
-            component="div"
-            variant="h4"
-            sx={{
-              color: "#444",
-              fontFamily: "Roboto arial sans-serif",
-              margin: "10px 0px 0px 10px",
-              fontSize: "2.25rem",
-              lineHeight: "2.5rem",
-              fontWeight: "100",
-            }}
-          >
-             $ {furnitures.price}
-          </Typography>
-
+        <div className="product-all-detail">
           <div
+            className="detail-img"
             style={{
-              width: "100%",
-              padding: "10px",
-              display: "flex",
-              columnGap: "10px",
-              marginTop: "20px",
+              width: "68%",
+              padding: "0",
             }}
           >
-            {furnitures?.images?.map((values) => {
-              return (
-                <div
-                  style={{
-                    width: "32px",
-                    height: "32px",
-                    overflow: "hidden",
-                    borderRadius: "50%",
-                    backgroundColor: values.color,
-                  }}
-                />
-              );
-            })}
+            <ZoomProduct furnitures={furnitures} />
           </div>
 
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              margin: "15% 0px 0px 10px",
-              alignItems: "center",
+          <div
+            className="detail-product-right-side"
+            style={{
+              width: "30%",
+              padding: "40px 0px 0px 20px",
+              backgroundColor: "white",
             }}
           >
+            <Typography
+              component="div"
+              variant="h4"
+              sx={{
+                fontSize: "2.25rem",
+                lineHeight: "2.5rem",
+                fontWeight: "100",
+                color: "#444",
+                margin: "5px 0px 0px 10px",
+              }}
+            >
+              {furnitures.name}
+            </Typography>
+
+            <Typography
+              component="div"
+              variant="h7"
+              sx={{
+                fontWeight: "500",
+                color: "#838383",
+                margin: "10px 0px 0px 10px",
+              }}
+            >
+              Product Code: {furnitures.id}
+            </Typography>
+
+            <Typography
+              component="div"
+              variant="h4"
+              sx={{
+                color: "#444",
+                fontFamily: "Roboto arial sans-serif",
+                margin: "10px 0px 0px 10px",
+                fontSize: "2.25rem",
+                lineHeight: "2.5rem",
+                fontWeight: "100",
+              }}
+            >
+              $ {furnitures.price}
+            </Typography>
+
+            <div
+              style={{
+                width: "100%",
+                padding: "10px",
+                display: "flex",
+                columnGap: "10px",
+                marginTop: "20px",
+              }}
+            >
+              {furnitures?.images?.map((values) => {
+                return (
+                  <div
+                    style={{
+                      width: "32px",
+                      height: "32px",
+                      overflow: "hidden",
+                      borderRadius: "50%",
+                      backgroundColor: values.color,
+                    }}
+                  />
+                );
+              })}
+            </div>
+
             <Box
               sx={{
                 display: "flex",
-                border: 1,
-                borderColor: "grey",
-                width: "165px",
-                height: "63px",
+                flexDirection: "row",
+                margin: "5% 0px 0px 10px",
                 alignItems: "center",
-                borderRadius: 10,
-                justifyContent: "space-between",
               }}
             >
-              <IconButton size="large">
-                {" "}
-                <AiOutlineMinus />{" "}
-              </IconButton>
-              <h3>0</h3>
-              <IconButton size="large">
-                {" "}
-                <AiOutlinePlus />{" "}
-              </IconButton>
-            </Box>
-            <Box
-              sx={{
-                marginLeft: "15%",
-              }}
-            >
-              {/*
+              <Box
+                sx={{
+                  display: "flex",
+                  border: 1,
+                  borderColor: "grey",
+                  width: "165px",
+                  height: "63px",
+                  alignItems: "center",
+                  borderRadius: 10,
+                  justifyContent: "space-between",
+                }}
+              >
+                <IconButton size="large">
+                  {" "}
+                  <AiOutlineMinus />{" "}
+                </IconButton>
+                <h3>0</h3>
+                <IconButton size="large">
+                  {" "}
+                  <AiOutlinePlus />{" "}
+                </IconButton>
+              </Box>
+
+              <Box
+                sx={{
+                  marginLeft: "10%",
+                }}
+              >
+                <Button style={{ padding: "18px" }} variant="outlined">
+                  {" "}
+                  Add to Cart
+                </Button>
+                {/*
                 addFavorites == true ? (
                   <AiFillHeart size={50} style={{ color: "red" }} onClick={() => setaddFavorites(!addFavorites)} />) : (
                   <AiOutlineHeart size={50} onClick={() => setaddFavorites(!addFavorites)} />)
                   */}
+              </Box>
             </Box>
-          </Box>
 
-          {/*<Typography component="div" variant="h5" sx={{
+            {/*<Typography component="div" variant="h5" sx={{
             fontWeight: "100",
             color: "#444",
             margin: "20px 0px 0px 10px"
           }}>
             Stock Count: 0
           </Typography>  */}
+          </div>
         </div>
       </div>
 
       <Box
+      className=""
         sx={{
           display: "flex",
           padding: "30px",
@@ -207,12 +215,12 @@ const DetailPage = () => {
           variant="inset"
         />
         <Box
+        className="detail-card-main"
           sx={{
             width: "70%",
           }}
         >
-          <FurnitureDetailCard furnitures = {furnitures} />
-
+          <FurnitureDetailCard furnitures={furnitures} />
         </Box>
       </Box>
     </div>
