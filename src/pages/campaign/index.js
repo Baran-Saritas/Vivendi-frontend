@@ -1,18 +1,16 @@
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
-import { FormControl, InputLabel, MenuItem, Select, Snackbar } from "@mui/material";
+import { MenuItem, Select, Snackbar } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DateFnsUtils from '@date-io/date-fns';
+import DateFnsUtils from "@date-io/date-fns";
 import SelectImage from "../../component/SelectImage/SelectImage";
 import { getFurnitureCategory } from "../../store/furnitureCategory/furnitureCategorySlice";
 import SetDrawer from "../../component/setDrawer";
-import { getFurniture } from "../../store/furniture/furnitureSlice";
 import { postCampaign } from "../../store/campaign/campaignSlice";
 
 export default function ProductsCampaign() {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.category);
-  const { furnitures } = useSelector((state) => state.furniture);
   const [values, setValues] = useState({
     campaignName: undefined,
     categoryId: undefined,
@@ -20,7 +18,7 @@ export default function ProductsCampaign() {
     description: undefined,
     endDate: undefined,
   });
-  const [cTarget,setCTarget] = useState([]);
+  const [cTarget, setCTarget] = useState([]);
   const [selectedDate, handleDateChange] = useState(new Date());
   const [images, setImages] = useState([]);
   const [openMessage, setOpenMessage] = useState(false);
@@ -66,18 +64,17 @@ export default function ProductsCampaign() {
       delete i.id;
     });
 
-
-     let data = { ...values, images: newData , cTargets:cTarget };
-     console.log(data);
-     data.endDate = selectedDate.toISOString().split(".")[0];
-     dispatch(postCampaign(data));
+    let data = { ...values, images: newData, cTargets: cTarget };
+    console.log(data);
+    data.endDate = selectedDate.toISOString().split(".")[0];
+    dispatch(postCampaign(data));
   };
 
   useEffect(() => {
-    if(categories.length === 0){
+    if (categories.length === 0) {
       dispatch(getFurnitureCategory());
     }
-  },[])
+  }, []);
   return (
     <div>
       <Snackbar
@@ -114,14 +111,12 @@ export default function ProductsCampaign() {
 
             <div className="product-field">
               <label htmlFor="p-categoryId">Category</label>
-              
+
               <Select
-    
                 id="p-categoryId"
                 defaultValue=""
-                onChange={(e, val) =>{
-                  setValues({ ...values, categoryId: e.target.value })
-                  
+                onChange={(e, val) => {
+                  setValues({ ...values, categoryId: e.target.value });
                 }}
               >
                 {categories.map((i) => (
@@ -151,11 +146,11 @@ export default function ProductsCampaign() {
               </MuiPickersUtilsProvider>
             </div>
             <div className="product-field">
-                <SetDrawer cTarget={cTarget} setCTarget={setCTarget} />
+              <SetDrawer cTarget={cTarget} setCTarget={setCTarget} />
             </div>
           </div>
           <div className="add-product-right">
-            <SelectImage images={images} setImages={setImages}/>
+            <SelectImage images={images} setImages={setImages} />
             <button type="submit" onClick={handleClick}>
               Create
             </button>
