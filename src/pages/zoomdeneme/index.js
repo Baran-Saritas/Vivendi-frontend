@@ -44,22 +44,13 @@ export default function ZoomDeneme() {
   };
 
   return (
-    <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open dialog
-      </Button>
-      <Dialog fullScreen={fullScreen} open={open} onClose={handleClose}>
-        <DialogTitle>Dialog</DialogTitle>
-        <DialogContent>
-          <DialogContentText>lorem ipsum</DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary" autoFocus>
-            ok
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+    
+<div>
+<div style={{width:"300px",height:"200px"}}>
+  
+<ReactImageZoom {...props} />
+</div>
+</div>
   );
 }
 

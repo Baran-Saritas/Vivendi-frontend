@@ -37,9 +37,7 @@ const CustomCard = ({ value }) => {
       initial="closed"
       whileHover="open"
 
-      onClick={() => {
-        navigate(`/products/detail/${value.id}`);
-      }}
+
       style={{
         display: "flex",
         flexDirection: "column",
@@ -55,6 +53,9 @@ const CustomCard = ({ value }) => {
         style={{ height: "350px", width: "100%", overflow: "hidden" }}
       >
         <img
+              onClick={() => {
+                navigate(`/products/detail/${value.id}`);
+              }}
           animate={isHover ? { scale: 1.05 } : ""}
           style={{
             height: "100%",
