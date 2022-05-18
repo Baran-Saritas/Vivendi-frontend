@@ -5,6 +5,7 @@ import { CgShoppingBag } from "react-icons/cg";
 import { AiOutlineHeart } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/productCart/productCartSlice";
+import { useNavigate } from "react-router-dom";
 const variant = {
   open: {},
   closed: {},
@@ -20,6 +21,7 @@ const item = {
   },
 };
 const CustomCard = ({ value }) => {
+  const navigate = useNavigate();
   const [isHover, setIsHover] = useState(false);
   const [image, setImage] = useState(null);
   const [activeImage, setActiveImage] = useState("");
@@ -28,11 +30,16 @@ const CustomCard = ({ value }) => {
       setActiveImage(value.images[0].imageSource);
     }
   }, [value]);
+
   return (
     <motion.div
       variants={variant}
       initial="closed"
       whileHover="open"
+
+      onClick={() => {
+        navigate(`/products/detail/${value.id}`);
+      }}
       style={{
         display: "flex",
         flexDirection: "column",

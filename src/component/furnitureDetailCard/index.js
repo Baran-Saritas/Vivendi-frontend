@@ -14,12 +14,12 @@ import {
 import { setGlob } from "../../store/global/globalSlice";
 
 const FurnitureDetailCard = ({ furnitures }) => {
+  const dispatch = useDispatch();
   const { pd_active } = useSelector((state) => state.global);
-  const [activeImage, setActiveImage] = useState("");
+  const theme = useTheme();
   useEffect(() => {
-    if (furnitures?.images?.length) {
-      console.log("F : ", furnitures);
-      setActiveImage(furnitures.images[0].imageSource);
+    if (furnitures?.images !== undefined) {
+      dispatch(setGlob(["pd_active", furnitures?.images[0]?.imageSource]));
     }
   }, [furnitures]);
   return (
@@ -36,7 +36,7 @@ const FurnitureDetailCard = ({ furnitures }) => {
         className="FurnitureDetailCardLeft"
         style={{ width: "55%", height: "300px" }}
       >
-        <img style={{ width: "100%" }} src={activeImage} alt="" />
+        <img style={{ width: "100%" }} src={pd_active} alt="" />
       </div>
 
       <Box
@@ -69,10 +69,9 @@ const FurnitureDetailCard = ({ furnitures }) => {
             marginTop: "20px",
           }}
         >
-          {furnitures?.images?.map((values, i) => {
+          {furnitures?.images?.map((values) => {
             return (
               <div
-                key={i}
                 style={{
                   width: "32px",
                   height: "32px",
@@ -80,7 +79,7 @@ const FurnitureDetailCard = ({ furnitures }) => {
                   borderRadius: "50%",
                   backgroundColor: values.color,
                 }}
-                onMouseEnter={() => setActiveImage(values.imageSource)}
+                
               />
             );
           })}
