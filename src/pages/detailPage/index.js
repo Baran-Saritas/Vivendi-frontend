@@ -51,7 +51,7 @@ const DetailPage = () => {
             className="detail-product-right-side"
             style={{
               width: "30%",
-              padding: "40px 0px 0px 20px",
+              padding: "0px 0px 0px 20px",
               backgroundColor: "white",
             }}
           >

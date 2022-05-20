@@ -1,14 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
 import CategoryCarousel from "../mainCarousel";
 import CustomCarousel from "../carousel";
+import ReactImageZoom from "react-image-zoom";
 import DetailCarousel from "../detailCarousel";
 import { useDispatch, useSelector } from "react-redux";
 import { setGlob } from "../../store/global/globalSlice";
+import Zoom from "react-img-zoom";
 
 const ZoomProduct = ({ furnitures }) => {
   const dispatch = useDispatch();
   const [images, setImages] = useState([]);
   const { pd_active } = useSelector((state) => state.global);
+
+  const props = {
+    width: 1000,
+    height: 450,
+    zoomPosition: "original",
+    zoomWidth: 1000,
+    img: `${pd_active}`,
+  };
 
   useEffect(() => {
     if (furnitures?.images !== undefined) {
@@ -25,9 +35,15 @@ const ZoomProduct = ({ furnitures }) => {
       >
         <div
           className="img-div-detail"
-          style={{ width: "93%", height: "450px", overflow: "hidden" }}
+          style={{
+            width: "100%",
+            height: "450px",
+            overflow: "hidden",
+            justifyContent: "center",
+            display: "flex",
+          }}
         >
-          <img style={{ maxWidth: "100%" }} src={pd_active} alt="" />
+          <img style={{ maxWidth: "90%",height:"100%", objectFit:"contain" }} src={pd_active} alt="" />
         </div>
       </div>
 

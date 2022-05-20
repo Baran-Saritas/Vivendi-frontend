@@ -14,7 +14,7 @@ import { useParams } from "react-router-dom";
 import { getFurnitureById } from "../../store/furniture/furnitureSlice";
 import SetImageTable from "../../component/setImages";
 import { getFurnitureSetById } from "../../store/furnitureSetInfo/furnitureSetInfoSlice";
-
+import { setGlob } from "../../store/global/globalSlice";
 const SetDetailPage = () => {
   const { set_id } = useParams();
   const { setInfosOnHover } = useSelector((state) => state.setInfo);
@@ -30,6 +30,7 @@ const SetDetailPage = () => {
   return (
     <div style={{ backgroundColor: "#f2f2f2 !important" }}>
       <div style={{ display: "flex", padding: "30px 10px 10px 0px" }}>
+      <div className="product-all-detail">
         <div
           style={{
             width: "68%",
@@ -40,115 +41,140 @@ const SetDetailPage = () => {
           <SetImageTable set={setInfosOnHover} />
         </div>
 
-        <Box
-          sx={{
-            width: "30%",
-            padding: "40px 0px 0px 20px",
-            backgroundColor: "white",
-          }}
-        >
-          <Typography
-            component="div"
-            variant="h4"
-            sx={{
-              fontSize: "2.25rem",
-              lineHeight: "2.5rem",
-              fontWeight: "100",
-              color: "#444",
-              margin: "5px 0px 0px 10px",
-            }}
-          >
-            {setInfosOnHover.setInfoName}
-          </Typography>
-
-          <Typography
-            component="div"
-            variant="h7"
-            sx={{
-              fontWeight: "500",
-              color: "#838383",
-              margin: "10px 0px 0px 10px",
-            }}
-          >
-            Product Code: {setInfosOnHover.categoryId}
-          </Typography>
-
-          <Typography
-            component="div"
-            variant="h4"
-            sx={{
-              color: "#444",
-              fontFamily: "Roboto arial sans-serif",
-              margin: "10px 0px 0px 10px",
-              fontSize: "2.25rem",
-              lineHeight: "2.5rem",
-              fontWeight: "100",
-            }}
-          >
-            $ {setInfosOnHover.price}
-          </Typography>
-
-          <div
+        <div
+            className="detail-product-right-side"
             style={{
-              width: "100%",
-              padding: "10px",
-              display: "flex",
-              columnGap: "10px",
-              marginTop: "20px",
+              width: "30%",
+              padding: "40px 0px 0px 20px",
+              backgroundColor: "white",
             }}
           >
-            {setInfosOnHover?.images?.map((values) => {
-              return (
-                <div
-                  style={{
-                    width: "32px",
-                    height: "32px",
-                    overflow: "hidden",
-                    borderRadius: "50%",
-                    backgroundColor: values.color,
-                  }}
-                />
-              );
-            })}
-          </div>
+            <Typography
+              component="div"
+              variant="h4"
+              sx={{
+                fontSize: "2.25rem",
+                lineHeight: "2.5rem",
+                fontWeight: "100",
+                color: "#444",
+                margin: "5px 0px 0px 10px",
+              }}
+            >
+             {setInfosOnHover.setInfoName}
+            </Typography>
 
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              margin: "15% 0px 0px 10px",
-              alignItems: "center",
-            }}
-          >
+            <Typography
+              component="div"
+              variant="h7"
+              sx={{
+                fontWeight: "500",
+                color: "#838383",
+                margin: "10px 0px 0px 10px",
+              }}
+            >
+              Product Code: {setInfosOnHover.categoryId}
+            </Typography>
+
+            <Typography
+              component="div"
+              variant="h4"
+              sx={{
+                color: "#444",
+                fontFamily: "Roboto arial sans-serif",
+                margin: "10px 0px 0px 10px",
+                fontSize: "2.25rem",
+                lineHeight: "2.5rem",
+                fontWeight: "100",
+              }}
+            >
+              $ {setInfosOnHover.price}
+            </Typography>
+
+            <div
+              style={{
+                width: "100%",
+                padding: "10px",
+                display: "flex",
+                columnGap: "10px",
+                marginTop: "20px",
+              }}
+            >
+                {setInfosOnHover?.images?.map((values) => {
+                return (
+                  <div
+                    style={{
+                      width: "32px",
+                      height: "32px",
+                      overflow: "hidden",
+                      borderRadius: "50%",
+                      backgroundColor: values.color,
+                    }}
+                    onMouseEnter={() =>
+                      dispatch(setGlob(["pd_active", values.imageSource]))
+                    }
+                  />
+                );
+              })}
+            </div>
+
             <Box
               sx={{
                 display: "flex",
-                border: 1,
-                borderColor: "grey",
-                width: "165px",
-                height: "63px",
+                flexDirection: "row",
+                margin: "5% 0px 0px 10px",
                 alignItems: "center",
-                borderRadius: 10,
-                justifyContent: "space-between",
               }}
             >
-              <IconButton size="large">
-                {" "}
-                <AiOutlineMinus />{" "}
-              </IconButton>
-              <h3>0</h3>
-              <IconButton size="large">
-                {" "}
-                <AiOutlinePlus />{" "}
-              </IconButton>
+              <Box
+                sx={{
+                  display: "flex",
+                  border: 1,
+                  borderColor: "grey",
+                  width: "165px",
+                  height: "63px",
+                  alignItems: "center",
+                  borderRadius: 10,
+                  justifyContent: "space-between",
+                }}
+              >
+                <IconButton size="large">
+                  {" "}
+                  <AiOutlineMinus />{" "}
+                </IconButton>
+                <h3>0</h3>
+                <IconButton size="large">
+                  {" "}
+                  <AiOutlinePlus />{" "}
+                </IconButton>
+              </Box>
+
+              <Box
+                sx={{
+                  marginLeft: "10%",
+                }}
+              >
+                <Button style={{ padding: "18px" }} variant="outlined">
+                  {" "}
+                  Add to Cart
+                </Button>
+                {/*
+                addFavorites == true ? (
+                  <AiFillHeart size={50} style={{ color: "red" }} onClick={() => setaddFavorites(!addFavorites)} />) : (
+                  <AiOutlineHeart size={50} onClick={() => setaddFavorites(!addFavorites)} />)
+                  */}
+              </Box>
             </Box>
-            <Box
-              sx={{
-                marginLeft: "15%",
-              }}
-            ></Box>
-          </Box>
-        </Box>
+
+            {/*<Typography component="div" variant="h5" sx={{
+            fontWeight: "100",
+            color: "#444",
+            margin: "20px 0px 0px 10px"
+          }}>
+            Stock Count: 0
+          </Typography>  */}
+          </div>
+
+      </div>
       </div>
 
       <Box

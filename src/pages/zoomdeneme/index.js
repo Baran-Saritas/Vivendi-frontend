@@ -8,7 +8,7 @@ import { Drawer } from "@mui/material";
 import { Box } from "@mui/system";
 import {IoIosMenu,IoMdClose} from "react-icons/io"
 
-
+import Zoom from 'react-img-zoom'
 
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -29,7 +29,7 @@ export default function ZoomDeneme() {
     height: 250,
     zoomPosition: "original",
     zoomWidth: 400,
-    img: "http://malaman.github.io/react-image-zoom/example/1.jpg",
+    img: "https://s3.us-west-1.amazonaws.com/vivendi-image/31edcce5-9a60-4b93-9d1d-9c6663c229d3.png",
   };
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
@@ -46,9 +46,14 @@ export default function ZoomDeneme() {
   return (
     
 <div>
-<div style={{width:"300px",height:"200px"}}>
-  
-<ReactImageZoom {...props} />
+<div style={{width:"100%",height:"400px",justifyContent:"center",display:"flex",overflow:"hidden"}}>
+<Zoom
+  img="https://s3.us-west-1.amazonaws.com/vivendi-image/31edcce5-9a60-4b93-9d1d-9c6663c229d3.png"
+  zoomScale={3}
+  width={1000}
+  height={600}
+/>
+{/* <ReactImageZoom {...props} /> */}
 </div>
 </div>
   );
