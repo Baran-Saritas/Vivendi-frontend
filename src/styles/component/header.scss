@@ -203,6 +203,12 @@
   }
 }
 @media (max-width:1000px) {
+.header-util{
+  justify-content: right !important;
+}
+  .header-search{
+    display: none !important;
+  }
 .hamburger-menu{
   display: block !important;
 }
