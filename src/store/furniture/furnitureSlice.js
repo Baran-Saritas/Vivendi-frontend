@@ -108,6 +108,7 @@ const postFurniture = createAsyncThunk(
 const initialState = {
   isLoading: false,
   furnitures: [],
+  furniture: null,
   furnitureOnHover: [],
   error: null,
 };
@@ -142,7 +143,7 @@ export const FurnitureSlice = createSlice({
       console.log("Furniture err : ", action.payload);
     },
     [getFurnitureById.fulfilled]: (state, action) => {
-      state.furnitures = action.payload;
+      state.furniture = action.payload;
     },
     [getFurnitureById.rejected]: (state, action) => {
       console.log("Furniture err : ", action.payload);
