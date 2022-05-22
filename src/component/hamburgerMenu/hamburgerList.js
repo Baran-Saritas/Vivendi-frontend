@@ -28,7 +28,7 @@ export default function HamburgerList({ setState, setIsSelect }) {
     <div>
       <Divider />
       <div
-        style={{ marginTop: "15px", justifyContent: "center", display: "flex" }}
+        style={{ marginTop: "200px", justifyContent: "center", display: "flex" }}
       >
         <List
           onMouseLeave={() => setIsSelect(0)}
