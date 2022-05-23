@@ -82,6 +82,7 @@ export default function ProductsCampaign() {
   useEffect(() => {
     if(categories.length === 0){
       dispatch(getFurnitureCategory());
+      dispatch(getFurniture());
     }
   },[])
   return (

@@ -29,7 +29,7 @@ export default function Product() {
   const reload = () => {
     setTimeout(function() {
     window.location.reload();
-  }, 3000);
+  }, 6000);
   }
   const handleClick = () => {
     if (!values.name) {
@@ -81,7 +81,7 @@ export default function Product() {
     });
     let data = { ...values, images: newData, price: parseFloat(values.price) };
     dispatch(postFurniture(data));
-    reload();
+   // reload();
   };
 
 

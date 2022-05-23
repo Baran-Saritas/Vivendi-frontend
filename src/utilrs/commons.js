@@ -6,4 +6,6 @@ const compareDiff = (obj1, obj2) => {
   return newObj;
 };
 
-export { compareDiff };
+const money = (v) => v.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
+
+export { compareDiff, money };

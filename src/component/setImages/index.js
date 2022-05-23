@@ -20,12 +20,12 @@ const SetImageTable = ({ set }) => {
   return (
     <div>
       <div
-        className="xyz"
+        className="img-detail-side"
         style={{ width: "100%", display: "flex", justifyContent: "center" }}
       >
         <div
-          className="asd"
-          style={{ width: "93%", height: "500px", overflow: "hidden" }}
+          className="img-div-detail"
+          style={{ width: "93%", height: "450px", overflow: "hidden" }}
         >
           <img style={{ maxWidth: "100%" }} src={pd_active} alt="" />
         </div>
