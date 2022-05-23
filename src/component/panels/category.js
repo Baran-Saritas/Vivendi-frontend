@@ -1,9 +1,10 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import * as React from "react";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Category from "../../pages/category";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -34,7 +35,7 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
+    "aria-controls": `vertical-tabpanel-${index}`,
   };
 }
 
@@ -45,37 +46,5 @@ export default function CategoryPanel() {
     setValue(newValue);
   };
 
-  return (
-    <Box
-      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex',height:"100%" }}
-    >
-      <Tabs
-        orientation="vertical"
-        variant="scrollable"
-        value={value}
-        onChange={handleChange}
-        aria-label="Vertical category tabs"
-        sx={{ borderRight: 1, borderColor: 'divider' }}
-      >
-        <Tab label="Add Category" {...a11yProps(0)} />
-        <Tab label="Update Category" {...a11yProps(1)} />
-        <Tab label="Delete Category" {...a11yProps(2)} />
-        <Tab label="View Category" {...a11yProps(3)} />
-
-      </Tabs>
-      <TabPanel value={value} index={0}>
-        Item One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        Item Four
-      </TabPanel>
-
-    </Box>
-  );
+  return <Category />;
 }
