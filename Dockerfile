@@ -13,8 +13,7 @@ COPY package-lock.json ./
 # add app
 COPY . ./
 
-RUN npm install --force
-
+RUN npm --verbose install
 
 # start app
 CMD ["npm", "start"]
