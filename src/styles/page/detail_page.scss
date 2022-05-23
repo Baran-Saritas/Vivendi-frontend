@@ -155,6 +155,7 @@
               color: #444;
               font-weight: 500;
               margin: 0 0 0 4px;
+              font-size: 16px !important;
             }
           }
           .product-detail-card-price {
@@ -188,13 +189,14 @@
   }
   .product-down {
     .product-down-card {
+      width: 100% !important;
       .product-detail-card {
         .furniture-detail-card-right {
           .product-detail-card-prop {
             flex-direction: column;
             row-gap: 10px;
             & > p {
-            font-size: 14px !important;
+            //font-size: 14px !important;
             }
           }
           .product-detail-card-price {
@@ -228,6 +230,7 @@
 @media (max-width: 800px) {
   .product-down {
     .product-down-card {
+    width: 100% !important;
       .product-detail-card {
         flex-direction: column;
         .furniture-detail-card-right {
@@ -236,7 +239,7 @@
             flex-direction: column;
             row-gap: 10px;
             & > p {
-            font-size: 14px !important;
+            //font-size: 14px !important;
             }
           }
           .product-detail-card-price {
@@ -261,7 +264,6 @@
 @media (max-width: 700px) {
   .product-down {
     .product-down-card {
-      width: 100%;
       .product-detail-card {
         flex-direction: column;
         .furniture-detail-card-right {
@@ -270,7 +272,7 @@
             flex-direction: column;
             row-gap: 10px;
             & > p {
-            font-size: 14px !important;
+            //font-size: 14px !important;
             }
           }
           .product-detail-card-price {
