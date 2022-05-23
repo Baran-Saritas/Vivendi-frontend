@@ -204,11 +204,27 @@
   }
 }
 @media (max-width:1000px) {
+.header-util{
+  justify-content: right !important;
+}
+ .header-search{
+    display: none !important;
+}
+.header{
+  z-index: 1201 !important;
+}
 .hamburger-menu{
+  margin-top: auto;
   display: block !important;
 }
 .large-menu{
   display: none !important;
+}
+
+@media (max-width:400px) {
+.hamburger-list-width{
+  width: 80% !important;
+}
 }
 
 

@@ -75,9 +75,9 @@ const CustomHeader = () => {
           <div
             style={{ marginLeft: "10px" }}
             className="dialog-item-2"
-            onClick={() => toggleDrawer(true)}
           >
-            {state === true ? <IoMdClose size={50} /> : <IoIosMenu size={50} />}
+            {state === true ? <IoMdClose size={45} onClick={() => {setState(false)}} /> : <IoIosMenu size={50} 
+            onClick={() => toggleDrawer(true)} />}
           </div>
           <div className="furnitureDrawer"></div>
           <Drawer
@@ -92,6 +92,7 @@ const CustomHeader = () => {
             onClose={() => toggleDrawer(false)}
           >
             <Box
+            className="hamburger-list-width"
               PaperProps={{
                 sx: { width: "100%" },
               }}

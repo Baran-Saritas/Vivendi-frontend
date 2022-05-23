@@ -4,21 +4,44 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Checkbox from "@mui/material/Checkbox";
-import { Button, Divider, fabClasses, Typography } from "@mui/material";
+import { getFurnitureCategory } from "../../store/furnitureCategory/furnitureCategorySlice";
+import {
+  Autocomplete,
+  Button,
+  Divider,
+  fabClasses,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useSelector,useDispatch } from "react-redux";
 
 export default function HamburgerList({ setState, setIsSelect }) {
+  const { categories } = useSelector((state) => state.category);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    dispatch(getFurnitureCategory());
+  },[])
   return (
     <div>
       <Divider />
       <div
-        style={{ marginTop: "15px", justifyContent: "center", display: "flex" }}
+        style={{ marginTop: "200px", justifyContent: "center", display: "flex" }}
       >
         <List
           onMouseLeave={() => setIsSelect(0)}
           sx={{ width: "100%", maxWidth: 350, bgcolor: "background.paper" }}
         >
+          <Autocomplete
+            id="free-solo-demo"
+            freeSolo
+            sx={{}}
+            renderInput={(params) => (
+              <TextField {...params} label="Seacrh Furniture" />
+            )}
+          />
           <ListItem
             sx={{
               margin: "10px 0px 10px 0px",
@@ -32,14 +55,17 @@ export default function HamburgerList({ setState, setIsSelect }) {
                 primary={
                   <Typography
                     variant="h6"
-                    style={{ color: "rgba(0,0,0,.9)", fontSize: "26px",textAlign:"center" }}
+                    style={{
+                      color: "rgba(0,0,0,.9)",
+                      fontSize: "26px",
+                      textAlign: "center",
+                    }}
                   >
                     Products Menu
                   </Typography>
                 }
               />
             </ListItemButton>
-      
           </ListItem>
           <Divider />
           <ListItem

@@ -8,6 +8,45 @@ import { getCampaignOfCategory } from "../../store/campaign/campaignSlice";
 const CategoryCarousel = () => {
   const [open, setOpen] = useState("false");
   const dispatch = useDispatch();
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 2,
+    swipeToSlide: true,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1424,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 2,
+        }
+      },
+      {
+        breakpoint: 1000,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 650,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
   return (
     <div className="test">
       <StoryDialog open={open} setOpen={setOpen} />

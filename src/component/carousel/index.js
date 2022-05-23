@@ -31,7 +31,7 @@ const CustomCarousel = ({ speed, autoplaySpeed }) => {
     slidesToShow: 1,
     swipeToSlide: true,
     autoplay: true,
-    speed: speed || 5000,
+    speed: 500,
     autoplaySpeed: autoplaySpeed || 4000,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
