@@ -12,7 +12,7 @@ import AddSet from "./AddSet";
 import EditSet from "./EditSet";
 import DeleteSet from "./DeleteSet";
 
-export default function SetInfo() {
+export default function Set() {
   const [addOpen, setAddOpen] = React.useState(false);
   const [editOpen, setEditOpen] = React.useState(false);
   const [deleteOpen, setDeleteOpen] = React.useState("");

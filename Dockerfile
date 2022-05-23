@@ -10,10 +10,11 @@ COPY package.json ./
 
 COPY package-lock.json ./
 
-RUN npm install
-
 # add app
 COPY . ./
+
+RUN npm install --force
+
 
 # start app
 CMD ["npm", "start"]
