@@ -1,58 +1,57 @@
 import React, { useEffect, useRef, useState } from "react";
-import CategoryCarousel from "../mainCarousel";
-import CustomCarousel from "../carousel";
-import ReactImageZoom from "react-image-zoom";
 import DetailCarousel from "../detailCarousel";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setGlob } from "../../store/global/globalSlice";
-import Zoom from "react-img-zoom";
+import { Zoom } from "swiper";
 
-const ZoomProduct = ({ furnitures }) => {
-  const dispatch = useDispatch();
+const ZoomProduct = ({ furniture, activeImage, setActiveImage }) => {
   const [images, setImages] = useState([]);
-  const { pd_active } = useSelector((state) => state.global);
-
-  const props = {
-    width: 1000,
-    height: 450,
-    zoomPosition: "original",
-    zoomWidth: 1000,
-    img: `${pd_active}`,
-  };
+  const ref = useRef(null);
+  const imgRef = useRef(null);
 
   useEffect(() => {
-    if (furnitures?.images !== undefined) {
-      setImages(furnitures.images);
-      dispatch(setGlob(["pd_active", furnitures?.images[0]?.imageSource]));
-    }
-  }, [furnitures]);
+    setImages(furniture.images);
+  }, [furniture]);
 
+  useEffect(() => {
+    let a = ref.current;
+    function onZoom(e) {
+      const x = e.offsetX - e.target.offsetLeft;
+      const y = e.offsetY - e.target.offsetTop;
+      imgRef.current.style.transition = "none";
+      imgRef.current.style.transformOrigin = `${x}px ${y}px`;
+      imgRef.current.style.transform =
+        window.innerWidth < 900 ? "scale(1.3)" : "scale(1.8)";
+    }
+    function offZoom(e) {
+      let res = e.target.getElementsByTagName("img")[0];
+      res.style.transformOrigin = `center center`;
+      res.style.transition = "all .2s ease";
+      res.style.transform = "scale(1)";
+    }
+    a.addEventListener("mousemove", onZoom);
+    a.addEventListener("mouseover", onZoom);
+    a.addEventListener("mouseleave", offZoom);
+    return () => {
+      a.removeEventListener("mousemove", onZoom);
+      a.removeEventListener("mouseover", onZoom);
+      a.removeEventListener("mouseleave", offZoom);
+    };
+  }, [ref, imgRef]);
   return (
-    <div>
-      <div
-        className="img-detail-side"
-        style={{ width: "100%", display: "flex", justifyContent: "center" }}
-      >
-        <div
-          className="img-div-detail"
-          style={{
-            width: "100%",
-            height: "450px",
-            overflow: "hidden",
-            justifyContent: "center",
-            display: "flex",
-          }}
-        >
-          <img style={{ maxWidth: "90%",height:"100%", objectFit:"contain" }} src={pd_active} alt="" />
-        </div>
+    <>
+      <div className="img-detail-side" ref={ref}>
+        <img ref={imgRef} src={activeImage} alt={furniture.name} />
       </div>
 
       <div className="DetailCarousel-div">
         <div className="DCarousel-div">
-          {images.length > 0 ? <DetailCarousel images={images} /> : null}
+          {images.length > 1 ? (
+            <DetailCarousel setActiveImage={setActiveImage} images={images} />
+          ) : null}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -35,6 +35,7 @@ const CustomHeader = () => {
       <div className="header-top">
         <div className="header-logo">
           <img
+            style={{ cursor: "pointer" }}
             onClick={() => {
               navigate("/");
             }}
