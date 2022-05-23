@@ -18,6 +18,7 @@ import { useSelector,useDispatch } from "react-redux";
 
 export default function HamburgerList({ setState, setIsSelect }) {
   const { categories } = useSelector((state) => state.category);
+  const { furnitures } = useSelector((state) => state.furniture);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -37,7 +38,7 @@ export default function HamburgerList({ setState, setIsSelect }) {
           <Autocomplete
             id="free-solo-demo"
             freeSolo
-            sx={{}}
+            options={furnitures?.map((option) => option.name)}
             renderInput={(params) => (
               <TextField {...params} label="Seacrh Furniture" />
             )}
