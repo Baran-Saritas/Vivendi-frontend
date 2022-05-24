@@ -63,6 +63,11 @@ const furnitureCategorySlice = createSlice({
   name: "furnitureCategory",
   initialState,
   reducers: {
+    removeCategory: (state, { payload }) => {
+      if (payload.id) {
+        state.categories = state.categories.filter((i) => !i.id);
+      }
+    },
     /**
      * Assign the project to an employee.
      * @param {string} furnitureCategory.categoryName
@@ -105,7 +110,8 @@ const furnitureCategorySlice = createSlice({
   },
 });
 
-export const { getFurnitureCategoryById } = furnitureCategorySlice.actions;
+export const { getFurnitureCategoryById, removeCategory } =
+  furnitureCategorySlice.actions;
 export {
   getFurnitureCategory,
   postFurnitureCategory,

@@ -1,10 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { furniture_api } from "../../utilrs/axiosInterceptors";
+import { furniture_api, product_api } from "../../utilrs/axiosInterceptors";
+import { setFullFilled } from "../global/globalSlice";
 
 const getFurniture = createAsyncThunk(
   "furniture/getAll",
   async (_, { rejectWithValue }) => {
-    const res = await furniture_api.get("/");
+    const res = await product_api.get("/furniture");
+    //const res = await furniture_api.get("/");
     if (res.status === 200) {
       return res.data;
     } else {
@@ -20,6 +22,18 @@ const getFurnitureTop5 = createAsyncThunk(
       return res.data;
     } else {
       rejectWithValue(res.data);
+    }
+  }
+);
+
+const deleteImage = createAsyncThunk(
+  "furniture/deleteImage",
+  async (id, { rejectWithValue }) => {
+    let set_res = await product_api.delete("/furniture/image/" + id);
+    if (set_res.status === 200) {
+      return set_res.data;
+    } else {
+      rejectWithValue(set_res.data);
     }
   }
 );
@@ -72,8 +86,10 @@ const getFurnitureById = createAsyncThunk(
 const deleteFurniture = createAsyncThunk(
   "furniture/delete",
   async (id, { rejectWithValue, dispatch }) => {
-    let furniture_res = await furniture_api.delete("/" + id);
+    let furniture_res = await product_api.delete("/furniture/" + id);
+    //let furniture_res = await furniture_api.delete("/" + id);
     if (furniture_res.status === 200) {
+      dispatch(setFullFilled({ value: true }));
       return furniture_res.data;
     } else {
       rejectWithValue(furniture_res.data);
@@ -96,7 +112,8 @@ const updateFurnitures = createAsyncThunk(
 const postFurniture = createAsyncThunk(
   "furniture/add",
   async (data, { rejectWithValue, dispatch }) => {
-    let furniture_res = await furniture_api.post("/", data);
+    //let furniture_res = await furniture_api.post("/", data);
+    let furniture_res = await product_api.post("/furniture", data);
     if (furniture_res.status === 200) {
       return furniture_res.data;
     } else {
@@ -116,7 +133,13 @@ const initialState = {
 export const FurnitureSlice = createSlice({
   name: "furniture",
   initialState,
-  reducers: {},
+  reducers: {
+    removeFurniture: (state, { payload }) => {
+      if (payload.id) {
+        state.furnitures = state.furnitures.filter((i) => i !== i.id);
+      }
+    },
+  },
   extraReducers: {
     [getFurnitureBySetId.fulfilled]: (state, action) => {
       state.furnitures = action.payload;
@@ -166,6 +189,12 @@ export const FurnitureSlice = createSlice({
     [deleteFurniture.rejected]: (state, action) => {
       console.log("Furniture err : ", action.payload);
     },
+    [deleteImage.fulfilled]: (state, action) => {
+      console.log("IMAGE DELETED");
+    },
+    [deleteImage.rejected]: (state, action) => {
+      console.log(action);
+    },
   },
 });
 
@@ -179,6 +208,8 @@ export {
   getFurnitureByCategoryId,
   getFurnitureByCategoryIdOnHover,
   getFurnitureBySetId,
+  deleteImage,
 };
 
+export const { removeFurniture } = FurnitureSlice.actions;
 export default FurnitureSlice.reducer;

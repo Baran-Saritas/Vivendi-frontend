@@ -10,6 +10,7 @@ import ProductsCampaign from "../pages/campaign";
 import Base from "../pages/panel";
 import SetDetailPage from "../pages/setDetailPage";
 import ZoomDeneme from "../pages/zoomdeneme";
+import NotFound from "../component/Results/NotFound";
 export const useCustomRoutes = () => {
   return [
     {
@@ -54,15 +55,15 @@ export const useCustomRoutes = () => {
     },
     {
       path: "/panel/campaign",
-      element: <ProductsCampaign/>,
+      element: <ProductsCampaign />,
     },
     {
       path: "/panel/base",
-      element: <Base/>,
+      element: <Base />,
     },
     {
       path: "*",
-      element: <div>Page Not Found</div>,
+      element: <NotFound />,
     },
   ];
 };

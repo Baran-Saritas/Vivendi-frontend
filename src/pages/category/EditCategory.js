@@ -15,13 +15,13 @@ export default function EditCategory({ setOpenMessage, open, setOpen }) {
   const dispatch = useDispatch();
   const { fullfilled } = useSelector((state) => state.global);
   const [images, setImages] = React.useState([]);
-  const [categoryName, setCategoryName] = React.useState("");
+  const [name, setName] = React.useState("");
   const handleOk = async (e) => {
     let data = {};
-    if (open.categoryName !== categoryName) {
-      data.categoryName = categoryName;
+    if (open.name !== name) {
+      data.name = name;
     }
-    if (!categoryName) {
+    if (!name) {
       setOpenMessage("Please fill category name!");
       return;
     }
@@ -33,7 +33,7 @@ export default function EditCategory({ setOpenMessage, open, setOpen }) {
     if (editImages.length) {
       data.images = editImages;
     }
-    dispatch(updateFurnitureCategory({id: open.id, data }));
+    dispatch(updateFurnitureCategory({ id: open.id, data }));
   };
   const handleClose = (_, r) => {
     if (r !== "backdropClick") {
@@ -43,7 +43,7 @@ export default function EditCategory({ setOpenMessage, open, setOpen }) {
   useEffect(() => {
     if (open) {
       setImages(open.images);
-      setCategoryName(open.categoryName);
+      setName(open.name);
     }
   }, [open]);
   useEffect(() => {
@@ -65,8 +65,8 @@ export default function EditCategory({ setOpenMessage, open, setOpen }) {
         <DialogTitle className="ae-dialog-title">Edit Category</DialogTitle>
         <DialogContent className="ae-dialog-content">
           <TextField
-            value={categoryName}
-            onChange={(e) => setCategoryName(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             autoFocus
             margin="dense"
             id="name"

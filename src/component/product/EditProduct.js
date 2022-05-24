@@ -8,34 +8,45 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useDispatch, useSelector } from "react-redux";
 import { setFullFilled } from "../../store/global/globalSlice";
-import { postFurnitureCategory } from "../../store/furnitureCategory/furnitureCategorySlice";
-import SelectImage from "../../component/SelectImage/SelectImage";
+import SelectImage from "../SelectImage/SelectImage";
+import { updateFurnitureCategory } from "../../store/furnitureCategory/furnitureCategorySlice";
+import { deleteImage } from "../../store/furniture/furnitureSlice";
 
-export default function AddCategory({ setOpenMessage, open, setOpen }) {
+export default function EditProduct({ setOpenMessage, open, setOpen }) {
   const dispatch = useDispatch();
   const { fullfilled } = useSelector((state) => state.global);
   const [images, setImages] = React.useState([]);
   const [name, setName] = React.useState("");
   const handleOk = async (e) => {
+    let data = {};
+    if (open.name !== name) {
+      data.name = name;
+    }
     if (!name) {
       setOpenMessage("Please fill category name!");
       return;
     }
-    if (images.length < 1) {
-      setOpenMessage("Please select one image!");
-      return;
+    let editImages = [];
+    images.forEach((i) => {
+      let res = open.images.find((j) => j.id === i.id);
+      if (res?.color !== i.color) editImages.push(i);
+    });
+    if (editImages.length) {
+      data.images = editImages;
     }
-    if (images.filter((i) => !i.color).length) {
-      setOpenMessage("Please select image color!");
-      return;
-    }
-    dispatch(postFurnitureCategory({ name, images }));
+    dispatch(updateFurnitureCategory({ id: open.id, data }));
   };
   const handleClose = (_, r) => {
     if (r !== "backdropClick") {
-      setOpen(false);
+      setOpen("");
     }
   };
+  useEffect(() => {
+    if (open) {
+      setImages(open.images);
+      setName(open.name);
+    }
+  }, [open]);
   useEffect(() => {
     if (fullfilled) {
       setOpen(false);
@@ -48,11 +59,11 @@ export default function AddCategory({ setOpenMessage, open, setOpen }) {
         fullWidth
         maxWidth="sm"
         style={{ backgroundColor: "transparent" }}
-        open={open}
+        open={Boolean(open)}
         onClose={handleClose}
         className="ae-dialog"
       >
-        <DialogTitle className="ae-dialog-title">Add Category</DialogTitle>
+        <DialogTitle className="ae-dialog-title">Edit Category</DialogTitle>
         <DialogContent className="ae-dialog-content">
           <TextField
             value={name}
@@ -60,18 +71,22 @@ export default function AddCategory({ setOpenMessage, open, setOpen }) {
             autoFocus
             margin="dense"
             id="name"
-            label="Category name..."
+            label="Category name"
             type="text"
             fullWidth
             variant="standard"
           />
           <div className="c-add-edit-images">
-            <SelectImage images={images} setImages={setImages} />
+            <SelectImage
+              deleteImage={deleteImage}
+              images={images}
+              setImages={setImages}
+            />
           </div>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleOk}>OK</Button>
-          <Button onClick={() => setOpen(false)}>CANCEL</Button>
+          <Button onClick={() => setOpen("")}>CANCEL</Button>
         </DialogActions>
       </Dialog>
     </div>
