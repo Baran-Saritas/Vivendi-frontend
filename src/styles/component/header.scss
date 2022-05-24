@@ -229,19 +229,32 @@
 
 
 }
+.search-all-result{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+
+}
+.search-result-set{
+  width: 30% !important;
+}
 .search-result-container {
-  z-index: 30;
+  width: 90%;
   position: absolute;
   padding: 20px;
   row-gap: 10px;
-  overflow: hidden;
+  
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   .result {
-    margin: 0;
+    margin: 10px;
+    display: flex;
+    justify-content: left;
+    font-family: 'FS Meridian Medium',sans-serif !important;
     text-align: center;
-    text-decoration: underline;
+    text-decoration: none;
   }
 .search-result{
  $card_width : 225px;
@@ -250,14 +263,7 @@
  $card_medium:22;
  $card_large:33;
 
- .search-all-result{
-   width: 100%;
-   display: flex;
-   flex-direction: column;
-   .search-text{
-     width: 30%;
-   }
- }
+
   .pin_container{
     width: 100%;
     display: flex;

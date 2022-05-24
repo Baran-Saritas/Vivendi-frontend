@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     borderRadius: 15,
   },
   notRoot: {
-    width: "700px",
+    width: "900px",
     height: "510px",
     borderRadius: 15,
   },
@@ -77,7 +77,7 @@ const SearchResultNew = ({ containerRef, search, anchorEl, setAnchorEl }) => {
             initial="closed"
             className="search-result-container"
           >
-            <h1 className="result">Results</h1>
+            <h2 className="result">Products</h2>
             <div className="search-result">
               <div className="pin_container">
                 <div>
@@ -107,7 +107,7 @@ const SearchResultNew = ({ containerRef, search, anchorEl, setAnchorEl }) => {
               </div>
             </div>
           </motion.div>
-          <div className="search-text"></div>
+
         </div>
       </Menu>
     </>
