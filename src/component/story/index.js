@@ -156,7 +156,7 @@ const Story = () => {
         <Stories
           storyContainerStyles={{ margin: "0 auto" }}
           stories={res}
-          defaultInterval={3500}
+          defaultInterval={6000}
           keyboardNavigation={true}
           onAllStoriesEnd={() => dispatch(setStory({ value: true }))}
           onStoryStart={() => dispatch(setStory({ value: false }))}

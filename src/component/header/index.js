@@ -10,6 +10,7 @@ import { IoIosMenu, IoMdClose } from "react-icons/io";
 import HeaderSetCarousel from "../headerCarousel";
 import { Box, Drawer } from "@mui/material";
 import HamburgerList from "../hamburgerMenu/hamburgerList";
+import SearchResultNew from "../searchResult";
 
 const CustomHeader = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,8 @@ const CustomHeader = () => {
   const { headerFurnitureData } = useSelector((state) => state.global);
   const { headerSetData } = useSelector((state) => state.global);
   const ref = useRef(null);
+  
+  const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [isSelect, setIsSelect] = useState(0);
@@ -29,6 +32,9 @@ const CustomHeader = () => {
     dispatch(getHeaderData());
   }, []);
 
+  useEffect(() => {
+    console.log(anchorEl);
+  }, [anchorEl]);
   return (
     <motion.div className="header">
       <Sign open={open} setOpen={setOpen} />
@@ -48,18 +54,15 @@ const CustomHeader = () => {
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              onClick={() => setIsFocus(true)}
+              onClick={(e) => setAnchorEl(e.currentTarget)}
             />
             <div className="btn-con">
               <button>Search</button>
             </div>
-            {(search || isFocus) && (
-              <SearchResult
-                containerRef={ref}
-                setIsFocus={setIsFocus}
-                isFocus={isFocus}
+              <SearchResultNew              
+              anchorEl={anchorEl}
+              setAnchorEl={setAnchorEl}
               />
-            )}
           </div>
         </div>
         <div className="header-util">
@@ -116,7 +119,7 @@ const CustomHeader = () => {
           </div>
           <div
             onClick={() => {
-              navigate(`/products/ca333a93-4630-4cd9-8176-2969887072c2`);
+              navigate(`/products/ca333a93-4630-4cd9-8176-2969887072c2/Sofas`);
             }}
             onMouseEnter={() => setIsSelect(2)}
           >
@@ -124,7 +127,7 @@ const CustomHeader = () => {
           </div>
           <div
             onClick={() => {
-              navigate(`/products/ea6b1aaf-65c0-4023-9248-cfa2ac8e3cbc`);
+              navigate(`/products/ea6b1aaf-65c0-4023-9248-cfa2ac8e3cbc/Beds`);
             }}
             onMouseEnter={() => setIsSelect(3)}
           >
@@ -132,7 +135,7 @@ const CustomHeader = () => {
           </div>
           <div
             onClick={() => {
-              navigate(`/products/a76ec128-c8be-4234-be0c-158518585153`);
+              navigate(`/products/a76ec128-c8be-4234-be0c-158518585153/Chair`);
             }}
             onMouseEnter={() => setIsSelect(4)}
           >
@@ -140,7 +143,7 @@ const CustomHeader = () => {
           </div>
           <div
             onClick={() => {
-              navigate(`/products/635e94eb-75ac-4933-a75c-07a21db3a319`);
+              navigate(`/products/635e94eb-75ac-4933-a75c-07a21db3a319/Tables`);
             }}
             onMouseEnter={() => setIsSelect(5)}
           >
@@ -148,7 +151,7 @@ const CustomHeader = () => {
           </div>
           <div
             onClick={() => {
-              navigate(`/products/775f98ce-a2f2-4c9b-bd70-fcb99481af9a`);
+              navigate(`/products/775f98ce-a2f2-4c9b-bd70-fcb99481af9a/Bergere`);
             }}
             onMouseEnter={() => setIsSelect(6)}
           >
@@ -156,7 +159,7 @@ const CustomHeader = () => {
           </div>
           <div
             onClick={() => {
-              navigate(`/products/888cce34-8ce8-4207-9628-be245d6930c0`);
+              navigate(`/products/888cce34-8ce8-4207-9628-be245d6930c0/Lampshade`);
             }}
             onMouseEnter={() => setIsSelect(7)}
           >
@@ -164,7 +167,7 @@ const CustomHeader = () => {
           </div>
           <div
             onClick={() => {
-              navigate(`/products/1161f244-93cb-4415-9940-d2ceb6ea3a7c`);
+              navigate(`/products/1161f244-93cb-4415-9940-d2ceb6ea3a7c/Mirror`);
             }}
             onMouseEnter={() => setIsSelect(8)}
           >
@@ -172,7 +175,7 @@ const CustomHeader = () => {
           </div>
           <div
             onClick={() => {
-              navigate(`/products/e557af58-0800-4ac6-8783-8ecc9f7cf337`);
+              navigate(`/products/e557af58-0800-4ac6-8783-8ecc9f7cf337/Tv-Units`);
             }}
             onMouseEnter={() => setIsSelect(9)}
           >
@@ -180,7 +183,7 @@ const CustomHeader = () => {
           </div>
           <div
             onClick={() => {
-              navigate(`/products/f48538c8-e405-4e5b-bea7-28d948aba48a`);
+              navigate(`/products/f48538c8-e405-4e5b-bea7-28d948aba48a/Console-Table`);
             }}
             onMouseEnter={() => setIsSelect(10)}
           >

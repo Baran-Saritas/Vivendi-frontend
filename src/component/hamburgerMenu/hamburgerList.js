@@ -16,7 +16,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useSelector,useDispatch } from "react-redux";
 
-export default function HamburgerList({ setState, setIsSelect }) {
+export default function HamburgerList({ setState}) {
   const { categories } = useSelector((state) => state.category);
   const { furnitures } = useSelector((state) => state.furniture);
   const dispatch = useDispatch();
@@ -32,7 +32,6 @@ export default function HamburgerList({ setState, setIsSelect }) {
         style={{ marginTop: "200px", justifyContent: "center", display: "flex" }}
       >
         <List
-          onMouseLeave={() => setIsSelect(0)}
           sx={{ width: "100%", maxWidth: 350, bgcolor: "background.paper" }}
         >
           <Autocomplete
@@ -89,7 +88,6 @@ export default function HamburgerList({ setState, setIsSelect }) {
                   navigate(`/products/c76f7cef-f05f-4142-8a80-da88be374b66`);
                   setState(false);
                 }}
-                onMouseEnter={() => setIsSelect(1)}
                 primary={
                   <Typography
                     variant="h5"
@@ -118,8 +116,6 @@ export default function HamburgerList({ setState, setIsSelect }) {
               <ListItemText
                 disableTypography
                 // onClick={() => setState(false)}
-
-                onMouseEnter={() => setIsSelect(2)}
                 primary={
                   <Typography
                     variant="h5"
@@ -151,7 +147,6 @@ export default function HamburgerList({ setState, setIsSelect }) {
                 onClick={() => {
                   navigate(`/products/ea6b1aaf-65c0-4023-9248-cfa2ac8e3cbc`);
                 }}
-                onMouseEnter={() => setIsSelect(3)}
                 primary={
                   <Typography
                     variant="h5"
@@ -181,7 +176,6 @@ export default function HamburgerList({ setState, setIsSelect }) {
                 disableTypography
                 // onClick={() => setState(false)}
 
-                onMouseEnter={() => setIsSelect(4)}
                 primary={
                   <Typography
                     variant="h5"
@@ -213,7 +207,6 @@ export default function HamburgerList({ setState, setIsSelect }) {
                 onClick={() => {
                   navigate(`/products/635e94eb-75ac-4933-a75c-07a21db3a319`);
                 }}
-                onMouseEnter={() => setIsSelect(5)}
                 primary={
                   <Typography
                     variant="h5"
@@ -242,8 +235,6 @@ export default function HamburgerList({ setState, setIsSelect }) {
               <ListItemText
                 disableTypography
                 // onClick={() => setState(false)}
-
-                onMouseEnter={() => setIsSelect(6)}
                 primary={
                   <Typography
                     variant="h5"
@@ -272,8 +263,6 @@ export default function HamburgerList({ setState, setIsSelect }) {
               <ListItemText
                 disableTypography
                 // onClick={() => setState(false)}
-
-                onMouseEnter={() => setIsSelect(7)}
                 primary={
                   <Typography
                     variant="h5"
@@ -302,8 +291,6 @@ export default function HamburgerList({ setState, setIsSelect }) {
               <ListItemText
                 disableTypography
                 // onClick={() => setState(false)}
-
-                onMouseEnter={() => setIsSelect(8)}
                 primary={
                   <Typography
                     variant="h5"
@@ -332,8 +319,6 @@ export default function HamburgerList({ setState, setIsSelect }) {
               <ListItemText
                 disableTypography
                 // onClick={() => setState(false)}
-
-                onMouseEnter={() => setIsSelect(9)}
                 primary={
                   <Typography
                     variant="h5"
@@ -362,8 +347,6 @@ export default function HamburgerList({ setState, setIsSelect }) {
               <ListItemText
                 disableTypography
                 // onClick={() => setState(false)}
-
-                onMouseEnter={() => setIsSelect(10)}
                 primary={
                   <Typography
                     variant="h5"

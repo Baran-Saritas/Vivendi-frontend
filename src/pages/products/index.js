@@ -8,10 +8,18 @@ import OrderFilter from "../../component/product/OrderFilter";
 import { getFurnitureByCategoryId } from "../../store/furniture/furnitureSlice";
 
 export default function Products() {
+  //category_name
+  const { category_name } = useParams();
   const { category_id } = useParams();
   const { furnitures } = useSelector((state) => state.furniture);
+  const [productsName,setProductsName] = useState("");
   const dispatch = useDispatch();
+//  var NewText = SampleText.replace("Developer", "App Builder");
 
+useEffect(() => {
+  setProductsName( category_name.replace("-", " ")
+  )
+},[category_name])
   useEffect(() => {
     if (category_id) {
       dispatch(getFurnitureByCategoryId(category_id));
@@ -20,11 +28,11 @@ export default function Products() {
   return (
     <div className="products-page">
       <div className="products-page-side">
-        <h1>SEATING GROUPS</h1>
+        <h1>{productsName !== "" ? productsName:null}</h1>
         <hr />
         <div className="products-filter">
           <OrderFilter />
-          <KindFilter />
+          {/* <KindFilter /> */}
         </div>
         <div className="all-products">
           {furnitures?.map((value, i) => (

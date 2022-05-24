@@ -21,8 +21,8 @@ import { useNavigate } from "react-router-dom";
 const useStyles = makeStyles({
   root: {
     width: "550px",
-    height: "600px",
     borderRadius: 15,
+    paddingBottom:"50px"
   },
   notRoot: {
     width: "550px",

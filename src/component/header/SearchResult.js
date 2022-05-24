@@ -1,16 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-const paneVar = {
-  closed: ({ w }) => ({
-    width: w,
-    opacity: 0,
-  }),
-  open: {
-    visibility: "visible",
-    opacity: 1,
-  },
-};
+
 
 function SearchResult({ containerRef, isFocus, search, setIsFocus }) {
   const ref = useRef(null);
@@ -43,7 +34,6 @@ function SearchResult({ containerRef, isFocus, search, setIsFocus }) {
   return (
     <motion.div
       ref={ref}
-      ariants={paneVar}
       initial="closed"
       custom={{ w: bound?.width }}
       animate={isFocus ? "open" : ""}
