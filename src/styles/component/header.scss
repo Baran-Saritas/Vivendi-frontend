@@ -273,26 +273,26 @@
     }
     & > div:nth-child(1) {
       & > div:first-child {
-        flex: 2;
+        flex: 3;
       }
       & > div:last-child {
-        flex: 1;
+        flex: 2;
       }
     }
     & > div:nth-child(2) {
       & > div:first-child {
-        flex: 1;
+        flex: 2;
       }
       & > div:last-child {
-        flex: 2;
+        flex: 3;
       }
     }
     & > div:nth-child(3) {
       & > div:first-child {
-        flex: 2;
+        flex: 3;
       }
       & > div:last-child {
-        flex: 1;
+        flex: 2;
       }
     }
   }
