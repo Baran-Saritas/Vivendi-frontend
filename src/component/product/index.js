@@ -2,12 +2,13 @@ import { MenuItem, Select, Snackbar } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFurnitureCategory } from "../../store/furnitureCategory/furnitureCategorySlice";
-import { postFurniture } from "../../store/furniture/furnitureSlice";
+import {
+  deleteImage,
+  postFurniture,
+} from "../../store/furniture/furnitureSlice";
 import SelectImage from "../SelectImage/SelectImage";
-import { useNavigate } from "react-router-dom";
 export default function Product() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { categories } = useSelector((state) => state.category);
 
   const [values, setValues] = useState({
@@ -18,6 +19,7 @@ export default function Product() {
     price: undefined,
     description: undefined,
     categoryId: undefined,
+    stock: undefined,
   });
   const [images, setImages] = useState([]);
   const [openMessage, setOpenMessage] = useState(false);
@@ -26,11 +28,6 @@ export default function Product() {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const reload = () => {
-    setTimeout(function() {
-    window.location.reload();
-  }, 6000);
-  }
   const handleClick = () => {
     if (!values.name) {
       setMessageText("Please fill name field!");
@@ -56,6 +53,11 @@ export default function Product() {
       setOpenMessage(true);
       return;
     }
+    if (!values.stock || !parseInt(values.stock)) {
+      setMessageText("Please fill stock field!");
+      setOpenMessage(true);
+      return;
+    }
     if (!values.categoryId) {
       setMessageText("Please select a category!");
       setOpenMessage(true);
@@ -73,23 +75,39 @@ export default function Product() {
     }
     let newData = [];
     images.forEach((i) => newData.push(JSON.parse(JSON.stringify(i))));
+    let imgName = "";
     newData.forEach((i) => {
       if (!i?.color) {
-        i.color = "#ffffff";
+        imgName = i.name;
       }
       delete i.id;
     });
+    if (imgName) {
+      setMessageText("Please select one color for " + imgName);
+      setOpenMessage(true);
+      return;
+    }
     let data = { ...values, images: newData, price: parseFloat(values.price) };
     dispatch(postFurniture(data));
-   // reload();
+    setImages([]);
+    setValues({
+      name: "",
+      height: "",
+      width: "",
+      depth: "",
+      price: "",
+      description: "",
+      categoryId: "",
+      stock: "",
+    });
+    // reload();
   };
 
-
   useEffect(() => {
-    if(categories.length === 0){
+    if (categories.length === 0) {
       dispatch(getFurnitureCategory());
     }
-  },[])
+  }, []);
   return (
     <>
       <Snackbar
@@ -157,6 +175,17 @@ export default function Product() {
               />
             </div>
             <div className="product-field">
+              <label htmlFor="p-stock">Stock</label>
+              <input
+                type="text"
+                id="p-stock"
+                name="stock"
+                value={values.stock}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="product-field">
               <label htmlFor="p-categoryId">Category</label>
               <Select
                 labelId="simple-select-label"
@@ -189,8 +218,12 @@ export default function Product() {
             </div>
           </div>
           <div className="add-product-right">
-            <SelectImage images={images} setImages={setImages} />
-            <button  type="submit" onClick={handleClick}>
+            <SelectImage
+              deleteImage={deleteImage}
+              images={images}
+              setImages={setImages}
+            />
+            <button type="submit" onClick={handleClick}>
               Create
             </button>
           </div>
@@ -199,8 +232,6 @@ export default function Product() {
     </>
   );
 }
-
-
 
 /*
 

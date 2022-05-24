@@ -16,9 +16,7 @@ function ImageListItem({ item, removeImage, setImages, setPreviewImage }) {
     newItem.color = color;
     setImages((p) => {
       let newState = [...p];
-      const currentIndex = p.findIndex(
-        (i) => i.imageName === newItem.imageName
-      );
+      const currentIndex = p.findIndex((i) => i.name === newItem.name);
       newState.splice(currentIndex, 1, newItem);
       console.log(newState);
       return newState;
@@ -43,7 +41,7 @@ function ImageListItem({ item, removeImage, setImages, setPreviewImage }) {
     <p style={{ cursor: "pointer" }}>
       <span>
         <span onClick={() => setPreviewImage(item.imageSource)}>
-          {item.imageName}
+          {item.name}
         </span>
         <span
           className="p-select-color"
@@ -51,7 +49,7 @@ function ImageListItem({ item, removeImage, setImages, setPreviewImage }) {
           onClick={handleClick}
         ></span>
         <Popover
-          id={"simple-popover" + item.imageName}
+          id={"simple-popover" + item.name}
           open={Boolean(anchor)}
           anchorEl={anchor}
           onClose={handleClose}
@@ -70,7 +68,7 @@ function ImageListItem({ item, removeImage, setImages, setPreviewImage }) {
           </Typography>
         </Popover>
       </span>
-      <span onClick={() => removeImage(item.imageName)}>
+      <span onClick={() => removeImage(item.name)}>
         <TiDeleteOutline fontSize={20} />
       </span>
     </p>

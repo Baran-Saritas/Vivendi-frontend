@@ -1,6 +1,13 @@
 import axios from "axios";
 import env from "../env.json";
 
+const product_api = axios.create({
+  headers: {
+    "Content-Type": "application/json",
+  },
+  timeout: 15000,
+  baseURL: env.PRODUCT,
+});
 
 const furniture_api = axios.create({
   headers: {
@@ -78,6 +85,9 @@ export const handleError = ({ message, data, status }) => {
 furniture_api.interceptors.request.use(config, error);
 furniture_api.interceptors.response.use(response);
 //
+product_api.interceptors.request.use(config, error);
+product_api.interceptors.response.use(response);
+//
 user_api.interceptors.request.use(config, error);
 user_api.interceptors.response.use(response);
 //
@@ -139,5 +149,5 @@ export {
   campaign_api,
   furniture_api,
   set_info_f_api,
+  product_api,
 };
-

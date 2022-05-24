@@ -5,6 +5,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Product from "../product";
+import EditProdutView from "../product/EditProductView";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -70,7 +71,7 @@ export default function FurniturePanel() {
         <Product />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <EditProdutView />
       </TabPanel>
     </Box>
   );

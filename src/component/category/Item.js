@@ -51,9 +51,9 @@ export default function Item({
         <img
           style={{ objectFit: "cover" }}
           src={itemData?.images[0].imageSource}
-          alt="category"
+          alt="product"
         />
-        <p>{itemData.categoryName}</p>
+        <p>{itemData.name}</p>
       </div>
     </div>
   );

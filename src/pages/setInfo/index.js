@@ -22,9 +22,6 @@ export default function Set() {
   useEffect(() => {
     dispatch(getFurnitureSetInfo());
   }, []);
-  useEffect(() => {
-    console.log("RES : ", setInfos);
-  }, [setInfos]);
   return (
     <div className="dialog-edit">
       <Snackbar

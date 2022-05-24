@@ -7,11 +7,11 @@ import DialogContentText from "@mui/material/DialogContentText";
 import { useDispatch, useSelector } from "react-redux";
 import { setFullFilled } from "../../store/global/globalSlice";
 import {
-  deleteFurnitureCategory,
-  removeCategory,
-} from "../../store/furnitureCategory/furnitureCategorySlice";
+  deleteFurniture,
+  removeFurniture,
+} from "../../store/furniture/furnitureSlice";
 
-export default function DeleteCategory({ open, setOpen }) {
+export default function DeleteProduct({ open, setOpen }) {
   const { fullfilled } = useSelector((state) => state.global);
   const dispatch = useDispatch();
   const handleClose = (_, r) => {
@@ -19,12 +19,12 @@ export default function DeleteCategory({ open, setOpen }) {
   };
 
   const handleClick = () => {
-    dispatch(deleteFurnitureCategory(open));
+    dispatch(deleteFurniture(open));
   };
   useEffect(() => {
     if (fullfilled) {
+      dispatch(removeFurniture({ id: open }));
       setOpen("");
-      dispatch(removeCategory({ id: open }));
       dispatch(setFullFilled({ value: false }));
     }
   }, [fullfilled, setOpen]);

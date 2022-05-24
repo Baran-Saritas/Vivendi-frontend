@@ -6,7 +6,10 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import { useDispatch, useSelector } from "react-redux";
 import { setFullFilled } from "../../store/global/globalSlice";
-import { deleteFurnitureSetInfo } from "../../store/furnitureSetInfo/furnitureSetInfoSlice";
+import {
+  deleteFurnitureSetInfo,
+  removeSet,
+} from "../../store/furnitureSetInfo/furnitureSetInfoSlice";
 
 export default function DeleteSet({ open, setOpen }) {
   const { fullfilled } = useSelector((state) => state.global);
@@ -21,6 +24,7 @@ export default function DeleteSet({ open, setOpen }) {
   useEffect(() => {
     if (fullfilled) {
       setOpen("");
+      dispatch(removeSet({ id: open }));
       dispatch(setFullFilled({ value: false }));
     }
   }, [fullfilled, setOpen]);

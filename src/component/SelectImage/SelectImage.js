@@ -1,25 +1,24 @@
 import { Snackbar } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { deleteImage } from "../../store/image/imageSlice";
 import ImageListItem from "./ImageListItem";
 
-function SelectImage({ images, setImages }) {
+function SelectImage({ images, setImages, deleteImage }) {
   const [openMessage, setOpenMessage] = useState(false);
   const [previewImage, setPreviewImage] = useState(images?.[0]?.imageSource);
   const dispatch = useDispatch();
   // eger disardan resim kaldirmak istiyorsak bu fonksiyonu oraya yerlestirip sonra da buraya prop olarak gecirmek lazim
-  const removeImage = (imageName) => {
+  const removeImage = (name) => {
     if (images.length <= 1) {
       setOpenMessage("You have to select one image!");
       return;
     }
     setImages((p) => {
       let filteredImage = p.filter((i) => {
-        if (i.imageName === imageName && i.id) {
+        if (i.name === name && i.id) {
           dispatch(deleteImage(i.id));
         }
-        return i.imageName !== imageName;
+        return i.name !== name;
       });
       setPreviewImage(filteredImage[0].getImageSource);
       return filteredImage;
@@ -27,16 +26,16 @@ function SelectImage({ images, setImages }) {
   };
   const onImageChange = async (e) => {
     if (e.target.files && e.target.files[0]) {
-      if (e.target.files[0].size > 3000000) {
+      if (e.target.files[0].size > 300000) {
         setOpenMessage("Max image size must be 300KB");
         return;
       }
       let file = e.target.files[0];
-      if (images.filter((i) => i.imageName === file.name).length) {
+      if (images.filter((i) => i.name === file.name).length) {
         return;
       }
       let img = await getBase64(file);
-      setImages((p) => [...p, { imageSource: img, imageName: file.name }]);
+      setImages((p) => [...p, { imageSource: img, name: file.name }]);
       setPreviewImage(undefined);
     }
   };
@@ -80,7 +79,7 @@ function SelectImage({ images, setImages }) {
             setPreviewImage={setPreviewImage}
             removeImage={removeImage}
             setImages={setImages}
-            key={i.imageName}
+            key={i.name}
             item={i}
           />
         ))}
