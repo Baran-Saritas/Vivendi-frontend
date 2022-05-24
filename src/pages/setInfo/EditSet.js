@@ -9,7 +9,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useDispatch, useSelector } from "react-redux";
 import { setFullFilled } from "../../store/global/globalSlice";
 import SelectImage from "../../component/SelectImage/SelectImage";
-import Icon from "@mui/material/Icon";
 import {
   Checkbox,
   Drawer,
@@ -17,29 +16,31 @@ import {
   FormControlLabel,
   FormGroup,
   FormLabel,
-  IconButton,
   InputLabel,
   MenuItem,
   Select,
 } from "@mui/material";
-import { set_info_f_api } from "../../utilrs/axiosInterceptors";
-import { updateFurnitureCategory } from "../../store/furnitureCategory/furnitureCategorySlice";
+import {
+  deleteImage,
+  updateFurnitureSetInfo,
+} from "../../store/furnitureSetInfo/furnitureSetInfoSlice";
 
 export default function EditSet({ setOpenMessage, open, setOpen }) {
   const dispatch = useDispatch();
   const { fullfilled } = useSelector((state) => state.global);
   const [images, setImages] = React.useState([]);
-  const [setInfoName, setSetInfoName] = React.useState("");
+  const [name, setName] = React.useState("");
   const [price, setPrice] = React.useState("");
   const [openDrawer, setOpenDrawer] = React.useState(false);
+  const [description, setDescription] = React.useState("");
   const [categoryId, setCategoryId] = React.useState("");
   const { categories } = useSelector((state) => state.category);
   const { furnitures } = useSelector((state) => state.furniture);
   const [selectedFurniture, setSelectedFurniture] = React.useState({});
   const handleOk = async (e) => {
     let data = {};
-    if (open.setInfoName !== setInfoName) {
-      data.setInfoName = setInfoName;
+    if (open.name !== name) {
+      data.name = name;
     }
     if (open.price !== Number(price)) {
       data.price = Number(price);
@@ -47,12 +48,27 @@ export default function EditSet({ setOpenMessage, open, setOpen }) {
     if (open.categoryId !== categoryId) {
       data.categoryId = categoryId;
     }
-    if (!setInfoName) {
+    if (open.description !== description) {
+      data.description = description;
+    }
+    if (!name) {
       setOpenMessage("Please fill set name!");
       return;
     }
     if (!Number(price)) {
       setOpenMessage("Price have to be number!");
+      return;
+    }
+    if (!price) {
+      setOpenMessage("Please fill set price!");
+      return;
+    }
+    if (!categoryId) {
+      setOpenMessage("Please fill select a category!");
+      return;
+    }
+    if (!description) {
+      setOpenMessage("Please fill the description!");
       return;
     }
     let furs = Object.entries(selectedFurniture)
@@ -85,7 +101,9 @@ export default function EditSet({ setOpenMessage, open, setOpen }) {
     if (editImages.length) {
       data.images = editImages;
     }
-    dispatch(updateFurnitureCategory());
+    //console.table(data);
+    data.id = open.id;
+    dispatch(updateFurnitureSetInfo(data));
   };
   const handleClose = (_, r) => {
     if (r !== "backdropClick") {
@@ -95,9 +113,10 @@ export default function EditSet({ setOpenMessage, open, setOpen }) {
   useEffect(() => {
     if (open) {
       setImages(open.images);
-      setSetInfoName(open.setInfoName);
+      setName(open.name);
       setPrice(open.price);
       setCategoryId(open.categoryId);
+      setDescription(open.description);
       let val = {};
       open.furnitures.map((i) => (val[i.id] = true));
       setSelectedFurniture(val);
@@ -106,6 +125,11 @@ export default function EditSet({ setOpenMessage, open, setOpen }) {
   useEffect(() => {
     if (fullfilled) {
       setOpen(false);
+      setImages([]);
+      setName("");
+      setPrice("");
+      setCategoryId("");
+      setDescription("");
       dispatch(setFullFilled({ value: false }));
     }
   }, [fullfilled, setOpen]);
@@ -154,8 +178,8 @@ export default function EditSet({ setOpenMessage, open, setOpen }) {
         <DialogTitle className="ae-dialog-title">Edit Set</DialogTitle>
         <DialogContent className="ae-dialog-content">
           <TextField
-            value={setInfoName}
-            onChange={(e) => setSetInfoName(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             autoFocus
             margin="dense"
             id="name"
@@ -192,8 +216,21 @@ export default function EditSet({ setOpenMessage, open, setOpen }) {
             </Select>
           </FormControl>
           <div className="f-add-edit-images">
-            <SelectImage images={images} setImages={setImages} />
+            <SelectImage
+              deleteImage={deleteImage}
+              images={images}
+              setImages={setImages}
+            />
           </div>
+          <TextField
+            id="outlined-multiline-static"
+            label="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            multiline
+            rows={4}
+          />
+
           <Button
             onClick={() => setOpenDrawer(true)}
             variant="contained"

@@ -22,21 +22,25 @@ import {
   Select,
 } from "@mui/material";
 import { getFurniture } from "../../store/furniture/furnitureSlice";
-import { postFurnitureSetInfo } from "../../store/furnitureSetInfo/furnitureSetInfoSlice";
+import {
+  deleteImage,
+  postFurnitureSetInfo,
+} from "../../store/furnitureSetInfo/furnitureSetInfoSlice";
 
 export default function AddSet({ setOpenMessage, open, setOpen }) {
   const dispatch = useDispatch();
   const { fullfilled } = useSelector((state) => state.global);
   const [images, setImages] = React.useState([]);
-  const [setInfoName, setSetInfoName] = React.useState("");
+  const [name, setName] = React.useState("");
   const [price, setPrice] = React.useState("");
+  const [description, setDescription] = React.useState("");
   const [openDrawer, setOpenDrawer] = React.useState(false);
   const [categoryId, setCategoryId] = React.useState("");
   const { categories } = useSelector((state) => state.category);
   const { furnitures } = useSelector((state) => state.furniture);
   const [selectedFurniture, setSelectedFurniture] = React.useState({});
   const handleOk = async (e) => {
-    if (!setInfoName) {
+    if (!name) {
       setOpenMessage("Please fill set name!");
       return;
     }
@@ -56,6 +60,10 @@ export default function AddSet({ setOpenMessage, open, setOpen }) {
       setOpenMessage("Please select image color!");
       return;
     }
+    if (!description) {
+      setOpenMessage("Please fill the description!");
+      return;
+    }
     let furs = Object.entries(selectedFurniture)
       .filter((i) => i[1])
       .map((i) => i[0]);
@@ -63,11 +71,16 @@ export default function AddSet({ setOpenMessage, open, setOpen }) {
       setOpenMessage("Please choose al lease 2 furnitures!");
       return;
     }
-    //console.log({ setInfoName, categoryId, price, images });
+    let sedFurs = [...furnitures].map((i) => i.id);
+    //console.table({ name, categoryId, price, images, furnitures: sedFurs });
     dispatch(
       postFurnitureSetInfo({
-        data: { setInfoName, categoryId, price, images },
-        furnitureIds: { furs },
+        name,
+        categoryId,
+        price,
+        images,
+        description,
+        furnitures: sedFurs,
       })
     );
   };
@@ -83,7 +96,7 @@ export default function AddSet({ setOpenMessage, open, setOpen }) {
   useEffect(() => {
     if (fullfilled) {
       setImages([]);
-      setSetInfoName("");
+      setName("");
       setPrice("");
       setOpenDrawer(false);
       setCategoryId("");
@@ -137,8 +150,8 @@ export default function AddSet({ setOpenMessage, open, setOpen }) {
         <DialogTitle className="ae-dialog-title">Add Set</DialogTitle>
         <DialogContent className="ae-dialog-content">
           <TextField
-            value={setInfoName}
-            onChange={(e) => setSetInfoName(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             autoFocus
             margin="dense"
             id="name"
@@ -150,7 +163,6 @@ export default function AddSet({ setOpenMessage, open, setOpen }) {
           <TextField
             value={price}
             onChange={(e) => setPrice(e.target.value)}
-            autoFocus
             margin="dense"
             id="name"
             label="Set price"
@@ -175,8 +187,21 @@ export default function AddSet({ setOpenMessage, open, setOpen }) {
             </Select>
           </FormControl>
           <div className="f-add-edit-images">
-            <SelectImage images={images} setImages={setImages} />
+            <SelectImage
+              deleteImage={deleteImage}
+              images={images}
+              setImages={setImages}
+            />
           </div>
+          <TextField
+            id="outlined-multiline-static"
+            label="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            multiline
+            rows={4}
+          />
+
           <Button
             onClick={() => setOpenDrawer(true)}
             variant="contained"
