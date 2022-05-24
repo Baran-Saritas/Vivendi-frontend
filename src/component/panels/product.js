@@ -1,10 +1,10 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Product from '../product';
+import * as React from "react";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Product from "../product";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -35,7 +35,7 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
+    "aria-controls": `vertical-tabpanel-${index}`,
   };
 }
 
@@ -48,7 +48,12 @@ export default function FurniturePanel() {
 
   return (
     <Box
-      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: "100%" }}
+      sx={{
+        flexGrow: 1,
+        bgcolor: "background.paper",
+        display: "flex",
+        height: "100%",
+      }}
     >
       <Tabs
         orientation="vertical"
@@ -56,27 +61,17 @@ export default function FurniturePanel() {
         value={value}
         onChange={handleChange}
         aria-label="Vertical furniture set tabs"
-        sx={{ borderRight: 1, borderColor: 'divider' }}
+        sx={{ borderRight: 1, borderColor: "divider" }}
       >
         <Tab label="Add Furniture" {...a11yProps(0)} />
         <Tab label="Update Furniture" {...a11yProps(1)} />
-        <Tab label="Delete Furniture" {...a11yProps(2)} />
-        <Tab label="View Furniture" {...a11yProps(3)} />
-
       </Tabs>
       <TabPanel value={value} index={0}>
-        <Product/>
+        <Product />
       </TabPanel>
       <TabPanel value={value} index={1}>
         Item Two
       </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        Item Four
-      </TabPanel>
-
     </Box>
   );
 }

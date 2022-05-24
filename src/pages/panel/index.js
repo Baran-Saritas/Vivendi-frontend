@@ -49,7 +49,7 @@ export default function Base() {
   };
 
   return (
-    <Box sx={{ width: "93%", margin: "40px",height:"100%" }}>
+    <Box sx={{ width: "93%", height: "100%" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={value}
@@ -65,16 +65,16 @@ export default function Base() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <CategoryPanel/>
+        <CategoryPanel />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <FurniturePanel/>
+        <FurniturePanel />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <CampaignPanel/>
+        <CampaignPanel />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <FurnitureSetPanel/>
+        <FurnitureSetPanel />
       </TabPanel>
     </Box>
   );
