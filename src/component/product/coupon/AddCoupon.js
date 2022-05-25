@@ -138,7 +138,7 @@ export default function AddCoupon() {
             value={furnitureId}
             onChange={handleAutoComplete}
             getOptionLabel={(o) => o.name}
-            options={furnitures.filter((f) => !f?.coupon)}
+            options={furnitures.filter((f) => f?.coupon)}
             sx={{ width: 300 }}
             renderInput={(params) => (
               <TextField

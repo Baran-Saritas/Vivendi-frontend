@@ -5,6 +5,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Set from "../../pages/setInfo";
+import DisplayCoupon from "../../pages/setInfo/DisplayCoupon";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -12,6 +13,7 @@ function TabPanel(props) {
   return (
     <div
       role="tabpanel"
+      style={{ width: "100%" }}
       hidden={value !== index}
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
@@ -46,5 +48,32 @@ export default function FurnitureSetPanel() {
     setValue(newValue);
   };
 
-  return <Set />;
+  return (
+    <Box
+      sx={{
+        flexGrow: 1,
+        bgcolor: "background.paper",
+        display: "flex",
+        height: "100%",
+      }}
+    >
+      <Tabs
+        orientation="vertical"
+        variant="scrollable"
+        value={value}
+        onChange={handleChange}
+        aria-label="Vertical furniture set tabs"
+        sx={{ borderRight: 1, borderColor: "divider" }}
+      >
+        <Tab label="Sets" {...a11yProps(0)} />
+        <Tab label="Coupons" {...a11yProps(1)} />
+      </Tabs>
+      <TabPanel value={value} index={0}>
+        <Set />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <DisplayCoupon />
+      </TabPanel>
+    </Box>
+  );
 }

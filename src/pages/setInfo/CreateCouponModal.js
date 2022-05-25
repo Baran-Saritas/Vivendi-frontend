@@ -12,9 +12,9 @@ import { DateTimePicker } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import {
-  getFurniture,
-  postFurnitureCoupon,
-} from "../../../store/furniture/furnitureSlice";
+  getFurnitureSetInfo,
+  postSetCoupon,
+} from "../../store/furnitureSetInfo/furnitureSetInfoSlice";
 
 export default function CreateCouponModal({ open, setOpen }) {
   const [discount, setDiscount] = useState(0);
@@ -22,7 +22,7 @@ export default function CreateCouponModal({ open, setOpen }) {
   const [image, setImage] = useState(null);
   const [setId, setSetId] = useState();
   const [endDate, setEndDate] = useState(new Date());
-  const { setInfos } = useSelector((state) => state.setInfos);
+  const { setInfos } = useSelector((state) => state.setInfo);
   const { fullfilled } = useSelector((state) => state.global);
   const dispatch = useDispatch();
 
@@ -71,7 +71,7 @@ export default function CreateCouponModal({ open, setOpen }) {
       id: setId,
     });
     dispatch(
-      postFurnitureCoupon({
+      postSetCoupon({
         data: {
           imageSource: image,
           discount,
@@ -82,7 +82,7 @@ export default function CreateCouponModal({ open, setOpen }) {
     );
   };
   const fetchFurnitures = () => {
-    if (!setInfos.length) dispatch(getFurniture());
+    if (!setInfos.length) dispatch(getFurnitureSetInfo());
   };
 
   const handleAutoComplete = (event, newValue) => {
@@ -102,9 +102,11 @@ export default function CreateCouponModal({ open, setOpen }) {
 
   useEffect(() => {
     if (fullfilled) {
+      setOpen(false);
+      dispatch(getFurnitureSetInfo());
       setDiscount(1);
       setImage(null);
-      setSetId("");
+      setSetId(undefined);
     }
   }, [fullfilled]);
 
@@ -150,6 +152,7 @@ export default function CreateCouponModal({ open, setOpen }) {
             disablePortal
             id="combo-box-demo"
             value={setId}
+            noOptionsText="No set"
             onChange={handleAutoComplete}
             getOptionLabel={(o) => o.name}
             options={setInfos.filter((f) => !f?.coupon)}
