@@ -1,9 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  product_api,
-  set_info_api,
-  set_info_f_api,
-} from "../../utilrs/axiosInterceptors";
+import { product_api, set_info_api } from "../../utilrs/axiosInterceptors";
 import { setFullFilled } from "../global/globalSlice";
 
 const getFurnitureSetInfo = createAsyncThunk(
@@ -27,6 +23,19 @@ const getFurnitureSetByAsc = createAsyncThunk(
       return res.data;
     } else {
       rejectWithValue(res.data);
+    }
+  }
+);
+
+const postSetCoupon = createAsyncThunk(
+  "set/addCoupon",
+  async ({ data, id }, { rejectWithValue, dispatch }) => {
+    let furniture_res = await product_api.post("/set/coupon/" + id, data);
+    if (furniture_res.status === 200) {
+      dispatch(setFullFilled({ value: true }));
+      return furniture_res.data;
+    } else {
+      rejectWithValue(furniture_res.data);
     }
   }
 );
@@ -251,5 +260,6 @@ export {
   getFurnitureSetTop5,
   getFurnitureSetById,
   deleteImage,
+  postSetCoupon,
 };
 export default furnitureSetInfoSlice.reducer;

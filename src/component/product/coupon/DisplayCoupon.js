@@ -2,8 +2,13 @@ import { Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getFurniture } from "../../../store/furniture/furnitureSlice";
 import CreateCouponModal from "./CreateCouponModal";
+import {
+  deleteFurnitureCoupon,
+  getFurniture,
+  postFurnitureCoupon,
+} from "../../../store/furniture/furnitureSlice";
+import Operation from "../../table/coupon/operation";
 
 export default function DisplayCoupon() {
   const { furnitures } = useSelector((state) => state.furniture);
@@ -14,7 +19,7 @@ export default function DisplayCoupon() {
     if (furnitures.length) {
       let rws = [];
       furnitures.forEach((i) => {
-        rws.push({ ...i, ...i.coupon });
+        if (i.coupon) rws.push({ ...i.coupon, ...i, cid: i.coupon.id });
       });
       setRows(rws);
     } else {
@@ -53,5 +58,15 @@ const columns = [
     headerName: "Created Date",
     editable: true,
     width: 250,
+  },
+  {
+    renderCell: ({ value, row }) => (
+      <Operation row={row} deleteFunc={deleteFurnitureCoupon} />
+    ),
+    key: "operation",
+    headerName: "Operation",
+    sortable: false,
+    minWidth: 50,
+    headerAlign: "center",
   },
 ];

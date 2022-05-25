@@ -2,25 +2,25 @@ import { Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getFurniture } from "../../../store/furniture/furnitureSlice";
+import { getFurnitureSetInfo } from "../../store/furnitureSetInfo/furnitureSetInfoSlice";
 import CreateCouponModal from "./CreateCouponModal";
 
 export default function DisplayCoupon() {
-  const { furnitures } = useSelector((state) => state.furniture);
+  const { setInfos } = useSelector((state) => state.setInfo);
   const [rows, setRows] = useState([]);
   const [open, setOpen] = useState(null);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (furnitures.length) {
+    if (setInfos.length) {
       let rws = [];
-      furnitures.forEach((i) => {
-        rws.push({ ...i, ...i.coupon });
+      setInfos.forEach((i) => {
+        if (i.coupon) rws.push({ ...i, ...i.coupon });
       });
       setRows(rws);
     } else {
-      dispatch(getFurniture());
+      dispatch(getFurnitureSetInfo());
     }
-  }, [furnitures]);
+  }, [setInfos]);
   return (
     <div style={{ height: 500, width: "100%" }}>
       <Button
@@ -44,7 +44,6 @@ export default function DisplayCoupon() {
 
 const columns = [
   { field: "name", headerName: "Name", editable: true, width: 250 },
-  { field: "stock", headerName: "Stock", editable: true, width: 150 },
   { field: "discount", headerName: "Discount", editable: true, width: 150 },
   { field: "imageSource", headerName: "Image", editable: true, width: 250 },
   { field: "endDate", headerName: "End Date", editable: true, width: 250 },

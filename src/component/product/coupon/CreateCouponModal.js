@@ -102,9 +102,11 @@ export default function CreateCouponModal({ open, setOpen }) {
 
   useEffect(() => {
     if (fullfilled) {
+      setOpen(false);
+      dispatch(getFurniture());
       setDiscount(1);
       setImage(null);
-      setFurnitureId("");
+      setFurnitureId(undefined);
     }
   }, [fullfilled]);
 
@@ -152,6 +154,7 @@ export default function CreateCouponModal({ open, setOpen }) {
             value={furnitureId}
             onChange={handleAutoComplete}
             getOptionLabel={(o) => o.name}
+            noOptionsText="No furniture"
             options={furnitures.filter((f) => !f?.coupon)}
             sx={{ width: 300 }}
             renderInput={(params) => (
