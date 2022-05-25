@@ -8,12 +8,15 @@ import {
   getCircularProgressUtilityClass,
   Typography,
 } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SetDetailCard from "../component/setdetailcard";
 import NewProductCarousel from "../component/newProduct";
 import { useNavigate } from "react-router-dom";
+import { getFurniture } from "../store/furniture/furnitureSlice";
+
 
 export default function Main() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   let arr = ["item-span-3", "item-span-4", "item-span-5", "item-span-6"].sort(
     () => Math.random() - 0.5
@@ -28,6 +31,10 @@ export default function Main() {
     return res;
   }
 
+  useEffect(() =>{
+  dispatch(getFurniture());
+
+  },[])
   return (
     <div className="main">
       <div
