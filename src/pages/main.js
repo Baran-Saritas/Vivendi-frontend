@@ -57,7 +57,7 @@ export default function Main() {
           className="b-carousel-side-div"
           style={{ width: "90%", borderRadius: "10px" }}
         >
-          <CustomCarousel />
+          <CustomCarousel  />
         </div>
       </div>
 
@@ -68,7 +68,7 @@ export default function Main() {
       </div>
       <div className="categoryCarousel-div">
         <div className="Carousel-div">
-          <CategoryCarousel />
+          <CategoryCarousel  furnitures={furnitures} setInfos={setInfos} />
         </div>
       </div>
 

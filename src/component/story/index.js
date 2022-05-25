@@ -3,7 +3,7 @@ import Stories from "react-insta-stories";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setStory } from "../../store/global/globalSlice";
-const Story = () => {
+const Story = ({data}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { campaigns } = useSelector((state) => state.campaign);
@@ -96,12 +96,14 @@ const Story = () => {
       ),
     },
   ];
-  let res = campaigns.map((i) => {
+  let res = data.map((i) => {
+    console.log("St : ", i)
     return {
+      duration: 3000,
       content: (props) => (
         <div
           key={i}
-          onClick={() => navigate("/products/detail/" + i.cTargets[0].t_id)}
+          onClick={() => navigate(`/products/${i.width ? "detail" : "setDetail"}/${i.id}`)}
           style={{
             width: "100%",
             height: "100%",
@@ -111,11 +113,7 @@ const Story = () => {
         >
           <img
             style={{ width: "100%", marginTop: "35px", height: "100%" }}
-            src={
-              i % 2 === 0
-                ? "https://images.unsplash.com/photo-1612151855475-877969f4a6cc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80"
-                : "https://jamiemckaye.com/media/posts/27/example-of-an-image.jpeg"
-            }
+            src={i.coupon.imageSource}
             alt={i.id}
           />
           <div
@@ -150,13 +148,13 @@ const Story = () => {
     };
   });
 
-  return campaigns.length ? (
+  return  (
     <>
       <div className="large-Story">
         <Stories
           storyContainerStyles={{ margin: "0 auto" }}
           stories={res}
-          defaultInterval={6000}
+          defaultInterval={res.length * 3000}
           keyboardNavigation={true}
           onAllStoriesEnd={() => dispatch(setStory({ value: true }))}
           onStoryStart={() => dispatch(setStory({ value: false }))}
@@ -168,7 +166,7 @@ const Story = () => {
       <div className="medium-Story">
         <Stories
           storyContainerStyles={{ margin: "0 auto" }}
-          stories={stories}
+          stories={res}
           defaultInterval={3500}
           keyboardNavigation={true}
           onAllStoriesEnd={() => dispatch(setStory({ value: true }))}
@@ -181,7 +179,7 @@ const Story = () => {
       <div className="small-Story">
         <Stories
           storyContainerStyles={{ margin: "0 auto" }}
-          stories={stories}
+          stories={res}
           defaultInterval={3500}
           keyboardNavigation={true}
           onAllStoriesEnd={() => dispatch(setStory({ value: true }))}
@@ -194,7 +192,7 @@ const Story = () => {
       <div className="xsmall-Story">
         <Stories
           storyContainerStyles={{ margin: "0 auto" }}
-          stories={stories}
+          stories={res}
           defaultInterval={3500}
           keyboardNavigation={true}
           onAllStoriesEnd={() => dispatch(setStory({ value: true }))}
@@ -205,6 +203,6 @@ const Story = () => {
         />
       </div>
     </>
-  ) : null;
+  ) ;
 };
 export default Story;
