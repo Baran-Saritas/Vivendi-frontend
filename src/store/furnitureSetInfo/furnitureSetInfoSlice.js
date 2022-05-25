@@ -18,6 +18,18 @@ const getFurnitureSetInfo = createAsyncThunk(
     }
   }
 );
+const getFurnitureSetByAsc = createAsyncThunk(
+  "setInfo/getAll",
+  async (_, { rejectWithValue }) => {
+    const res = await product_api.get("/set/asc");
+    //const res = await set_info_api.get("/");
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      rejectWithValue(res.data);
+    }
+  }
+);
 
 const getFurnitureSetById = createAsyncThunk(
   "setInfo/getById",
@@ -159,6 +171,15 @@ const furnitureSetInfoSlice = createSlice({
     },
   },
   extraReducers: {
+
+    //getFurnitureSetByAsc
+
+    [getFurnitureSetByAsc.fulfilled]: (state, action) => {
+      state.setInfos = action.payload;
+    },
+    [getFurnitureSetByAsc.rejected]: (state, action) => {
+      console.log("getFurnitureSetByAsc err : ", action.payload);
+    },
     [getFurnitureSetById.fulfilled]: (state, action) => {
       state.setInfosOnHover = action.payload;
     },
@@ -225,6 +246,7 @@ export {
   deleteFurnitureSetInfo,
   getFurnitureSetInfoOfGroup,
   getFurnitureSetByCategoryId,
+  getFurnitureSetByAsc,
   getFurnitureSetByCategoryIdOnHover,
   getFurnitureSetTop5,
   getFurnitureSetById,

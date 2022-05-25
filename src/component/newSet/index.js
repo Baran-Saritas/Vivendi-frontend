@@ -3,7 +3,8 @@ import Slider from "react-slick";
 import { Typography } from "@mui/material";
 import SetDetailCard from "../setdetailcard";
 import NewProductCard from "../newProductCard/index";
-const NewProductCarousel = ({ speed, autoplaySpeed,furnitures }) => {
+import NewSetCard from "../newSetCard";
+const NewSetCarousel = ({ speed, autoplaySpeed,setInfos }) => {
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (
@@ -25,26 +26,25 @@ const NewProductCarousel = ({ speed, autoplaySpeed,furnitures }) => {
     );
   }
   const settings = {
-    className: "new-prod",
+    className: "center",
     infinite: true,
     centerPadding: "30px",
     slidesToShow: 1,
     swipeToSlide: true,
+    autoplay: true,
     speed: speed || 5000,
     autoplaySpeed: autoplaySpeed || 4000,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-
   };
-
 
   return (
     <div>
       <Slider {...settings}>
         {
-          [...furnitures]?.reverse().map((value,i) =>(
-        <div key={i} className="newProduct-main-carousel" >
-        <NewProductCard value={value} />
+          [...setInfos]?.reverse().map((value,i) =>(
+        <div key={i} className="newProduct-main-carousel">
+        <NewSetCard value={value} />
       </div>
           ))
         }
@@ -52,4 +52,4 @@ const NewProductCarousel = ({ speed, autoplaySpeed,furnitures }) => {
     </div>
   );
 };
-export default NewProductCarousel;
+export default NewSetCarousel;

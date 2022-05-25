@@ -116,7 +116,7 @@ const CategoryCarousel = () => {
           <img
             style={{
               width: "100%",
-              height: "120px",
+              height: "120px !important",
               margin: "0px 5px 0px 0px",
             }}
             src="https://www.ikea.com/us/en/images/products/malm-bed-frame-high-black-brown-luroey__0638608_pe699032_s5.jpg"

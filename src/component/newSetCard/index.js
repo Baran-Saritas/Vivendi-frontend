@@ -13,13 +13,16 @@ import {
 } from "../../store/productCart/productCartSlice";
 import { SentimentVeryDissatisfiedOutlined } from "@mui/icons-material";
 import { Button } from "@mui/material";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const NewProductCard = ({ value }) => {
+const NewSetCard = ({ value }) => {
   const [activeImage, setActiveImage] = useState(value.images[0].imageSource);
+  const navigate= useNavigate();
   const theme = useTheme();
-  const navigate = useNavigate();
 
+  useEffect(() => {
+    console.log("step3Set", value);
+  }, []);
 
   return (
     <Card
@@ -83,111 +86,13 @@ const NewProductCard = ({ value }) => {
           })}
         </div>
 
+
         <Box
           sx={{
             flexDirection: "row",
             display: "flex",
-            alignItems: "center",
-            margin: "30px 0px 0px 10px",
-          }}
-        >
-          <Box
-            sx={{
-              flexDirection: "row",
-              display: "flex",
-              alignItems: "center",
-              marginLeft: "0px",
-            }}
-          >
-            <Typography
-              component="div"
-              variant="h5"
-              sx={{
-                fontWeight: "500",
-                color: "#242433",
-              }}
-            >
-              W
-            </Typography>{" "}
-            <Typography
-              component="div"
-              variant="h6"
-              sx={{
-                fontWeight: "500",
-                color: "#444",
-                margin: "0px 0px 0px 4px",
-              }}
-            >
-              {value.width}mm
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              flexDirection: "row",
-              display: "flex",
-              alignItems: "center",
-              marginLeft: "25px",
-            }}
-          >
-            <Typography
-              component="div"
-              variant="h5"
-              sx={{
-                fontWeight: "500",
-                color: "#242433",
-              }}
-            >
-              H
-            </Typography>
-            <Typography
-              component="div"
-              variant="h6"
-              sx={{
-                fontWeight: "500",
-                color: "#444",
-                margin: "0px 0px 0px 4px",
-              }}
-            >
-              {value.height}mm
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              flexDirection: "row",
-              display: "flex",
-              alignItems: "center",
-              marginLeft: "25px",
-            }}
-          >
-            <Typography
-              component="div"
-              variant="h5"
-              sx={{
-                fontWeight: "500",
-                color: "#242433",
-              }}
-            >
-              D
-            </Typography>
-            <Typography
-              component="div"
-              variant="h6"
-              sx={{
-                fontWeight: "500",
-                color: "#444",
-                margin: "0px 0px 0px 4px",
-              }}
-            >
-              {value.depth}mm
-            </Typography>
-          </Box>
-        </Box>
-        <Box
-          sx={{
-            flexDirection: "row",
-            display: "flex",
-            justifyContent:"space-between",
             width:"70%",
+            justifyContent:"space-between",
             alignItems: "center",
             margin: "40px 0px 0px 10px",
           }}
@@ -204,11 +109,11 @@ const NewProductCard = ({ value }) => {
           >
             £ {value.price}
           </Typography>
-          <Button onClick={() =>{navigate("/products/detail/"+ value.id)}} variant="outlined">View</Button>
+          <Button onClick={() =>{navigate("/products/setDetail/"+ value.id)}} variant="outlined">View</Button>
         </Box>
       </Box>
     </Card>
   );
 };
-export default NewProductCard;
+export default NewSetCard;
 

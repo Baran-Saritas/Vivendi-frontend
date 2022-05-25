@@ -13,12 +13,15 @@ import SetDetailCard from "../component/setdetailcard";
 import NewProductCarousel from "../component/newProduct";
 import { useNavigate } from "react-router-dom";
 import { getFurniture, getFurnitureByAsc } from "../store/furniture/furnitureSlice";
+import NewSetCarousel from "../component/newSet";
+import { getFurnitureSetByAsc } from "../store/furnitureSetInfo/furnitureSetInfoSlice";
 
 //furnitures
 export default function Main() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { furnitures } = useSelector((state) => state.furniture);
+  const { setInfos } = useSelector((state) => state.setInfo);
   let arr = ["item-span-3", "item-span-4", "item-span-5", "item-span-6"].sort(
     () => Math.random() - 0.5
   );
@@ -35,6 +38,8 @@ export default function Main() {
  
   useEffect(() =>{
   dispatch(getFurnitureByAsc());
+  
+  dispatch(getFurnitureSetByAsc());
 
   },[])
   return (
@@ -334,7 +339,7 @@ export default function Main() {
               margin: "15px 0px 10px 10px",
             }}
           >
-            New Product
+            New Set's
           </Typography>
 
           <Typography
@@ -348,7 +353,7 @@ export default function Main() {
               margin: "15px 0px 40px 10px",
             }}
           >
-            Have you checked out our new product?
+            Have you checked out our new set's?
           </Typography>
           <Divider
             sx={{ color: "black" }}
@@ -363,7 +368,7 @@ export default function Main() {
                 "rgba(0, 0, 0, 0.3) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
             }}
           >
-            <NewProductCarousel />
+            <NewSetCarousel setInfos={setInfos} />
           </div>
         </div>
       </div>
