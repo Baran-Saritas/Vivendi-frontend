@@ -2,11 +2,12 @@ import React from "react";
 import Slider from "react-slick";
 
 const DetailCarousel = ({ images, setActiveImage }) => {
+  let condition = images.length < 2 ? 2 : images.length > 5 ? 5 : 3;
   const settings = {
     dots: true,
     className: "center",
     infinite: true,
-    slidesToShow: images.length > 5 ? 5 : 3,
+    slidesToShow: condition,
     swipeToSlide: true,
     autoplay: true,
     speed: 4000,
@@ -15,6 +16,7 @@ const DetailCarousel = ({ images, setActiveImage }) => {
       {
         breakpoint: 1024,
         settings: {
+          slidesToShow: images.length > 5 ? 5 : 2,
           slidesToShow: 3,
           slidesToScroll: 3,
           infinite: true,

@@ -4,7 +4,7 @@ import Divider from "@mui/material/Divider";
 import ZoomProduct from "../../component/hoverZoomProductsMenu";
 import { useParams } from "react-router-dom";
 import FurnitureDetailCard from "../../component/furnitureDetailCard";
-import { set_info_api } from "../../utilrs/axiosInterceptors";
+import { product_api, set_info_api } from "../../utilrs/axiosInterceptors";
 import { money } from "../../utilrs/commons";
 
 const SetDetailPage = () => {
@@ -14,8 +14,8 @@ const SetDetailPage = () => {
 
   useEffect(() => {
     if (set_id) {
-      set_info_api
-        .get("/" + set_id)
+      product_api
+        .get("/set/" + set_id)
         .then((res) => {
           setSet(res.data);
           setActiveImageUp(res.data.images[0].imageSource);
@@ -87,6 +87,7 @@ const SetDetailPage = () => {
             </div>
           </div>
           <div className="product-down">
+            <p className="product-down-description-title">Description</p>
             <p className="product-down-description">{set.description}</p>
             <Divider className="product-down-divider" variant="inset" />
             <div className="product-down-card">

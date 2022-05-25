@@ -1,33 +1,33 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { furniture_api, set_info_api } from "../../utilrs/axiosInterceptors";
+import {
+  furniture_api,
+  product_api,
+  set_info_api,
+} from "../../utilrs/axiosInterceptors";
 
 export const getHeaderData = createAsyncThunk(
   "glob/getHeaderData",
   async (_, { rejectWithValue, dispatch }) => {
-    [
-      "c76f7cef-f05f-4142-8a80-da88be374b66",
-      "ca333a93-4630-4cd9-8176-2969887072c2",
-      "ea6b1aaf-65c0-4023-9248-cfa2ac8e3cbc",
-      "a76ec128-c8be-4234-be0c-158518585153",
-      "635e94eb-75ac-4933-a75c-07a21db3a319",
-      "775f98ce-a2f2-4c9b-bd70-fcb99481af9a",
-      "888cce34-8ce8-4207-9628-be245d6930c0",
-      "1161f244-93cb-4415-9940-d2ceb6ea3a7c",
-      "e557af58-0800-4ac6-8783-8ecc9f7cf337",
-      "f48538c8-e405-4e5b-bea7-28d948aba48a",
-    ].map(async (id, i) => {
-      set_info_api.get("/category-top5/" + id).then((res) => {
+    const data = {
+      categories: [
+        "c76f7cef-f05f-4142-8a80-da88be374b66",
+        "ca333a93-4630-4cd9-8176-2969887072c2",
+        "ea6b1aaf-65c0-4023-9248-cfa2ac8e3cbc",
+        "a76ec128-c8be-4234-be0c-158518585153",
+        "a76ec128-c8be-4234-be0c-158518585153",
+      ],
+    };
+    product_api.post("/furniture/category/top/5", data).then((res) => {
+      res.data.entities.forEach((j, i) => {
         dispatch(
-          setHeaderData({ id: i + 1, target: "headerSetData", data: res.data })
+          setHeaderData({ id: i + 1, target: "headerFurnitureData", data: j })
         );
       });
-      furniture_api.get("/category-top5/" + id).then((res) => {
+    });
+    product_api.post("/set/category/top/5", data).then((res) => {
+      res.data.entities.forEach((j, i) => {
         dispatch(
-          setHeaderData({
-            id: i + 1,
-            target: "headerFurnitureData",
-            data: res.data,
-          })
+          setHeaderData({ id: i + 1, target: "headerSetData", data: j })
         );
       });
     });
