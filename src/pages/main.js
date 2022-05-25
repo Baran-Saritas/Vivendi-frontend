@@ -12,12 +12,13 @@ import { useDispatch, useSelector } from "react-redux";
 import SetDetailCard from "../component/setdetailcard";
 import NewProductCarousel from "../component/newProduct";
 import { useNavigate } from "react-router-dom";
-import { getFurniture } from "../store/furniture/furnitureSlice";
+import { getFurniture, getFurnitureByAsc } from "../store/furniture/furnitureSlice";
 
-
+//furnitures
 export default function Main() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { furnitures } = useSelector((state) => state.furniture);
   let arr = ["item-span-3", "item-span-4", "item-span-5", "item-span-6"].sort(
     () => Math.random() - 0.5
   );
@@ -31,8 +32,9 @@ export default function Main() {
     return res;
   }
 
+ 
   useEffect(() =>{
-  dispatch(getFurniture());
+  dispatch(getFurnitureByAsc());
 
   },[])
   return (
@@ -206,11 +208,12 @@ export default function Main() {
             className="new-products-card-main"
             style={{
               width: "70%",
+              height:"100%",
               boxShadow:
                 "rgba(0, 0, 0, 0.3) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
             }}
           >
-            <NewProductCarousel />
+            <NewProductCarousel furnitures={furnitures} />
           </div>
         </div>
       </div>

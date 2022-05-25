@@ -14,6 +14,18 @@ const getFurniture = createAsyncThunk(
     }
   }
 );
+const getFurnitureByAsc = createAsyncThunk(
+  "furniture/getAll",
+  async (_, { rejectWithValue }) => {
+    const res = await product_api.get("/furniture/asc");
+    //const res = await furniture_api.get("/");
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      rejectWithValue(res.data);
+    }
+  }
+);
 const getFurnitureTop5 = createAsyncThunk(
   "furniture/getCategory-top5",
   async (id, { rejectWithValue }) => {
@@ -155,6 +167,12 @@ export const FurnitureSlice = createSlice({
     },
   },
   extraReducers: {
+    [getFurnitureByAsc.fulfilled]: (state, action) => {
+      state.furnitures = action.payload;
+    },
+    [getFurnitureByAsc.rejected]: (state, action) => {
+      console.log("Furniture err : ", action.payload);
+    },
     [getFurnitureBySetId.fulfilled]: (state, action) => {
       state.furnitures = action.payload;
     },
@@ -219,6 +237,7 @@ export {
   getFurnitureTop5,
   deleteFurniture,
   getFurnitureById,
+  getFurnitureByAsc,
   getFurnitureByCategoryId,
   getFurnitureByCategoryIdOnHover,
   getFurnitureBySetId,

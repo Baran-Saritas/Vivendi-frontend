@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { Typography } from "@mui/material";
 import SetDetailCard from "../setdetailcard";
 import NewProductCard from "../newProductCard/index";
-const NewProductCarousel = ({ speed, autoplaySpeed }) => {
+const NewProductCarousel = ({ speed, autoplaySpeed,furnitures }) => {
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (
@@ -36,18 +36,20 @@ const NewProductCarousel = ({ speed, autoplaySpeed }) => {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
+
+  useEffect(() => {
+    console.log("step2:",furnitures);
+  },[furnitures])
   return (
     <div>
       <Slider {...settings}>
+        {
+          furnitures?.slice(-4).map((value) =>(
         <div className="newProduct-main-carousel">
-          <NewProductCard />
-        </div>
-        <div className="newProduct-main-carousel">
-          <NewProductCard />
-        </div>
-        <div className="newProduct-main-carousel">
-          <NewProductCard />
-        </div>
+        <NewProductCard value={value} />
+      </div>
+          ))
+        }
       </Slider>
     </div>
   );

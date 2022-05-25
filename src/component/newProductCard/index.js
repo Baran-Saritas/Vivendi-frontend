@@ -11,20 +11,27 @@ import {
   toIncreaseProductCount,
   toReduceProductCount,
 } from "../../store/productCart/productCartSlice";
+import { SentimentVeryDissatisfiedOutlined } from "@mui/icons-material";
 
-const NewProductCard = () => {
-  const [activeImage, setActiveImage] = useState(srcs[0].imageSource);
+const NewProductCard = ({ value }) => {
+  const [activeImage, setActiveImage] = useState(value.images[0].imageSource);
   const theme = useTheme();
+
+  useEffect(() => {
+    console.log("step3", value);
+  }, []);
+
   return (
     <Card
       className="newFurnitureCard"
       sx={{
         display: "flex",
         padding: "20px",
+        height:"100%",
         justifyContent: "space-between",
       }}
     >
-      <div className="newFurnitureCardLeft" style={{ width: "55%" }}>
+      <div className="newFurnitureCardLeft" style={{ width: "55%",overflow:"hidden" }}>
         <img style={{ width: "90%" }} src={activeImage} />
       </div>
 
@@ -46,9 +53,8 @@ const NewProductCard = () => {
             margin: "15px 0px 0px 10px",
           }}
         >
-          Furniture Name
+          {value.name}
         </Typography>
-
         <div
           style={{
             width: "100%",
@@ -58,70 +64,22 @@ const NewProductCard = () => {
             marginTop: "20px",
           }}
         >
-          <div
-            style={{
-              color: "inherit",
-              textDecoration: "inherit",
-              width: "32px",
-              height: "32px",
-              overflow: "hidden",
-              borderRadius: "9999px",
-            }}
-            onMouseEnter={() => setActiveImage(srcs[0].imageSource)}
-          >
-            <img
-              style={{ width: "100%", height: "100%" }}
-              src={srcs[0].color}
-            />
-          </div>
-          <div
-            style={{
-              color: "inherit",
-              textDecoration: "inherit",
-              width: "32px",
-              height: "32px",
-              overflow: "hidden",
-              borderRadius: "9999px",
-            }}
-            onMouseEnter={() => setActiveImage(srcs[1].imageSource)}
-          >
-            <img
-              style={{ width: "100%", height: "100%" }}
-              src={srcs[1].color}
-            />
-          </div>
-          <div
-            style={{
-              color: "inherit",
-              textDecoration: "inherit",
-              width: "32px",
-              height: "32px",
-              overflow: "hidden",
-              borderRadius: "9999px",
-            }}
-            onMouseEnter={() => setActiveImage(srcs[2].imageSource)}
-          >
-            <img
-              style={{ width: "100%", height: "100%" }}
-              src={srcs[2].color}
-            />
-          </div>
-          <div
-            style={{
-              color: "inherit",
-              textDecoration: "inherit",
-              width: "32px",
-              height: "32px",
-              overflow: "hidden",
-              borderRadius: "9999px",
-            }}
-            onMouseEnter={() => setActiveImage(srcs[3].imageSource)}
-          >
-            <img
-              style={{ width: "100%", height: "100%" }}
-              src={srcs[3].color}
-            />
-          </div>
+          {value?.images?.map((data, i) => {
+            return <div
+              style={{
+                color: "inherit",
+                textDecoration: "inherit",
+                width: "32px",
+                height: "32px",
+                overflow: "hidden",
+                borderRadius: "9999px",
+                backgroundColor:`${data.color}`,
+              }}
+              onMouseEnter={() => setActiveImage(data.imageSource)}
+            >
+              
+            </div>;
+          })}
         </div>
 
         <Box
@@ -159,7 +117,7 @@ const NewProductCard = () => {
                 margin: "0px 0px 0px 4px",
               }}
             >
-              350mm
+              {value.width}mm
             </Typography>
           </Box>
           <Box
@@ -189,7 +147,7 @@ const NewProductCard = () => {
                 margin: "0px 0px 0px 4px",
               }}
             >
-              600mm
+              {value.height}mm
             </Typography>
           </Box>
           <Box
@@ -219,7 +177,7 @@ const NewProductCard = () => {
                 margin: "0px 0px 0px 4px",
               }}
             >
-              400mm
+              {value.depth}mm
             </Typography>
           </Box>
         </Box>
@@ -241,7 +199,7 @@ const NewProductCard = () => {
               margin: "0px 0px 10px 0px",
             }}
           >
-            £ 495
+            £ {value.price}
           </Typography>
         </Box>
       </Box>

@@ -1,6 +1,7 @@
 .newProduct-main-carousel > img{
     //.newProduct-main-carousel > div > img{
-    height:400px;           
+    height:400px !important;          
+    overflow: hidden; 
 }
 
 .new-products-card-main{

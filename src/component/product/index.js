@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getFurnitureCategory } from "../../store/furnitureCategory/furnitureCategorySlice";
 import {
   deleteImage,
+  getFurniture,
   postFurniture,
 } from "../../store/furniture/furnitureSlice";
 import SelectImage from "../SelectImage/SelectImage";
@@ -100,6 +101,7 @@ export default function Product() {
       categoryId: "",
       stock: "",
     });
+    dispatch(getFurniture());
     // reload();
   };
 
@@ -233,8 +235,10 @@ export default function Product() {
   );
 }
 
-/*
 
+//getFurniture
+
+/*
     campaignName:"undefined",
     categoryId:"undefined",
     title:"undefined",
