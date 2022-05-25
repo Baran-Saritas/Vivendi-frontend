@@ -152,6 +152,9 @@ export default function AddSet({ setOpenMessage, open, setOpen }) {
           <TextField
             value={name}
             onChange={(e) => setName(e.target.value)}
+            inputProps={{
+              autoComplete: "none",
+            }}
             autoFocus
             margin="dense"
             id="name"
@@ -164,6 +167,9 @@ export default function AddSet({ setOpenMessage, open, setOpen }) {
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             margin="dense"
+            inputProps={{
+              autoComplete: "none",
+            }}
             id="name"
             label="Set price"
             type="text"
@@ -196,6 +202,9 @@ export default function AddSet({ setOpenMessage, open, setOpen }) {
           <TextField
             id="outlined-multiline-static"
             label="Description"
+            inputProps={{
+              autoComplete: "none",
+            }}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             multiline

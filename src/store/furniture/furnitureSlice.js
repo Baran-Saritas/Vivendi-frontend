@@ -97,11 +97,25 @@ const deleteFurniture = createAsyncThunk(
   }
 );
 
+const postFurnitureCoupon = createAsyncThunk(
+  "furniture/addCoupon",
+  async ({ data, id }, { rejectWithValue, dispatch }) => {
+    let furniture_res = await product_api.post("/furniture/coupon/" + id, data);
+    if (furniture_res.status === 200) {
+      dispatch(setFullFilled({ value: true }));
+      return furniture_res.data;
+    } else {
+      rejectWithValue(furniture_res.data);
+    }
+  }
+);
+
 const updateFurnitures = createAsyncThunk(
   "furniture/update",
   async (data, { rejectWithValue, dispatch }) => {
-    let furniture_res = await furniture_api.put("/" + data.id, data.data);
+    let furniture_res = await product_api.put("/furniture", data);
     if (furniture_res.status === 200) {
+      dispatch(setFullFilled({ value: true }));
       return furniture_res.data;
     } else {
       rejectWithValue(furniture_res.data);
@@ -209,6 +223,7 @@ export {
   getFurnitureByCategoryIdOnHover,
   getFurnitureBySetId,
   deleteImage,
+  postFurnitureCoupon,
 };
 
 export const { removeFurniture } = FurnitureSlice.actions;

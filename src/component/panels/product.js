@@ -6,12 +6,15 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Product from "../product";
 import EditProdutView from "../product/EditProductView";
+import AddCoupon from "../product/coupon/AddCoupon";
+import DisplayCoupon from "../product/coupon/DisplayCoupon";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
   return (
     <div
+      style={{ width: "100%" }}
       role="tabpanel"
       hidden={value !== index}
       id={`vertical-tabpanel-${index}`}
@@ -66,12 +69,16 @@ export default function FurniturePanel() {
       >
         <Tab label="Add Furniture" {...a11yProps(0)} />
         <Tab label="Update Furniture" {...a11yProps(1)} />
+        <Tab label="Coupons" {...a11yProps(2)} />
       </Tabs>
       <TabPanel value={value} index={0}>
         <Product />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <EditProdutView />
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <DisplayCoupon />
       </TabPanel>
     </Box>
   );

@@ -72,12 +72,17 @@ const CustomHeader = () => {
       </div>
       <div className="header-mid" onMouseLeave={() => setIsSelect(0)}>
         <div className="hamburger-menu">
-          <div
-            style={{ marginLeft: "10px" }}
-            className="dialog-item-2"
-          >
-            {state === true ? <IoMdClose size={45} onClick={() => {setState(false)}} /> : <IoIosMenu size={50} 
-            onClick={() => toggleDrawer(true)} />}
+          <div style={{ marginLeft: "10px" }} className="dialog-item-2">
+            {state === true ? (
+              <IoMdClose
+                size={45}
+                onClick={() => {
+                  setState(false);
+                }}
+              />
+            ) : (
+              <IoIosMenu size={50} onClick={() => toggleDrawer(true)} />
+            )}
           </div>
           <div className="furnitureDrawer"></div>
           <Drawer
@@ -92,7 +97,7 @@ const CustomHeader = () => {
             onClose={() => toggleDrawer(false)}
           >
             <Box
-            className="hamburger-list-width"
+              className="hamburger-list-width"
               PaperProps={{
                 sx: { width: "100%" },
               }}
@@ -190,8 +195,9 @@ const CustomHeader = () => {
         {!!isSelect && (
           <div className="nav-pane">
             <div className="nav-pane-left">
-              {headerFurnitureData?.[isSelect]?.map((furniture) => (
+              {headerFurnitureData?.[isSelect]?.map((furniture, i) => (
                 <div
+                  key={i}
                   onClick={() => {
                     navigate(`/products/detail/${furniture.id}`);
                   }}
@@ -205,8 +211,9 @@ const CustomHeader = () => {
 
             <div className="nav-pane-right">
               <div>
-                {headerSetData?.[isSelect]?.map((set) => (
+                {headerSetData?.[isSelect]?.map((set, i) => (
                   <HeaderSetCarousel
+                    key={i}
                     set={set}
                     speed={2500}
                     autoplaySpeed={6000}

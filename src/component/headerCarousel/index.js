@@ -42,10 +42,6 @@ const HeaderSetCarousel = ({ set, speed, autoplaySpeed }) => {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
-
-  useEffect(() => {
-    console.log("set :",set);
-  },[])
   return (
     <div>
       <Slider {...settings}>
