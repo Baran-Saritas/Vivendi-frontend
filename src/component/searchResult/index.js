@@ -32,7 +32,7 @@ const useStyles = makeStyles({
   },
   a: {},
 });
-const SearchResultNew = ({ containerRef, search, anchorEl, setAnchorEl }) => {
+const SearchResultNew = ({ filterData, anchorEl, setAnchorEl }) => {
   const dispatch = useDispatch();
   const ref = useRef(null);
   const classes = useStyles();
@@ -42,6 +42,9 @@ const SearchResultNew = ({ containerRef, search, anchorEl, setAnchorEl }) => {
     (state) => state.productCart
   );
 
+  useEffect(() =>{
+    console.log("filterData:",filterData);
+  },[filterData])
   return (
     <>
       {/* <Badge badgeContent={shoppingCartProduct.totalCount} color="primary">

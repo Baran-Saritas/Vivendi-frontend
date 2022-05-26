@@ -47,6 +47,7 @@ const globalSlice = createSlice({
     setIdValue: 0,
     headerFurnitureData: {},
     headerSetData: {},
+    searchData:{},
   },
   reducers: {
     setHeaderData: (state, { payload }) => {
@@ -69,9 +70,12 @@ const globalSlice = createSlice({
     setId: (state, { payload: { value } }) => {
       state.setIdValue = value;
     },
+    setSearchData: (state, { payload}) => {
+      state.searchData = payload;
+    },
   },
 });
 
-export const { setHeaderData, setGlob, setFullFilled, setStory, setId } =
+export const { setHeaderData, setGlob, setFullFilled, setStory, setId,setSearchData } =
   globalSlice.actions;
 export default globalSlice.reducer;

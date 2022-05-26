@@ -4,7 +4,7 @@ import SearchResult from "./SearchResult";
 import Sign from "../../pages/user/index";
 import HeaderShoppingCart from "../shoppingCart";
 import { useDispatch, useSelector } from "react-redux";
-import { getHeaderData, setId } from "../../store/global/globalSlice";
+import { getHeaderData, setId, setSearchData } from "../../store/global/globalSlice";
 import { useNavigate } from "react-router-dom";
 import { IoIosMenu, IoMdClose } from "react-icons/io";
 import HeaderSetCarousel from "../headerCarousel";
@@ -17,17 +17,33 @@ const CustomHeader = () => {
   const navigate = useNavigate();
   const { headerFurnitureData } = useSelector((state) => state.global);
   const { headerSetData } = useSelector((state) => state.global);
+  const { setInfos } = useSelector((state) => state.setInfo);
+  const { furnitures } = useSelector((state) => state.furniture);
   const ref = useRef(null);
   
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
+  const [filterData,setFilterData] = useState();
   const [isSelect, setIsSelect] = useState(0);
   const [isFocus, setIsFocus] = useState(false);
   const [state, setState] = React.useState(false);
   const toggleDrawer = (open) => {
     setState(open);
   };
+  
+  useEffect(() => {
+    setTimeout(function() {
+      setFilterData(furnitures.filter(furnitures => furnitures.name.toLowerCase().includes(search) ));
+    }, 1000);
+    
+  }, [search]);
+
+
+  useEffect(() => {
+    dispatch(setSearchData(filterData));
+  }, [filterData]);
+
   useEffect(() => {
     dispatch(getHeaderData());
   }, []);
@@ -53,13 +69,19 @@ const CustomHeader = () => {
           <div className="res-con" ref={ref}>
             <input
               value={search}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  navigate("/search-results")
+                }
+            }}
               onChange={(e) => setSearch(e.target.value)}
               onClick={(e) => setAnchorEl(e.currentTarget)}
             />
             <div className="btn-con">
               <button>Search</button>
             </div>
-              <SearchResultNew              
+              <SearchResultNew    
+              filterData={filterData}          
               anchorEl={anchorEl}
               setAnchorEl={setAnchorEl}
               />

@@ -32,7 +32,7 @@ const NewSetCarousel = ({ speed, autoplaySpeed,setInfos }) => {
     slidesToShow: 1,
     swipeToSlide: true,
     autoplay: true,
-    speed: speed || 5000,
+    speed:  700,
     autoplaySpeed: autoplaySpeed || 4000,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,

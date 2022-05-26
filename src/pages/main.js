@@ -12,7 +12,10 @@ import { useDispatch, useSelector } from "react-redux";
 import SetDetailCard from "../component/setdetailcard";
 import NewProductCarousel from "../component/newProduct";
 import { useNavigate } from "react-router-dom";
-import { getFurniture, getFurnitureByAsc } from "../store/furniture/furnitureSlice";
+import {
+  getFurniture,
+  getFurnitureByAsc,
+} from "../store/furniture/furnitureSlice";
 import NewSetCarousel from "../component/newSet";
 import { getFurnitureSetByAsc } from "../store/furnitureSetInfo/furnitureSetInfoSlice";
 
@@ -35,13 +38,10 @@ export default function Main() {
     return res;
   }
 
- 
-  useEffect(() =>{
-  dispatch(getFurnitureByAsc());
-  
-  dispatch(getFurnitureSetByAsc());
-
-  },[])
+  useEffect(() => {
+    dispatch(getFurnitureByAsc());
+    dispatch(getFurnitureSetByAsc());
+  }, []);
   return (
     <div className="main">
       <div
@@ -57,7 +57,7 @@ export default function Main() {
           className="b-carousel-side-div"
           style={{ width: "90%", borderRadius: "10px" }}
         >
-          <CustomCarousel  />
+          <CustomCarousel />
         </div>
       </div>
 
@@ -68,7 +68,7 @@ export default function Main() {
       </div>
       <div className="categoryCarousel-div">
         <div className="Carousel-div">
-          <CategoryCarousel  furnitures={furnitures} setInfos={setInfos} />
+          <CategoryCarousel furnitures={furnitures} setInfos={setInfos} />
         </div>
       </div>
 
@@ -213,7 +213,7 @@ export default function Main() {
             className="new-products-card-main"
             style={{
               width: "70%",
-              height:"100%",
+              height: "100%",
               boxShadow:
                 "rgba(0, 0, 0, 0.3) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
             }}
