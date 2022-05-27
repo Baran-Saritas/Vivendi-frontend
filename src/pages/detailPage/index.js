@@ -31,8 +31,7 @@ const DetailPage = () => {
   }, [product_id]);
 
   const discount = () => {
-    // days > 0
-    if (1) {
+    if (days > 0) {
       return (
         <span
           style={{
