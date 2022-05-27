@@ -46,7 +46,7 @@ const NewProductCard = ({ value }) => {
       >
         <Typography
           component="div"
-          variant="h4"
+          variant="h5"
           sx={{
             fontWeight: "500",
             color: "#444",

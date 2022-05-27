@@ -82,9 +82,6 @@ const DetailPage = () => {
                 Product Code: {furniture.id}
               </p>
               <p className="product-up-right-price">
-                Price : ${money(furniture.price)}
-              </p>
-              {/*<p>Price : ${money(furniture.price)}</p>*/}
               <div
                 style={{
                   display: "grid",
@@ -118,6 +115,9 @@ const DetailPage = () => {
                 </span>
                 {discount()}
               </div>
+              </p>
+              {/*<p>Price : ${money(furniture.price)}</p>*/}
+             
               <div className="product-up-right-colors">
                 {furniture.images.map((image, i) => (
                   <div

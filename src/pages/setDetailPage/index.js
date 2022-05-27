@@ -77,7 +77,7 @@ const SetDetailPage = () => {
               <p className="product-up-right-name">{set.name}</p>
               <p className="product-up-right-code">Product Code: {set.id}</p>
               <p className="product-up-right-price">
-                Price : ${money(set.price)}
+                
                 <div
                   style={{
                     display: "grid",
