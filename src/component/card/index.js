@@ -36,8 +36,6 @@ const CustomCard = ({ value }) => {
       variants={variant}
       initial="closed"
       whileHover="open"
-
-
       style={{
         display: "flex",
         flexDirection: "column",
@@ -53,9 +51,9 @@ const CustomCard = ({ value }) => {
         style={{ height: "350px", width: "100%", overflow: "hidden" }}
       >
         <img
-              onClick={() => {
-                navigate(`/products/detail/${value.id}`);
-              }}
+          onClick={() => {
+            navigate(`/products/detail/${value.id}`);
+          }}
           animate={isHover ? { scale: 1.05 } : ""}
           style={{
             height: "100%",
@@ -68,9 +66,7 @@ const CustomCard = ({ value }) => {
           alt="sehpa"
         />
       </div>
-
       <IconComponent value={value} />
-
       <CardFooter setActiveImage={setActiveImage} value={value} />
     </motion.div>
   );

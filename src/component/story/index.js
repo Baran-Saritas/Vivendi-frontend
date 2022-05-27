@@ -3,7 +3,7 @@ import Stories from "react-insta-stories";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setStory } from "../../store/global/globalSlice";
-const Story = ({data}) => {
+const Story = ({ data }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { campaigns } = useSelector((state) => state.campaign);
@@ -97,13 +97,14 @@ const Story = ({data}) => {
     },
   ];
   let res = data.map((i) => {
-    console.log("St : ", i)
     return {
       duration: 3000,
       content: (props) => (
         <div
           key={i}
-          onClick={() => navigate(`/products/${i.width ? "detail" : "setDetail"}/${i.id}`)}
+          onClick={() =>
+            navigate(`/products/${i.width ? "detail" : "setDetail"}/${i.id}`)
+          }
           style={{
             width: "100%",
             height: "100%",
@@ -148,7 +149,7 @@ const Story = ({data}) => {
     };
   });
 
-  return  (
+  return (
     <>
       <div className="large-Story">
         <Stories
@@ -203,6 +204,6 @@ const Story = ({data}) => {
         />
       </div>
     </>
-  ) ;
+  );
 };
 export default Story;

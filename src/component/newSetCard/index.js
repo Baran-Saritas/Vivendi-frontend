@@ -17,25 +17,22 @@ import { useNavigate } from "react-router-dom";
 
 const NewSetCard = ({ value }) => {
   const [activeImage, setActiveImage] = useState(value.images[0].imageSource);
-  const navigate= useNavigate();
-  const theme = useTheme();
-
-  useEffect(() => {
-    console.log("step3Set", value);
-  }, []);
-
+  const navigate = useNavigate();
   return (
     <Card
       className="newFurnitureCard"
       sx={{
         display: "flex",
         padding: "20px",
-        height:"100%",
+        height: "100%",
         justifyContent: "space-between",
       }}
     >
-      <div className="newFurnitureCardLeft" style={{ width: "55%",overflow:"hidden" }}>
-        <img style={{ width: "90%" }} src={activeImage} />
+      <div
+        className="newFurnitureCardLeft"
+        style={{ width: "55%", overflow: "hidden" }}
+      >
+        <img style={{ width: "90%" }} src={activeImage} alt="fur" />
       </div>
 
       <Box
@@ -68,31 +65,30 @@ const NewSetCard = ({ value }) => {
           }}
         >
           {value?.images?.map((data, i) => {
-            return <div
-            key={i}
-              style={{
-                color: "inherit",
-                textDecoration: "inherit",
-                width: "32px",
-                height: "32px",
-                overflow: "hidden",
-                borderRadius: "9999px",
-                backgroundColor:`${data.color}`,
-              }}
-              onMouseEnter={() => setActiveImage(data.imageSource)}
-            >
-              
-            </div>;
+            return (
+              <div
+                key={i}
+                style={{
+                  color: "inherit",
+                  textDecoration: "inherit",
+                  width: "32px",
+                  height: "32px",
+                  overflow: "hidden",
+                  borderRadius: "9999px",
+                  backgroundColor: `${data.color}`,
+                }}
+                onMouseEnter={() => setActiveImage(data.imageSource)}
+              ></div>
+            );
           })}
         </div>
-
 
         <Box
           sx={{
             flexDirection: "row",
             display: "flex",
-            width:"70%",
-            justifyContent:"space-between",
+            width: "70%",
+            justifyContent: "space-between",
             alignItems: "center",
             margin: "40px 0px 0px 10px",
           }}
@@ -109,11 +105,17 @@ const NewSetCard = ({ value }) => {
           >
             £ {value.price}
           </Typography>
-          <Button onClick={() =>{navigate("/products/setDetail/"+ value.id)}} variant="outlined">View</Button>
+          <Button
+            onClick={() => {
+              navigate("/products/setDetail/" + value.id);
+            }}
+            variant="outlined"
+          >
+            View
+          </Button>
         </Box>
       </Box>
     </Card>
   );
 };
 export default NewSetCard;
-

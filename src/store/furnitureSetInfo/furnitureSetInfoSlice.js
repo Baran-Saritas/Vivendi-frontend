@@ -17,7 +17,7 @@ const getFurnitureSetInfo = createAsyncThunk(
 const getFurnitureSetByAsc = createAsyncThunk(
   "setInfo/getAll",
   async (_, { rejectWithValue }) => {
-    const res = await product_api.get("/set/asc");
+    const res = await product_api.get("/set/desc");
     //const res = await set_info_api.get("/");
     if (res.status === 200) {
       return res.data;
@@ -180,7 +180,6 @@ const furnitureSetInfoSlice = createSlice({
     },
   },
   extraReducers: {
-
     //getFurnitureSetByAsc
 
     [getFurnitureSetByAsc.fulfilled]: (state, action) => {

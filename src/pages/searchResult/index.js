@@ -1,36 +1,54 @@
+import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import CustomCard from "../../component/card";
-import DetailCard from "../../component/dcard/index";
-import KindFilter from "../../component/product/KindFilter";
-import OrderFilter from "../../component/product/OrderFilter";
-import { getFurnitureByCategoryId } from "../../store/furniture/furnitureSlice";
+import { product_api } from "../../utilrs/axiosInterceptors";
 
 export default function SearchProducts() {
-  const { furnitures } = useSelector((state) => state.furniture);
-  const [productsName,setProductsName] = useState("");
-  const { searchData } = useSelector((state) => state.global);
-  const dispatch = useDispatch();
-//  var NewText = SampleText.replace("Developer", "App Builder");
+  const [searchparam] = useSearchParams();
+  const [activeBtn, setActiveBtn] = useState("furniture");
+  const [furniture, setFurniture] = useState([]);
+  const [set, setSet] = useState([]);
 
-useEffect(()=>{
-  console.log("Data",searchData);
-},[])
+  const getProducts = () => {
+    let notFound = <h2>{searchparam.get("name") + " not found."}</h2>;
+    if (activeBtn === "furniture") {
+      if (!furniture.length) return notFound;
+      return furniture.map((f, i) => <CustomCard key={i} value={f} />);
+    } else if (activeBtn === "set") {
+      if (!set.length) return notFound;
+      return set.map((s, i) => <CustomCard key={i} value={s} />);
+    }
+  };
+
+  useEffect(() => {
+    product_api
+      .get("/furniture/search?" + searchparam.toString())
+      .then((res) => setFurniture(res.data));
+    product_api
+      .get("/set/search?" + searchparam.toString())
+      .then((res) => setSet(res.data));
+  }, [searchparam]);
+
   return (
     <div className="products-page">
       <div className="products-page-side">
-        <h1>{productsName !== "" ? productsName:null}</h1>
+        <h1>RESULT</h1>
         <hr />
         <div className="products-filter">
-          <OrderFilter />
+          <ToggleButtonGroup
+            color="primary"
+            value={activeBtn}
+            exclusive
+            onChange={(_, i) => setActiveBtn(i)}
+          >
+            <ToggleButton value="furniture">furniture</ToggleButton>
+            <ToggleButton value="set">Set</ToggleButton>
+          </ToggleButtonGroup>
+          {/*<OrderFilter />*/}
           {/* <KindFilter /> */}
         </div>
-        <div className="all-products">
-          {furnitures?.map((value, i) => (
-            <CustomCard key={i} value={value} />
-          ))}
-        </div>
+        <div className="all-products">{getProducts()}</div>
         <br />
         <br />
         <div style={{ justifyContent: "center", display: "flex" }}>
@@ -41,21 +59,3 @@ useEffect(()=>{
     </div>
   );
 }
-
-
-/*
-
-useEffect(() => {
-  let arr = []
-  setInfos.forEach(i => {
-    if(i.categoryId === "a76ec128-c8be-4234-be0c-158518585153" && i.coupon)
-      arr.push(i)
-  })
-  furnitures.forEach(i => {
-    if(i.categoryId === "a76ec128-c8be-4234-be0c-158518585153" && i.coupon)
-      arr.push(i)
-  })
-  setChair(arr)
-},[furnitures, setInfos])
-
-*/

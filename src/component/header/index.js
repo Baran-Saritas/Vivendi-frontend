@@ -1,14 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import SearchResult from "./SearchResult";
 import Sign from "../../pages/user/index";
 import HeaderShoppingCart from "../shoppingCart";
 import { useDispatch, useSelector } from "react-redux";
-import { getHeaderData, setId, setSearchData } from "../../store/global/globalSlice";
+import { getHeaderData, setSearchData } from "../../store/global/globalSlice";
 import { useNavigate } from "react-router-dom";
 import { IoIosMenu, IoMdClose } from "react-icons/io";
 import HeaderSetCarousel from "../headerCarousel";
-import { Box, Drawer } from "@mui/material";
+import {
+  Autocomplete,
+  Box,
+  ClickAwayListener,
+  Drawer,
+  FormControl,
+  OutlinedInput,
+  TextField,
+} from "@mui/material";
 import HamburgerList from "../hamburgerMenu/hamburgerList";
 import SearchResultNew from "../searchResult";
 
@@ -19,26 +26,16 @@ const CustomHeader = () => {
   const { headerSetData } = useSelector((state) => state.global);
   const { setInfos } = useSelector((state) => state.setInfo);
   const { furnitures } = useSelector((state) => state.furniture);
-  const ref = useRef(null);
-  
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
-  const [filterData,setFilterData] = useState();
+  const [filterData, setFilterData] = useState();
   const [isSelect, setIsSelect] = useState(0);
-  const [isFocus, setIsFocus] = useState(false);
   const [state, setState] = React.useState(false);
+  const ref = useRef(null);
   const toggleDrawer = (open) => {
     setState(open);
   };
-  
-  useEffect(() => {
-    setTimeout(function() {
-      setFilterData(furnitures.filter(furnitures => furnitures.name.toLowerCase().includes(search) ));
-    }, 1000);
-    
-  }, [search]);
-
 
   useEffect(() => {
     dispatch(setSearchData(filterData));
@@ -48,9 +45,6 @@ const CustomHeader = () => {
     dispatch(getHeaderData());
   }, []);
 
-  useEffect(() => {
-    console.log(anchorEl);
-  }, [anchorEl]);
   return (
     <motion.div className="header">
       <Sign open={open} setOpen={setOpen} />
@@ -67,30 +61,55 @@ const CustomHeader = () => {
         </div>
         <div className="header-search" tabIndex="0">
           <div className="res-con" ref={ref}>
+            <Box sx={{ width: "100%" }} noValidate autoComplete="off">
+              <FormControl sx={{ width: "100%" }}>
+                <OutlinedInput
+                  sx={{ padding: "2px 0px" }}
+                  size="small"
+                  placeholder="Search..."
+                  value={search}
+                  onClick={(e) => {
+                    setAnchorEl(e.currentTarget);
+                  }}
+                  onChange={(e) => setSearch(e.target.value)}
+                  onKeyPress={(e) => {
+                    if (e.key === "Enter") {
+                      navigate("/search-results?name=" + search);
+                    }
+                  }}
+                />
+              </FormControl>
+            </Box>
+            {/*
             <input
               value={search}
               onKeyPress={(e) => {
                 if (e.key === "Enter") {
-                  navigate("/search-results")
+                  navigate("/search-results?name=" + search);
                 }
-            }}
+              }}
               onChange={(e) => setSearch(e.target.value)}
-              onClick={(e) => setAnchorEl(e.currentTarget)}
+              onClick={(e) => {
+                setAnchorEl(e.currentTarget);
+                e.currentTarget.focus();
+              }}
             />
             <div className="btn-con">
               <button>Search</button>
             </div>
-              <SearchResultNew    
-              filterData={filterData}          
+            */}
+            {/* 
+            <SearchResultNew
+              filterData={filterData}
               anchorEl={anchorEl}
               setAnchorEl={setAnchorEl}
-              />
+            />
+          */}
           </div>
         </div>
         <div className="header-util">
           <p onClick={() => setOpen(true)}>Sign In</p>
           <p>
-            {" "}
             <HeaderShoppingCart />
           </p>
         </div>
@@ -178,7 +197,9 @@ const CustomHeader = () => {
           </div>
           <div
             onClick={() => {
-              navigate(`/products/775f98ce-a2f2-4c9b-bd70-fcb99481af9a/Bergere`);
+              navigate(
+                `/products/775f98ce-a2f2-4c9b-bd70-fcb99481af9a/Bergere`
+              );
             }}
             onMouseEnter={() => setIsSelect(6)}
           >
@@ -186,7 +207,9 @@ const CustomHeader = () => {
           </div>
           <div
             onClick={() => {
-              navigate(`/products/888cce34-8ce8-4207-9628-be245d6930c0/Lampshade`);
+              navigate(
+                `/products/888cce34-8ce8-4207-9628-be245d6930c0/Lampshade`
+              );
             }}
             onMouseEnter={() => setIsSelect(7)}
           >
@@ -202,7 +225,9 @@ const CustomHeader = () => {
           </div>
           <div
             onClick={() => {
-              navigate(`/products/e557af58-0800-4ac6-8783-8ecc9f7cf337/Tv-Units`);
+              navigate(
+                `/products/e557af58-0800-4ac6-8783-8ecc9f7cf337/Tv-Units`
+              );
             }}
             onMouseEnter={() => setIsSelect(9)}
           >
@@ -210,7 +235,9 @@ const CustomHeader = () => {
           </div>
           <div
             onClick={() => {
-              navigate(`/products/f48538c8-e405-4e5b-bea7-28d948aba48a/Console-Table`);
+              navigate(
+                `/products/f48538c8-e405-4e5b-bea7-28d948aba48a/Console-Table`
+              );
             }}
             onMouseEnter={() => setIsSelect(10)}
           >
