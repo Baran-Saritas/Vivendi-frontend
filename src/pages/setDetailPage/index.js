@@ -6,10 +6,12 @@ import { useParams } from "react-router-dom";
 import FurnitureDetailCard from "../../component/furnitureDetailCard";
 import { product_api, set_info_api } from "../../utilrs/axiosInterceptors";
 import { money } from "../../utilrs/commons";
+import moment from "moment";
 
 const SetDetailPage = () => {
   const { set_id } = useParams();
   const [set, setSet] = useState(undefined);
+  const [days, setDays] = useState(null);
   const [activeImageUp, setActiveImageUp] = useState();
 
   useEffect(() => {
@@ -18,11 +20,30 @@ const SetDetailPage = () => {
         .get("/set/" + set_id)
         .then((res) => {
           setSet(res.data);
+          if (res.data.coupon && res.data.coupon.discount) {
+            let days = moment(res.data.coupon.endDate).diff(moment(), "days");
+            setDays(days);
+          }
           setActiveImageUp(res.data.images[0].imageSource);
         })
         .catch((err) => console.log(err));
     }
   }, [set_id]);
+
+  const discount = () => {
+    if (days > 0) {
+      return (
+        <span
+          style={{
+            gridArea: "2 / 2",
+          }}
+        >
+          {money(set.price - set.price * (set.coupon.discount / 100))}
+        </span>
+      );
+    }
+    return null;
+  };
 
   const handleMouseEnter = (image) => {
     setActiveImageUp(image.imageSource);
@@ -57,6 +78,39 @@ const SetDetailPage = () => {
               <p className="product-up-right-code">Product Code: {set.id}</p>
               <p className="product-up-right-price">
                 Price : ${money(set.price)}
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(2, 1fr)",
+                    gridTemplateRows: "repeat(2, 1fr)",
+                  }}
+                >
+                  <span
+                    style={
+                      days > 0
+                        ? {
+                            gridArea: "2 / 1",
+                          }
+                        : {}
+                    }
+                  >
+                    Price :
+                  </span>
+                  <span
+                    style={
+                      days > 0
+                        ? {
+                            textDecoration: "line-through",
+                            color: "red",
+                            gridArea: "1 / 2",
+                          }
+                        : {}
+                    }
+                  >
+                    {money(set.price)}
+                  </span>
+                  {discount()}
+                </div>
               </p>
               <div className="product-up-right-colors">
                 {set.images.map((image, i) => (
