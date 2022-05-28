@@ -46,8 +46,9 @@ const NewSetCard = ({ value }) => {
       >
         <Typography
           component="div"
-          variant="h4"
+          variant="h5"
           sx={{
+            fontSize:"28px",
             fontWeight: "500",
             color: "#444",
             margin: "15px 0px 0px 10px",
@@ -55,15 +56,31 @@ const NewSetCard = ({ value }) => {
         >
           {value.name}
         </Typography>
+
+
+        <Typography
+          component="div"
+          variant="h5"
+          sx={{
+            fontSize:"19px",
+            fontWeight: "100",
+            opacity:0.8,
+            color: "#444",
+            margin: "25px 0px 0px 10px",
+          }}
+        >
+          {value.description}
+        </Typography>        
         <div
           style={{
             width: "100%",
-            padding: "0px 0px 0px 10px",
+            padding: "40px 0px 0px 10px",
             display: "flex",
             columnGap: "10px",
             marginTop: "20px",
           }}
         >
+          
           {value?.images?.map((data, i) => {
             return (
               <div
@@ -71,8 +88,8 @@ const NewSetCard = ({ value }) => {
                 style={{
                   color: "inherit",
                   textDecoration: "inherit",
-                  width: "32px",
-                  height: "32px",
+                  width: "26px",
+                  height: "26px",
                   overflow: "hidden",
                   borderRadius: "9999px",
                   backgroundColor: `${data.color}`,
@@ -87,34 +104,27 @@ const NewSetCard = ({ value }) => {
           sx={{
             flexDirection: "row",
             display: "flex",
-            width: "70%",
-            justifyContent: "space-between",
+            justifyContent:"space-between",
+            width:"70%",
             alignItems: "center",
-            margin: "40px 0px 0px 10px",
+            margin: "3  0px 0px 0px 10px",
           }}
         >
           <Typography
             component="div"
             variant="h4 "
             sx={{
+              fontSize:"23px",
               fontFamily: "New Roman,Times,serif",
-              fontWeight: "500",
+              fontWeight: "200",
               color: "#242433",
-              margin: "0px 0px 10px 0px",
+              margin: "20px 0px 10px 10px",
             }}
           >
-            £ {value.price}
+            $ {value.price}
           </Typography>
-          <Button
-            onClick={() => {
-              navigate("/products/setDetail/" + value.id);
-            }}
-            variant="outlined"
-          >
-            View
-          </Button>
-        </Box>
-      </Box>
+          <Button onClick={() =>{navigate("/products/detail/"+ value.id)}} variant="outlined">View</Button>
+        </Box> </Box>
     </Card>
   );
 };

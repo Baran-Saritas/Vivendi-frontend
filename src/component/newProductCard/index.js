@@ -48,7 +48,8 @@ const NewProductCard = ({ value }) => {
           component="div"
           variant="h5"
           sx={{
-            fontWeight: "500",
+            fontSize:"28px",
+            fontWeight: "100",
             color: "#444",
             margin: "15px 0px 0px 10px",
           }}
@@ -58,7 +59,7 @@ const NewProductCard = ({ value }) => {
         <div
           style={{
             width: "100%",
-            padding: "0px 0px 0px 10px",
+            padding: "20px 0px 0px 10px",
             display: "flex",
             columnGap: "10px",
             marginTop: "20px",
@@ -70,8 +71,8 @@ const NewProductCard = ({ value }) => {
               style={{
                 color: "inherit",
                 textDecoration: "inherit",
-                width: "32px",
-                height: "32px",
+                width: "26px",
+                height: "26px",
                 overflow: "hidden",
                 borderRadius: "9999px",
                 backgroundColor:`${data.color}`,
@@ -88,7 +89,7 @@ const NewProductCard = ({ value }) => {
             flexDirection: "row",
             display: "flex",
             alignItems: "center",
-            margin: "30px 0px 0px 10px",
+            margin: "20px 0px 0px 10px",
           }}
         >
           <Box
@@ -103,7 +104,8 @@ const NewProductCard = ({ value }) => {
               component="div"
               variant="h5"
               sx={{
-                fontWeight: "500",
+                fontSize:"17px",
+                fontWeight: "200",
                 color: "#242433",
               }}
             >
@@ -113,7 +115,8 @@ const NewProductCard = ({ value }) => {
               component="div"
               variant="h6"
               sx={{
-                fontWeight: "500",
+                fontWeight: "2  00",
+                fontSize:"17px",
                 color: "#444",
                 margin: "0px 0px 0px 4px",
               }}
@@ -133,7 +136,8 @@ const NewProductCard = ({ value }) => {
               component="div"
               variant="h5"
               sx={{
-                fontWeight: "500",
+                fontSize:"17px",
+                fontWeight: "200",
                 color: "#242433",
               }}
             >
@@ -143,7 +147,8 @@ const NewProductCard = ({ value }) => {
               component="div"
               variant="h6"
               sx={{
-                fontWeight: "500",
+                fontSize:"17px",
+                fontWeight: "200",
                 color: "#444",
                 margin: "0px 0px 0px 4px",
               }}
@@ -163,7 +168,8 @@ const NewProductCard = ({ value }) => {
               component="div"
               variant="h5"
               sx={{
-                fontWeight: "500",
+                fontSize:"17px",
+                fontWeight: "200",
                 color: "#242433",
               }}
             >
@@ -173,7 +179,8 @@ const NewProductCard = ({ value }) => {
               component="div"
               variant="h6"
               sx={{
-                fontWeight: "500",
+                fontSize:"17px",
+                fontWeight: "200",
                 color: "#444",
                 margin: "0px 0px 0px 4px",
               }}
@@ -196,13 +203,14 @@ const NewProductCard = ({ value }) => {
             component="div"
             variant="h4 "
             sx={{
+              fontSize:"23px",
               fontFamily: "New Roman,Times,serif",
-              fontWeight: "500",
+              fontWeight: "200",
               color: "#242433",
               margin: "0px 0px 10px 0px",
             }}
           >
-            £ {value.price}
+            $ {value.price}
           </Typography>
           <Button onClick={() =>{navigate("/products/detail/"+ value.id)}} variant="outlined">View</Button>
         </Box>
