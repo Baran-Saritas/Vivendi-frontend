@@ -3,46 +3,38 @@ import { motion } from "framer-motion";
 import Sign from "../../pages/user/index";
 import HeaderShoppingCart from "../shoppingCart";
 import { useDispatch, useSelector } from "react-redux";
-import { getHeaderData, setSearchData } from "../../store/global/globalSlice";
 import { useNavigate } from "react-router-dom";
 import { IoIosMenu, IoMdClose } from "react-icons/io";
 import HeaderSetCarousel from "../headerCarousel";
-import {
-  Autocomplete,
-  Box,
-  ClickAwayListener,
-  Drawer,
-  FormControl,
-  OutlinedInput,
-  TextField,
-} from "@mui/material";
+import { Box, Drawer, FormControl, OutlinedInput } from "@mui/material";
 import HamburgerList from "../hamburgerMenu/hamburgerList";
-import SearchResultNew from "../searchResult";
+import { category_api } from "../../utilrs/axiosInterceptors";
 
 const CustomHeader = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { headerFurnitureData } = useSelector((state) => state.global);
   const { headerSetData } = useSelector((state) => state.global);
-  const { setInfos } = useSelector((state) => state.setInfo);
-  const { furnitures } = useSelector((state) => state.furniture);
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
-  const [filterData, setFilterData] = useState();
   const [isSelect, setIsSelect] = useState(0);
   const [state, setState] = React.useState(false);
+  const [categories, setCategories] = useState([]);
   const ref = useRef(null);
   const toggleDrawer = (open) => {
     setState(open);
   };
 
   useEffect(() => {
-    dispatch(setSearchData(filterData));
-  }, [filterData]);
-
-  useEffect(() => {
-    dispatch(getHeaderData());
+    category_api
+      .get("/category")
+      .then((res) => {
+        setCategories(res.data);
+      })
+      .catch((err) => {
+        // handle err
+        console.log("error : ", err);
+      });
   }, []);
 
   return (
@@ -155,94 +147,17 @@ const CustomHeader = () => {
         </div>
 
         <nav className="large-menu">
-          <div
-            onClick={() => {
-              navigate(`/products/c76f7cef-f05f-4142-8a80-da88be374b66`);
-            }}
-            onMouseEnter={() => setIsSelect(1)}
-          >
-            Deneme
-          </div>
-          <div
-            onClick={() => {
-              navigate(`/products/ca333a93-4630-4cd9-8176-2969887072c2/Sofas`);
-            }}
-            onMouseEnter={() => setIsSelect(2)}
-          >
-            Sofas
-          </div>
-          <div
-            onClick={() => {
-              navigate(`/products/ea6b1aaf-65c0-4023-9248-cfa2ac8e3cbc/Beds`);
-            }}
-            onMouseEnter={() => setIsSelect(3)}
-          >
-            Beds
-          </div>
-          <div
-            onClick={() => {
-              navigate(`/products/a76ec128-c8be-4234-be0c-158518585153/Chair`);
-            }}
-            onMouseEnter={() => setIsSelect(4)}
-          >
-            Chair{" "}
-          </div>
-          <div
-            onClick={() => {
-              navigate(`/products/635e94eb-75ac-4933-a75c-07a21db3a319/Tables`);
-            }}
-            onMouseEnter={() => setIsSelect(5)}
-          >
-            Tables
-          </div>
-          <div
-            onClick={() => {
-              navigate(
-                `/products/775f98ce-a2f2-4c9b-bd70-fcb99481af9a/Bergere`
-              );
-            }}
-            onMouseEnter={() => setIsSelect(6)}
-          >
-            Bergere
-          </div>
-          <div
-            onClick={() => {
-              navigate(
-                `/products/888cce34-8ce8-4207-9628-be245d6930c0/Lampshade`
-              );
-            }}
-            onMouseEnter={() => setIsSelect(7)}
-          >
-            Lampshade{" "}
-          </div>
-          <div
-            onClick={() => {
-              navigate(`/products/1161f244-93cb-4415-9940-d2ceb6ea3a7c/Mirror`);
-            }}
-            onMouseEnter={() => setIsSelect(8)}
-          >
-            Mirror
-          </div>
-          <div
-            onClick={() => {
-              navigate(
-                `/products/e557af58-0800-4ac6-8783-8ecc9f7cf337/Tv-Units`
-              );
-            }}
-            onMouseEnter={() => setIsSelect(9)}
-          >
-            Tv Units
-          </div>
-          <div
-            onClick={() => {
-              navigate(
-                `/products/f48538c8-e405-4e5b-bea7-28d948aba48a/Console-Table`
-              );
-            }}
-            onMouseEnter={() => setIsSelect(10)}
-          >
-            Console Table
-          </div>
+          {categories.map((category) => (
+            <div
+              key={category.id}
+              onClick={() => {
+                navigate(`/products/${category.id}`);
+              }}
+              onMouseEnter={() => setIsSelect(1)}
+            >
+              {category.name}
+            </div>
+          ))}
         </nav>
         {!!isSelect && (
           <div className="nav-pane">

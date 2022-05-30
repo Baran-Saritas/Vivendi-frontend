@@ -8,12 +8,15 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useDispatch, useSelector } from "react-redux";
 import { setFullFilled } from "../../store/global/globalSlice";
-import { postFurnitureCategory } from "../../store/furnitureCategory/furnitureCategorySlice";
 import SelectImage from "../../component/SelectImage/SelectImage";
+import {
+  getCategory,
+  postCategory,
+} from "../../store/furnitureCategory/furnitureCategorySlice";
+import { category_api } from "../../utilrs/axiosInterceptors";
 
 export default function AddCategory({ setOpenMessage, open, setOpen }) {
   const dispatch = useDispatch();
-  const { fullfilled } = useSelector((state) => state.global);
   const [images, setImages] = React.useState([]);
   const [name, setName] = React.useState("");
   const handleOk = async (e) => {
@@ -29,19 +32,24 @@ export default function AddCategory({ setOpenMessage, open, setOpen }) {
       setOpenMessage("Please select image color!");
       return;
     }
-    dispatch(postFurnitureCategory({ name, images }));
+    category_api
+      .post("/category", { name, images })
+      .then((res) => {
+        setOpen(false);
+        dispatch(getCategory());
+        setImages([]);
+        setName("");
+      })
+      .catch((err) => {
+        // err message
+        setOpen(false);
+      });
   };
   const handleClose = (_, r) => {
     if (r !== "backdropClick") {
       setOpen(false);
     }
   };
-  useEffect(() => {
-    if (fullfilled) {
-      setOpen(false);
-      dispatch(setFullFilled({ value: false }));
-    }
-  }, [fullfilled, setOpen]);
   return (
     <div>
       <Dialog
@@ -58,6 +66,9 @@ export default function AddCategory({ setOpenMessage, open, setOpen }) {
             value={name}
             onChange={(e) => setName(e.target.value)}
             autoFocus
+            inputProps={{
+              autoComplete: "none",
+            }}
             margin="dense"
             id="name"
             label="Category name..."

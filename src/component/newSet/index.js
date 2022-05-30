@@ -4,7 +4,7 @@ import { Typography } from "@mui/material";
 import SetDetailCard from "../setdetailcard";
 import NewProductCard from "../newProductCard/index";
 import NewSetCard from "../newSetCard";
-const NewSetCarousel = ({ speed, autoplaySpeed,setInfos }) => {
+const NewSetCarousel = ({ speed, autoplaySpeed, setInfos }) => {
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (
@@ -32,7 +32,7 @@ const NewSetCarousel = ({ speed, autoplaySpeed,setInfos }) => {
     slidesToShow: 1,
     swipeToSlide: true,
     autoplay: true,
-    speed:  700,
+    speed: 700,
     autoplaySpeed: autoplaySpeed || 4000,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
@@ -41,13 +41,11 @@ const NewSetCarousel = ({ speed, autoplaySpeed,setInfos }) => {
   return (
     <div>
       <Slider {...settings}>
-        {
-          [...setInfos]?.reverse().map((value,i) =>(
-        <div key={i} className="newProduct-main-carousel">
-        <NewSetCard value={value} />
-      </div>
-          ))
-        }
+        {[...setInfos].map((value, i) => (
+          <div key={i} className="newProduct-main-carousel">
+            <NewSetCard value={value} />
+          </div>
+        ))}
       </Slider>
     </div>
   );

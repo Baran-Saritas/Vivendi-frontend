@@ -38,7 +38,7 @@ const category_api = axios.create({
     "Content-Type": "application/json",
   },
   timeout: 15000,
-  baseURL: env.FCATEGORY_API,
+  baseURL: env.CATEGORY,
 });
 
 const campaigns_and_ctarget_api = axios.create({

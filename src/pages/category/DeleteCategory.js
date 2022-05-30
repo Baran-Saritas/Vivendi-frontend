@@ -1,34 +1,31 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
-import { useDispatch, useSelector } from "react-redux";
-import { setFullFilled } from "../../store/global/globalSlice";
-import {
-  deleteFurnitureCategory,
-  removeCategory,
-} from "../../store/furnitureCategory/furnitureCategorySlice";
+import { useDispatch } from "react-redux";
+import { getCategory } from "../../store/furnitureCategory/furnitureCategorySlice";
+import { category_api } from "../../utilrs/axiosInterceptors";
 
 export default function DeleteCategory({ open, setOpen }) {
-  const { fullfilled } = useSelector((state) => state.global);
   const dispatch = useDispatch();
   const handleClose = (_, r) => {
     if (r !== "backdropClick") setOpen("");
   };
 
   const handleClick = () => {
-    dispatch(deleteFurnitureCategory(open));
+    category_api
+      .delete("/category/" + open)
+      .then((res) => {
+        setOpen("");
+        dispatch(getCategory());
+      })
+      .catch((err) => {
+        //err message
+        setOpen("");
+      });
   };
-  useEffect(() => {
-    if (fullfilled) {
-      setOpen("");
-      dispatch(removeCategory({ id: open }));
-      dispatch(setFullFilled({ value: false }));
-    }
-  }, [fullfilled, setOpen]);
-
   return (
     <div>
       <Dialog

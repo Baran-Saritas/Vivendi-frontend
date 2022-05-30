@@ -14,7 +14,7 @@ import NewProductCarousel from "../component/newProduct";
 import { useNavigate } from "react-router-dom";
 import {
   getFurniture,
-  getFurnitureByAsc,
+  getFurnitureByDesc,
 } from "../store/furniture/furnitureSlice";
 import NewSetCarousel from "../component/newSet";
 import { getFurnitureSetByAsc } from "../store/furnitureSetInfo/furnitureSetInfoSlice";
@@ -39,7 +39,7 @@ export default function Main() {
   }
 
   useEffect(() => {
-    dispatch(getFurnitureByAsc());
+    dispatch(getFurnitureByDesc());
     dispatch(getFurnitureSetByAsc());
   }, []);
   return (
@@ -73,7 +73,7 @@ export default function Main() {
       </div>
 
       <div
-       className="main-carts"
+        className="main-carts"
         style={{
           width: "100%",
           display: "flex",
@@ -196,7 +196,7 @@ export default function Main() {
             component="div"
             variant="h6"
             sx={{
-              fontSize:"20px",
+              fontSize: "20px",
               fontFamily:
                 "Mont,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji",
               fontWeight: "100",
@@ -235,7 +235,7 @@ export default function Main() {
         }}
       >
         <div
-        className="main-carts"
+          className="main-carts"
           style={{
             width: "90%",
             display: "flex",
@@ -246,7 +246,9 @@ export default function Main() {
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
               onClick={() =>
-                navigate("/products/635e94eb-75ac-4933-a75c-07a21db3a319/Tables")
+                navigate(
+                  "/products/635e94eb-75ac-4933-a75c-07a21db3a319/Tables"
+                )
               }
               href=""
             >
@@ -272,7 +274,9 @@ export default function Main() {
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
               onClick={() =>
-                navigate("/products/775f98ce-a2f2-4c9b-bd70-fcb99481af9a/Bergere")
+                navigate(
+                  "/products/775f98ce-a2f2-4c9b-bd70-fcb99481af9a/Bergere"
+                )
               }
               href=""
             >
@@ -297,7 +301,9 @@ export default function Main() {
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
               onClick={() =>
-                navigate("/products/888cce34-8ce8-4207-9628-be245d6930c0/Lampshade")
+                navigate(
+                  "/products/888cce34-8ce8-4207-9628-be245d6930c0/Lampshade"
+                )
               }
               href=""
             >
@@ -349,7 +355,7 @@ export default function Main() {
             component="div"
             variant="h6"
             sx={{
-              fontSize:"20px",
+              fontSize: "20px",
               fontFamily:
                 "Mont,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji",
               fontWeight: "100",
@@ -378,7 +384,7 @@ export default function Main() {
       </div>
 
       <div
-       className="main-carts"
+        className="main-carts"
         style={{
           width: "100%",
           display: "flex",
@@ -398,7 +404,9 @@ export default function Main() {
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
               onClick={() =>
-                navigate("/products/1161f244-93cb-4415-9940-d2ceb6ea3a7c/Mirror")
+                navigate(
+                  "/products/1161f244-93cb-4415-9940-d2ceb6ea3a7c/Mirror"
+                )
               }
               href=""
             >
@@ -424,7 +432,9 @@ export default function Main() {
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
               onClick={() =>
-                navigate("/products/e557af58-0800-4ac6-8783-8ecc9f7cf337/Tv-Units")
+                navigate(
+                  "/products/e557af58-0800-4ac6-8783-8ecc9f7cf337/Tv-Units"
+                )
               }
               href=""
             >
@@ -449,7 +459,9 @@ export default function Main() {
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
               onClick={() =>
-                navigate("/products/f48538c8-e405-4e5b-bea7-28d948aba48a/Console-Table")
+                navigate(
+                  "/products/f48538c8-e405-4e5b-bea7-28d948aba48a/Console-Table"
+                )
               }
               href=""
             >

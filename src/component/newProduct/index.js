@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import { Typography } from "@mui/material";
 import SetDetailCard from "../setdetailcard";
 import NewProductCard from "../newProductCard/index";
-const NewProductCarousel = ({ speed, autoplaySpeed,furnitures }) => {
+const NewProductCarousel = ({ speed, autoplaySpeed, furnitures }) => {
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (
@@ -35,20 +35,16 @@ const NewProductCarousel = ({ speed, autoplaySpeed,furnitures }) => {
     autoplaySpeed: autoplaySpeed || 4000,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-
   };
-
 
   return (
     <div>
       <Slider {...settings}>
-        {
-          [...furnitures]?.reverse().map((value,i) =>(
-        <div key={i} className="newProduct-main-carousel" >
-        <NewProductCard value={value} />
-      </div>
-          ))
-        }
+        {[...furnitures].map((value, i) => (
+          <div key={i} className="newProduct-main-carousel">
+            <NewProductCard value={value} />
+          </div>
+        ))}
       </Slider>
     </div>
   );
