@@ -5,7 +5,7 @@ import CustomCard from "../../component/card";
 import DetailCard from "../../component/dcard/index";
 import KindFilter from "../../component/product/KindFilter";
 import OrderFilter from "../../component/product/OrderFilter";
-import { getFurnitureByCategoryId } from "../../store/furniture/furnitureSlice";
+import { clearFurniture, getFurnitureByCategoryId } from "../../store/furniture/furnitureSlice";
 
 export default function Products() {
   //category_name
@@ -23,6 +23,9 @@ useEffect(() => {
   useEffect(() => {
     if (category_id) {
       dispatch(getFurnitureByCategoryId(category_id));
+    }
+    return () => {
+      dispatch(clearFurniture());
     }
   }, [category_id]);
   return (

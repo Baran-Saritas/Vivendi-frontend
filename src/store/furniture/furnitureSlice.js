@@ -53,7 +53,7 @@ const deleteImage = createAsyncThunk(
 const getFurnitureByCategoryId = createAsyncThunk(
   "furniture/getAll",
   async (id, { rejectWithValue }) => {
-    const res = await furniture_api.get("/category/" + id);
+    const res = await product_api.get("/furniture/category/"+id+"/top/999");
     if (res.status === 200) {
       return res.data;
     } else {
@@ -64,7 +64,7 @@ const getFurnitureByCategoryId = createAsyncThunk(
 const getFurnitureBySetId = createAsyncThunk(
   "furniture/getBySetId",
   async (id, { rejectWithValue }) => {
-    const res = await furniture_api.get("/furniture-set-info/" + id);
+    const res = await product_api.get("/set/category/" + id +"/top/999");
     if (res.status === 200) {
       return res.data;
     } else {
@@ -174,6 +174,9 @@ export const FurnitureSlice = createSlice({
   name: "furniture",
   initialState,
   reducers: {
+    clearFurniture:(state,action) => {
+       state.furnitures = [];
+    },
     removeFurniture: (state, { payload }) => {
       if (payload.id) {
         state.furnitures = state.furnitures.filter((i) => i !== i.id);
@@ -258,7 +261,8 @@ export {
   deleteImage,
   postFurnitureCoupon,
   deleteFurnitureCoupon,
+  
 };
 
-export const { removeFurniture } = FurnitureSlice.actions;
+export const { removeFurniture,clearFurniture } = FurnitureSlice.actions;
 export default FurnitureSlice.reducer;

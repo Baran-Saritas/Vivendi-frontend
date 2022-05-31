@@ -7,8 +7,11 @@ import FurnitureDetailCard from "../../component/furnitureDetailCard";
 import { furniture_api, product_api } from "../../utilrs/axiosInterceptors";
 import { money } from "../../utilrs/commons";
 import moment from "moment";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/productCart/productCartSlice";
 
 const DetailPage = () => {
+  const dispatch = useDispatch();
   const { product_id } = useParams();
   const [furniture, setFurniture] = useState(undefined);
   const [days, setDays] = useState(null);
@@ -79,7 +82,7 @@ const DetailPage = () => {
             <div className="product-up-right">
               <p className="product-up-right-name">{furniture.name}</p>
               <p className="product-up-right-code">
-                Product Code: {furniture.id}
+              <span style={{fontWeight:"500",fontSize:"17px"}}>Product Code </span>: {furniture.id}
               </p>
               <p className="product-up-right-price">
               <div
@@ -98,7 +101,7 @@ const DetailPage = () => {
                       : {}
                   }
                 >
-                  Price :
+                  Price :  
                 </span>
                 <span
                   style={
@@ -111,7 +114,7 @@ const DetailPage = () => {
                       : {}
                   }
                 >
-                  {money(furniture.price)}
+                  $ {money(furniture.price)} 
                 </span>
                 {discount()}
               </div>
@@ -141,7 +144,7 @@ const DetailPage = () => {
                 //  </IconButton>
                 //</div>
               }
-              <Button style={{ padding: "18px 30px" }} variant="outlined">
+              <Button onClick={(()=> { dispatch(addToCart({ item:furniture  }));})} style={{ padding: "18px 30px" }} variant="outlined">
                 Add to Cart
               </Button>
             </div>

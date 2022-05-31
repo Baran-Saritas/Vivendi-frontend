@@ -28,7 +28,7 @@ const Hcard = ({ set }) => {
         {" "}
         <p>
           {" "}
-          <strong> deneme </strong>
+        <strong> {set.name} </strong>
         </p>
       </div>
     </div>

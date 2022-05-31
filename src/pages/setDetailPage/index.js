@@ -75,7 +75,19 @@ const SetDetailPage = () => {
             </div>
             <div className="product-up-right">
               <p className="product-up-right-name">{set.name}</p>
-              <p className="product-up-right-code">Product Code: {set.id}</p>
+              <p className="product-up-right-code"><span style={{fontWeight:"500",fontSize:"17px"}}>Product Code </span> : {set.id}</p>
+              <div className="product-up-right-colors">
+                {set.images.map((image, i) => (
+                  <div
+                    className="pur-colors-item"
+                    style={{
+                      backgroundColor: image.color,
+                    }}
+                    key={i}
+                    onMouseEnter={() => handleMouseEnter(image)}
+                  />
+                ))}
+              </div>
               <p className="product-up-right-price">
                 
                 <div
@@ -107,23 +119,12 @@ const SetDetailPage = () => {
                         : {}
                     }
                   >
-                    {money(set.price)}
+                   $ {money(set.price)}
                   </span>
                   {discount()}
                 </div>
               </p>
-              <div className="product-up-right-colors">
-                {set.images.map((image, i) => (
-                  <div
-                    className="pur-colors-item"
-                    style={{
-                      backgroundColor: image.color,
-                    }}
-                    key={i}
-                    onMouseEnter={() => handleMouseEnter(image)}
-                  />
-                ))}
-              </div>
+
               {
                 //<div >
                 //  <IconButton size="large">

@@ -93,7 +93,7 @@ export default function Main() {
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
               onClick={() =>
-                navigate("/products/ca333a93-4630-4cd9-8176-2969887072c2/Sofas")
+                navigate("/products/d1d78226-9ced-4fe6-9293-8d5b6160855a/Sofas")
               }
               href=""
             >
@@ -119,7 +119,7 @@ export default function Main() {
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
               onClick={() =>
-                navigate("/products/ea6b1aaf-65c0-4023-9248-cfa2ac8e3cbc/Beds")
+                navigate("/products/2831e014-fe03-4b9a-8ef7-edff01393db6/Beds")
               }
               href=""
             >
@@ -144,7 +144,7 @@ export default function Main() {
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
               onClick={() =>
-                navigate("/products/a76ec128-c8be-4234-be0c-158518585153/Chair")
+                navigate("/products/66588660-6ead-4874-b9e2-6cfc1f4485a4/Chair")
               }
               href=""
             >
@@ -247,7 +247,7 @@ export default function Main() {
             <a
               onClick={() =>
                 navigate(
-                  "/products/635e94eb-75ac-4933-a75c-07a21db3a319/Tables"
+                  "/products/16b8231c-fcf8-41cf-bb88-f64893c29e5e/Tables"
                 )
               }
               href=""
@@ -275,7 +275,7 @@ export default function Main() {
             <a
               onClick={() =>
                 navigate(
-                  "/products/775f98ce-a2f2-4c9b-bd70-fcb99481af9a/Bergere"
+                  "/products/5fd043d4-e2ac-494a-aa7f-b80baf2075b2/Bergere"
                 )
               }
               href=""
@@ -302,7 +302,7 @@ export default function Main() {
             <a
               onClick={() =>
                 navigate(
-                  "/products/888cce34-8ce8-4207-9628-be245d6930c0/Lampshade"
+                  "/products/f40ce8fb-1f7f-40ba-a519-71b4b2e8d556/Lampshade"
                 )
               }
               href=""
@@ -405,7 +405,7 @@ export default function Main() {
             <a
               onClick={() =>
                 navigate(
-                  "/products/1161f244-93cb-4415-9940-d2ceb6ea3a7c/Mirror"
+                  "/products/8b46bc6a-8c84-4676-8589-ca3eaa11968b/Mirror"
                 )
               }
               href=""
@@ -433,7 +433,7 @@ export default function Main() {
             <a
               onClick={() =>
                 navigate(
-                  "/products/e557af58-0800-4ac6-8783-8ecc9f7cf337/Tv-Units"
+                  "/products/076cc82f-f51b-4d0c-b89e-5f966d0890ab/Tv-Units"
                 )
               }
               href=""
@@ -460,7 +460,7 @@ export default function Main() {
             <a
               onClick={() =>
                 navigate(
-                  "/products/f48538c8-e405-4e5b-bea7-28d948aba48a/Console-Table"
+                  "/products/9d2a6b3b-785c-4051-bdd3-d0c3b772e3ae/Console-Table"
                 )
               }
               href=""
