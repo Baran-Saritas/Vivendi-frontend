@@ -143,7 +143,7 @@ const CustomHeader = () => {
             <div
               key={category.id}
               onClick={() => {
-                navigate(`/products/${category.id}`);
+                navigate(`/products/${category.id}/${category.name}`);
               }}
               onMouseEnter={() => setIsSelect(i + 1)}
             >
