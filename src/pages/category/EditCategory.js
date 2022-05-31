@@ -9,11 +9,15 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useDispatch, useSelector } from "react-redux";
 import { setFullFilled } from "../../store/global/globalSlice";
 import SelectImage from "../../component/SelectImage/SelectImage";
-import { updateFurnitureCategory } from "../../store/furnitureCategory/furnitureCategorySlice";
+import {
+  deleteImage,
+  getCategory,
+  updateCategory,
+} from "../../store/furnitureCategory/furnitureCategorySlice";
+import { category_api } from "../../utilrs/axiosInterceptors";
 
 export default function EditCategory({ setOpenMessage, open, setOpen }) {
   const dispatch = useDispatch();
-  const { fullfilled } = useSelector((state) => state.global);
   const [images, setImages] = React.useState([]);
   const [name, setName] = React.useState("");
   const handleOk = async (e) => {
@@ -33,7 +37,17 @@ export default function EditCategory({ setOpenMessage, open, setOpen }) {
     if (editImages.length) {
       data.images = editImages;
     }
-    dispatch(updateFurnitureCategory({ id: open.id, data }));
+    data.id = open.id;
+    category_api
+      .put("/category", data)
+      .then((res) => {
+        setOpen(false);
+        dispatch(getCategory());
+      })
+      .catch((err) => {
+        // err message
+        setOpen(false);
+      });
   };
   const handleClose = (_, r) => {
     if (r !== "backdropClick") {
@@ -46,12 +60,6 @@ export default function EditCategory({ setOpenMessage, open, setOpen }) {
       setName(open.name);
     }
   }, [open]);
-  useEffect(() => {
-    if (fullfilled) {
-      setOpen(false);
-      dispatch(setFullFilled({ value: false }));
-    }
-  }, [fullfilled, setOpen]);
   return (
     <div>
       <Dialog
@@ -76,7 +84,11 @@ export default function EditCategory({ setOpenMessage, open, setOpen }) {
             variant="standard"
           />
           <div className="c-add-edit-images">
-            <SelectImage images={images} setImages={setImages} />
+            <SelectImage
+              deleteImage={deleteImage}
+              images={images}
+              setImages={setImages}
+            />
           </div>
         </DialogContent>
         <DialogActions>

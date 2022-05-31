@@ -12,14 +12,14 @@ import {
   toReduceProductCount,
 } from "../../store/productCart/productCartSlice";
 import { SentimentVeryDissatisfiedOutlined } from "@mui/icons-material";
+import { Button } from "@mui/material";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const NewProductCard = ({ value }) => {
   const [activeImage, setActiveImage] = useState(value.images[0].imageSource);
   const theme = useTheme();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log("step3", value);
-  }, []);
 
   return (
     <Card
@@ -46,9 +46,10 @@ const NewProductCard = ({ value }) => {
       >
         <Typography
           component="div"
-          variant="h4"
+          variant="h5"
           sx={{
-            fontWeight: "500",
+            fontSize:"28px",
+            fontWeight: "100",
             color: "#444",
             margin: "15px 0px 0px 10px",
           }}
@@ -58,7 +59,7 @@ const NewProductCard = ({ value }) => {
         <div
           style={{
             width: "100%",
-            padding: "0px 0px 0px 10px",
+            padding: "20px 0px 0px 10px",
             display: "flex",
             columnGap: "10px",
             marginTop: "20px",
@@ -66,11 +67,12 @@ const NewProductCard = ({ value }) => {
         >
           {value?.images?.map((data, i) => {
             return <div
+            key={i}
               style={{
                 color: "inherit",
                 textDecoration: "inherit",
-                width: "32px",
-                height: "32px",
+                width: "26px",
+                height: "26px",
                 overflow: "hidden",
                 borderRadius: "9999px",
                 backgroundColor:`${data.color}`,
@@ -87,7 +89,7 @@ const NewProductCard = ({ value }) => {
             flexDirection: "row",
             display: "flex",
             alignItems: "center",
-            margin: "30px 0px 0px 10px",
+            margin: "20px 0px 0px 10px",
           }}
         >
           <Box
@@ -102,7 +104,8 @@ const NewProductCard = ({ value }) => {
               component="div"
               variant="h5"
               sx={{
-                fontWeight: "500",
+                fontSize:"17px",
+                fontWeight: "200",
                 color: "#242433",
               }}
             >
@@ -112,7 +115,8 @@ const NewProductCard = ({ value }) => {
               component="div"
               variant="h6"
               sx={{
-                fontWeight: "500",
+                fontWeight: "2  00",
+                fontSize:"17px",
                 color: "#444",
                 margin: "0px 0px 0px 4px",
               }}
@@ -132,7 +136,8 @@ const NewProductCard = ({ value }) => {
               component="div"
               variant="h5"
               sx={{
-                fontWeight: "500",
+                fontSize:"17px",
+                fontWeight: "200",
                 color: "#242433",
               }}
             >
@@ -142,7 +147,8 @@ const NewProductCard = ({ value }) => {
               component="div"
               variant="h6"
               sx={{
-                fontWeight: "500",
+                fontSize:"17px",
+                fontWeight: "200",
                 color: "#444",
                 margin: "0px 0px 0px 4px",
               }}
@@ -162,7 +168,8 @@ const NewProductCard = ({ value }) => {
               component="div"
               variant="h5"
               sx={{
-                fontWeight: "500",
+                fontSize:"17px",
+                fontWeight: "200",
                 color: "#242433",
               }}
             >
@@ -172,7 +179,8 @@ const NewProductCard = ({ value }) => {
               component="div"
               variant="h6"
               sx={{
-                fontWeight: "500",
+                fontSize:"17px",
+                fontWeight: "200",
                 color: "#444",
                 margin: "0px 0px 0px 4px",
               }}
@@ -185,6 +193,8 @@ const NewProductCard = ({ value }) => {
           sx={{
             flexDirection: "row",
             display: "flex",
+            justifyContent:"space-between",
+            width:"70%",
             alignItems: "center",
             margin: "40px 0px 0px 10px",
           }}
@@ -193,14 +203,16 @@ const NewProductCard = ({ value }) => {
             component="div"
             variant="h4 "
             sx={{
+              fontSize:"23px",
               fontFamily: "New Roman,Times,serif",
-              fontWeight: "500",
+              fontWeight: "200",
               color: "#242433",
               margin: "0px 0px 10px 0px",
             }}
           >
-            £ {value.price}
+            $ {value.price}
           </Typography>
+          <Button onClick={() =>{navigate("/products/detail/"+ value.id)}} variant="outlined">View</Button>
         </Box>
       </Box>
     </Card>
@@ -208,29 +220,3 @@ const NewProductCard = ({ value }) => {
 };
 export default NewProductCard;
 
-let srcs = [
-  {
-    color:
-      "https://enza.akinoncdn.com/products/2021/09/08/12498/4d525213-97d6-4a9a-bd8c-ede89c10a29f_size142x80_cropCenter.jpg",
-    imageSource:
-      "https://enza.akinoncdn.com/products/2021/11/17/22405/5e71b980-fa01-4f99-bd3a-abee4f88534d_size1684x950.jpg",
-  },
-  {
-    color:
-      "https://enza.akinoncdn.com/products/2021/09/08/12202/8598c41f-f0ba-49bd-88de-75497b2b1028_size142x80_cropCenter.jpg",
-    imageSource:
-      "https://enza.akinoncdn.com/products/2021/11/17/22315/27df44dc-1952-4132-b004-67919c796536_size1684x950.jpg",
-  },
-  {
-    color:
-      "https://enza.akinoncdn.com/products/2021/09/08/10973/c59b6e8d-2d12-4b66-95a8-57fd2bee849a_size142x80_cropCenter.jpg",
-    imageSource:
-      "https://enza.akinoncdn.com/products/2021/11/17/22311/caf9d9af-10eb-46a3-bc69-182e8c8448b8_size1684x950.jpg",
-  },
-  {
-    color:
-      "https://enza.akinoncdn.com/products/2021/09/08/10802/815faf2a-24e9-497e-9080-4fde116488bd_size142x80_cropCenter.jpg",
-    imageSource:
-      "https://enza.akinoncdn.com/products/2021/11/17/22310/10a68c03-b60d-4f5e-8aea-d1dd3af9b075_size1684x950.jpg",
-  },
-];

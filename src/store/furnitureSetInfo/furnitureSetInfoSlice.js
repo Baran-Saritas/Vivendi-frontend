@@ -1,9 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  product_api,
-  set_info_api,
-  set_info_f_api,
-} from "../../utilrs/axiosInterceptors";
+import { product_api, set_info_api } from "../../utilrs/axiosInterceptors";
 import { setFullFilled } from "../global/globalSlice";
 
 const getFurnitureSetInfo = createAsyncThunk(
@@ -15,6 +11,31 @@ const getFurnitureSetInfo = createAsyncThunk(
       return res.data;
     } else {
       rejectWithValue(res.data);
+    }
+  }
+);
+const getFurnitureSetByAsc = createAsyncThunk(
+  "setInfo/getAll",
+  async (_, { rejectWithValue }) => {
+    const res = await product_api.get("/set/desc");
+    //const res = await set_info_api.get("/");
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      rejectWithValue(res.data);
+    }
+  }
+);
+
+const postSetCoupon = createAsyncThunk(
+  "set/addCoupon",
+  async ({ data, id }, { rejectWithValue, dispatch }) => {
+    let furniture_res = await product_api.post("/set/coupon/" + id, data);
+    if (furniture_res.status === 200) {
+      dispatch(setFullFilled({ value: true }));
+      return furniture_res.data;
+    } else {
+      rejectWithValue(furniture_res.data);
     }
   }
 );
@@ -159,6 +180,14 @@ const furnitureSetInfoSlice = createSlice({
     },
   },
   extraReducers: {
+    //getFurnitureSetByAsc
+
+    [getFurnitureSetByAsc.fulfilled]: (state, action) => {
+      state.setInfos = action.payload;
+    },
+    [getFurnitureSetByAsc.rejected]: (state, action) => {
+      console.log("getFurnitureSetByAsc err : ", action.payload);
+    },
     [getFurnitureSetById.fulfilled]: (state, action) => {
       state.setInfosOnHover = action.payload;
     },
@@ -225,9 +254,11 @@ export {
   deleteFurnitureSetInfo,
   getFurnitureSetInfoOfGroup,
   getFurnitureSetByCategoryId,
+  getFurnitureSetByAsc,
   getFurnitureSetByCategoryIdOnHover,
   getFurnitureSetTop5,
   getFurnitureSetById,
   deleteImage,
+  postSetCoupon,
 };
 export default furnitureSetInfoSlice.reducer;

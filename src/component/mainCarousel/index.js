@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { Typography } from "@mui/material";
 import Story from "../story";
 import StoryDialog from "../storyDialog";
 import { useDispatch } from "react-redux";
 import { getCampaignOfCategory } from "../../store/campaign/campaignSlice";
-const CategoryCarousel = () => {
+const CategoryCarousel = ({setInfos,furnitures}) => {
   const [open, setOpen] = useState("false");
+  const [data, setData] = useState([])
+  const [chair, setChair] = useState([])
   const dispatch = useDispatch();
   var settings = {
     dots: true,
@@ -47,17 +49,28 @@ const CategoryCarousel = () => {
       }
     ]
   };
+
+  useEffect(() => {
+    let arr = []
+    setInfos.forEach(i => {
+      if(i.categoryId === "a76ec128-c8be-4234-be0c-158518585153" && i.coupon)
+        arr.push(i)
+    })
+    furnitures.forEach(i => {
+      if(i.categoryId === "a76ec128-c8be-4234-be0c-158518585153" && i.coupon)
+        arr.push(i)
+    })
+    setChair(arr)
+  },[furnitures, setInfos])
   return (
     <div className="test">
-      <StoryDialog open={open} setOpen={setOpen} />
+      <StoryDialog data={data} open={open} setOpen={setOpen} />
       <Slider {...settings}>
         <div
           className="categories-small-div"
           onClick={() => {
             setOpen("open");
-            dispatch(
-              getCampaignOfCategory("635e94eb-75ac-4933-a75c-07a21db3a319")
-            );
+            
           }}
           style={{ padding: "10px" }}
         >
@@ -84,7 +97,7 @@ const CategoryCarousel = () => {
         </div>
         <div
           className="categories-small-div"
-          onClick={() => setOpen("open")}
+          onClick={() => {setOpen("open"); setData(chair)}}
           style={{ padding: "10px" }}
         >
           <img

@@ -1,14 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  Button,
-  IconButton,
-  Popover,
-  Typography,
-  MenuItem,
-  Menu,
-  Box,
-  Badge,
-} from "@mui/material";
+import { Menu, Badge } from "@mui/material";
 import { CgShoppingBag } from "react-icons/cg";
 import { RiCloseFill } from "react-icons/ri";
 import { width } from "@mui/system";
@@ -32,16 +23,10 @@ const useStyles = makeStyles({
   },
   a: {},
 });
-const SearchResultNew = ({ containerRef, search, anchorEl, setAnchorEl }) => {
-  const dispatch = useDispatch();
+const SearchResultNew = ({ filterData, anchorEl, setAnchorEl }) => {
   const ref = useRef(null);
   const classes = useStyles();
-  const navigate = useNavigate();
-  const [cartNull, setCartNull] = useState(false);
-  const { productList, shoppingCartProduct, totalPrice } = useSelector(
-    (state) => state.productCart
-  );
-
+  const { productList } = useSelector((state) => state.productCart);
   return (
     <>
       {/* <Badge badgeContent={shoppingCartProduct.totalCount} color="primary">
@@ -51,12 +36,13 @@ const SearchResultNew = ({ containerRef, search, anchorEl, setAnchorEl }) => {
         />
       </Badge> */}
       <Menu
+        disableAutoFocus
         id="basic-menu"
         anchorEl={anchorEl}
         PaperProps={{
-          className: !productList.length == 0 ? classes.root : classes.notRoot,
+          className: !productList.length === 0 ? classes.root : classes.notRoot,
         }}
-        sx={{ borderRadius: 8 }}
+        sx={{ borderRadius: 8, margin: "5px 0 0 0" }}
         open={Boolean(anchorEl)}
         onClose={() => setAnchorEl(null)}
         MenuListProps={{
@@ -107,7 +93,6 @@ const SearchResultNew = ({ containerRef, search, anchorEl, setAnchorEl }) => {
               </div>
             </div>
           </motion.div>
-
         </div>
       </Menu>
     </>

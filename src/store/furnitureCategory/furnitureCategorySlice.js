@@ -14,6 +14,18 @@ const getFurnitureCategory = createAsyncThunk(
   }
 );
 
+const getCategory = createAsyncThunk(
+  "category/getAll",
+  async (_, { rejectWithValue }) => {
+    const res = await category_api.get("/category");
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      rejectWithValue(res.data);
+    }
+  }
+);
+
 const deleteFurnitureCategory = createAsyncThunk(
   "category/delete",
   async (id, { rejectWithValue, dispatch }) => {
@@ -27,10 +39,61 @@ const deleteFurnitureCategory = createAsyncThunk(
   }
 );
 
+const deleteCategory = createAsyncThunk(
+  "category/delete",
+  async (id, { rejectWithValue, dispatch }) => {
+    let category_res = await category_api.delete("/category/" + id);
+    if (category_res.status === 200) {
+      dispatch(setFullFilled({ value: true }));
+      return category_res.data;
+    } else {
+      rejectWithValue(category_res.data);
+    }
+  }
+);
+
+const updateCategory = createAsyncThunk(
+  "category/update",
+  async (data, { rejectWithValue, dispatch }) => {
+    let category_res = await category_api.put("/category", data);
+    if (category_res.status === 200) {
+      dispatch(setFullFilled({ value: true }));
+      return category_res.data;
+    } else {
+      rejectWithValue(category_res.data);
+    }
+  }
+);
+
+const deleteImage = createAsyncThunk(
+  "category/deleteImage",
+  async (id, { rejectWithValue, dispatch }) => {
+    let res = await category_api.delete("/category/image/" + id);
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      rejectWithValue(res.data);
+    }
+  }
+);
+
 const updateFurnitureCategory = createAsyncThunk(
   "category/update",
   async (data, { rejectWithValue, dispatch }) => {
     let category_res = await category_api.put("/" + data.id, data.data);
+    if (category_res.status === 200) {
+      dispatch(setFullFilled({ value: true }));
+      return category_res.data;
+    } else {
+      rejectWithValue(category_res.data);
+    }
+  }
+);
+
+const postCategory = createAsyncThunk(
+  "category/add",
+  async (data, { rejectWithValue, dispatch }) => {
+    let category_res = await category_api.post("/category", data);
     if (category_res.status === 200) {
       dispatch(setFullFilled({ value: true }));
       return category_res.data;
@@ -95,8 +158,18 @@ const furnitureCategorySlice = createSlice({
     [getFurnitureCategory.rejected]: (state, action) => {
       console.log("Category err : ", action.payload);
     },
+    [getCategory.fulfilled]: (state, action) => {
+      state.categories = action.payload;
+    },
+    [getCategory.rejected]: (state, action) => {
+      console.log("Category err : ", action.payload);
+    },
     [postFurnitureCategory.fulfilled]: (state, action) => {},
     [postFurnitureCategory.rejected]: (state, action) => {
+      console.log("Category err : ", action.payload);
+    },
+    [updateCategory.fulfilled]: (state, action) => {},
+    [updateCategory.rejected]: (state, action) => {
       console.log("Category err : ", action.payload);
     },
     [updateFurnitureCategory.fulfilled]: (state, action) => {},
@@ -114,8 +187,11 @@ export const { getFurnitureCategoryById, removeCategory } =
   furnitureCategorySlice.actions;
 export {
   getFurnitureCategory,
-  postFurnitureCategory,
   updateFurnitureCategory,
-  deleteFurnitureCategory,
+  getCategory,
+  deleteImage,
+  updateCategory,
+  deleteCategory,
+  postCategory,
 };
 export default furnitureCategorySlice.reducer;

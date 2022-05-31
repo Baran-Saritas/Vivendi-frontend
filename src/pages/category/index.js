@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Snackbar, Tooltip } from "@mui/material";
 import Item from "../../component/category/Item";
-import { getFurnitureCategory } from "../../store/furnitureCategory/furnitureCategorySlice";
+import { getCategory } from "../../store/furnitureCategory/furnitureCategorySlice";
 import { useDispatch, useSelector } from "react-redux";
 import AddCategory from "./AddCategory";
 import ConfirmDialog from "./DeleteCategory";
@@ -16,7 +16,7 @@ export default function Category() {
   const { categories } = useSelector((state) => state.category);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getFurnitureCategory());
+    dispatch(getCategory());
   }, []);
   return (
     <div className="dialog-edit">

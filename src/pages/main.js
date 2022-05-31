@@ -12,13 +12,19 @@ import { useDispatch, useSelector } from "react-redux";
 import SetDetailCard from "../component/setdetailcard";
 import NewProductCarousel from "../component/newProduct";
 import { useNavigate } from "react-router-dom";
-import { getFurniture, getFurnitureByAsc } from "../store/furniture/furnitureSlice";
+import {
+  getFurniture,
+  getFurnitureByDesc,
+} from "../store/furniture/furnitureSlice";
+import NewSetCarousel from "../component/newSet";
+import { getFurnitureSetByAsc } from "../store/furnitureSetInfo/furnitureSetInfoSlice";
 
 //furnitures
 export default function Main() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { furnitures } = useSelector((state) => state.furniture);
+  const { setInfos } = useSelector((state) => state.setInfo);
   let arr = ["item-span-3", "item-span-4", "item-span-5", "item-span-6"].sort(
     () => Math.random() - 0.5
   );
@@ -32,11 +38,10 @@ export default function Main() {
     return res;
   }
 
- 
-  useEffect(() =>{
-  dispatch(getFurnitureByAsc());
-
-  },[])
+  useEffect(() => {
+    dispatch(getFurnitureByDesc());
+    dispatch(getFurnitureSetByAsc());
+  }, []);
   return (
     <div className="main">
       <div
@@ -63,11 +68,12 @@ export default function Main() {
       </div>
       <div className="categoryCarousel-div">
         <div className="Carousel-div">
-          <CategoryCarousel />
+          <CategoryCarousel furnitures={furnitures} setInfos={setInfos} />
         </div>
       </div>
 
       <div
+        className="main-carts"
         style={{
           width: "100%",
           display: "flex",
@@ -87,7 +93,7 @@ export default function Main() {
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
               onClick={() =>
-                navigate("/products/ca333a93-4630-4cd9-8176-2969887072c2")
+                navigate("/products/ca333a93-4630-4cd9-8176-2969887072c2/Sofas")
               }
               href=""
             >
@@ -113,7 +119,7 @@ export default function Main() {
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
               onClick={() =>
-                navigate("/products/ea6b1aaf-65c0-4023-9248-cfa2ac8e3cbc")
+                navigate("/products/ea6b1aaf-65c0-4023-9248-cfa2ac8e3cbc/Beds")
               }
               href=""
             >
@@ -138,7 +144,7 @@ export default function Main() {
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
               onClick={() =>
-                navigate("/products/a76ec128-c8be-4234-be0c-158518585153")
+                navigate("/products/a76ec128-c8be-4234-be0c-158518585153/Chair")
               }
               href=""
             >
@@ -174,7 +180,7 @@ export default function Main() {
         >
           <Typography
             component="div"
-            variant="h4"
+            variant="h5"
             sx={{
               fontFamily:
                 "MADE Coachella,ui-serif,Georgia,Cambria,Times New Roman,Times,serif",
@@ -190,6 +196,7 @@ export default function Main() {
             component="div"
             variant="h6"
             sx={{
+              fontSize: "20px",
               fontFamily:
                 "Mont,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji",
               fontWeight: "100",
@@ -208,7 +215,7 @@ export default function Main() {
             className="new-products-card-main"
             style={{
               width: "70%",
-              height:"100%",
+              height: "100%",
               boxShadow:
                 "rgba(0, 0, 0, 0.3) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
             }}
@@ -228,6 +235,7 @@ export default function Main() {
         }}
       >
         <div
+          className="main-carts"
           style={{
             width: "90%",
             display: "flex",
@@ -238,7 +246,9 @@ export default function Main() {
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
               onClick={() =>
-                navigate("/products/635e94eb-75ac-4933-a75c-07a21db3a319")
+                navigate(
+                  "/products/635e94eb-75ac-4933-a75c-07a21db3a319/Tables"
+                )
               }
               href=""
             >
@@ -264,7 +274,9 @@ export default function Main() {
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
               onClick={() =>
-                navigate("/products/775f98ce-a2f2-4c9b-bd70-fcb99481af9a")
+                navigate(
+                  "/products/775f98ce-a2f2-4c9b-bd70-fcb99481af9a/Bergere"
+                )
               }
               href=""
             >
@@ -289,7 +301,9 @@ export default function Main() {
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
               onClick={() =>
-                navigate("/products/888cce34-8ce8-4207-9628-be245d6930c0")
+                navigate(
+                  "/products/888cce34-8ce8-4207-9628-be245d6930c0/Lampshade"
+                )
               }
               href=""
             >
@@ -325,7 +339,7 @@ export default function Main() {
         >
           <Typography
             component="div"
-            variant="h4"
+            variant="h5"
             sx={{
               fontFamily:
                 "MADE Coachella,ui-serif,Georgia,Cambria,Times New Roman,Times,serif",
@@ -334,13 +348,14 @@ export default function Main() {
               margin: "15px 0px 10px 10px",
             }}
           >
-            New Product
+            New Set's
           </Typography>
 
           <Typography
             component="div"
             variant="h6"
             sx={{
+              fontSize: "20px",
               fontFamily:
                 "Mont,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji",
               fontWeight: "100",
@@ -348,7 +363,7 @@ export default function Main() {
               margin: "15px 0px 40px 10px",
             }}
           >
-            Have you checked out our new product?
+            Have you checked out our new set's?
           </Typography>
           <Divider
             sx={{ color: "black" }}
@@ -363,12 +378,13 @@ export default function Main() {
                 "rgba(0, 0, 0, 0.3) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
             }}
           >
-            <NewProductCarousel />
+            <NewSetCarousel setInfos={setInfos} />
           </div>
         </div>
       </div>
 
       <div
+        className="main-carts"
         style={{
           width: "100%",
           display: "flex",
@@ -388,7 +404,9 @@ export default function Main() {
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
               onClick={() =>
-                navigate("/products/1161f244-93cb-4415-9940-d2ceb6ea3a7c")
+                navigate(
+                  "/products/1161f244-93cb-4415-9940-d2ceb6ea3a7c/Mirror"
+                )
               }
               href=""
             >
@@ -414,7 +432,9 @@ export default function Main() {
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
               onClick={() =>
-                navigate("/products/e557af58-0800-4ac6-8783-8ecc9f7cf337")
+                navigate(
+                  "/products/e557af58-0800-4ac6-8783-8ecc9f7cf337/Tv-Units"
+                )
               }
               href=""
             >
@@ -439,7 +459,9 @@ export default function Main() {
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
               onClick={() =>
-                navigate("/products/f48538c8-e405-4e5b-bea7-28d948aba48a")
+                navigate(
+                  "/products/f48538c8-e405-4e5b-bea7-28d948aba48a/Console-Table"
+                )
               }
               href=""
             >

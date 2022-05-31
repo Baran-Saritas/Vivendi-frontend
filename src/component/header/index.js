@@ -1,40 +1,34 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import SearchResult from "./SearchResult";
 import Sign from "../../pages/user/index";
 import HeaderShoppingCart from "../shoppingCart";
 import { useDispatch, useSelector } from "react-redux";
-import { getHeaderData, setId } from "../../store/global/globalSlice";
 import { useNavigate } from "react-router-dom";
 import { IoIosMenu, IoMdClose } from "react-icons/io";
 import HeaderSetCarousel from "../headerCarousel";
-import { Box, Drawer } from "@mui/material";
+import { Box, Drawer, FormControl, OutlinedInput } from "@mui/material";
 import HamburgerList from "../hamburgerMenu/hamburgerList";
-import SearchResultNew from "../searchResult";
+import { getHeaderAndData } from "../../store/global/globalSlice";
 
 const CustomHeader = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { headerFurnitureData } = useSelector((state) => state.global);
-  const { headerSetData } = useSelector((state) => state.global);
-  const ref = useRef(null);
-  
+  const { headerFurnitureData, headerSetData, categories } = useSelector(
+    (state) => state.global
+  );
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [isSelect, setIsSelect] = useState(0);
-  const [isFocus, setIsFocus] = useState(false);
   const [state, setState] = React.useState(false);
+  const ref = useRef(null);
+  const dispatch = useDispatch();
   const toggleDrawer = (open) => {
     setState(open);
   };
   useEffect(() => {
-    dispatch(getHeaderData());
+    dispatch(getHeaderAndData());
   }, []);
 
-  useEffect(() => {
-    console.log(anchorEl);
-  }, [anchorEl]);
   return (
     <motion.div className="header">
       <Sign open={open} setOpen={setOpen} />
@@ -51,24 +45,55 @@ const CustomHeader = () => {
         </div>
         <div className="header-search" tabIndex="0">
           <div className="res-con" ref={ref}>
+            <Box sx={{ width: "100%" }} noValidate autoComplete="off">
+              <FormControl sx={{ width: "100%" }}>
+                <OutlinedInput
+                  sx={{ padding: "2px 0px" }}
+                  size="small"
+                  placeholder="Search..."
+                  value={search}
+                  onClick={(e) => {
+                    setAnchorEl(e.currentTarget);
+                  }}
+                  onChange={(e) => setSearch(e.target.value)}
+                  onKeyPress={(e) => {
+                    if (e.key === "Enter") {
+                      navigate("/search-results?name=" + search);
+                    }
+                  }}
+                />
+              </FormControl>
+            </Box>
+            {/*
             <input
               value={search}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  navigate("/search-results?name=" + search);
+                }
+              }}
               onChange={(e) => setSearch(e.target.value)}
-              onClick={(e) => setAnchorEl(e.currentTarget)}
+              onClick={(e) => {
+                setAnchorEl(e.currentTarget);
+                e.currentTarget.focus();
+              }}
             />
             <div className="btn-con">
               <button>Search</button>
             </div>
-              <SearchResultNew              
+            */}
+            {/* 
+            <SearchResultNew
+              filterData={filterData}
               anchorEl={anchorEl}
               setAnchorEl={setAnchorEl}
-              />
+            />
+          */}
           </div>
         </div>
         <div className="header-util">
           <p onClick={() => setOpen(true)}>Sign In</p>
           <p>
-            {" "}
             <HeaderShoppingCart />
           </p>
         </div>
@@ -114,86 +139,17 @@ const CustomHeader = () => {
         </div>
 
         <nav className="large-menu">
-          <div
-            onClick={() => {
-              navigate(`/products/c76f7cef-f05f-4142-8a80-da88be374b66`);
-            }}
-            onMouseEnter={() => setIsSelect(1)}
-          >
-            Deneme
-          </div>
-          <div
-            onClick={() => {
-              navigate(`/products/ca333a93-4630-4cd9-8176-2969887072c2/Sofas`);
-            }}
-            onMouseEnter={() => setIsSelect(2)}
-          >
-            Sofas
-          </div>
-          <div
-            onClick={() => {
-              navigate(`/products/ea6b1aaf-65c0-4023-9248-cfa2ac8e3cbc/Beds`);
-            }}
-            onMouseEnter={() => setIsSelect(3)}
-          >
-            Beds
-          </div>
-          <div
-            onClick={() => {
-              navigate(`/products/a76ec128-c8be-4234-be0c-158518585153/Chair`);
-            }}
-            onMouseEnter={() => setIsSelect(4)}
-          >
-            Chair{" "}
-          </div>
-          <div
-            onClick={() => {
-              navigate(`/products/635e94eb-75ac-4933-a75c-07a21db3a319/Tables`);
-            }}
-            onMouseEnter={() => setIsSelect(5)}
-          >
-            Tables
-          </div>
-          <div
-            onClick={() => {
-              navigate(`/products/775f98ce-a2f2-4c9b-bd70-fcb99481af9a/Bergere`);
-            }}
-            onMouseEnter={() => setIsSelect(6)}
-          >
-            Bergere
-          </div>
-          <div
-            onClick={() => {
-              navigate(`/products/888cce34-8ce8-4207-9628-be245d6930c0/Lampshade`);
-            }}
-            onMouseEnter={() => setIsSelect(7)}
-          >
-            Lampshade{" "}
-          </div>
-          <div
-            onClick={() => {
-              navigate(`/products/1161f244-93cb-4415-9940-d2ceb6ea3a7c/Mirror`);
-            }}
-            onMouseEnter={() => setIsSelect(8)}
-          >
-            Mirror
-          </div>
-          <div
-            onClick={() => {
-              navigate(`/products/e557af58-0800-4ac6-8783-8ecc9f7cf337/Tv-Units`);
-            }}
-            onMouseEnter={() => setIsSelect(9)}
-          >
-            Tv Units
-          </div>
-          <div
-            onClick={() => {
-              navigate(`/products/f48538c8-e405-4e5b-bea7-28d948aba48a/Console-Table`);
-            }}
-            onMouseEnter={() => setIsSelect(10)}
-          >
-            Console Table
-          </div>
+          {categories.map((category, i) => (
+            <div
+              key={category.id}
+              onClick={() => {
+                navigate(`/products/${category.id}`);
+              }}
+              onMouseEnter={() => setIsSelect(i + 1)}
+            >
+              {category.name}
+            </div>
+          ))}
         </nav>
         {!!isSelect && (
           <div className="nav-pane">

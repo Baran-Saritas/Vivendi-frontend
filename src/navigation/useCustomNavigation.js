@@ -11,6 +11,7 @@ import Base from "../pages/panel";
 import SetDetailPage from "../pages/setDetailPage";
 import ZoomDeneme from "../pages/zoomdeneme";
 import NotFound from "../component/Results/NotFound";
+import SearchProducts from "../pages/searchResult";
 export const useCustomRoutes = () => {
   return [
     {
@@ -46,12 +47,13 @@ export const useCustomRoutes = () => {
       element: <Category />,
     },
     {
-      path: "/set-info-edit",
-      element: <SetInfo />,
-    },
-    {
       path: "/panel/product",
       element: <Product />,
+    },
+    
+    {
+      path: "/search-results",
+      element: <SearchProducts />,
     },
     {
       path: "/panel/campaign",
@@ -67,4 +69,4 @@ export const useCustomRoutes = () => {
     },
   ];
 };
-// /Campaign
+//SearchProducts

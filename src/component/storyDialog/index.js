@@ -5,7 +5,7 @@ import { useTheme } from "@mui/material/styles";
 import Story from "../story";
 import { useSelector } from "react-redux";
 
-const StoryDialog = ({ open, setOpen }) => {
+const StoryDialog = ({ open, setOpen, data }) => {
   const theme = useTheme();
   const [storyExit, setStoryExit] = React.useState();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
@@ -34,7 +34,7 @@ const StoryDialog = ({ open, setOpen }) => {
         fullWidth
         aria-labelledby="responsive-dialog-title"
       >
-        <Story />
+        <Story data={data} />
       </Dialog>
     </div>
   );

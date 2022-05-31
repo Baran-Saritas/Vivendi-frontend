@@ -62,7 +62,6 @@ export default function Base() {
           <Tab label="Furniture" {...a11yProps(1)} />
           <Tab label="Campaign" {...a11yProps(2)} />
           <Tab label="Set" {...a11yProps(3)} />
-          <Tab label="Coupon" {...a11yProps(4)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
@@ -75,9 +74,6 @@ export default function Base() {
         <CampaignPanel />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <FurnitureSetPanel />
-      </TabPanel>
-      <TabPanel value={value} index={4}>
         <FurnitureSetPanel />
       </TabPanel>
     </Box>

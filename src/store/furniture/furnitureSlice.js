@@ -14,10 +14,10 @@ const getFurniture = createAsyncThunk(
     }
   }
 );
-const getFurnitureByAsc = createAsyncThunk(
+const getFurnitureByDesc = createAsyncThunk(
   "furniture/getAll",
   async (_, { rejectWithValue }) => {
-    const res = await product_api.get("/furniture/asc");
+    const res = await product_api.get("/furniture/desc");
     //const res = await furniture_api.get("/");
     if (res.status === 200) {
       return res.data;
@@ -122,6 +122,20 @@ const postFurnitureCoupon = createAsyncThunk(
   }
 );
 
+const deleteFurnitureCoupon = createAsyncThunk(
+  "furniture/deleteCoupon",
+  async (id, { rejectWithValue, dispatch }) => {
+    let furniture_res = await product_api.delete("/furniture/coupon/" + id);
+    if (furniture_res.status === 200) {
+      dispatch(setFullFilled({ value: true }));
+      dispatch(getFurniture());
+      return furniture_res.data;
+    } else {
+      rejectWithValue(furniture_res.data);
+    }
+  }
+);
+
 const updateFurnitures = createAsyncThunk(
   "furniture/update",
   async (data, { rejectWithValue, dispatch }) => {
@@ -167,10 +181,10 @@ export const FurnitureSlice = createSlice({
     },
   },
   extraReducers: {
-    [getFurnitureByAsc.fulfilled]: (state, action) => {
+    [getFurnitureByDesc.fulfilled]: (state, action) => {
       state.furnitures = action.payload;
     },
-    [getFurnitureByAsc.rejected]: (state, action) => {
+    [getFurnitureByDesc.rejected]: (state, action) => {
       console.log("Furniture err : ", action.payload);
     },
     [getFurnitureBySetId.fulfilled]: (state, action) => {
@@ -237,12 +251,13 @@ export {
   getFurnitureTop5,
   deleteFurniture,
   getFurnitureById,
-  getFurnitureByAsc,
+  getFurnitureByDesc,
   getFurnitureByCategoryId,
   getFurnitureByCategoryIdOnHover,
   getFurnitureBySetId,
   deleteImage,
   postFurnitureCoupon,
+  deleteFurnitureCoupon,
 };
 
 export const { removeFurniture } = FurnitureSlice.actions;

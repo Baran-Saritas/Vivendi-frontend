@@ -1,3 +1,6 @@
+html {
+    overflow-y: scroll;
+}
 .app {
     padding: 0 40px;
     display: flex;
@@ -5,9 +8,7 @@
     margin: 0 auto;
     flex-direction: column;
     height: 100vh;
-    p, span, a, button, h5, h4,div {
-        font-size: 16px !important;
-    }
+    
 }
 .app > div:nth-child(2) {
     flex: 1;

@@ -1,36 +1,30 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {
-  furniture_api,
-  product_api,
-  set_info_api,
-} from "../../utilrs/axiosInterceptors";
+import { category_api, product_api } from "../../utilrs/axiosInterceptors";
 
-export const getHeaderData = createAsyncThunk(
-  "glob/getHeaderData",
+export const getHeaderAndData = createAsyncThunk(
+  "glob/getHeaderAndData",
   async (_, { rejectWithValue, dispatch }) => {
-    const data = {
-      categories: [
-        "c76f7cef-f05f-4142-8a80-da88be374b66",
-        "ca333a93-4630-4cd9-8176-2969887072c2",
-        "ea6b1aaf-65c0-4023-9248-cfa2ac8e3cbc",
-        "a76ec128-c8be-4234-be0c-158518585153",
-        "a76ec128-c8be-4234-be0c-158518585153",
-      ],
-    };
-    product_api.post("/furniture/category/top/5", data).then((res) => {
-      res.data.entities.forEach((j, i) => {
-        dispatch(
-          setHeaderData({ id: i + 1, target: "headerFurnitureData", data: j })
-        );
+    let category_res = await category_api.get("/category");
+    if (category_res.status === 200) {
+      let data = { categories: category_res.data.map((i) => i.id) };
+      product_api.post("/furniture/category/top/5", data).then((res) => {
+        let data = {};
+        res.data.entities.map((i, j) => {
+          data[j + 1] = i;
+        });
+        dispatch(setFurnitureData(data));
       });
-    });
-    product_api.post("/set/category/top/5", data).then((res) => {
-      res.data.entities.forEach((j, i) => {
-        dispatch(
-          setHeaderData({ id: i + 1, target: "headerSetData", data: j })
-        );
+      product_api.post("/set/category/top/5", data).then((res) => {
+        let data = {};
+        res.data.entities.map((i, j) => {
+          data[j + 1] = i;
+        });
+        dispatch(setSetData(data));
       });
-    });
+      return category_res.data;
+    } else {
+      rejectWithValue(category_res.data);
+    }
   }
 );
 
@@ -44,14 +38,22 @@ const globalSlice = createSlice({
     storyEndDialog: false,
     addedSetFurnitures: [],
     closeDrawer: true,
+    categories: [],
     setIdValue: 0,
     headerFurnitureData: {},
     headerSetData: {},
+    searchData: {},
   },
   reducers: {
     setHeaderData: (state, { payload }) => {
       state[payload.target][payload.id] = payload.data;
       //state.headerFurnitureData[payload.id] = payload.data
+    },
+    setFurnitureData: (state, { payload }) => {
+      state.headerFurnitureData = payload;
+    },
+    setSetData: (state, { payload }) => {
+      state.headerSetData = payload;
     },
     setFullFilled: (state, { payload: { value } }) => {
       state.fullfilled = value;
@@ -69,9 +71,28 @@ const globalSlice = createSlice({
     setId: (state, { payload: { value } }) => {
       state.setIdValue = value;
     },
+    setSearchData: (state, { payload }) => {
+      state.searchData = payload;
+    },
+  },
+  extraReducers: {
+    [getHeaderAndData.fulfilled]: (state, action) => {
+      state.categories = action.payload;
+    },
+    [getHeaderAndData.rejected]: (state, action) => {
+      console.log("Category err : ", action.payload);
+    },
   },
 });
 
-export const { setHeaderData, setGlob, setFullFilled, setStory, setId } =
-  globalSlice.actions;
+export const {
+  setHeaderData,
+  setGlob,
+  setFullFilled,
+  setStory,
+  setId,
+  setSearchData,
+  setFurnitureData,
+  setSetData,
+} = globalSlice.actions;
 export default globalSlice.reducer;
