@@ -8,33 +8,25 @@ import { IoIosMenu, IoMdClose } from "react-icons/io";
 import HeaderSetCarousel from "../headerCarousel";
 import { Box, Drawer, FormControl, OutlinedInput } from "@mui/material";
 import HamburgerList from "../hamburgerMenu/hamburgerList";
-import { category_api } from "../../utilrs/axiosInterceptors";
+import { getHeaderAndData } from "../../store/global/globalSlice";
 
 const CustomHeader = () => {
   const navigate = useNavigate();
-  const { headerFurnitureData } = useSelector((state) => state.global);
-  const { headerSetData } = useSelector((state) => state.global);
+  const { headerFurnitureData, headerSetData, categories } = useSelector(
+    (state) => state.global
+  );
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [isSelect, setIsSelect] = useState(0);
   const [state, setState] = React.useState(false);
-  const [categories, setCategories] = useState([]);
   const ref = useRef(null);
+  const dispatch = useDispatch();
   const toggleDrawer = (open) => {
     setState(open);
   };
-
   useEffect(() => {
-    category_api
-      .get("/category")
-      .then((res) => {
-        setCategories(res.data);
-      })
-      .catch((err) => {
-        // handle err
-        console.log("error : ", err);
-      });
+    dispatch(getHeaderAndData());
   }, []);
 
   return (
@@ -147,13 +139,13 @@ const CustomHeader = () => {
         </div>
 
         <nav className="large-menu">
-          {categories.map((category) => (
+          {categories.map((category, i) => (
             <div
               key={category.id}
               onClick={() => {
                 navigate(`/products/${category.id}`);
               }}
-              onMouseEnter={() => setIsSelect(1)}
+              onMouseEnter={() => setIsSelect(i + 1)}
             >
               {category.name}
             </div>
