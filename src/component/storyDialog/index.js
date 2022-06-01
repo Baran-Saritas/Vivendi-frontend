@@ -17,6 +17,9 @@ const StoryDialog = ({ open, setOpen, data }) => {
     }
   }, [storyEndDialog]);
 
+  React.useEffect(() => {
+    console.log("data", data );
+  },[data])
   return (
     <div>
       <Dialog

@@ -48,6 +48,7 @@ const CustomCarousel = ({ speed, autoplaySpeed }) => {
   const settings = {
     className: "center",
     infinite: true,
+    dots: true,
     centerPadding: "30px",
     slidesToShow: 1,
     swipeToSlide: true,

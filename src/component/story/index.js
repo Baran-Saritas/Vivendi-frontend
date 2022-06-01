@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Stories from "react-insta-stories";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -96,7 +96,11 @@ const Story = ({ data }) => {
       ),
     },
   ];
-  let res = data.map((i) => {
+
+  useEffect(() => {
+    console.log(data);
+  },[])
+  let res = data?.map((i) => {
     return {
       duration: 3000,
       content: (props) => (
