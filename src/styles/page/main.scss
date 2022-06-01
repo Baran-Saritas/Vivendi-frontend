@@ -244,26 +244,10 @@
       //padding-top: 50px;
     }
   }
-
   .main-campaign-carousel{
     .slick-arrow {
       &.slick-prev {
-        transform: translateX(-50%) translateX(10px);
-
-      }
-      &.slick-next {
-        transform: translateX(-50%) translateX(25px);
-      }
-    }
-  }
-
-}
-@media only screen and (max-width: 670px) {
-
-  .main-campaign-carousel{
-    .slick-arrow {
-      &.slick-prev {
-        transform: translateX(-50%) translateX(40px);
+        transform: translateX(-50%) translateX(42px);
 
       }
       &.slick-next {
@@ -271,7 +255,9 @@
       }
     }
   }
+
 }
+
 @media only screen and (max-width: 600px) {
   .dialog-edit {
     //height: 100%;
