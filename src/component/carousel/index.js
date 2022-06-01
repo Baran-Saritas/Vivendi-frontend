@@ -19,26 +19,32 @@ const CustomCarousel = ({ speed, autoplaySpeed }) => {
       });
   }, []);
   if (!Object.keys(coupons).length) return null;
-  function SampleNextArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "none" }}
-        onClick={onClick}
-      />
-    );
-  }
-  function SamplePrevArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "none" }}
-        onClick={onClick}
-      />
-    );
-  }
+  const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
+    <button
+      {...props}
+      className={
+        "slick-prev slick-arrow"
+      }
+      aria-hidden="true"
+      aria-disabled={currentSlide === 0 ? true : false}
+      type="button"
+    >
+      Previous
+    </button>
+  );
+  const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
+    <button
+      {...props}
+      className={
+        "slick-next slick-arrow" 
+      }
+      aria-hidden="true"
+      aria-disabled={currentSlide === slideCount - 1 ? true : false}
+      type="button"
+    >
+      Next
+    </button>
+  );
   const settings = {
     className: "center",
     infinite: true,
@@ -48,11 +54,11 @@ const CustomCarousel = ({ speed, autoplaySpeed }) => {
     autoplay: true,
     speed: 500,
     autoplaySpeed: autoplaySpeed || 4000,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
+    prevArrow: <SlickArrowLeft />,
+    nextArrow: <SlickArrowRight />,
   };
   return (
-    <div>
+    <div className="main-campaign-carousel">
       <Slider {...settings}>
         {coupons?.furnitures.map((i) => (
           <div
