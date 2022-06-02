@@ -48,7 +48,7 @@ const CustomHeader = () => {
         </div>
         <div className="header-search" tabIndex="0">
           <div className="res-con" ref={ref}>
-            <OutlinedInput
+            <input
               sx={{ padding: "2px 0px" }}
               size="small"
               placeholder="Search..."
@@ -71,7 +71,7 @@ const CustomHeader = () => {
                 Search
               </button>
             </div>
-            {( isFocus) && (
+            {(isFocus) && (
               <SearchResult
                 containerRef={ref}
                 setIsFocus={setIsFocus}
