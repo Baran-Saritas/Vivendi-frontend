@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Sign from "../../pages/user/index";
 import HeaderShoppingCart from "../shoppingCart";
 import { useDispatch, useSelector } from "react-redux";
+import SearchResult from "./SearchResult";
 import { useNavigate } from "react-router-dom";
 import { IoIosMenu, IoMdClose } from "react-icons/io";
 import HeaderSetCarousel from "../headerCarousel";
@@ -20,6 +21,8 @@ const CustomHeader = () => {
   const [search, setSearch] = useState("");
   const [isSelect, setIsSelect] = useState(0);
   const [state, setState] = React.useState(false);
+  
+  const [isFocus, setIsFocus] = useState(false);
   const ref = useRef(null);
   const dispatch = useDispatch();
   const toggleDrawer = (open) => {
@@ -45,50 +48,21 @@ const CustomHeader = () => {
         </div>
         <div className="header-search" tabIndex="0">
           <div className="res-con" ref={ref}>
-            <Box sx={{ width: "100%" }} noValidate autoComplete="off">
-              <FormControl sx={{ width: "100%" }}>
-                <OutlinedInput
-                  sx={{ padding: "2px 0px" }}
-                  size="small"
-                  placeholder="Search..."
-                  value={search}
-                  onClick={(e) => {
-                    setAnchorEl(e.currentTarget);
-                  }}
-                  onChange={(e) => setSearch(e.target.value)}
-                  onKeyPress={(e) => {
-                    if (e.key === "Enter") {
-                      navigate("/search-results?name=" + search);
-                    }
-                  }}
-                />
-              </FormControl>
-            </Box>
-            {/*
             <input
               value={search}
-              onKeyPress={(e) => {
-                if (e.key === "Enter") {
-                  navigate("/search-results?name=" + search);
-                }
-              }}
               onChange={(e) => setSearch(e.target.value)}
-              onClick={(e) => {
-                setAnchorEl(e.currentTarget);
-                e.currentTarget.focus();
-              }}
+              onClick={() => setIsFocus(true)}
             />
             <div className="btn-con">
               <button>Search</button>
             </div>
-            */}
-            {/* 
-            <SearchResultNew
-              filterData={filterData}
-              anchorEl={anchorEl}
-              setAnchorEl={setAnchorEl}
-            />
-          */}
+            {(search || isFocus) && (
+              <SearchResult
+                containerRef={ref}
+                setIsFocus={setIsFocus}
+                isFocus={isFocus}
+              />
+            )}
           </div>
         </div>
         <div className="header-util">

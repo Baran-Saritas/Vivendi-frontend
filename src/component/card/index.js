@@ -84,9 +84,10 @@ function CardFooter({ value, setActiveImage }) {
           marginTop: "0px",
         }}
       >
-        {value.images.map((values) => {
+        {value?.images?.map((values,i) => {
           return (
             <div
+            key={i}
               onMouseEnter={() => setActiveImage(values.imageSource)}
               style={{
                 width: "32px",
