@@ -21,7 +21,7 @@ const CustomHeader = () => {
   const [search, setSearch] = useState("");
   const [isSelect, setIsSelect] = useState(0);
   const [state, setState] = React.useState(false);
-  
+
   const [isFocus, setIsFocus] = useState(false);
   const ref = useRef(null);
   const dispatch = useDispatch();
@@ -48,15 +48,30 @@ const CustomHeader = () => {
         </div>
         <div className="header-search" tabIndex="0">
           <div className="res-con" ref={ref}>
-            <input
+            <OutlinedInput
+              sx={{ padding: "2px 0px" }}
+              size="small"
+              placeholder="Search..."
               value={search}
+              onClick={(e) => {
+                setAnchorEl(e.currentTarget);
+                setIsFocus(true);
+              }}
               onChange={(e) => setSearch(e.target.value)}
-              onClick={() => setIsFocus(true)}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  navigate("/search-results?name=" + search);
+                  setIsFocus("");
+                }
+              }}
             />
             <div className="btn-con">
-              <button>Search</button>
+              <button
+              >
+                Search
+              </button>
             </div>
-            {(search || isFocus) && (
+            {( isFocus) && (
               <SearchResult
                 containerRef={ref}
                 setIsFocus={setIsFocus}
