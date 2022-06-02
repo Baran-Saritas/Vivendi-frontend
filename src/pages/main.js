@@ -20,7 +20,7 @@ import NewSetCarousel from "../component/newSet";
 import { getFurnitureSetByAsc } from "../store/furnitureSetInfo/furnitureSetInfoSlice";
 
 //furnitures
-export default function Main() {
+const Main = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { furnitures } = useSelector((state) => state.furniture);
@@ -92,10 +92,8 @@ export default function Main() {
         >
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
-              onClick={() =>
-                navigate("/products/d1d78226-9ced-4fe6-9293-8d5b6160855a/Sofas")
-              }
-              href=""
+
+              href="/products/d1d78226-9ced-4fe6-9293-8d5b6160855a/Sofas"
             >
               <div className="h-card-body">
                 <div className="h-card-img">
@@ -118,10 +116,7 @@ export default function Main() {
 
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
-              onClick={() =>
-                navigate("/products/2831e014-fe03-4b9a-8ef7-edff01393db6/Beds")
-              }
-              href=""
+              href="/products/2831e014-fe03-4b9a-8ef7-edff01393db6/Beds"
             >
               <div className="h-card-body">
                 <div className="h-card-img">
@@ -143,10 +138,8 @@ export default function Main() {
           </div>
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
-              onClick={() =>
-                navigate("/products/66588660-6ead-4874-b9e2-6cfc1f4485a4/Chair")
-              }
-              href=""
+
+              href="/products/66588660-6ead-4874-b9e2-6cfc1f4485a4/Chair"
             >
               <div className="h-card-body">
                 <div className="h-card-img">
@@ -245,12 +238,7 @@ export default function Main() {
         >
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
-              onClick={() =>
-                navigate(
-                  "/products/16b8231c-fcf8-41cf-bb88-f64893c29e5e/Tables"
-                )
-              }
-              href=""
+              href="/products/16b8231c-fcf8-41cf-bb88-f64893c29e5e/Tables"
             >
               <div className="h-card-body">
                 <div className="h-card-img">
@@ -273,12 +261,7 @@ export default function Main() {
 
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
-              onClick={() =>
-                navigate(
-                  "/products/5fd043d4-e2ac-494a-aa7f-b80baf2075b2/Bergere"
-                )
-              }
-              href=""
+              href="/products/5fd043d4-e2ac-494a-aa7f-b80baf2075b2/Bergere"
             >
               <div className="h-card-body">
                 <div className="h-card-img">
@@ -300,12 +283,7 @@ export default function Main() {
           </div>
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
-              onClick={() =>
-                navigate(
-                  "/products/f40ce8fb-1f7f-40ba-a519-71b4b2e8d556/Lampshade"
-                )
-              }
-              href=""
+              href="/products/f40ce8fb-1f7f-40ba-a519-71b4b2e8d556/Lampshade"
             >
               <div className="h-card-body">
                 <div className="h-card-img">
@@ -403,12 +381,7 @@ export default function Main() {
         >
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
-              onClick={() =>
-                navigate(
-                  "/products/8b46bc6a-8c84-4676-8589-ca3eaa11968b/Mirror"
-                )
-              }
-              href=""
+              href="/products/8b46bc6a-8c84-4676-8589-ca3eaa11968b/Mirror"
             >
               <div className="h-card-body">
                 <div className="h-card-img">
@@ -431,12 +404,7 @@ export default function Main() {
 
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
-              onClick={() =>
-                navigate(
-                  "/products/076cc82f-f51b-4d0c-b89e-5f966d0890ab/Tv-Units"
-                )
-              }
-              href=""
+              href="/products/076cc82f-f51b-4d0c-b89e-5f966d0890ab/Tv-Units"
             >
               <div className="h-card-body">
                 <div className="h-card-img">
@@ -458,12 +426,7 @@ export default function Main() {
           </div>
           <div style={{ overflow: "hidden", width: "500px" }}>
             <a
-              onClick={() =>
-                navigate(
-                  "/products/9d2a6b3b-785c-4051-bdd3-d0c3b772e3ae/Console-Table"
-                )
-              }
-              href=""
+              href="/products/9d2a6b3b-785c-4051-bdd3-d0c3b772e3ae/Console-Table"
             >
               <div className="h-card-body">
                 <div className="h-card-img">
@@ -496,3 +459,4 @@ export default function Main() {
     </div>
   );
 }
+export default Main;

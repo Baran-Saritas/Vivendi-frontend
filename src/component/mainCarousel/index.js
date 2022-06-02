@@ -198,7 +198,7 @@ const CategoryCarousel = ({ setInfos, furnitures }) => {
               height: "120px",
               margin: "0px 5px 0px 0px",
             }}
-            src="https://www.ikea.com/us/en/images/products/malm-bed-frame-high-black-brown-luroey__0638608_pe699032_s5.jpg"
+            src="https://media.4rgos.it/s/Argos/9310454_R_SET?$Main768$&w=620&h=620"
             alt=""
           />
           <Typography

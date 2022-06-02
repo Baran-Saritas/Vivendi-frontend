@@ -1,6 +1,17 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
+const paneVar = {
+  closed: ({ w }) => ({
+    width: w,
+    opacity: 0,
+  }),
+  open: {
+    visibility: "visible",
+    opacity: 1,
+  },
+};
+
 function SearchResult({ containerRef, isFocus, search, setIsFocus }) {
   const ref = useRef(null);
   const [bound, setBound] = useState(
@@ -10,9 +21,29 @@ function SearchResult({ containerRef, isFocus, search, setIsFocus }) {
     setBound(containerRef.current?.getBoundingClientRect());
   }, [containerRef.current]);
 
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setIsFocus(false);
+      /*
+      if (ref.current) {                                  
+        ref.current.style.left =
+          containerRef.current?.getBoundingClientRect().left;
+        ref.current.style.top =
+          containerRef.current?.getBoundingClientRect().top;
+      }
+      */
+    });
+    let fnc = (e) => {
+      let res = document.querySelector(".res-con").contains(e.target);
+      if (!res) setIsFocus(false);
+    };
+    document.addEventListener("click", fnc);
+    return () => document.removeEventListener("click", fnc);
+  }, []);
   return (
     <motion.div
       ref={ref}
+      ariants={paneVar}
       initial="closed"
       custom={{ w: bound?.width }}
       animate={isFocus ? "open" : ""}
