@@ -11,7 +11,6 @@ const CustomCarousel = ({ speed, autoplaySpeed }) => {
     product_api
       .get("/coupon/best")
       .then((res) => {
-        console.log("EE : ", res.data);
         setCoupons(res.data);
       })
       .catch((err) => {

@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { Typography } from "@mui/material";
-import Story from "../story";
 import StoryDialog from "../storyDialog";
-import { useDispatch } from "react-redux";
-import { getCampaignOfCategory } from "../../store/campaign/campaignSlice";
-const CategoryCarousel = ({setInfos,furnitures}) => {
+import { furniture_api, product_api } from "../../utilrs/axiosInterceptors";
+const CategoryCarousel = ({ setInfos, furnitures }) => {
   const [open, setOpen] = useState("false");
-  const [data, setData] = useState([])
-  const [chair, setChair] = useState([])
-  const dispatch = useDispatch();
+  const [data, setData] = useState([]);
+  const [chair, setChair] = useState([]);
+  const [stories, setStories] = useState([]);
   var settings = {
     dots: true,
     infinite: true,
@@ -24,53 +22,118 @@ const CategoryCarousel = ({setInfos,furnitures}) => {
         settings: {
           slidesToShow: 4,
           slidesToScroll: 2,
-        }
+        },
       },
       {
         breakpoint: 1000,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
-        }
+        },
       },
       {
         breakpoint: 650,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-        }
+        },
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
+  const groupBy = (arr, key) => {
+    let result = arr.reduce(function (r, a) {
+      r[a[key]] = r[a[key]] || [];
+      r[a[key]].push(a);
+      return r;
+    }, Object.create(null));
+    return result;
   };
 
   useEffect(() => {
-    let arr = []
-    setInfos.forEach(i => {
-      if(i.categoryId === "a76ec128-c8be-4234-be0c-158518585153" && i.coupon)
-        arr.push(i)
-    })
-    furnitures.forEach(i => {
-      if(i.categoryId === "a76ec128-c8be-4234-be0c-158518585153" && i.coupon)
-        arr.push(i)
-    })
-    setChair(arr)
-  },[furnitures, setInfos])
+    product_api
+      .get("/coupon/best")
+      .then((res) => {
+        let fur = res.data.furnitures;
+        let set = res.data.sets;
+        let t1 = groupBy(fur, "categoryId");
+        let t2 = groupBy(set, "categoryId");
+        Object.keys(t1).forEach((i) => {
+          if (t2[i]) {
+            t1[i].push(...t2[i]);
+          }
+        });
+        console.log(" III : ", Object.values(t1));
+        setStories(Object.values(t1));
+      })
+      .catch((err) => {
+        console.log("error : ", err);
+      });
+  }, []);
+
+  /*
+  useEffect(() => {
+    let arr = [];
+    setInfos.forEach((i) => {
+      if (i.categoryId === "a76ec128-c8be-4234-be0c-158518585153" && i.coupon)
+        arr.push(i);
+    });
+    furnitures.forEach((i) => {
+      if (i.categoryId === "a76ec128-c8be-4234-be0c-158518585153" && i.coupon)
+        arr.push(i);
+    });
+    setChair(arr);
+  }, [furnitures, setInfos]);
+  */
+  if (stories.length <= 0) return null;
   return (
     <div className="test">
       <StoryDialog data={data} open={open} setOpen={setOpen} />
       <Slider {...settings}>
+        {stories.map((i, j) => (
+          <div
+            key={j}
+            className="categories-small-div"
+            onClick={() => {
+              setOpen("open");
+              setData(i);
+            }}
+            style={{ padding: "10px" }}
+          >
+            <img
+              style={{
+                width: "100%",
+                height: "120px",
+                margin: "0px 5px 0px 0px",
+              }}
+              src="https://www.normann-copenhagen.com/-/media/Product-Pictures-Podio/Normann-Copenhagen/Scala/Scala-Table-H75-cm/Scala-Table-H75-150-cm-Marble/604184/Scala-Table-H75-150-cm1.png?w=279&rev=d4aeb33d2e7b48d085b8a6b9b0eb6d2c"
+              alt=""
+            />
+            <Typography
+              component="div"
+              sx={{
+                textAlign: "center",
+                letterSpacing: "0.02em",
+                fontWeight: "500",
+                color: "#000",
+              }}
+            >
+              Tables
+            </Typography>
+          </div>
+        ))}
+        {/*
         <div
           className="categories-small-div"
           onClick={() => {
             setOpen("open");
-            
           }}
           style={{ padding: "10px" }}
         >
@@ -97,7 +160,10 @@ const CategoryCarousel = ({setInfos,furnitures}) => {
         </div>
         <div
           className="categories-small-div"
-          onClick={() => {setOpen("open"); setData(chair)}}
+          onClick={() => {
+            setOpen("open");
+            setData(chair);
+          }}
           style={{ padding: "10px" }}
         >
           <img
@@ -225,6 +291,7 @@ const CategoryCarousel = ({setInfos,furnitures}) => {
             Lighting
           </Typography>
         </div>
+          */}
       </Slider>
     </div>
   );
